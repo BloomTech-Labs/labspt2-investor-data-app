@@ -1,14 +1,19 @@
 import React from 'react'
+import Navigation from '../Navigation/index'
 
-export default class Landing extends React.Comonent {
+class Landing extends React.Component {
     constructor(){
         super();
     }
+    
     render(){
         return(
             <div>
-               
+                <Navigation /> 
             </div>
         )
     }
 }
+
+
+export default Landing
