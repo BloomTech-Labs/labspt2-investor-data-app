@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-
-import CssBaseline from '@material-ui/core/CssBaseline';
+import Landing from '../components/Landing/index'
+import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <CssBaseline />
+        <Landing />
       </div>
     );
   }
