@@ -22,7 +22,8 @@ const styles = theme => ({
     paper: {
         padding: theme.spacing.unit * 3,
         textAlign: 'left',
-        color: theme.palette.text.secondary
+        color: theme.palette.text.secondary,
+        height: '40vh',
     },
     block: {
         padding: theme.spacing.unit * 2,
@@ -44,7 +45,7 @@ class Dashboard extends Component {
                                     <Typography variant="h6" gutterBottom>Dashboard</Typography>
                                 </div>
                             </Grid>
-                            <Grid item xs={12} md={6}>
+                            <Grid item xs={12} md={6} >
                                 <Paper className={classes.paper}>
                                     <div>
                                         <Typography variant="h5" gutterBottom>
