@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import Dashboard from '../components/Dashboard'
-
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 class App extends Component {
@@ -9,7 +7,6 @@ class App extends Component {
     return (
       <div>
         <CssBaseline />
-        <Dashboard />
       </div>
     );
   }
