@@ -8,7 +8,6 @@ const jwt = require('jsonwebtoken');
 const logger = require('morgan');
 const helmet = require('helmet');
 const bcrypt = require('bcryptjs')
-const session = require('express-session')
 const favoritesRouter = require('./routers/favoritesRouter');
 const billingRouter = require('./routers/billingRouter');
 const usersRouter = require('./routers/usersRouter');

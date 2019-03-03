@@ -44,11 +44,11 @@ module.exports = {
     },
 
     findUsers: function () {
-        return db('users').select('id', 'username');
+        return db('users').select('id', 'email');
     },
 
     find: function () {
-        return db('users').select('id', 'username');
+        return db('users').select('id', 'email');
     }
 
 };
