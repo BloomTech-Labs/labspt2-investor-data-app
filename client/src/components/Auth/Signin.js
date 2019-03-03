@@ -8,7 +8,8 @@ export default class Signin extends Component {
     this.state = {
       authenticated: false,
       password: "",
-      username: ""
+      username: "",
+      email: ""
     };
   }
   // This is to check for authenticated when we add it in latter this code may change
@@ -58,6 +59,15 @@ export default class Signin extends Component {
             placeholder="username"
             id="username"
             value={this.state.username}
+            onChange={this.handleChange}
+          />
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="email"
+            id="email"
+            value={this.state.email}
             onChange={this.handleChange}
           />
           <label>Password:</label>
