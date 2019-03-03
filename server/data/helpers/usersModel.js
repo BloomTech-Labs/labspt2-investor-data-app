@@ -35,8 +35,8 @@ module.exports = {
             .del();
     },
 
-    findByUsername: function (username) {
-        return db('users').where('username', username).first();
+     findByUserEmail: function (email) {
+        return db('users').where('email', email).first();
     },
 
     findById: function (id) {
