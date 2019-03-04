@@ -37,7 +37,7 @@ class Navigation extends React.Component {
                 <NavContainer>
                     <NavbarLeft>
                         <MenuDrawer>
-                        <i class="fas fa-bars"></i>
+                        <i className="fas fa-bars"></i>
                          </MenuDrawer>
                         <h2>Pick Em</h2>
                     </NavbarLeft>
