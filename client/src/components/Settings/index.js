@@ -1,4 +1,6 @@
 import React from 'react';
+
+// MATERIAL UI COMPONENTS
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
@@ -7,38 +9,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
-
-const styles = theme => ({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'column'
-    },
-    header: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-    },
-    currentHeader: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit
-    },
-    currentValue: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit
-    },
-    textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        width: 200
-    },
-    button: {
-        margin: theme.spacing.unit,
-        width: 200
-    },
-    optSwitch: {
-        margin: theme.spacing.unit,
-    }
-});
+// WITHSTYLES
+import styles from './styles';
 
 class Settings extends React.Component {
     constructor(){
