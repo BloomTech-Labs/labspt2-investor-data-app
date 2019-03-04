@@ -49,7 +49,10 @@ class Settings extends React.Component {
             newEmail: '',
             newPhone: '',
             optEmails: true,
-            optTexts: true
+            optTexts: true,
+            oldPassword: '',
+            newPassword: '',
+            newPasswordConfirm: ''
         };
     };
 
@@ -151,6 +154,47 @@ class Settings extends React.Component {
                         className={classes.optSwitch}
                     />
                 </FormGroup>
+                <form 
+                    className={classes.container}
+                    id='passwordForm'
+                >
+                    <TextField 
+                        id='oldPassword'
+                        label='Old password'
+                        className={classes.textField}
+                        value={this.state.oldPassword}
+                        onChange={this.handleChange('oldPassword')}
+                        margin='normal'
+                        type='password'
+                    />
+                    <TextField 
+                        id='newPassword'
+                        label='New password'
+                        className={classes.textField}
+                        value={this.state.newPassword}
+                        onChange={this.handleChange('newPassword')}
+                        margin='normal'
+                        type='password'
+                    />
+                    <TextField 
+                        id='newPasswordConfirm'
+                        label='Confirm new password'
+                        className={classes.textField}
+                        value={this.state.newPasswordConfirm}
+                        onChange={this.handleChange('newPasswordConfirm')}
+                        margin='normal'
+                        type='password'
+                    />
+                    <Button 
+                        variant='contained' 
+                        color='primary'
+                        className={classes.button}
+                        type='submit'
+                        form='passwordForm'
+                    >
+                        Update password
+                    </Button>
+                </form>
             </div>
         )
     };
