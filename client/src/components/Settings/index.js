@@ -1,7 +1,8 @@
 import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
-import CssBaseline from '@material-ui/core/CssBaseline';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     container: {
@@ -21,9 +22,13 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit
     },
-    textField : {
+    textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
+        width: 200
+    },
+    button: {
+        margin: theme.spacing.unit,
         width: 200
     }
 });
@@ -49,7 +54,10 @@ class Settings extends React.Component {
         return(
             <div>
                 <CssBaseline />
-                <form className={classes.container}>
+                <form 
+                    className={classes.container}
+                    id='emailForm'
+                >
                     <h2 className={classes.header}>
                         Settings
                     </h2>
@@ -65,8 +73,20 @@ class Settings extends React.Component {
                         onChange={this.handleChange('newEmail')}
                         margin='normal'
                     />
+                    <Button 
+                        variant='contained' 
+                        color='primary'
+                        className={classes.button}
+                        type='submit'
+                        form='emailForm'
+                    >
+                        Update email
+                    </Button>
                 </form>
-                <form className={classes.container}>
+                <form 
+                    className={classes.container}
+                    id='phoneForm'
+                >
                     <div>
                         <h3 className={classes.currentHeader}>Current phone:</h3>
                         <p className={classes.currentValue}>{this.state.phone}</p>
@@ -79,6 +99,15 @@ class Settings extends React.Component {
                         onChange={this.handleChange('newPhone')}
                         margin='normal'
                     />
+                    <Button 
+                        variant='contained' 
+                        color='primary'
+                        className={classes.button}
+                        type='submit'
+                        form='phoneForm'
+                    >
+                        Update phone
+                    </Button>
                 </form>
             </div>
         )
