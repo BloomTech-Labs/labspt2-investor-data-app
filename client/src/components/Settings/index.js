@@ -3,6 +3,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
 import Button from '@material-ui/core/Button';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+
 
 const styles = theme => ({
     container: {
@@ -30,6 +34,9 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
         width: 200
+    },
+    optSwitch: {
+        margin: theme.spacing.unit,
     }
 });
 
@@ -40,13 +47,19 @@ class Settings extends React.Component {
             email: 'test@example.com',
             phone: '888-888-8888',
             newEmail: '',
-            newPhone: ''
+            newPhone: '',
+            optEmails: true,
+            optTexts: true
         };
     };
 
     handleChange = name => event => {
         this.setState({ [name]: event.target.value });
     };
+
+    handleSwitch = name => event => {
+        this.setState({ [name]: event.target.checked });
+    }
     
     render(){
         const { classes } = this.props;
@@ -54,13 +67,14 @@ class Settings extends React.Component {
         return(
             <div>
                 <CssBaseline />
+                <h2 className={classes.header}>
+                        Settings
+                </h2>
+                {/* FORM TO UPDATE EMAIL ADDRESS */}
                 <form 
                     className={classes.container}
                     id='emailForm'
                 >
-                    <h2 className={classes.header}>
-                        Settings
-                    </h2>
                     <div>
                         <h3 className={classes.currentHeader}>Current email address:</h3>
                         <p className={classes.currentValue}>{this.state.email}</p>
@@ -83,6 +97,7 @@ class Settings extends React.Component {
                         Update email
                     </Button>
                 </form>
+                {/* FORM TO UPDATE PHONE NUMBER */}
                 <form 
                     className={classes.container}
                     id='phoneForm'
@@ -109,6 +124,33 @@ class Settings extends React.Component {
                         Update phone
                     </Button>
                 </form>
+                {/* OPT IN/OUT FOR TEXTS AND EMAILS */}
+                <FormGroup row>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={this.state.optEmails}
+                                onChange={this.handleSwitch('optEmails')}
+                                value='optEmails'
+                                color='primary'
+                            />
+                        }
+                        label='Emails?'
+                        className={classes.optSwitch}
+                    />
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={this.state.optTexts}
+                                onChange={this.handleSwitch('optTexts')}
+                                value='optTexts'
+                                color='primary'
+                            />
+                        }
+                        label='Texts?'
+                        className={classes.optSwitch}
+                    />
+                </FormGroup>
             </div>
         )
     };
