@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const styles = theme => ({
     container: {
@@ -47,6 +48,7 @@ class Settings extends React.Component {
 
         return(
             <div>
+                <CssBaseline />
                 <form className={classes.container}>
                     <h1 className={classes.header}>
                         Settings
