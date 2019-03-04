@@ -1,17 +1,25 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+// import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { SingInModal } from "../Styles/Navigation/Signin";
+import { TextField } from "@material-ui/core";
 
-/* TODO:  Need to change onClicks to hadle inputs. */
+/* TODO:
+ * Create a connection to database
+ * Fill in Submit Handler
+ * Setup SignUp Model
+ * Add in Validation and Testing
+ */
 
 export default class FormDialog extends React.Component {
   state = {
+    email: "",
+    password: "",
     open: false
   };
 
@@ -19,8 +27,20 @@ export default class FormDialog extends React.Component {
     this.setState({ open: true });
   };
 
-  handleClose = () => {
+  handleSignup = () => {
     this.setState({ open: false });
+  };
+
+  handleChange = prop => event => {
+    event.preventDefault();
+    this.setState({ [prop]: event.target.value });
+  };
+
+  handleSubmit = e => {
+    this.setState({
+      email: "",
+      password: ""
+    });
   };
 
   render() {
@@ -36,33 +56,40 @@ export default class FormDialog extends React.Component {
         >
           <DialogContent>
             <SingInModal>
-              <DialogTitle id="signin">Sign In</DialogTitle>
+              <DialogTitle id="signin">PICKEM</DialogTitle>
               <DialogContentText>
                 Please Sign In <p /> {""}
               </DialogContentText>
               <TextField
                 autoFocus
                 required
-                margin="dense"
-                id="name"
+                placeholder="Email"
+                // margin="dense"
+                id="email"
                 label="Email Address"
                 type="email"
+                name="email"
                 variant="outlined"
-              />{" "}
+                value={this.state.email}
+                onChange={this.handleChange("email")}
+              />
+              <p />
               {""}
               <TextField
-                required
-                margin="dense"
                 id="password"
-                label="Password"
                 type="password"
                 variant="outlined"
+                required
+                name="password"
+                label="Password"
+                value={this.state.password}
+                onChange={this.handleChange("password")}
               />
               <DialogActions>
-                <Button onClick={this.handleClose} color="default">
+                <Button onClick={this.handleSignup} color="default">
                   Sign Up
                 </Button>
-                <Button onClick={this.handleClose} color="default">
+                <Button onClick={this.handleSubmit} color="default">
                   Sign In
                 </Button>
               </DialogActions>
