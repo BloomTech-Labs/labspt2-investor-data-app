@@ -10,6 +10,14 @@ const styles = theme => ({
     },
     header: {
         marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+    },
+    currentHeader: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit
+    },
+    currentValue: {
+        marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit
     },
     textField : {
@@ -23,6 +31,8 @@ class Settings extends React.Component {
     constructor(){
         super();
         this.state = {
+            currentEmail: 'test@example.com',
+            currentPhone: '888-888-8888',
             email: '',
             phone: ''
         };
@@ -36,29 +46,35 @@ class Settings extends React.Component {
         const { classes } = this.props;
 
         return(
-            <form className={classes.container}>
-                <h1
-                    className={classes.header}
-                >
-                    Settings
-                </h1>
-                <TextField 
-                    id='email'
-                    label='Email'
-                    className={classes.textField}
-                    value={this.state.email}
-                    onChange={this.handleChange('email')}
-                    margin='normal'
-                />
+            <div>
+                <form className={classes.container}>
+                    <h1 className={classes.header}>
+                        Settings
+                    </h1>
+                    <h2 className={classes.currentHeader}>Current email address:</h2>
+                    <p className={classes.currentValue}>{this.state.currentEmail}</p>
+                    <TextField 
+                        id='email'
+                        label='New email'
+                        className={classes.textField}
+                        value={this.state.email}
+                        onChange={this.handleChange('email')}
+                        margin='normal'
+                    />
+                </form>
+                <form className={classes.container}>
+                <h2 className={classes.currentHeader}>Current phone:</h2>
+                <p className={classes.currentValue}>{this.state.currentPhone}</p>
                 <TextField 
                     id='phone'
-                    label='Phone'
+                    label='New phone'
                     className={classes.textField}
                     value={this.state.phone}
                     onChange={this.handleChange('phone')}
                     margin='normal'
                 />
-            </form>
+                </form>
+            </div>
         )
     };
 };
