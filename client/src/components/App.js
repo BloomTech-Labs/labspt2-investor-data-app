@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Landing from '../components/Landing/index'
-import Settings from '../components/Settings/index'
 
 import './App.css';
 
