@@ -26,14 +26,14 @@ class EmailForm extends React.Component {
                 <div>
                     {/* Show current email address */}
                     <h3 className={classes.currentHeader}>Current email address:</h3>
-                    <p className={classes.currentValue}>{this.state.email}</p>
+                    <p className={classes.currentValue}>{this.props.email}</p>
                 </div>
                 {/* Text field for new email address */}
                 <TextField 
                     id='newEmail'
                     label='New email'
                     className={classes.textField}
-                    value={this.state.newEmail}
+                    value={this.props.newEmail}
                     onChange={this.props.handleChange('newEmail')}
                     margin='normal'
                 />

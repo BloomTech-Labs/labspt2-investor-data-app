@@ -1,6 +1,6 @@
 import React from 'react';
 
-// MATERIAL UI COMPONENTS
+// Material UI Components
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
@@ -9,11 +9,12 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
-// WITHSTYLES
+// WithStyles
 import styles from './styles';
 
-// SETTINGS PAGE COMPONENTS
+// Settings Page Components
 import EmailForm from './EmailForm';
+import PhoneForm from './PhoneForm';
 
 class Settings extends React.Component {
     constructor(){
@@ -49,36 +50,19 @@ class Settings extends React.Component {
                 <h2 className={classes.header}>
                         Settings
                 </h2>
-                {/* FORM TO UPDATE EMAIL ADDRESS */}
-                <EmailForm handleChange={this.handleChange}/> 
-                {/* FORM TO UPDATE PHONE NUMBER */}
-                <form 
-                    className={classes.container}
-                    id='phoneForm'
-                >
-                    <div>
-                        <h3 className={classes.currentHeader}>Current phone:</h3>
-                        <p className={classes.currentValue}>{this.state.phone}</p>
-                    </div>
-                    <TextField 
-                        id='newPhone'
-                        label='New phone'
-                        className={classes.textField}
-                        value={this.state.newPhone}
-                        onChange={this.handleChange('newPhone')}
-                        margin='normal'
-                    />
-                    <Button 
-                        variant='contained' 
-                        color='primary'
-                        className={classes.button}
-                        type='submit'
-                        form='phoneForm'
-                    >
-                        Update phone
-                    </Button>
-                </form>
-                {/* OPT IN/OUT FOR TEXTS AND EMAILS */}
+                {/* Form to update email address */}
+                <EmailForm 
+                    handleChange={this.handleChange} 
+                    email={this.state.email}
+                    newEmail={this.state.newEmail}
+                /> 
+                {/* Form to update phone number */}
+                <PhoneForm 
+                    handleChange={this.handleChange}
+                    phone={this.state.phone}
+                    newPhone={this.state.newPhone}
+                /> 
+                {/* Opt in/out for texts and emails */}
                 <FormGroup row>
                     <FormControlLabel
                         control={
