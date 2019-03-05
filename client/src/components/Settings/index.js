@@ -12,6 +12,9 @@ import Switch from '@material-ui/core/Switch';
 // WITHSTYLES
 import styles from './styles';
 
+// SETTINGS PAGE COMPONENTS
+import EmailForm from './EmailForm';
+
 class Settings extends React.Component {
     constructor(){
         super();
@@ -30,6 +33,7 @@ class Settings extends React.Component {
 
     handleChange = name => event => {
         this.setState({ [name]: event.target.value });
+        console.log(this.state)
     };
 
     handleSwitch = name => event => {
@@ -46,32 +50,7 @@ class Settings extends React.Component {
                         Settings
                 </h2>
                 {/* FORM TO UPDATE EMAIL ADDRESS */}
-                <form 
-                    className={classes.container}
-                    id='emailForm'
-                >
-                    <div>
-                        <h3 className={classes.currentHeader}>Current email address:</h3>
-                        <p className={classes.currentValue}>{this.state.email}</p>
-                    </div>
-                    <TextField 
-                        id='newEmail'
-                        label='New email'
-                        className={classes.textField}
-                        value={this.state.newEmail}
-                        onChange={this.handleChange('newEmail')}
-                        margin='normal'
-                    />
-                    <Button 
-                        variant='contained' 
-                        color='primary'
-                        className={classes.button}
-                        type='submit'
-                        form='emailForm'
-                    >
-                        Update email
-                    </Button>
-                </form>
+                <EmailForm handleChange={this.handleChange}/> 
                 {/* FORM TO UPDATE PHONE NUMBER */}
                 <form 
                     className={classes.container}
