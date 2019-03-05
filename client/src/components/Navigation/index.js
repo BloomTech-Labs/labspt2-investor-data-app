@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
+import SignupModal from "./SignupModal";
 
 const NavContainer = styled.section`
   display: flex; 
@@ -42,7 +43,7 @@ class Navigation extends React.Component {
                         <h2>Pick Em</h2>
                     </NavbarLeft>
                     <NavbarRight>
-                        <p>Sign In</p> 
+                    <SignupModal />
                     </NavbarRight>
                 </NavContainer>
             </div> 
