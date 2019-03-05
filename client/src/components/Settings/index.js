@@ -15,6 +15,7 @@ import styles from './styles';
 // Settings Page Components
 import EmailForm from './EmailForm';
 import PhoneForm from './PhoneForm';
+import OptEmailsTextsForm from './OptEmailsTextsForm'
 
 class Settings extends React.Component {
     constructor(){
@@ -39,7 +40,8 @@ class Settings extends React.Component {
 
     handleSwitch = name => event => {
         this.setState({ [name]: event.target.checked });
-    }
+        console.log(this.state)
+    };
     
     render(){
         const { classes } = this.props;
@@ -62,33 +64,12 @@ class Settings extends React.Component {
                     phone={this.state.phone}
                     newPhone={this.state.newPhone}
                 /> 
-                {/* Opt in/out for texts and emails */}
-                <FormGroup row>
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                checked={this.state.optEmails}
-                                onChange={this.handleSwitch('optEmails')}
-                                value='optEmails'
-                                color='primary'
-                            />
-                        }
-                        label='Emails?'
-                        className={classes.optSwitch}
-                    />
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                checked={this.state.optTexts}
-                                onChange={this.handleSwitch('optTexts')}
-                                value='optTexts'
-                                color='primary'
-                            />
-                        }
-                        label='Texts?'
-                        className={classes.optSwitch}
-                    />
-                </FormGroup>
+                {/* Form to opt in/out for texts and emails */}
+                <OptEmailsTextsForm
+                    handleSwitch={this.handleSwitch}
+                    optEmails={this.state.optEmails}
+                    optTexts={this.state.optTexts}
+                />
                 <form 
                     className={classes.container}
                     id='passwordForm'
