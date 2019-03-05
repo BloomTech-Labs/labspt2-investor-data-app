@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://getpickem.co/">
+  <a href="https://getpickem.co">
     <!-- <img alt="Pickem" src="" width="120" /> -->
     <h1>Pickem</h1>
   </a>
