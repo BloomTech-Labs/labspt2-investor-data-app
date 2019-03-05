@@ -3,11 +3,6 @@ import React from 'react';
 // Material UI Components
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField'; 
-import Button from '@material-ui/core/Button';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 
 // WithStyles
 import styles from './styles';
@@ -15,7 +10,8 @@ import styles from './styles';
 // Settings Page Components
 import EmailForm from './EmailForm';
 import PhoneForm from './PhoneForm';
-import OptEmailsTextsForm from './OptEmailsTextsForm'
+import OptEmailsTextsForm from './OptEmailsTextsForm';
+import PasswordForm from './PasswordForm';
 
 class Settings extends React.Component {
     constructor(){
@@ -35,12 +31,10 @@ class Settings extends React.Component {
 
     handleChange = name => event => {
         this.setState({ [name]: event.target.value });
-        console.log(this.state)
     };
 
     handleSwitch = name => event => {
         this.setState({ [name]: event.target.checked });
-        console.log(this.state)
     };
     
     render(){
@@ -70,47 +64,12 @@ class Settings extends React.Component {
                     optEmails={this.state.optEmails}
                     optTexts={this.state.optTexts}
                 />
-                <form 
-                    className={classes.container}
-                    id='passwordForm'
-                >
-                    <TextField 
-                        id='oldPassword'
-                        label='Old password'
-                        className={classes.textField}
-                        value={this.state.oldPassword}
-                        onChange={this.handleChange('oldPassword')}
-                        margin='normal'
-                        type='password'
-                    />
-                    <TextField 
-                        id='newPassword'
-                        label='New password'
-                        className={classes.textField}
-                        value={this.state.newPassword}
-                        onChange={this.handleChange('newPassword')}
-                        margin='normal'
-                        type='password'
-                    />
-                    <TextField 
-                        id='newPasswordConfirm'
-                        label='Confirm new password'
-                        className={classes.textField}
-                        value={this.state.newPasswordConfirm}
-                        onChange={this.handleChange('newPasswordConfirm')}
-                        margin='normal'
-                        type='password'
-                    />
-                    <Button 
-                        variant='contained' 
-                        color='primary'
-                        className={classes.button}
-                        type='submit'
-                        form='passwordForm'
-                    >
-                        Update password
-                    </Button>
-                </form>
+                <PasswordForm 
+                    oldPassword={this.state.oldPassword}
+                    newPassword={this.state.newPassword}
+                    newPasswordConfirm={this.state.newPasswordConfirm}
+                    handleChange={this.handleChange}
+                />
             </div>
         )
     };
