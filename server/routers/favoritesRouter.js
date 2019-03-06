@@ -114,7 +114,7 @@ router.post('/', (req, res, next) => {
     } else {
         res
             .status(400)
-            .json({ message: "missing title." })
+            .json({ message: "missing symbol, target and/or users_id." })
     }
 });
 
