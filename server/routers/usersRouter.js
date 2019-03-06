@@ -6,7 +6,12 @@ const bcrypt = require("bcryptjs");
 const { authenticate, generateToken } = require("../auth/authenticate");
 
 
+/* TODO:
+    Add either a route get/users and authenticate the route for
+    front end use and viewing. 
 
+
+*/
 // Added routes for signin and authenitcate the username and password for front end use. 
 module.exports = router => {
     router.get("/signin", authenicate, getUsers);
@@ -37,7 +42,7 @@ module.exports = router => {
         });
 }); 
 
-signin =(req, res) => {
+signin = (req, res) => {
     //implementing user signin 
     const creds = req.body;
     users.get(creds.usersname)
