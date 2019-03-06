@@ -35,8 +35,8 @@ module.exports = {
             .del();
     },
 
-    findByUsername: function (username) {
-        return db('users').where('username', username).first();
+     findByUserEmail: function (email) {
+        return db('users').where('email', email).first();
     },
 
     findById: function (id) {
@@ -44,11 +44,11 @@ module.exports = {
     },
 
     findUsers: function () {
-        return db('users').select('id', 'username');
+        return db('users').select('id', 'email');
     },
 
     find: function () {
-        return db('users').select('id', 'username');
+        return db('users').select('id', 'email');
     }
 
 };
