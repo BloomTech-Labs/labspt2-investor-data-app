@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "pg": "^7.8.1"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0"
+  }
+}
