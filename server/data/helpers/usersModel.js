@@ -1,13 +1,14 @@
 const db = require('../dbConfig.js');
 
+/* Removed Function turned it into arrow for ES6 */
+
 module.exports = {
 
-
-    get: function () {
+    get:  () => {
         return db('users')
     },
 
-    get: function (id) {
+    getById:  (id) => {
         let query = db('users');
         if (id) {
             query.where('users.id', id).first();
@@ -15,39 +16,43 @@ module.exports = {
         }
         return db('users')
     },
+    
+    getByUser: (username) => {
+        return db('users').where('username', username).first()
+    },
 
-    insert: function (user) {
+    insert:  (user) => {
         return db('users')
             .insert(user)
             .then(([id]) => this.get(id));
     },
 
-    update: function (id, changes) {
+    update:  (id, changes) => {
         return db('users')
             .where('id', id)
             .update(changes)
             .then(count => (count > 0 ? this.get(id) : null));
     },
 
-    remove: function (id) {
+    remove:  (id) => {
         return db('users')
             .where('id', id)
             .del();
     },
 
-     findByUserEmail: function (email) {
+     findByUserEmail:  (email) => {
         return db('users').where('email', email).first();
     },
 
-    findById: function (id) {
+    findById:  (id) => {
         return db('users').where('id', id).first();
     },
 
-    findUsers: function () {
+    findUsers:  () => {
         return db('users').select('id', 'email');
     },
 
-    find: function () {
+    find:  () => {
         return db('users').select('id', 'email');
     }
 

@@ -14,8 +14,9 @@ const { authenticate, generateToken } = require("../auth/authenticate");
 */
 // Added routes for signin and authenitcate the username and password for front end use. 
 module.exports = router => {
-    router.get("/signin", authenicate, getUsers);
-    router.get("/:id", userById);
+    router.get("/signin", signin);
+    router.get("/signin", signup);
+    router.get("/:id", authenticate, userById);
 }
 
 /************************************ USERS SECTION ***********************************/
@@ -59,6 +60,20 @@ signin = (req, res) => {
     .catch( err => res.status(500).send(err))
 }
 
+signup = (req, res) => {
+ const user = req.body
+ user.password = bcrypt.hashSync(user.password, 12)
+   users.insert(user).then(ids => {
+       users.getByUser([ids[0]])
+       .then(user => {
+        const token = generateToken(user);
+        res.status(201).json({ id: user.id, token });
+       })
+       .catch(err => {
+        res.status(500).send(err);
+      })
+   })
+}
 
 /********* Get Single User *************/
 router.get('/:id', (req, res) => {
