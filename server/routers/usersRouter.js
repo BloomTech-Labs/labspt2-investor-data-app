@@ -1,9 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const users = require('../data/helpers/usersModel')
+const axios = require("axios");
+const bcrypt = require("bcryptjs");
+const { authenticate, generateToken } = require("../auth/authenticate");
 
 
 
+// Added routes for signin and authenitcate the username and password for front end use. 
+module.exports = router => {
+    router.get("/signin", authenicate, getUsers);
+    router.get("/:id", userById);
+}
 
 /************************************ USERS SECTION ***********************************/
 // protect this route, only authenticated users should see it
@@ -28,6 +36,23 @@ const users = require('../data/helpers/usersModel')
                 .json({ error: "The users could not be retrieved." });
         });
 }); 
+
+signin =(req, res) => {
+    //implementing user signin 
+    const creds = req.body;
+    users.get(creds.usersname)
+    .then(user => {
+        //Check to see is username is valid
+        if(user && bcrypt.compareSync(creds.password, user.password)){
+            const token = generateToken(user)
+            res.json({id: user.id, token})
+        }else {
+            res.status(404).json({err:"Invalid username or password"})
+
+        }
+    })
+    .catch( err => res.status(500).send(err))
+}
 
 
 /********* Get Single User *************/
