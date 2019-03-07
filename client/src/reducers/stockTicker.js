@@ -1,6 +1,5 @@
 import { FETCHING, FETCHED, ERROR } from  "../actions/index";
 
-
 const initialState = {
   stocks: [],
   fetching: false,

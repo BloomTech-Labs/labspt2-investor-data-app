@@ -3,11 +3,11 @@ export const FETCHING = 'FETCHING';
 export const FETCHED = 'FETCHED';
 export const ERROR = 'ERROR';
 
- export const fetchStocks = () => {
+ export const fetchStocks = (item) => {
     return dispatch => {
         dispatch({ type: FETCHING });
         axios
-        .get('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=AMZN&interval=5min&apikey=MRYZL6KHH9MMJYIF')
+        .get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${item}&interval=5min&apikey=MRYZL6KHH9MMJYIF`)
         .then(response => {
             dispatch({
                 type: FETCHED, payload: response.data['Time Series (5min)']

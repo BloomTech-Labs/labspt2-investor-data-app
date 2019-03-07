@@ -6,7 +6,7 @@ const NavContainer = styled.section`
   flex-wrap: wrap; 
   align-items: center; 
   justify-content: space-between;  
-  padding: 0% 5%;
+  padding: 0% 3%;
   background-color: rgba(0, 0, 0, 0.1); 
 `
 const NavbarRight = styled.div`
