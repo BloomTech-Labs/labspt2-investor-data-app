@@ -9,7 +9,7 @@ const createFakeUser = () => ({
   password: faker.internet.password()
 });
 
-// For loop that runs createFakeUser function to seed database with 500 dummy users
+// Deletes the existing users seeds, then runs the for loop that runs createFakeUser function to seed database with 500 dummy users
 
 exports.seed = function(knex, Promise) {
   const desiredFakeUsers = 100;
