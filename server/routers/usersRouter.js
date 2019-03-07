@@ -41,6 +41,7 @@ module.exports = router => {
                 .status(500)
                 .json({ error: "The users could not be retrieved." });
         });
+<<<<<<< HEAD
 }); 
 
 signin = (req, res) => {
@@ -93,12 +94,10 @@ router.get('/:id', (req, res) => {
                 .status(500)
                 .json({ error: "The users information could not be retrieved." });
         });
+=======
+>>>>>>> f88ce17a880ba38a7cac5d914d0ed1e629ffa203
 });
 
 
 
-
-
-
 module.exports = router;
-
