@@ -10,9 +10,12 @@ class App extends Component {
     return (
       <div>
         <Landing />
+        <Switch>
+          
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
