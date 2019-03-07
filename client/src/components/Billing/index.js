@@ -1,100 +1,96 @@
-import React from 'react';
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import StarIcon from '@material-ui/icons/StarBorder';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import React from "react";
+import PropTypes from "prop-types";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardHeader from "@material-ui/core/CardHeader";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import StarIcon from "@material-ui/icons/StarBorder";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
-  '@global': {
+  "@global": {
     body: {
-      backgroundColor: theme.palette.common.white,
-    },
+      backgroundColor: theme.palette.common.white
+    }
   },
   appBar: {
-    position: 'relative',
+    position: "relative"
   },
   toolbarTitle: {
-    flex: 1,
+    flex: 1
   },
   layout: {
-    width: 'auto',
+    width: "auto",
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(900 + theme.spacing.unit * 3 * 2)]: {
       width: 900,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
+      marginLeft: "auto",
+      marginRight: "auto"
+    }
   },
   heroContent: {
     maxWidth: 600,
-    margin: '0 auto',
-    padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
+    margin: "0 auto",
+    padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`
   },
   cardHeader: {
-    backgroundColor: theme.palette.grey[200],
+    backgroundColor: theme.palette.grey[200]
   },
   cardPricing: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'baseline',
-    marginBottom: theme.spacing.unit * 2,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "baseline",
+    marginBottom: theme.spacing.unit * 2
   },
   cardActions: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing.unit * 2,
-    },
+    [theme.breakpoints.up("sm")]: {
+      paddingBottom: theme.spacing.unit * 2
+    }
   },
   footer: {
     marginTop: theme.spacing.unit * 8,
     borderTop: `1px solid ${theme.palette.divider}`,
-    padding: `${theme.spacing.unit * 6}px 0`,
-  },
+    padding: `${theme.spacing.unit * 6}px 0`
+  }
 });
 
 const tiers = [
   {
-    title: 'Newbie',
-    price: '5',
-    description: ['price indicator', 'Help documentation', 'Email support'],
-    buttonText: 'Sign up for now',
-    buttonVariant: 'outlined',
+    title: "Newbie",
+    price: "5",
+    description: ["price indicator", "Help documentation", "Email support"],
+    buttonText: "Sign up for now",
+    buttonVariant: "outlined"
   },
   {
-    title: 'Investor',
-    subheader: 'Most popular',
-    price: '15',
+    title: "Investor",
+    subheader: "Most popular",
+    price: "15",
     description: [
-      '3 indicators included',
-      'Help documentation',
-      'Priority email support',
+      "3 indicators included",
+      "Help documentation",
+      "Priority email support"
     ],
-    buttonText: 'Get started',
-    buttonVariant: 'contained',
+    buttonText: "Get started",
+    buttonVariant: "contained"
   },
   {
-    title: 'Pro',
-    price: '30',
+    title: "Pro",
+    price: "30",
     description: [
-      '5 indicators included',
-      'Help documentation',
-      'Priority email support',
+      "5 indicators included",
+      "Help documentation",
+      "Priority email support"
     ],
-    buttonText: 'Join us',
-    buttonVariant: 'outlined',
-  },
+    buttonText: "Join us",
+    buttonVariant: "outlined"
+  }
 ];
-
 
 function Pricing(props) {
   const { classes } = props;
@@ -106,27 +102,44 @@ function Pricing(props) {
       <main className={classes.layout}>
         {/* Hero unit */}
         <div className={classes.heroContent}>
-          <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+          <Typography
+            component="h1"
+            variant="h2"
+            align="center"
+            color="textPrimary"
+            gutterBottom
+          >
             Pricing
           </Typography>
-          <Typography variant="h6" align="center" color="textSecondary" component="p">
-          Pickem is a investor application that makes it easier to research stocks and 
-          make better investment decisions. Become a better investor today by picking one of 
-          our tiered plans below.  
+          <Typography
+            variant="h6"
+            align="center"
+            color="textSecondary"
+            component="p"
+          >
+            Pickem is a investor application that makes it easier to research
+            stocks and make better investment decisions. Become a better
+            investor today by picking one of our tiered plans below.
           </Typography>
         </div>
         {/* End hero unit */}
         <Grid container spacing={40} alignItems="flex-end">
           {tiers.map(tier => (
             // Enterprise card is full width at sm breakpoint
-            <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
+            <Grid
+              item
+              key={tier.title}
+              xs={12}
+              sm={tier.title === "Enterprise" ? 12 : 6}
+              md={4}
+            >
               <Card>
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}
-                  titleTypographyProps={{ align: 'center' }}
-                  subheaderTypographyProps={{ align: 'center' }}
-                  action={tier.title === 'Pro' ? <StarIcon /> : null}
+                  titleTypographyProps={{ align: "center" }}
+                  subheaderTypographyProps={{ align: "center" }}
+                  action={tier.title === "Pro" ? <StarIcon /> : null}
                   className={classes.cardHeader}
                 />
                 <CardContent>
@@ -145,7 +158,11 @@ function Pricing(props) {
                   ))}
                 </CardContent>
                 <CardActions className={classes.cardActions}>
-                  <Button fullWidth variant={tier.buttonVariant} color="primary">
+                  <Button
+                    fullWidth
+                    variant={tier.buttonVariant}
+                    color="primary"
+                  >
                     {tier.buttonText}
                   </Button>
                 </CardActions>
@@ -154,13 +171,12 @@ function Pricing(props) {
           ))}
         </Grid>
       </main>
-
     </React.Fragment>
   );
 }
 
 Pricing.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(Pricing);

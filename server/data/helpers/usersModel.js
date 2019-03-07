@@ -40,20 +40,20 @@ module.exports = {
             .del();
     },
 
-     findByUserEmail:  (email) => {
-        return db('users').where('email', email).first();
+    findByUsername: function (username) {
+        return db('users').where('username', username).first();
     },
 
     findById:  (id) => {
         return db('users').where('id', id).first();
     },
 
-    findUsers:  () => {
-        return db('users').select('id', 'email');
+    findUsers: function () {
+        return db('users').select('id', 'username');
     },
 
-    find:  () => {
-        return db('users').select('id', 'email');
+    find: function () {
+        return db('users').select('id', 'username');
     }
 
 };
