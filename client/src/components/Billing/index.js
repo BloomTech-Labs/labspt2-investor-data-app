@@ -11,17 +11,19 @@ import StarIcon from "@material-ui/icons/StarBorder";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
+/*
+TODO: 
+1) Change signup link on main navigation to route to here.
+2) Considering deleting signup component if not needed
+3) Make links at bottom of tier choices active to create users
+4) Settle on exact wording to use
+*/
+
 const styles = theme => ({
   "@global": {
     body: {
       backgroundColor: theme.palette.common.white
     }
-  },
-  appBar: {
-    position: "relative"
-  },
-  toolbarTitle: {
-    flex: 1
   },
   layout: {
     width: "auto",
@@ -52,12 +54,11 @@ const styles = theme => ({
       paddingBottom: theme.spacing.unit * 2
     }
   },
-  footer: {
-    marginTop: theme.spacing.unit * 8,
-    borderTop: `1px solid ${theme.palette.divider}`,
-    padding: `${theme.spacing.unit * 6}px 0`
-  }
 });
+
+
+/* Filled in wording & pricing for now.  I expect we will decide on 
+exact wording later on */
 
 const tiers = [
   {
@@ -125,12 +126,12 @@ function Pricing(props) {
         {/* End hero unit */}
         <Grid container spacing={40} alignItems="flex-end">
           {tiers.map(tier => (
-            // Enterprise card is full width at sm breakpoint
+            // Pro card is full width at sm breakpoint
             <Grid
               item
               key={tier.title}
               xs={12}
-              sm={tier.title === "Enterprise" ? 12 : 6}
+              sm={tier.title === "Pro" ? 12 : 6}
               md={4}
             >
               <Card>
@@ -139,7 +140,7 @@ function Pricing(props) {
                   subheader={tier.subheader}
                   titleTypographyProps={{ align: "center" }}
                   subheaderTypographyProps={{ align: "center" }}
-                  action={tier.title === "Pro" ? <StarIcon /> : null}
+                  action={tier.title === "Investor" ? <StarIcon /> : null}
                   className={classes.cardHeader}
                 />
                 <CardContent>

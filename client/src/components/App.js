@@ -7,7 +7,6 @@ class App extends Component {
     return (
       <div>
         <Landing />
-        <Billing />
       </div>
     );
   }
