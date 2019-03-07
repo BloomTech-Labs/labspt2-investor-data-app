@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Landing from '../components/Landing/index'
+import Landing from '../components/Landing'
 import './App.css';
 
 class App extends Component {
