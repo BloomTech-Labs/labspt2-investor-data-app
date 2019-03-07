@@ -27,33 +27,8 @@ const users = require('../data/helpers/usersModel')
                 .status(500)
                 .json({ error: "The users could not be retrieved." });
         });
-}); 
-
-
-/********* Get Single User *************/
-router.get('/:id', (req, res) => {
-    const { id } = req.params
-    users.get(id)
-        .then(user => {
-            if (user) {
-                res.json(user);
-            } else {
-                res
-                    .status(404)
-                    .json({ message: "The user with the specified ID does not exist." })
-            }
-        })
-        .catch(err => {
-            res
-                .status(500)
-                .json({ error: "The users information could not be retrieved." });
-        });
 });
 
 
 
-
-
-
 module.exports = router;
-
