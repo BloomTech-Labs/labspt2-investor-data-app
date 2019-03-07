@@ -64,6 +64,7 @@ class Settings extends React.Component {
                     optEmails={this.state.optEmails}
                     optTexts={this.state.optTexts}
                 />
+                {/* Form to update a user's password */}
                 <PasswordForm 
                     oldPassword={this.state.oldPassword}
                     newPassword={this.state.newPassword}
