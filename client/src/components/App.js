@@ -12,7 +12,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Landing />
         <Switch>
           <Route exact path={ROUTES.LANDING} component={Landing} />
           <Route path={ROUTES.DASHBOARD} component={Dashboard} />
