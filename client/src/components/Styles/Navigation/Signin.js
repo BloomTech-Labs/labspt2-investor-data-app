@@ -6,3 +6,10 @@ export const SingInModal = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const CloseButton = styled.button`
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: 20px;
+`;

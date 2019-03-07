@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 // import TextField from "@material-ui/core/TextField";
-import { SingInModal } from "../Styles/Navigation/Signin";
+import { SingInModal, CloseButton } from "../Styles/Navigation/Signin";
 import {
   TextField,
   DialogContent,
@@ -58,6 +58,9 @@ export default class FormDialog extends React.Component {
         >
           <DialogContent>
             <SingInModal>
+              <CloseButton onClick={this.handleSignup} color="default">
+                X
+              </CloseButton>
               <DialogTitle id="signin">PICKEM</DialogTitle>
               <DialogContentText>
                 Please Sign In <p /> {""}
