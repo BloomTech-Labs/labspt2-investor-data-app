@@ -6,6 +6,8 @@ import {
   NavbarRight
 } from "../Styles/Navigation/Main";
 import SigninModal from "./SigninModal";
+import SignupModal from "./SignupModal";
+
 class Navigation extends React.Component {
   //   constructor() {
   //     super();
@@ -23,6 +25,7 @@ class Navigation extends React.Component {
           </NavbarLeft>
           <NavbarRight>
             <SigninModal />
+            <SignupModal />
           </NavbarRight>
         </NavContainer>
       </div>
