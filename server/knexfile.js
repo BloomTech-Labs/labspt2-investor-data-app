@@ -31,19 +31,17 @@ module.exports = {
       directory: './data/seeds',
     },
   },
-  production: {
-    client: 'pg',
+  staging: {
+    client: 'sqlite3',
     connection: {
-      filename: process.env.DATABASE_URL,
+      filename: './data/staging.sqlite3',
     },
     useNullAsDefault: true,
     migrations: {
       directory: './data/migrations',
-      tableName: 'knex_migrations'
     },
     seeds: {
-      directory: './data/seeds'
-    }
-  },
-  
+      directory: './data/seeds',
+    },
+  }
 };
