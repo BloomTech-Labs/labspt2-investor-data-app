@@ -3,6 +3,8 @@ export const FETCHING = 'FETCHING';
 export const FETCHED = 'FETCHED';
 export const ERROR = 'ERROR';
 
+// Retrieves the stock data from the external API
+
 export const fetchStocks = (item) => {
   return dispatch => {
     dispatch({ type: FETCHING });

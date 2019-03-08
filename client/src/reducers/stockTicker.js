@@ -1,5 +1,7 @@
 import { FETCHING, FETCHED, ERROR } from  "../actions/index";
 
+// Reducer that operates the stock ticker and is responsible for fetching the data
+
 const initialState = {
   stocks: [],
   fetching: false,

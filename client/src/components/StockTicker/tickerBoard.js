@@ -38,6 +38,7 @@ function createData(name, open, high, low, close, change) {
   return { id, name, open, high, low, close, change };
 }
 
+// Dummy data until stock ticker functionality has been achieved
 const rows = [
   createData('Dow', 159, 6.0, 24, 4.0, 2),
   createData('Nasdaq', 237, 9.0, 37, 4.3, 5),
