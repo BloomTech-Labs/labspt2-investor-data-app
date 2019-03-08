@@ -16,9 +16,9 @@ module.exports = {
         return db('billing')
     },
 
-    insert: async function (list) {
+    insert: async function (bill) {
         return db('billing')
-            .insert(list)
+            .insert(bill)
             .then(([id]) => this.get(id));
     },
 
