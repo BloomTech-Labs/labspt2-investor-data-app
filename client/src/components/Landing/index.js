@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from "react";
 import Navigation from "../Navigation/index";
 // import axios from "axios";
@@ -6,8 +5,8 @@ import { Route } from "react-router-dom";
 import { data } from "../../data";
 import DevList from "../Team/DevList";
 class Landing extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       users: []
     };
@@ -35,23 +34,6 @@ class Landing extends React.Component {
       </div>
     );
   }
-=======
-import React from 'react'
-import Navigation from '../Navigation/index'
-
-class Landing extends React.Component {
-    constructor(){
-        super();
-    }
-    
-    render(){
-        return(
-            <div>
-                <Navigation /> 
-            </div>
-        )
-    }
->>>>>>> 41b615ccb0eae5cfbd50f2a47598c210b1e372c4
 }
 
 
