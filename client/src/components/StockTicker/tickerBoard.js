@@ -46,7 +46,7 @@ const rows = [
   createData('Apple', 356, 16.0, 49, 3.9, 2),
 ];
 
-function CustomizedTable(props) {
+function TickerBoard(props) {
   const { classes } = props;
 
   return (
@@ -81,8 +81,8 @@ function CustomizedTable(props) {
   );
 }
 
-CustomizedTable.propTypes = {
+TickerBoard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CustomizedTable);
+export default withStyles(styles)(TickerBoard);

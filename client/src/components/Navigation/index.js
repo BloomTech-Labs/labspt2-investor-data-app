@@ -15,39 +15,39 @@ const NavbarRight = styled.div`
 `
 
 const NavbarLeft = styled.div`
-    display: flex; 
-    flex-wrap: wrap; 
-    align-items: center; 
-    width: 60%; 
+  display: flex; 
+  flex-wrap: wrap; 
+  align-items: center; 
+  width: 60%; 
 `
 
 const MenuDrawer = styled.div`
-    font-size: 24px; 
-    margin-right: 5%; 
+  font-size: 24px; 
+  margin-right: 5%; 
 `
 
 class Navigation extends React.Component {
-    constructor(){
-        super();
-    }
+  constructor(){
+    super();
+  }
 
-    render(){
-        return(
-            <div>
-                <NavContainer>
-                    <NavbarLeft>
-                        <MenuDrawer>
-                        <i className="fas fa-bars"></i>
-                         </MenuDrawer>
-                        <h2>Pick Em</h2>
-                    </NavbarLeft>
-                    <NavbarRight>
-                        <p>Sign In</p> 
-                    </NavbarRight>
-                </NavContainer>
-            </div> 
-        )
-    }
+  render(){
+    return(
+      <div>
+        <NavContainer>
+          <NavbarLeft>
+            <MenuDrawer>
+              <i className="fas fa-bars"></i>
+             </MenuDrawer>
+            <h2>Pick Em</h2>
+          </NavbarLeft>
+          <NavbarRight>
+            <p>Sign In</p> 
+          </NavbarRight>
+        </NavContainer>
+      </div> 
+    )
+  }
 }
 
 export default Navigation

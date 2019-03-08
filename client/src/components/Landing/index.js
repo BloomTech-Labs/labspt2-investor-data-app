@@ -6,16 +6,15 @@ import TickerBoard from '../StockTicker/tickerBoard'
 
 
 class Landing extends React.Component {
-    constructor(){
-        super();
+  constructor(){
+  super();
     }
     
     render(){
         return(
             <div>
                 <Navigation /> 
-                <StockTicker />
-                
+                <StockTicker />   
             </div>
         )
     }
