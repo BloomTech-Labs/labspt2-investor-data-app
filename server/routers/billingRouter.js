@@ -35,6 +35,7 @@ router.post("/", (req, res) => {
       amount: req.body.amount,
       currency: "usd"
     };
+    
     stripe.charges.create(body, postStripeCharge(res));
 });
 
