@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const users = require('../data/helpers/usersModel')
 
-
-
-
 /************************************ USERS SECTION ***********************************/
 // protect this route, only authenticated users should see it
 /* router.get('/', protect, (req, res) => {
@@ -29,7 +26,6 @@ const users = require('../data/helpers/usersModel')
         });
 }); 
 
-
 /********* Get Single User *************/
 router.get('/:id', (req, res) => {
     const { id } = req.params
@@ -49,11 +45,6 @@ router.get('/:id', (req, res) => {
                 .json({ error: "The users information could not be retrieved." });
         });
 });
-
-
-
-
-
 
 module.exports = router;
 

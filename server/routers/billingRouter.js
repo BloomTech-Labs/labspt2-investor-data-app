@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const billing = require('../data/helpers/billingModel')
 
-
-
 /************************************ BILLING SECTION ***********************************/
 
 /********* Get Billing *************/
@@ -18,7 +16,5 @@ router.get('/', async (req, res) => {
                 .json({ error: "The billing could not be retrieved." });
         });
 });
-
-
 
 module.exports = router;
