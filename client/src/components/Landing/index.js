@@ -1,8 +1,8 @@
 import React from "react";
 import Navigation from "../Navigation/index";
-// import axios from "axios";
+import axios from "axios";
 import { Route } from "react-router-dom";
-import { data } from "../../data";
+// import { data } from "../../data";
 import DevList from "../Team/DevList";
 class Landing extends React.Component {
   constructor(props) {
@@ -12,15 +12,15 @@ class Landing extends React.Component {
     };
   }
   componentDidMount() {
-    this.setState({ users: data });
-    // axios
-    //   .get("https://pickemm.herokuapp.com/api/users")
-    //   .then(response => {
-    //     this.setState({ users: response.data });
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+    // this.setState({ users: data });
+    axios
+      .get("http://localhost:5000/api/users")
+      .then(response => {
+        this.setState({ users: response.data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
   render() {
     return (
