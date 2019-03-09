@@ -30,4 +30,4 @@ class UsersList extends Component {
   }
 }
 
-export default UserList;
+export default UsersList;
