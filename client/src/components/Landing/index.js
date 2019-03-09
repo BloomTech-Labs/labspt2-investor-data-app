@@ -3,7 +3,7 @@ import Navigation from "../Navigation/index";
 import axios from "axios";
 import { Route } from "react-router-dom";
 // import { data } from "../../data";
-import DevList from "../Team/DevList";
+import UsersList from "../Team/UsersList";
 class Landing extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +29,7 @@ class Landing extends React.Component {
         <Route
           exact
           path="/"
-          render={props => <DevList {...props} users={this.state.users} />}
+          render={props => <UsersList {...props} users={this.state.users} />}
         />
       </div>
     );
