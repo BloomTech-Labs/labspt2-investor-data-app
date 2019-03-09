@@ -14,7 +14,7 @@ class Landing extends React.Component {
   componentDidMount() {
     // this.setState({ users: data });
     axios
-      .get("http://localhost:5000/api/users")
+      .get("https://pickemm.herokuapp.com/api/users")
       .then(response => {
         this.setState({ users: response.data });
       })
