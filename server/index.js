@@ -22,11 +22,6 @@ server.use('/api/billing', billingRouter);
 server.use('/api/favorites', favoritesRouter);
 server.use('/api/users', usersRouter);
 
-//Server response get '/'
-server.get('/', async (req, res) => {
-    res.status(200).json({ response: 'PICKEM Investor-Data App Successfully Launched' })
-})
-
 
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`\n** server up on port ${port} **\n`));

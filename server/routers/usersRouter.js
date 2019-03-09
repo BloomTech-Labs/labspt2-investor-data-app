@@ -1,23 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const users = require('../data/helpers/usersModel')
-const axios = require("axios");
-const bcrypt = require("bcryptjs");
-const { authenticate, generateToken } = require("../auth/authenticate");
 
 
-/* TODO:
-    Add either a route get/users and authenticate the route for
-    front end use and viewing. 
 
-
-*/
-// Added routes for signin and authenitcate the username and password for front end use. 
-module.exports = router => {
-    router.get("/signin", signin);
-    router.get("/signin", signup);
-    router.get("/:id", authenticate, userById);
-}
 
 /************************************ USERS SECTION ***********************************/
 // protect this route, only authenticated users should see it
@@ -41,8 +27,36 @@ module.exports = router => {
                 .status(500)
                 .json({ error: "The users could not be retrieved." });
         });
+<<<<<<< HEAD
+=======
+}); 
+
+
+/********* Get Single User *************/
+router.get('/:id', (req, res) => {
+    const { id } = req.params
+    users.get(id)
+        .then(user => {
+            if (user) {
+                res.json(user);
+            } else {
+                res
+                    .status(404)
+                    .json({ message: "The user with the specified ID does not exist." })
+            }
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .json({ error: "The users information could not be retrieved." });
+        });
+>>>>>>> 4887b40523fd620dc95f54d97ffb9d0f3285c9fc
 });
 
 
 
+
+
+
 module.exports = router;
+
