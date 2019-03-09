@@ -12,7 +12,7 @@ export const fetchStocks = (item) => {
       .get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${item}&interval=5min&apikey=MRYZL6KHH9MMJYIF`)
         .then(response => {
           dispatch({
-            type: FETCHED, payload: response.data['Time Series (5min)']
+            type: FETCHED, payload: response.data
           })
         })
         .catch(error => {
