@@ -3,7 +3,10 @@ import Navigation from "../Navigation/index";
 import axios from "axios";
 import { Route } from "react-router-dom";
 // import { data } from "../../data";
+import PropTypes from 'prop-types'
 import UsersList from "../Team/UsersList";
+
+
 class Landing extends React.Component {
   constructor(props) {
     super(props);
@@ -35,6 +38,14 @@ class Landing extends React.Component {
     );
   }
 }
+Landing.propTypes = {
+  users:PropTypes.arrayOf( PropTypes.shape({
+    id:  PropTypes.number.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired
+  }
+  ))
+ }
 
 
 export default Landing
