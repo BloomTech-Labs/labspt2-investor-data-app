@@ -1,5 +1,9 @@
 import React from 'react';
 
+// Redux imports
+import { connect } from 'react-redux';
+import { getSettings } from './actions';
+
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
@@ -51,5 +55,12 @@ class EmailForm extends React.Component {
     };
 };
 
+const mapStateToProps = state => {
+    return {
+        fetchingSettings: state.fetchingSettings,
+        error: state.error,
+        firstName: state.firstName
+    }
+};  
 
-export default withStyles(styles)(EmailForm);
+export default withStyles(styles)(connect(mapStateToProps, { getSettings })(EmailForm));
