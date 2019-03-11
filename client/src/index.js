@@ -14,7 +14,7 @@ import rootReducer from './reducers/index';
 const middleware = applyMiddleware(logger, thunk);
 
 // Create Redux store
-const store = createStore(rootReducer, middleware)
+const store = createStore(rootReducer, middleware);
 
 ReactDOM.render(
     <Provider store={store}>

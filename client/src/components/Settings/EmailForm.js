@@ -17,6 +17,11 @@ class EmailForm extends React.Component {
         super();
     };
 
+    componentDidMount(){
+        this.props.getSettings();
+        console.log(this.props.fetchingSettings);
+    };
+
     render(){
 
         const { classes } = this.props;
@@ -29,7 +34,9 @@ class EmailForm extends React.Component {
                 <div>
                     {/* Show current email address */}
                     <h3 className={classes.currentHeader}>Current email address:</h3>
-                    <p className={classes.currentValue}>{this.props.email}</p>
+                    {this.props.fetchingSettings ? <p className={classes.currentValue}>Loading...</p> : null }
+                    {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
+                    <p className={classes.currentValue}>{this.props.error}</p>
                 </div>
                 {/* Text field for new email address */}
                 <TextField 
@@ -59,8 +66,9 @@ const mapStateToProps = state => {
     return {
         fetchingSettings: state.fetchingSettings,
         error: state.error,
-        firstName: state.firstName
+        settings: state.settings
     }
 };  
 
 export default withStyles(styles)(connect(mapStateToProps, { getSettings })(EmailForm));
+// export default connect(mapStateToProps, { getSettings })(EmailForm);
