@@ -3,7 +3,7 @@ import { FETCHING, GET_SETTINGS, ERROR } from './actions.js';
 const initialState = {
     fetchingSettings: false,
     error: null,
-    username: ''
+    firstName: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,7 +11,7 @@ const reducer = (state = initialState, action) => {
         case FETCHING:
             return Object.assign({}, state, {fetchingSettings: true});
         case GET_SETTINGS:
-            return Object.assign({}, state, {fetchingSettings: false, error: '', username: action.payload.username});
+            return Object.assign({}, state, {fetchingSettings: false, error: '', firstName: action.payload.firstName});
         case ERROR:
             return Object.assign({}, state, {fetchingSmurfs: false, error: action.error});
     }
