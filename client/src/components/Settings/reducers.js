@@ -14,6 +14,8 @@ const reducer = (state = initialState, action) => {
             return Object.assign({}, state, {fetchingSettings: false, error: '', firstName: action.payload.firstName});
         case ERROR:
             return Object.assign({}, state, {fetchingSmurfs: false, error: action.error});
+        default:
+            return state;
     }
 };
 
