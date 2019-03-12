@@ -83,7 +83,6 @@
    background-color: #FFF842;
    color: #403E10;
    font-weight: bold;
-   
    box-shadow: rgb(47, 95, 168) -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
    transform: translate3d(6px, -6px, 0);
    transition-delay: 0s;
@@ -98,6 +97,22 @@
      justify-content: center; 
      margin-top: 150px; 
  }
+
+ .clock{
+     display: flex; 
+     justify-content: center; 
+ }
+
+ .ticker-header{
+     display: flex; 
+     flex-wrap: wrap; 
+     justify-content: center; 
+ }
+
+ .header-spacing{
+     line-height: .5; 
+ }
+
  
  @media (max-width: 800px) {
  .container td:nth-child(4),

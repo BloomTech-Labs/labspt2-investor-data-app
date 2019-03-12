@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import './tickerBoard.css'
+import ClockFunction from './clock'
 
 class StockTicker extends React.Component {
   constructor(props){
@@ -14,7 +15,7 @@ class StockTicker extends React.Component {
 
   componentDidMount(){
     let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
-      axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${company}&interval=5min&apikey=MRYZL6KHH9MMJYIF`));
+      axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${company}&interval=5min&apikey=ZV7Y9QKGXRHCY0A4`));
     this.fetchStocks(promises)
   }
 
@@ -87,21 +88,25 @@ class StockTicker extends React.Component {
     return (
       <div>  
         <div className='table'>
-        <table className="container">
-	        <thead>
-		        <tr>
-			        <th><h1>Company</h1></th>
-			        <th><h1>Start</h1></th>
-			        <th><h1>High</h1></th>
-			        <th><h1>Low</h1></th>
-              <th><h1>Close</h1></th>
-              <th><h1>Change</h1></th> 
-		        </tr>
-	        </thead>
-	        <tbody>
-		        { rows }  
-	        </tbody>
-        </table>
+          <div className={'header-spacing'}>
+            <h2 className={'ticker-header'}>Pickem Currents</h2>
+            <ClockFunction />
+          </div> 
+          <table className="container">
+	          <thead>
+		          <tr>
+			          <th><h1>Company</h1></th>
+			          <th><h1>Start</h1></th>
+			          <th><h1>High</h1></th>
+			          <th><h1>Low</h1></th>
+                <th><h1>Close</h1></th>
+                <th><h1>Change</h1></th> 
+		          </tr>
+	          </thead>
+	          <tbody>
+		          { rows }  
+	          </tbody>
+          </table>
         </div> 
       </div> 
     )
