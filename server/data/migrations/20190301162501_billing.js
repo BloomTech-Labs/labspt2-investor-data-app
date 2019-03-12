@@ -35,7 +35,7 @@ exports.up = function(knex, Promise) {
     billing.string("accountStatus", 128).notNullable();
     billing.integer("targetsUsed").unsigned();
     billing.integer("users_id").unsigned();
-    
+  });
 };
 
 exports.down = function(knex, Promise) {
