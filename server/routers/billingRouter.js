@@ -62,34 +62,34 @@ router.delete("/:id", (req, res) => {
 /********* Update Billing *************/
 router.put("/:id", (req, res) => {
   const { id } = req.params;
-  const newBill = req.body;
+  const newBills = req.body;
   if (
-    !newBill.street ||
-    !newBill.city ||
-    !newBill.state ||
-    !newBill.country ||
-    !newBill.zipcode ||
-    !newBill.mailingStreet ||
-    !newBill.mailingCity ||
-    !newBill.mailingState ||
-    !newBill.mailingZipcode ||
-    !newBill.ccn ||
-    !newBill.expireMonth ||
-    !newBill.expireYear ||
-    !newBill.code ||
-    !newBill.monthlyBill ||
-    !newBill.accountStatus ||
-    !newBill.users_id ||
-    !newBill.targetsUsed
+    !newBills.street ||
+    !newBills.city ||
+    !newBills.state ||
+    !newBills.country ||
+    !newBills.zipcode ||
+    !newBills.mailingStreet ||
+    !newBills.mailingCity ||
+    !newBills.mailingState ||
+    !newBills.mailingZipcode ||
+    !newBills.ccn ||
+    !newBills.expireMonth ||
+    !newBills.expireYear ||
+    !newBills.code ||
+    !newBills.monthlyBill ||
+    !newBills.accountStatus ||
+    !newBills.users_id ||
+    !newBills.targetsUsed
   ) {
     res.status(400).json({
       message:
         "Please provide full street address, full mailing address, credit card number, expires month & year, security code, monthly bill amount, account status, user_id and # of targets used."
     });
   } else {
-    if (newBill) {
+    if (newBills) {
       billing
-        .update(id, newBill)
+        .update(id, newBills)
         .then(bills => {
           if (bills) {
             res.status(201).json(bills);
@@ -100,9 +100,7 @@ router.put("/:id", (req, res) => {
           }
         })
         .catch(err => {
-          res
-            .status(500)
-            .json({ error: "The bill could not be modified." });
+          res.status(500).json({ error: "The bill could not be modified." });
         });
     } else {
       res.status(404).json({
@@ -112,6 +110,44 @@ router.put("/:id", (req, res) => {
   }
 });
 
-
+/********* Create New Bill *************/
+router.post("/", (req, res, next) => {
+  const bills = req.body;
+  if (
+    bills.street &&
+    bills.city &&
+    bills.state &&
+    bills.country &&
+    bills.zipcode &&
+    bills.mailingStreet &&
+    bills.mailingCity &&
+    bills.mailingState &&
+    bills.mailingZipcode &&
+    bills.ccn &&
+    bills.expireMonth &&
+    bills.expireYear &&
+    bills.code &&
+    bills.monthlyBill &&
+    bills.accountStatus &&
+    bills.users_id &&
+    bills.targetsUsed
+  ) {
+    bills
+      .insert(bills)
+      .then(bills => {
+        res.status(201).json(bills);
+      })
+      .catch(err => {
+        res.status(500).json({ message: "failed to insert bill in db" });
+      });
+  } else {
+    res
+      .status(400)
+      .json({
+        message:
+          "missing full street address, full mailing address, credit card number, expires month & year, security code, monthly bill amount, account status, user_id and/or # of targets used.."
+      });
+  }
+});
 
 module.exports = router;
