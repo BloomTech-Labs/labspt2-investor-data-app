@@ -1,8 +1,6 @@
 import React from "react";
-import Navigation from "../Navigation/index";
 import axios from "axios";
 import { Route } from "react-router-dom";
-// import { data } from "../../data";
 import PropTypes from 'prop-types'
 import UsersList from "../Team/UsersList";
 
@@ -15,7 +13,6 @@ class Landing extends React.Component {
     };
   }
   componentDidMount() {
-    // this.setState({ users: data });
     axios
       .get("https://pickemm.herokuapp.com/api/users")
       .then(response => {
@@ -28,7 +25,6 @@ class Landing extends React.Component {
   render() {
     return (
       <div>
-        <Navigation />
         <Route
           exact
           path="/"
