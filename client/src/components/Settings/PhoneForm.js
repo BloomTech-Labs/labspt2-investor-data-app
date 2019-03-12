@@ -9,9 +9,6 @@ import Button from '@material-ui/core/Button';
 import styles from './styles';
 
 class PhoneForm extends React.Component {
-    constructor(){
-        super();
-    };
 
     render(){
 

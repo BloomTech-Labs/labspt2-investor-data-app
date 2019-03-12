@@ -13,9 +13,6 @@ import Button from '@material-ui/core/Button';
 import styles from './styles';
 
 class EmailForm extends React.Component {
-    constructor(){
-        super();
-    };
 
     componentDidMount(){
         this.props.getSettings();
@@ -24,18 +21,21 @@ class EmailForm extends React.Component {
     render(){
 
         const { classes } = this.props;
-        console.log(this.props.settings);
+
         return(
             <form 
                 className={classes.container}
                 id='emailForm'
             >
                 <div>
-                    {/* Show current email address */}
+                    {/* Current email address header*/}
                     <h3 className={classes.currentHeader}>Current email address:</h3>
+                    {/* Loading current email... */}
                     {this.props.fetchingSettings ? <p className={classes.currentValue}>Loading...</p> : null }
-                    {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.settings}</p> : null }
-                    <p className={classes.currentValue}>{this.props.email}</p>
+                    {/* Error in loading current email */}
+                    {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
+                    {/* Current email address */}
+                    <p className={classes.currentValue}>{this.props.settings.email}</p>
                 </div>
                 {/* Text field for new email address */}
                 <TextField 
