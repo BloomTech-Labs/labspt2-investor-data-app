@@ -10,6 +10,7 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import rootReducer from './reducers/index';
 
+
 // Middleware for error logging and dispatching
 const middleware = applyMiddleware(logger, thunk);
 

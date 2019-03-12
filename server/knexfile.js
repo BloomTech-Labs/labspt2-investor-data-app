@@ -31,6 +31,7 @@ module.exports = {
       directory: './data/seeds',
     },
   },
+
   staging: {
     client: 'sqlite3',
     connection: {
@@ -43,5 +44,20 @@ module.exports = {
     seeds: {
       directory: './data/seeds',
     },
-  }
+  },
+  production: {
+    client: 'pg',
+    connection: {
+      filename: process.env.DATABASE_URL,
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: './data/migrations',
+      tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
+    }
+  },
+  
 };
