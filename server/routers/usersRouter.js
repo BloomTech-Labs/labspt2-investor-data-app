@@ -40,6 +40,58 @@ module.exports = router => {
                 .status(500)
                 .json({ error: "The users could not be retrieved." });
         });
+}); 
+
+signin = (req, res) => {
+    //implementing user signin 
+    const creds = req.body;
+    users.get(creds.usersname)
+    .then(user => {
+        //Check to see is username is valid
+        if(user && bcrypt.compareSync(creds.password, user.password)){
+            const token = generateToken(user)
+            res.json({id: user.id, token})
+        }else {
+            res.status(404).json({err:"Invalid username or password"})
+
+        }
+    })
+    .catch( err => res.status(500).send(err))
+}
+
+signup = (req, res) => {
+ const user = req.body
+ user.password = bcrypt.hashSync(user.password, 12)
+   users.insert(user).then(ids => {
+       users.getByUser([ids[0]])
+       .then(user => {
+        const token = generateToken(user);
+        res.status(201).json({ id: user.id, token });
+       })
+       .catch(err => {
+        res.status(500).send(err);
+      })
+   })
+}
+
+/********* Get Single User *************/
+router.get('/:id', (req, res) => {
+    const { id } = req.params
+    users.get(id)
+        .then(user => {
+            if (user) {
+                res.json(user);
+            } else {
+                res
+                    .status(404)
+                    .json({ message: "The user with the specified ID does not exist." })
+            }
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .json({ error: "The users information could not be retrieved." });
+        });
 });
 
 
