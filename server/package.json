@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "client",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -13,6 +13,7 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
@@ -21,10 +22,12 @@
     "jsonwebtoken": "^8.5.0",
     "knex": "^0.16.3",
     "morgan": "^1.9.1",
+    "pg": "^7.8.2",
     "sqlite3": "^4.0.6"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
+    "faker": "^4.1.0",
     "jest": "^24.1.0",
     "nodemon": "^1.18.10",
     "supertest": "^3.4.2"

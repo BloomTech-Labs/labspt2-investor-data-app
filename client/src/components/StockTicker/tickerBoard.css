@@ -4,7 +4,7 @@
  .table {
    font-family: 'Open Sans', sans-serif;
    margin: 50px auto; 
-   width: 60%; 
+   width: 70%; 
    color:#A7A1AE;
    background-color:#1F2739;
    border-radius: 10px; 
@@ -47,7 +47,7 @@
    text-align: left;
    border-radius: 10px; 
    overflow: hidden;
-   width: 60%;
+   width: 100%;
    margin: 0 auto;
    display: table;
  }
@@ -90,6 +90,13 @@
    transition-duration: 0.4s;
    transition-property: all;
    transition-timing-function: line;
+ }
+
+ .page-loading{
+     font-size: 28px; 
+     display: flex;
+     justify-content: center; 
+     margin-top: 150px; 
  }
  
  @media (max-width: 800px) {

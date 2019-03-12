@@ -13,7 +13,7 @@ class StockTicker extends React.Component {
   }
 
   componentDidMount(){
-    let promises = this.state.companies.map(company =>   // map that sends array of stock companies through axios
+    let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
       axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${company}&interval=5min&apikey=MRYZL6KHH9MMJYIF`));
     this.fetchStocks(promises)
   }
@@ -30,13 +30,13 @@ class StockTicker extends React.Component {
             throw new Error()
           }
 
-          let data = result.data['Time Series (5min)']
+          let data = result.data['Time Series (5min)'] //Accesses correct object within API
           let timeStamps = Object.keys(data)
           let current = data[timeStamps[0]]
-          timeStamp = timeStamps[0]
+          timeStamp = timeStamps[0]  
 
           stocks.push({
-            company: result.data['Meta Data']['2. Symbol'], 
+            company: result.data['Meta Data']['2. Symbol'], // Collects stock symbol
             values: current
           })
         });
@@ -60,7 +60,7 @@ class StockTicker extends React.Component {
 
   render() {
     if(!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
-      return <div>Loading...</div>
+      return <div className="page-loading">Loading...</div>
     }
 
     let rows = [];
@@ -70,11 +70,11 @@ class StockTicker extends React.Component {
     const low = '3. low'
     const close = '4. close'
 
-    this.state.stocks.forEach( (stock, index) => {  // loops through array of stock values and creates a table
+    this.state.stocks.forEach( (stock, index) => {  // Loops through array of stock values and creates a table
       console.log(stock)
       rows.push(
-        <tr>
-          <td>{ stock.company }</td>
+        <tr>     
+          <td>{ stock.company }</td> 
           <td>{ stock.values[open] }</td>
           <td>{ stock.values[high] }</td>
           <td>{ stock.values[low] }</td>
