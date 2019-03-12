@@ -19,6 +19,26 @@ router.get('/', async (req, res) => {
         });
 });
 
+/********* Get Single Billing Record *************/
+router.get('/:id', async (req, res) => {
+    const { id } = req.params
+  await billing.get(id)
+        .then(bills => {
+            if (bills) {
+                res.json(bills);
+            } else {
+                res
+                    .status(404)
+                    .json({ message: "The favorite with the specified ID does not exist." })
+            }
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .json({ error: "The favorite information could not be retrieved." });
+        });
+});
+
 
 
 module.exports = router;
