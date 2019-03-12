@@ -29,16 +29,37 @@ router.get('/:id', async (req, res) => {
             } else {
                 res
                     .status(404)
-                    .json({ message: "The favorite with the specified ID does not exist." })
+                    .json({ message: "The bill with the specified ID does not exist." })
             }
         })
         .catch(err => {
             res
                 .status(500)
-                .json({ error: "The favorite information could not be retrieved." });
+                .json({ error: "The bill information could not be retrieved." });
         });
 });
 
+/************* Delete Bill *************/
+router.delete('/:id', (req, res) => {
+    const { id } = req.params
 
+    if (id) {
+        billing.remove(id)
+            .then(bills => {
+                if (bills) {
+                    res.json({ message: "The bill was successfully deleted" });
+                } else {
+                    res
+                        .status(404)
+                        .json({ message: "The bill with the specified ID does not exist." })
+                }
+            })
+            .catch(err => {
+                res
+                    .status(500)
+                    .json({ error: "The bill could not be removed." });
+            });
+    }
+});
 
 module.exports = router;
