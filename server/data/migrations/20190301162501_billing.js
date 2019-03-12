@@ -36,7 +36,7 @@ exports.up = function(knex, Promise) {
     billing.integer("targetsUsed").unsigned();
     billing.integer("users_id").unsigned();
     billing
-      .foreign("users_id")
+      .integer("users_id")
       .references("id")
       .on("users");
   });
