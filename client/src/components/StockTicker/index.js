@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import '../Styles/StockTicker/tickerBoard.css'
+import './tickerBoard.css'
 import ClockFunction from './clock'
 
 class StockTicker extends React.Component {
@@ -54,7 +54,7 @@ class StockTicker extends React.Component {
 
    change = (close, start) => {  // function for calculating the change of a stocks gain/loss by %
     let deduct = close - start
-    let divide = deduct / close
+    let divide = deduct / start
     let solution = divide * 100
       return solution.toFixed(2)
   }
