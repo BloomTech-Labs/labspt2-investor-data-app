@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import './tickerBoard.css'
+import '../Styles/StockTicker/tickerBoard.css'
 import ClockFunction from './clock'
 
 class StockTicker extends React.Component {
@@ -15,7 +15,7 @@ class StockTicker extends React.Component {
 
   componentDidMount(){
     let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
-      axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${company}&interval=5min&apikey=ZV7Y9QKGXRHCY0A4`));
+      axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=ZV7Y9QKGXRHCY0A4`));
     this.fetchStocks(promises)
   }
 
@@ -31,7 +31,7 @@ class StockTicker extends React.Component {
             throw new Error()
           }
 
-          let data = result.data['Time Series (5min)'] //Accesses correct object within API
+          let data = result.data['Time Series (Daily)'] //Accesses correct object within API
           let timeStamps = Object.keys(data)
           let current = data[timeStamps[0]]
           timeStamp = timeStamps[0]  
@@ -52,11 +52,11 @@ class StockTicker extends React.Component {
       });
   }
 
-  change = (close, start) => {  // function for calculating the change of a stocks gain/loss by %
+   change = (close, start) => {  // function for calculating the change of a stocks gain/loss by %
     let deduct = close - start
-    let divide = deduct / start
+    let divide = deduct / close
     let solution = divide * 100
-      return solution.toFixed(3)
+      return solution.toFixed(2)
   }
 
   render() {
@@ -89,7 +89,7 @@ class StockTicker extends React.Component {
       <div>  
         <div className='table'>
           <div className={'header-spacing'}>
-            <h2 className={'ticker-header'}>Pickem Currents</h2>
+            <h1 className={'ticker-header'}>Pickem Currents</h1>
             <ClockFunction />
           </div> 
           <table className="container">
