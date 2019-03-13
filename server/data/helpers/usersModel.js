@@ -41,7 +41,7 @@ module.exports = {
       .del();
   },
 
-  findByUsername: function(username) {
+  findByUsername: (username) => {
     return db("users")
       .where("username", username)
       .first();
@@ -53,11 +53,12 @@ module.exports = {
       .first();
   },
 
-  findUsers: function() {
+  findUsers: () => {
     return db("users").select("id", "username");
   },
 
-  find: function() {
+  find: () => {
     return db("users").select("id", "username");
   }
 };
+

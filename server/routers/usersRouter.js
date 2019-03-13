@@ -3,8 +3,7 @@ const router = express.Router();
 const users = require('../data/helpers/usersModel')
 const axios = require("axios");
 const bcrypt = require("bcryptjs");
-const { authenticate, generateToken } = require("../auth/authenticate");
-
+const { authenticate, generateToken } = require("../data/auth/authenticate")
 
 /* TODO:
     Add either a route get/users and authenticate the route for
@@ -12,7 +11,7 @@ const { authenticate, generateToken } = require("../auth/authenticate");
 
 
 */
-// Added routes for signin and authenitcate the username and password for front end use. 
+// Added routes for signin and authenticate the username and password for front end use. 
 module.exports = router => {
     router.get("/signin", signin);
     router.get("/signin", signup);
