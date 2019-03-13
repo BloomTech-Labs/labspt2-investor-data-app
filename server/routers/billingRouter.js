@@ -132,7 +132,7 @@ router.post("/", (req, res, next) => {
     bills.users_id &&
     bills.targetsUsed
   ) {
-    bills
+    billing
       .insert(bills)
       .then(bills => {
         res.status(201).json(bills);
