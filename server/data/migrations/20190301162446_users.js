@@ -9,7 +9,7 @@ exports.up = function (knex, Promise) {
             .string('lastName', 128)
             .notNullable();
         users
-            .string('userName', 128)
+            .string('username', 128)
             .notNullable()
             .unique();
         users
