@@ -28,5 +28,28 @@ export const getSettings = () => {
                     error: `The user's current settings could not be obtained at this time.`
                 });
             });
-    }
-}
+    };
+};
+
+export const updateEmail = (updatedEmail) => {
+    return dispatch => {
+        // Dispatch to reducer that current settings are being obtained from API
+        dispatch({type: FETCHING});
+        axios
+            // Update email on file in database
+            .put(`http://localhost:5000/api/users/1`, updatedEmail)
+            .then(response => {
+                // Dispatch to reducer that settings have been successfully updated and obtained, pass API response as payload
+                dispatch({
+                    type: SUCCESS,
+                    payload: response.data
+                });
+            })
+            .catch(err => {
+                dispatch({
+                    type: ERROR,
+                    error: `The user's email could not be updated at this time.`
+                });
+            });
+    };
+};
