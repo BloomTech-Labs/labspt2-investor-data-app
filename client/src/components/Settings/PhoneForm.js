@@ -1,5 +1,9 @@
 import React from 'react';
 
+// Redux imports
+import { connect } from 'react-redux';
+import { getSettings } from './actions';
+
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
@@ -9,6 +13,10 @@ import Button from '@material-ui/core/Button';
 import styles from './styles';
 
 class PhoneForm extends React.Component {
+
+    componentDidMount(){
+        this.props.getSettings();
+    };
 
     render(){
 
@@ -48,5 +56,12 @@ class PhoneForm extends React.Component {
     };
 };
 
+const mapStateToProps = state => {
+    return {
+        fetchingSettings: state.SettingsReducer.fetchingSettings,
+        error: state.SettingsReducer.error,
+        settings: state.SettingsReducer.settings
+    }
+};  
 
-export default withStyles(styles)(PhoneForm);
+export default withStyles(styles)(connect(mapStateToProps, { getSettings })(PhoneForm));
