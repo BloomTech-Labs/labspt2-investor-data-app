@@ -31,13 +31,15 @@ export const getSettings = () => {
     };
 };
 
-export const updateEmail = (updatedEmail) => {
+// Action creator to update current email
+
+export const updateEmail = (id, updatedEmail) => {
     return dispatch => {
         // Dispatch to reducer that current settings are being obtained from API
         dispatch({type: FETCHING});
         axios
             // Update email on file in database
-            .put(`http://localhost:5000/api/users/1`, updatedEmail)
+            .put(`http://localhost:5000/api/users/${id}`, updatedEmail)
             .then(response => {
                 // Dispatch to reducer that settings have been successfully updated and obtained, pass API response as payload
                 dispatch({
@@ -45,6 +47,7 @@ export const updateEmail = (updatedEmail) => {
                     payload: response.data
                 });
             })
+            // Dispatch to reducer that error has occurred, pass error message
             .catch(err => {
                 dispatch({
                     type: ERROR,
