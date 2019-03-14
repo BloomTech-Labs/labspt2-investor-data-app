@@ -1,7 +1,9 @@
 import React from 'react'
 import axios from 'axios'
-import './tickerBoard.css'
-import ClockFunction from './clock'
+import '../Styles/StockTicker/tickerBoard.css'
+import LiveClock from './clock'
+import { PageLoading } from '../Styles/StockTicker/TickerBoard'
+
 
 class StockTicker extends React.Component {
   constructor(props){
@@ -61,7 +63,7 @@ class StockTicker extends React.Component {
 
   render() {
     if(!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
-      return <div className="page-loading">Loading...</div>
+      return <PageLoading>Loading...</PageLoading>
     }
 
     let rows = [];
@@ -74,7 +76,7 @@ class StockTicker extends React.Component {
     this.state.stocks.forEach( (stock, index) => {  // Loops through array of stock values and creates a table
       console.log(stock)
       rows.push(
-        <tr>     
+        <tr key={index}>     
           <td>{ stock.company }</td> 
           <td>{ stock.values[open] }</td>
           <td>{ stock.values[high] }</td>
@@ -87,11 +89,8 @@ class StockTicker extends React.Component {
 
     return (
       <div>  
-        <div className='table'>
-          <div className={'header-spacing'}>
-            <h1 className={'ticker-header'}>Pickem Currents</h1>
-            <ClockFunction />
-          </div> 
+        <div className="table">
+          <LiveClock />
           <table className="container">
 	          <thead>
 		          <tr>

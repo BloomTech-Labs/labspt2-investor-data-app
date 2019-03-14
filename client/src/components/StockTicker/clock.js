@@ -1,6 +1,7 @@
 import React from 'react'
+import {Clock} from '../Styles/StockTicker/TickerBoard'
 
-export default class ClockFunction extends React.Component {
+export default class LiveClock extends React.Component {
   constructor() {
     super();
       this.state = { time: new Date() }; 
@@ -19,11 +20,13 @@ export default class ClockFunction extends React.Component {
       const { time } = this.state; // retrieves time from state
 
       return (
-        <div className='clock'>
+        <Clock>
+          <h3>Pickem</h3> 
+          <h2>Daily</h2>
           <h4>
             {time.toLocaleTimeString()}
           </h4>
-        </div>
+        </Clock>
       );
     }
 }
