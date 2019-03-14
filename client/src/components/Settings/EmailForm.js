@@ -67,6 +67,10 @@ const mapStateToProps = state => {
         error: state.SettingsReducer.error,
         settings: state.SettingsReducer.settings
     }
-};  
+};
 
-export default withStyles(styles)(connect(mapStateToProps, { getSettings })(EmailForm));
+const mapDispatchToProps = dispatch => ({
+    getSettings: () => dispatch(getSettings())
+});
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(EmailForm));
