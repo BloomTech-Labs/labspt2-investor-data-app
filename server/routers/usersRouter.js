@@ -15,7 +15,8 @@ const { authenticate, generateToken } = require("../data/auth/authenticate")
 module.exports = router => {
     router.get("/signin", signin);
     router.get("/signin", signup);
-    router.get("/:id", authenticate, userById);
+    router.get("/:id", userById);
+    // router.get("/:id", authenticate, userById);
 }
 
 /************************************ USERS SECTION ***********************************/
@@ -77,7 +78,7 @@ signup = (req, res) => {
 /********* Get Single User *************/
 router.get('/:id', (req, res) => {
     const { id } = req.params
-    users.get(id)
+    users.getById(id)
         .then(user => {
             if (user) {
                 res.json(user);
