@@ -1,26 +1,29 @@
 import React from "react";
 import Navigation from "../Navigation/index";
-// import axios from "axios";
+import axios from "axios";
 import { Route } from "react-router-dom";
-import { data } from "../../data";
-import DevList from "../Team/DevList";
+// import { data } from "../../data";
+import PropTypes from 'prop-types'
+import UsersList from "../Team/UsersList";
+
+
 class Landing extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       users: []
     };
   }
   componentDidMount() {
-    this.setState({ users: data });
-    // axios
-    //   .get("https://pickemm.herokuapp.com/api/users")
-    //   .then(response => {
-    //     this.setState({ users: response.data });
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+    // this.setState({ users: data });
+    axios
+      .get("https://pickemm.herokuapp.com/api/users")
+      .then(response => {
+        this.setState({ users: response.data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
   render() {
     return (
@@ -29,12 +32,20 @@ class Landing extends React.Component {
         <Route
           exact
           path="/"
-          render={props => <DevList {...props} users={this.state.users} />}
+          render={props => <UsersList {...props} users={this.state.users} />}
         />
       </div>
     );
   }
 }
+Landing.propTypes = {
+  users:PropTypes.arrayOf( PropTypes.shape({
+    id:  PropTypes.number.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired
+  }
+  ))
+ }
 
 
 export default Landing
