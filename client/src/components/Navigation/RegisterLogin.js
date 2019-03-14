@@ -1,17 +1,6 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import {Button, Dialog, DialogContent, DialogTitle, AppBar, Tabs, Tab, Typography} from "@material-ui/core";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
 
 function TabContainer(props) {
   return (
@@ -63,7 +52,7 @@ export default class RegisterLogin extends React.Component {
 
   submit = event => {
     event.preventDefault();
-    const { email, password1, password2 } = this.state;
+    const { password1, password2 } = this.state;
     if (password1 !== password2) {
       this.setState({
         passwordMessage: "Passwords do not match!"
@@ -76,8 +65,7 @@ export default class RegisterLogin extends React.Component {
   };
 
   render() {
-    //const { classes } = this.props;
-    const { password2, password1, passwordMessage, value } = this.state;
+    const { passwordMessage, value } = this.state;
     return (
       <div>
         <Button
@@ -133,30 +121,29 @@ export default class RegisterLogin extends React.Component {
                 </form>
               </TabContainer>
             )}
-            {value === 1 && <TabContainer>
-              Enter Email Address:
-                  <input
-                    type="email"
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.inputchange}
-                  />
-                  <br />
-                  Enter Password:
-                  <input
-                    type="password"
-                    name="password1"
-                    value={this.state.password1}
-                    onChange={this.inputchange}
-                  />
-                  <button type="submit">Submit</button>
-            </TabContainer>}
+            {value === 1 && (
+              <TabContainer>
+                Enter Email Address:
+                <input
+                  type="email"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.inputchange}
+                />
+                <br />
+                Enter Password:
+                <input
+                  type="password"
+                  name="password1"
+                  value={this.state.password1}
+                  onChange={this.inputchange}
+                />
+                <button type="submit">Submit</button>
+              </TabContainer>
+            )}
           </DialogContent>
         </Dialog>
       </div>
     );
   }
 }
-//RegisterLogin.propTypes = {
-//  classes: PropTypes.object.isRequired,
-//};
