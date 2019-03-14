@@ -1,0 +1,7 @@
+export const LANDING = '/'
+export const DASHBOARD = '/dashboard'
+export const REPORTS = '/reports'
+export const SETTINGS = '/settings'
+export const BILLING = '/billing'
+export const SIGNIN = '/signin'
+export const SIGNUP = '/signup'
