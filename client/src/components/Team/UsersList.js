@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import Team from "./Team";
 
-class DevList extends Component {
+/* TODO:
+- Add Redux
+- Add Proptypes
+- Update this area 
+
+*/
+
+class UsersList extends Component {
   render() {
     return (
       <div>
@@ -23,4 +30,4 @@ class DevList extends Component {
   }
 }
 
-export default DevList;
+export default UsersList;
