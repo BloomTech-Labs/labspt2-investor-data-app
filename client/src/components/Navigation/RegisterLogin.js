@@ -1,5 +1,14 @@
 import React from "react";
-import {Button, Dialog, DialogContent, DialogTitle, AppBar, Tabs, Tab, Typography} from "@material-ui/core";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  AppBar,
+  Tabs,
+  Tab,
+  Typography
+} from "@material-ui/core";
 import PropTypes from "prop-types";
 
 function TabContainer(props) {
@@ -70,7 +79,7 @@ export default class RegisterLogin extends React.Component {
       <div>
         <Button
           variant="outlined"
-          color="primary"
+          color="secondary"
           onClick={this.handleClickOpen}
         >
           Get Started

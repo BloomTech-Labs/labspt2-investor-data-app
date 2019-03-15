@@ -85,6 +85,7 @@ class Navigation extends React.Component {
               <Link component={RouterLink} to={ROUTES.SETTINGS} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Settings</MenuItem></Link>
               <Link component={RouterLink} to={ROUTES.BILLING} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Billing</MenuItem></Link>
             </Menu>
+            <RegisterLogin />
           </Toolbar>
         </AppBar>
       </div>
