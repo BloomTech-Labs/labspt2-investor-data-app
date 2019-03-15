@@ -10,11 +10,9 @@ import Switch from '@material-ui/core/Switch';
 import styles from './styles';
 
 class OptEmailsTextsForm extends React.Component {
-    constructor(){
-        super();
-    };
     
     render(){
+        
         const { classes } = this.props;
 
         return(

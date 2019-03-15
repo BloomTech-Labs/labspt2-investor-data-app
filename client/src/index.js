@@ -8,7 +8,8 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
-import rootReducer from './reducers'
+import rootReducer from './reducers/index';
+
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 // Create Material UI theme
@@ -34,7 +35,7 @@ const theme = createMuiTheme({
 const middleware = applyMiddleware(logger, thunk);
 
 // Create Redux store
-const store = createStore(rootReducer, middleware)
+const store = createStore(rootReducer, middleware);
 
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>
