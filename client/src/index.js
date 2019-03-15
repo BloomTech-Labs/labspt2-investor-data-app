@@ -10,6 +10,26 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import rootReducer from './reducers/index';
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+// Create Material UI theme
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            // light: will be calculated from palette.primary.main,
+            main: '#ff4400',
+            // dark: will be calculated from palette.primary.main,
+            // contrastText: will be calculated to contrast with palette.primary.main
+        },
+        secondary: {
+            light: '#0066ff',
+            main: '#0044ff',
+            // dark: will be calculated from palette.secondary.main,
+            contrastText: '#ffcc00',
+        },
+        // error: will use the default color
+    },
+});
 
 // Middleware for error logging and dispatching
 const middleware = applyMiddleware(logger, thunk);
@@ -18,10 +38,12 @@ const middleware = applyMiddleware(logger, thunk);
 const store = createStore(rootReducer, middleware);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Router>
-            <App />
-        </Router>
-    </Provider>,
-    document.getElementById('root'));
+    <MuiThemeProvider theme={theme}>
+        <Provider store={store}>
+            <Router>
+                <App />
+            </Router>
+        </Provider>
+    </MuiThemeProvider>,
+document.getElementById('root'));
 

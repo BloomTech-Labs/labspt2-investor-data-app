@@ -5,8 +5,9 @@ import {
   NavbarLeft,
   NavbarRight
 } from "../Styles/Navigation/Main";
-import SigninModal from "./SigninModal";
-import SignupModal from "./SignupModal";
+//import SigninModal from "./SigninModal";
+//import SignupModal from "./SignupModal";
+import RegisterLogin from "./RegisterLogin";
 
 class Navigation extends React.Component {
   //   constructor() {
@@ -24,8 +25,8 @@ class Navigation extends React.Component {
             <h2>Pick Em</h2>
           </NavbarLeft>
           <NavbarRight>
-            <SigninModal />
-            <SignupModal />
+            <RegisterLogin />
+            
           </NavbarRight>
         </NavContainer>
       </div>
