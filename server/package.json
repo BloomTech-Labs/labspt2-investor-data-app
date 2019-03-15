@@ -14,17 +14,18 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "faker": "^4.1.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "faker": "^4.1.0",
     "helmet": "^3.15.1",
     "jsonwebtoken": "^8.5.0",
     "knex": "^0.16.3",
     "morgan": "^1.9.1",
     "pg": "^7.8.2",
-    "sqlite3": "^4.0.6"
+    "sqlite3": "^4.0.6",
+    "stripe": "^6.26.0"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",

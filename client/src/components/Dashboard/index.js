@@ -20,7 +20,7 @@ const styles = theme => ({
         padding: theme.spacing.unit * 3,
         textAlign: 'left',
         color: theme.palette.text.secondary,
-        height: '40vh',
+        // height: '40vh',
     },
     block: {
         padding: theme.spacing.unit * 2,

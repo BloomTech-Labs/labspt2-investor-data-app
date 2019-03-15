@@ -1,6 +1,6 @@
 // Update with your config settings.
 
-//Must require the dotENV file to connect with postgre
+//Must require the dotENV file to connect with Postgres
 require('dotenv').config('/.env');
 
 module.exports = {
