@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 
 import {
   NavContainer,
@@ -23,21 +23,32 @@ import RegisterLogin from "./RegisterLogin";
 
 const styles = {
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20,
-  },
+    marginRight: 20
+  }
 };
 
 class Navigation extends React.Component {
-  //   constructor() {
-  //     super();
-  //   }
+  constructor() {
+    super();
+    state = {
+      anchorEl: null
+    };
+  }
+
+  handleMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleMenuClose = () => {
+    this.setState({ anchorEl: null });
+  };
 
   render() {
     return (
@@ -51,13 +62,12 @@ class Navigation extends React.Component {
           </NavbarLeft>
           <NavbarRight>
             <RegisterLogin />
-            
           </NavbarRight>
         </NavContainer>
       </div>
     );
   }
-};
+}
 
 const Navigation = props => {
   const { classes } = props;
