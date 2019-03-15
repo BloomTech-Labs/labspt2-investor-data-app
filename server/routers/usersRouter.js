@@ -95,6 +95,23 @@ router.get('/:id', (req, res) => {
         });
 });
 
+// Update user's settings
+router.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+    const userUpdated = await users.update(id, changes);
+    if (userUpdated) {
+        res
+            .status(201)
+            .json({ message: `The user's settings were updated.`});
+    }
+    else {
+        res
+            .status(500)
+            .json({ message: `Database error. The user's settings could not be updated at this time.`})
+    };
+});
+
 
 
 module.exports = router;
