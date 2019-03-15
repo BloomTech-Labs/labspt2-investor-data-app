@@ -7,6 +7,7 @@ class YourFavorites extends React.Component{
     render(){
         return(
             <div>
+                YourFavorites
             </div> 
         )
     }

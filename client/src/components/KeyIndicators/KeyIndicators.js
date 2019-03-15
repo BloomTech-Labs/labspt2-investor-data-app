@@ -7,6 +7,7 @@ class KeyIndicators extends React.Component{
     render(){
         return(
             <div>
+                KeyIndicators
             </div> 
         )
     }

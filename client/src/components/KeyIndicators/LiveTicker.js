@@ -7,6 +7,7 @@ class LiveTicker extends React.Component{
     render(){
         return(
             <div>
+                LiveTicker
             </div> 
         )
     }
