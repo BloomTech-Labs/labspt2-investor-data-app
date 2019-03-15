@@ -5,6 +5,8 @@ import { Route } from "react-router-dom";
 // import { data } from "../../data";
 import PropTypes from 'prop-types'
 import UsersList from "../Team/UsersList";
+import StockTicker from "../StockTicker/index"
+
 
 
 class Landing extends React.Component {
@@ -29,6 +31,7 @@ class Landing extends React.Component {
     return (
       <div>
         <Navigation />
+        <StockTicker /> 
         <Route
           exact
           path="/"
