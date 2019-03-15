@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { CssBaseline, Paper, Typography, Grid } from "@material-ui/core";
+import {
+  CssBaseline,
+  Paper,
+  Typography,
+  Grid,
+  AppBar,
+  Tabs,
+  Tab
+} from "@material-ui/core";
 
 const styles = theme => ({
   root: {
@@ -37,9 +45,26 @@ const styles = theme => ({
   }
 });
 
+function TabContainer(props) {
+  return (
+    <Typography component="div" style={{ padding: 8 * 3 }}>
+      {props.children}
+    </Typography>
+  );
+}
+
 class Reports extends Component {
+  state = {
+    tab: 0
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   render() {
     const { classes } = this.props;
+    const { value } = this.state;
 
     return (
       <React.Fragment>
@@ -90,9 +115,27 @@ class Reports extends Component {
                   className={classes.paper}
                   style={{ position: "relative" }}
                 >
-                  <Typography variant="h5" gutterBottom>
-                    Insert tabs and chart here.
-                  </Typography>
+                  <AppBar position="static">
+                    <Tabs
+                      value={value}
+                      onChange={this.handleChange}
+                      indicatorColor="primary"
+                      textColor="secondary"
+                      variant="scrollable"
+                      scrollButtons="auto"
+                    >
+                      <Tab label="Price" />
+                      <Tab label="Average True Range" />
+                      <Tab label="Volume Weighted Average" />
+                      <Tab label="Moving Average Convergence" />
+                      <Tab label="Moving Average" />
+                    </Tabs>
+                  </AppBar>
+                  {value === 0 && <TabContainer>Chart...</TabContainer>}
+                  {value === 1 && <TabContainer>Chart...</TabContainer>}
+                  {value === 2 && <TabContainer>Chart...</TabContainer>}
+                  {value === 3 && <TabContainer>Chart...</TabContainer>}
+                  {value === 4 && <TabContainer>Chart...</TabContainer>}
                 </Paper>
               </Grid>
             </Grid>
