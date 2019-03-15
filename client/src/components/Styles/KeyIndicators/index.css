@@ -1,0 +1,23 @@
+.page-container{
+    display: flex;    
+    flex-wrap: wrap; 
+    width: 100%; 
+}
+
+.fav-indicators{
+    display: flex; 
+    flex-wrap: wrap; 
+    flex-direction: column; 
+    width: 40%; 
+}
+
+.live-ticker{
+display: flex; 
+flex-wrap: wrap; 
+justify-content: flex-end; 
+width: 35%;  
+}
+
+.dash{
+    width: 25%; 
+}

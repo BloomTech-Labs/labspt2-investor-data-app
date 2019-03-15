@@ -1,0 +1,25 @@
+.table-column{
+    display: flex; 
+    flex-wrap: wrap; 
+    flex-direction: column; 
+    width: 50%;  
+}
+
+.live-ticker-table{
+    display: flex; 
+    flex-wrap: wrap; 
+    width: 100%; 
+}
+
+.live-ticker-container{
+    width: 100%; 
+    display: flex; 
+    flex-wrap: wrap; 
+    border: 1px solid black; 
+}
+
+.stock-header{
+    display: flex; 
+    flex-wrap: wrap; 
+    width: 100%; 
+}
