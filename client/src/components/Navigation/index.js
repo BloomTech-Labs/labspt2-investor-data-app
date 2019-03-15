@@ -80,10 +80,10 @@ class Navigation extends React.Component {
               open={open}
               onClose={this.handleMenuClose}
             >
-              <MenuItem onClick={this.handleMenuClose}><Link component={RouterLink} to={ROUTES.LANDING} style={{textDecoration: "none"}}>Home</Link></MenuItem>
-              <MenuItem onClick={this.handleMenuClose}><Link component={RouterLink} to={ROUTES.DASHBOARD} style={{textDecoration: "none"}}>Dashboard</Link></MenuItem>
-              <MenuItem onClick={this.handleMenuClose}><Link component={RouterLink} to={ROUTES.SETTINGS} style={{textDecoration: "none"}}>Settings</Link></MenuItem>
-              <MenuItem onClick={this.handleMenuClose}><Link component={RouterLink} to={ROUTES.BILLING} style={{textDecoration: "none"}}>Billing</Link></MenuItem>
+              <Link component={RouterLink} to={ROUTES.LANDING} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Home</MenuItem></Link>
+              <Link component={RouterLink} to={ROUTES.DASHBOARD} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Dashboard</MenuItem></Link>
+              <Link component={RouterLink} to={ROUTES.SETTINGS} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Settings</MenuItem></Link>
+              <Link component={RouterLink} to={ROUTES.BILLING} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Billing</MenuItem></Link>
             </Menu>
           </Toolbar>
         </AppBar>
