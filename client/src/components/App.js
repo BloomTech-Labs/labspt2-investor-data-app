@@ -7,6 +7,7 @@ import Landing from "../components/Landing";
 import Dashboard from "../components/Dashboard";
 import Settings from "../components/Settings";
 import Billing from "../components/Billing";
+import Reports from "../components/Reports"
 
 import * as ROUTES from "../constants/routes";
 import "./App.css";
@@ -21,7 +22,7 @@ class App extends Component {
           <Route path={ROUTES.DASHBOARD} component={Dashboard} />
           <Route path={ROUTES.SETTINGS} component={Settings} />
           <Route path={ROUTES.BILLING} component={Billing} />
-          {/* <Route path={ROUTES.REPORTS} component={} /> */}
+          <Route path={ROUTES.REPORTS} component={Reports} />
           {/* <Route path={ROUTES.SIGNIN} component={} />
           <Route path={ROUTES.SIGNUP} component={} /> */}
         </Switch>
