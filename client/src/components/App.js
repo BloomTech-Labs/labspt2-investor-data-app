@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router';
-import { Switch, Route } from 'react-router-dom';
+import React, { Component } from "react";
+import { withRouter } from "react-router";
+import { Switch, Route } from "react-router-dom";
 
-import Landing from '../components/Landing';
-import Dashboard from '../components/Dashboard';
-import Settings from '../components/Settings';
+import Landing from "../components/Landing";
+import Dashboard from "../components/Dashboard";
+import Settings from "../components/Settings";
+import Billing from "../components/Billing";
 
-import * as ROUTES from '../constants/routes';
-import './App.css';
+import * as ROUTES from "../constants/routes";
+import "./App.css";
 
 class App extends Component {
   render() {
@@ -18,9 +19,9 @@ class App extends Component {
           <Route exact path={ROUTES.LANDING} component={Landing} />
           <Route path={ROUTES.DASHBOARD} component={Dashboard} />
           <Route path={ROUTES.SETTINGS} component={Settings} />
-          {/* <Route path={ROUTES.REPORTS} component={} />
           <Route path={ROUTES.BILLING} component={} />
-          <Route path={ROUTES.SIGNIN} component={} />
+          {/* <Route path={ROUTES.REPORTS} component={} /> */}
+          {/* <Route path={ROUTES.SIGNIN} component={} />
           <Route path={ROUTES.SIGNUP} component={} /> */}
         </Switch>
       </div>
