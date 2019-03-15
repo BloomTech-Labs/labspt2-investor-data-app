@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({
+import SettingsReducer from '../components/Settings/reducers.js';
 
-})
+export default combineReducers({
+    SettingsReducer
+});
