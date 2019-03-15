@@ -17,6 +17,7 @@ module.exports = router => {
     router.get("/signin", signup);
     router.get("/:id", userById);
     // router.get("/:id", authenticate, userById);
+    router.put("/:id", update)
 }
 
 /************************************ USERS SECTION ***********************************/
@@ -96,20 +97,27 @@ router.get('/:id', (req, res) => {
 });
 
 // Update user's settings
-router.put('/:id', async (req, res) => {
+router.put('/:id', (req, res) => {
     const { id } = req.params;
     const changes = req.body;
-    const userUpdated = await users.update(id, changes);
-    if (userUpdated) {
-        res
-            .status(201)
-            .json({ message: `The user's settings were updated.`});
-    }
-    else {
-        res
-            .status(500)
-            .json({ message: `Database error. The user's settings could not be updated at this time.`})
-    };
+    users.update(id, changes)
+        .then(count => {
+            if (count) {
+                res
+                    .status(201)
+                    .json({ count });
+            }
+            else {
+                res
+                    .status(404)
+                    .json({ message: 'The user with the specified ID does not exist.' });
+            }
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .json({ message: `Database error. The user's settings could not be updated at this time.`});
+        });
 });
 
 
