@@ -1,5 +1,9 @@
 import React from 'react';
 
+// Redux imports
+import { connect } from 'react-redux';
+import { getSettings } from './actions';
+
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
@@ -9,12 +13,13 @@ import Button from '@material-ui/core/Button';
 import styles from './styles';
 
 class EmailForm extends React.Component {
-    constructor(){
-        super();
+
+    componentDidMount(){
+        this.props.getSettings();
     };
 
     render(){
-        
+
         const { classes } = this.props;
 
         return(
@@ -23,9 +28,14 @@ class EmailForm extends React.Component {
                 id='emailForm'
             >
                 <div>
-                    {/* Show current email address */}
+                    {/* Current email address header*/}
                     <h3 className={classes.currentHeader}>Current email address:</h3>
-                    <p className={classes.currentValue}>{this.props.email}</p>
+                    {/* Loading current email... */}
+                    {this.props.fetchingSettings ? <p className={classes.currentValue}>Loading...</p> : null }
+                    {/* Error in loading current email */}
+                    {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
+                    {/* Current email address */}
+                    <p className={classes.currentValue}>{this.props.settings.email}</p>
                 </div>
                 {/* Text field for new email address */}
                 <TextField 
@@ -51,5 +61,12 @@ class EmailForm extends React.Component {
     };
 };
 
+const mapStateToProps = state => {
+    return {
+        fetchingSettings: state.SettingsReducer.fetchingSettings,
+        error: state.SettingsReducer.error,
+        settings: state.SettingsReducer.settings
+    }
+};  
 
-export default withStyles(styles)(EmailForm);
+export default withStyles(styles)(connect(mapStateToProps, { getSettings })(EmailForm));

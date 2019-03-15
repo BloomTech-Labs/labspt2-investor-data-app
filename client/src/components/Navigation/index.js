@@ -2,26 +2,37 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import SigninModal from "./SigninModal";
-import SignupModal from "./SignupModal";
+  NavContainer,
+  MenuDrawer,
+  NavbarLeft,
+  NavbarRight
+} from "../Styles/Navigation/Main";
+//import SigninModal from "./SigninModal";
+//import SignupModal from "./SignupModal";
+import RegisterLogin from "./RegisterLogin";
 
-const styles = {
-  root: {
-    flexGrow: 1
-  },
-  grow: {
-    flexGrow: 1
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
+class Navigation extends React.Component {
+  //   constructor() {
+  //     super();
+  //   }
+
+  render() {
+    return (
+      <div>
+        <NavContainer>
+          <NavbarLeft>
+            <MenuDrawer>
+              <i className="fas fa-bars" />
+            </MenuDrawer>
+            <h2>Pick Em</h2>
+          </NavbarLeft>
+          <NavbarRight>
+            <RegisterLogin />
+            
+          </NavbarRight>
+        </NavContainer>
+      </div>
+    );
   }
 };
 
