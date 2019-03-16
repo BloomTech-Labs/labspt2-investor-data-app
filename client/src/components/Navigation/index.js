@@ -1,7 +1,7 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import PropTypes from "prop-types";
-
+import firebase from 'firebase'
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -45,7 +45,10 @@ class Navigation extends React.Component {
   handleMenuClose = () => {
     this.setState({ anchorEl: null });
   };
-
+  
+  signOut = () => {
+    firebase.auth().signOut()
+  }
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
@@ -58,6 +61,7 @@ class Navigation extends React.Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               Pick Em
             </Typography>
+            <RegisterLogin />
             <IconButton
               aria-owns={open ? "menu-appbar" : undefined}
               aria-haspopup="true"
@@ -84,8 +88,9 @@ class Navigation extends React.Component {
               <Link component={RouterLink} to={ROUTES.DASHBOARD} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Dashboard</MenuItem></Link>
               <Link component={RouterLink} to={ROUTES.SETTINGS} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Settings</MenuItem></Link>
               <Link component={RouterLink} to={ROUTES.BILLING} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Billing</MenuItem></Link>
+              <MenuItem onClick={this.signOut}>Sign Out</MenuItem>
             </Menu>
-            <RegisterLogin />
+        
           </Toolbar>
         </AppBar>
       </div>
