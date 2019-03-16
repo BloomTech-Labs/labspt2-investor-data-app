@@ -9,12 +9,8 @@ import Button from '@material-ui/core/Button';
 import styles from './styles';
 
 class PasswordForm extends React.Component {
-    constructor(){
-        super();
-    };
 
     render(){
-
 
         const { classes } = this.props;
 
