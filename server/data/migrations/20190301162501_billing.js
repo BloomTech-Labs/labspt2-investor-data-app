@@ -34,7 +34,8 @@ exports.up = function(knex, Promise) {
       .unsigned();
     billing.string("accountStatus", 128).notNullable();
     billing.integer("targetsUsed").unsigned();
-    billing.integer("users_id").unsigned();
+    billing.integer("accountType").unsigned();
+    billing.integer('users_id');
   });
 };
 
