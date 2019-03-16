@@ -2,7 +2,7 @@ import React from 'react';
 
 // Redux imports
 import { connect } from 'react-redux';
-import { getSettings } from './actions';
+import { getSettings } from '../../actions/settingsActions';
 
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';

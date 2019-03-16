@@ -77,7 +77,7 @@ signup = (req, res) => {
 /********* Get Single User *************/
 router.get('/:id', (req, res) => {
     const { id } = req.params
-    users.get(id)
+    users.getById(id)
         .then(user => {
             if (user) {
                 res.json(user);
