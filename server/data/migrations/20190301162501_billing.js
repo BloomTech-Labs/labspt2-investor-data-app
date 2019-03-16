@@ -60,9 +60,9 @@ exports.up = function (knex, Promise) {
             .integer('users_id')
             .unsigned();
         billing
-            .foreign('users_id')
-            .references('id')
-            .on('users');
+            .integer('user_id')
+            .unsigned()
+            .references('users.id');
     });
 };
 

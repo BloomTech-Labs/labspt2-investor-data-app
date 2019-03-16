@@ -9,14 +9,11 @@ exports.up = function (knex, Promise) {
         favorites
             .integer('target')
             .unsigned()
-            .notNullable();
+            .notNullable();    
         favorites
-            .integer('users_id')
-            .unsigned();
-        favorites
-            .foreign('users_id')
-            .references('id')
-            .on('users');
+            .integer('user_id')
+            .unsigned()
+            .references('users.id');
     });
 };
 
