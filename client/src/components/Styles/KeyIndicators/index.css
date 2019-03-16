@@ -2,6 +2,8 @@
     display: flex;    
     flex-wrap: wrap; 
     width: 100%; 
+    align-items: center; 
+    justify-content: space-between;  
 }
 
 .fav-indicators{
@@ -16,7 +18,9 @@ display: flex;
 flex-wrap: wrap; 
 justify-content: flex-end; 
 width: 35%;  
-}
+ 
+max-width: 350px;
+ }
 
 .dash{
     width: 25%; 

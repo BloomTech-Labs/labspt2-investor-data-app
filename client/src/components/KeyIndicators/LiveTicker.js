@@ -53,8 +53,6 @@ class LiveTicker extends React.Component{
             });
     }
       
-
-
     
     changePercent = (close, start) => {  // function for calculating the change of a stocks gain/loss by %
         let deduct = close - start
@@ -64,6 +62,9 @@ class LiveTicker extends React.Component{
     }
     changePoints = (close, start) => {  // calculates the change of a stocks gain/loss by points
         let solution = close - start;
+            if(solution > 0){
+                return "+" + solution.toFixed(1)
+            }
             return solution.toFixed(1)
     }
 
@@ -72,10 +73,31 @@ class LiveTicker extends React.Component{
             return input
     }
 
-    addCommas = ( volume ) => {  // adds commas after every third number for large integers
-        volume = parseFloat(volume)
-        return volume.toLocaleString(undefined, {maximumFractionDigits:2})
-    }
+    shortenVolume = (num) => {  // Crunches the length of the volume into a smaller number while inserting a decimal point and character representing the amount
+        let str,
+            suffix = '';
+        
+        let decimalPlaces = 2 || 0;
+
+        num = +num;
+        
+        let factor = Math.pow(10, decimalPlaces);
+        
+        if (num < 1000) {
+            str = num;
+        } else if (num < 1000000) {
+            str = Math.floor(num / (1000 / factor)) / factor;
+            suffix = 'K';
+        } else if (num < 1000000000) {
+            str = Math.floor(num / (1000000 / factor)) / factor;
+            suffix = 'M';
+        } else if (num < 1000000000000) {
+            str = Math.floor(num / (1000000000 / factor)) / factor;
+            suffix = 'B';
+        } 
+        return str + suffix;
+        }
+    
 
     render() {
         if(!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
@@ -93,19 +115,21 @@ class LiveTicker extends React.Component{
             rows.push(
                 <div className='live-ticker-container' key={index}>    
                     <div className='stock-header'> 
-                        <p>Company: {stock.company}</p> 
+                        <p>{stock.company}</p> 
                     </div> 
                     <br /> 
                     <div className='live-ticker-table'> 
-                    <div className='table-column'> 
-                        <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
-                        <p>volume: ${`${this.addCommas(stock.values[volume])}`}</p> 
+                        <div className='table-column'> 
+                            <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
+                            <p>volume: {`${this.shortenVolume(stock.values[volume])}`}</p> 
+                        </div> 
+                        <div className='table-column'> 
+                            <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
+                            <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
+                        </div> 
                     </div> 
-                    <div className='table-column'> 
-                        <p>Change {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
-                        <p>Change % {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
-                    </div> 
-                    </div> 
+                    <br />
+                    <hr/> 
                 </div>
             )
         });
@@ -114,7 +138,7 @@ class LiveTicker extends React.Component{
             <div>  
                 <div className='live-ticker-table'>
                     { rows }   
-                </div> 
+                </div>  
             </div> 
         )
     }
