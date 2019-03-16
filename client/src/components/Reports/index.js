@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { fade } from "@material-ui/core/styles/colorManipulator";
 import {
   CssBaseline,
   Paper,
@@ -7,8 +8,10 @@ import {
   Grid,
   AppBar,
   Tabs,
-  Tab
+  Tab,
+  InputBase
 } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 
 const styles = theme => ({
   root: {
@@ -32,16 +35,55 @@ const styles = theme => ({
   stockInfo: {
     display: "flex",
     justifyContent: "flex-start"
-    // alignItems: "center"
   },
   paper: {
     padding: theme.spacing.unit * 3,
     textAlign: "left",
     color: theme.palette.text.secondary
-    // height: '40vh',
   },
   block: {
     padding: theme.spacing.unit * 2
+  },
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.75),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.85)
+    },
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing.unit,
+      width: "auto"
+    }
+  },
+  searchIcon: {
+    width: theme.spacing.unit * 9,
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  inputRoot: {
+    color: "inherit",
+    width: "100%"
+  },
+  inputInput: {
+    paddingTop: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 10,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: 120,
+      "&:focus": {
+        width: 200
+      }
+    }
   }
 });
 
@@ -81,31 +123,32 @@ class Reports extends Component {
               <Grid item xs={12}>
                 <div className={classes.topBar}>
                   <div className={classes.block}>
-                    <Typography variant="h2" gutterBottom>
-                      AAPL
-                    </Typography>
+                    <Typography variant="h2">AAPL</Typography>
                   </div>
-                  <div>
-                    <Typography variant="h4" gutterBottom>
-                      Target Score: 15
-                    </Typography>
+                  <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                      <SearchIcon />
+                    </div>
+                    <InputBase
+                      placeholder="Search…"
+                      classes={{
+                        root: classes.inputRoot,
+                        input: classes.inputInput
+                      }}
+                    />
                   </div>
                 </div>
                 <div className={classes.block}>
                   <div className={classes.stockInfo}>
-                    <Typography variant="h6" gutterBottom>
-                      Price: 10
-                    </Typography>
-                    <Typography variant="h6" gutterBottom>
-                      Price: 10
+                    <Typography variant="h6">Price: $148.29</Typography>
+                    <Typography variant="h6" style={{ marginLeft: "50px" }}>
+                      Change: 6.05
                     </Typography>
                   </div>
                   <div className={classes.stockInfo}>
-                    <Typography variant="h6" gutterBottom>
-                      Price: 10
-                    </Typography>
-                    <Typography variant="h6" gutterBottom>
-                      Price: 10
+                    <Typography variant="h6">Volume: 43.2M</Typography>
+                    <Typography variant="h6" style={{ marginLeft: "50px" }}>
+                      Change %: +2.47
                     </Typography>
                   </div>
                 </div>
@@ -131,11 +174,11 @@ class Reports extends Component {
                       <Tab label="Moving Average" />
                     </Tabs>
                   </AppBar>
-                  {value === 0 && <TabContainer>Chart...</TabContainer>}
-                  {value === 1 && <TabContainer>Chart...</TabContainer>}
-                  {value === 2 && <TabContainer>Chart...</TabContainer>}
-                  {value === 3 && <TabContainer>Chart...</TabContainer>}
-                  {value === 4 && <TabContainer>Chart...</TabContainer>}
+                  {value === 0 && <TabContainer>Price Chart...</TabContainer>}
+                  {value === 1 && <TabContainer>ATR Chart...</TabContainer>}
+                  {value === 2 && <TabContainer>VMA Chart...</TabContainer>}
+                  {value === 3 && <TabContainer>MAC Chart...</TabContainer>}
+                  {value === 4 && <TabContainer>MA Chart...</TabContainer>}
                 </Paper>
               </Grid>
             </Grid>
