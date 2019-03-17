@@ -14,8 +14,10 @@ import "./App.css";
 import firebase from "firebase"
 import fire from "../components/Auth/firebase" // This is being used to provide apiKey to Authentication do not remove
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
+
 class App extends Component {
-state = {
+
+  state = {
     isSignedIn:false
    }
    uiConfig = {
@@ -33,6 +35,7 @@ componentDidMount =() =>{
   
   firebase.auth().onAuthStateChanged(user => {
     this.setState({isSignedIn:!!user})
+    console.log("user", user)
   })
 }
 
