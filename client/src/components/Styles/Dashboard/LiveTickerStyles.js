@@ -12,7 +12,6 @@ export const TickerContainer = styled.div`
     width: 100%; 
     color: white; 
     background-color: #ff4400;
-    font-weight: bold; 
     padding: 10px 10%; 
 `
 
