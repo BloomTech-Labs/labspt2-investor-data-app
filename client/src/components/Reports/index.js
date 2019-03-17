@@ -16,6 +16,7 @@ import { getData } from "./Charts/utils";
 
 import MAChart from "./Charts/MAChart";
 import MACDChart from "./Charts/MACDChart";
+import PriceChart from "./Charts/PriceChart";
 
 const styles = theme => ({
   root: {
@@ -185,7 +186,11 @@ class Reports extends Component {
                       <Tab label="Moving Average" />
                     </Tabs>
                   </AppBar>
-                  {value === 0 && <TabContainer>Price Chart...</TabContainer>}
+                  {value === 0 && (
+                    <TabContainer>
+                      <PriceChart data={this.state.data} />
+                    </TabContainer>
+                  )}
                   {value === 1 && <TabContainer>ATR Chart...</TabContainer>}
                   {value === 2 && <TabContainer>VMA Chart...</TabContainer>}
                   {value === 3 && (
