@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { CssBaseline, Paper, Typography, Grid } from "@material-ui/core";
-import LiveTicker from '../KeyIndicators/LiveTicker'
+import LiveTicker from './LiveTicker'
 import { Overflow } from '../Styles/Dashboard/index'
 
 

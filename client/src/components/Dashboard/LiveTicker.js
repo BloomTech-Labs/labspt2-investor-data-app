@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
-import { PageLoading } from '../Styles/StockTicker/TickerBoard'
-import { Column, TableContainer, TickerContainer, StockSymbol, Star, HeaderContainer } from '../Styles/Dashboard/LiveTickerStyles' 
+import TickerStar from './TickerStar'
+import { Loading, Column, TableContainer, TickerContainer, StockSymbol, Star, HeaderContainer } from '../Styles/Dashboard/LiveTickerStyles' 
 
 class LiveTicker extends React.Component{
     constructor(){
@@ -62,6 +62,7 @@ class LiveTicker extends React.Component{
             }
             return solution.toFixed(2)
     }
+
     changePoints = (close, start) => {  // calculates the change of a stocks gain/loss by points
         let solution = close - start;
             if(solution > 0){
@@ -97,13 +98,13 @@ class LiveTicker extends React.Component{
             str = Math.floor(num / (1000000000 / factor)) / factor;
             suffix = 'B';
         } 
-        return str + suffix;
+            return str + suffix;
         }
     
 
     render() {
         if(!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
-            return <PageLoading>Loading Stocks...</PageLoading>
+            return <Loading>Loading Stocks...</Loading>
         }
     
         let rows = [];
@@ -115,20 +116,20 @@ class LiveTicker extends React.Component{
         this.state.stocks.forEach( (stock, index) => {  // Loops through array of stock values and creates a table
             console.log(stock)
             rows.push(
-                <TickerContainer>
+                <TickerContainer key={index}>
                     <HeaderContainer>
                         <StockSymbol>        
                             <p>{stock.company}</p> 
                         </StockSymbol> 
                         <Star>
-                            <i className="far fa-star"></i>
+                            <TickerStar id={stock.company} /> 
                         </Star> 
                     </HeaderContainer> 
                     <br /> 
                     <TableContainer> 
                         <Column>
                             <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
-                            <p>volume: {`${this.shortenVolume(stock.values[volume])}`}</p> 
+                            <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p> 
                         </Column> 
                         <Column> 
                             <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
@@ -142,7 +143,7 @@ class LiveTicker extends React.Component{
         });
     
         return (
-            <div>  
+            <div>
                 <TableContainer>
                     { rows }   
                 </TableContainer>  
