@@ -12,9 +12,10 @@ import Billing from "../components/Billing";
 import * as ROUTES from "../constants/routes";
 import "./App.css";
 import firebase from "firebase"
-import fire from "../components/Auth/firebase" // This is being used to provide apiKey to Authentication do not remove
+import fire from "./Auth/firebaseConfig" // This is being used to provide apiKey to Authentication do not remove
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 
+const fireApp = firebase.initializeApp(fire)
 class App extends Component {
 
   state = {
@@ -53,7 +54,7 @@ componentDidMount =() =>{
           {/* <Route path={ROUTES.REPORTS} component={} /> */}
           {/* <Route path={ROUTES.SIGNIN} component={} />   
           <Route path={ROUTES.SIGNUP} component={} /> */}
-        </Switch> ): (<StyledFirebaseAuth uiConfig = {this.uiConfig} firebaseAuth={firebase.auth()} />)}
+        </Switch> ): (<StyledFirebaseAuth uiConfig = {this.uiConfig} firebaseAuth={fireApp.auth()} />)}
 
         
       </div>

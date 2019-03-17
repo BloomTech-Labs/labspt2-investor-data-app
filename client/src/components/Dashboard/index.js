@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 import withStyles from "@material-ui/core/styles/withStyles";
 import {Avatar, CssBaseline, Paper, Typography, Grid } from "@material-ui/core";
 import firebase from 'firebase'
@@ -93,9 +94,13 @@ class Dashboard extends Component {
             </Grid>
           </Grid>
         </div>
-      </React.Fragment>
+      </React.Fragment>    
     );
   }
+}
+
+Dashboard.propTypes = {
+  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(Dashboard);

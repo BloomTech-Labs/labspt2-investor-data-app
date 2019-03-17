@@ -9896,6 +9896,11 @@ react-transition-group@^2.2.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
+react-with-firebase-auth@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-with-firebase-auth/-/react-with-firebase-auth-1.0.2.tgz#50f3cf9fe93676d9edf8337e703c5a1500c82cc2"
+  integrity sha512-+CkdHTwmv6mviaSL5Z3+JsSzCPJEAjRpJ7rRx7ogCz54+9vd3vROgOKrNAR1bFULYn6+JLJ0y5cW++khhBda2Q==
+
 react@^16.8.4:
   version "16.8.4"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.4.tgz#fdf7bd9ae53f03a9c4cd1a371432c206be1c4768"
