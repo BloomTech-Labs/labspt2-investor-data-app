@@ -15,6 +15,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { getData } from "./Charts/utils";
 
 import MAChart from "./Charts/MAChart";
+import MACDChart from "./Charts/MACDChart";
 
 const styles = theme => ({
   root: {
@@ -187,7 +188,11 @@ class Reports extends Component {
                   {value === 0 && <TabContainer>Price Chart...</TabContainer>}
                   {value === 1 && <TabContainer>ATR Chart...</TabContainer>}
                   {value === 2 && <TabContainer>VMA Chart...</TabContainer>}
-                  {value === 3 && <TabContainer>MAC Chart...</TabContainer>}
+                  {value === 3 && (
+                    <TabContainer>
+                      <MACDChart data={this.state.data} />
+                    </TabContainer>
+                  )}
                   {value === 4 && (
                     <TabContainer>
                       <MAChart data={this.state.data} />
