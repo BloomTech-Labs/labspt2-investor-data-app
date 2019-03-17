@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import TickerStar from './TickerStar'
-import { Loading, Column, TableContainer, TickerContainer, StockSymbol, Star, HeaderContainer } from '../Styles/Dashboard/LiveTickerStyles' 
+import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles' 
 
 class LiveTicker extends React.Component{
     constructor(){
@@ -117,36 +117,32 @@ class LiveTicker extends React.Component{
             console.log(stock)
             rows.push(
                 <TickerContainer key={index}>
-                    <HeaderContainer>
+                    <Row>
                         <StockSymbol>        
                             <p>{stock.company}</p> 
                         </StockSymbol> 
                         <Star>
                             <TickerStar id={stock.company} /> 
                         </Star> 
-                    </HeaderContainer> 
-                    <br /> 
-                    <TableContainer> 
-                        <Column>
-                            <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
-                            <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p> 
-                        </Column> 
-                        <Column> 
-                            <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
-                            <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
-                        </Column> 
-                    </TableContainer> 
+                    </Row> 
                     <br />
-                    <hr style={{width: '88%'}}/> 
+                    <Row>
+                        <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
+                        <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p> 
+                    </Row> 
+                    <Row> 
+                        <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
+                        <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
+                    </Row> 
+                    <br />
+                    <hr/> 
                 </TickerContainer>
             )
         });
     
         return (
             <div>
-                <TableContainer>
-                    { rows }   
-                </TableContainer>  
+                { rows }  
             </div> 
         )
     }

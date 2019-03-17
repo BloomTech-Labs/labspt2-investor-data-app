@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { CssBaseline, Paper, Typography, Grid } from "@material-ui/core";
 import LiveTicker from './LiveTicker'
-import { Overflow } from '../Styles/Dashboard/index'
+import { BoxShadow } from '../Styles/Dashboard/index'
 
 
 const styles = theme => ({
@@ -63,13 +63,13 @@ class Dashboard extends Component {
                 </Paper>
               </Grid>
               <Grid item xs={12} md={6}>
-              <Overflow>
+              <BoxShadow>
                 <Paper className={classes.paper}>
                     <Typography variant="h6" gutterBottom>
                       <LiveTicker />
                     </Typography>
                 </Paper>
-              </Overflow>
+              </BoxShadow>
               </Grid> 
               <Grid item xs={12} md={12}>
                 <Paper
