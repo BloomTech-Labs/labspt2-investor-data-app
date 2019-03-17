@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { CssBaseline, Paper, Typography, Grid } from "@material-ui/core";
+import LiveTicker from '../KeyIndicators/LiveTicker'
+import { Overflow } from '../Styles/Dashboard/index'
+
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.grey["100"],
     overflow: "hidden",
-    height: "100vh"
+    //height: "100vh"
   },
   grid: {
     width: 1200,
@@ -60,21 +63,21 @@ class Dashboard extends Component {
                 </Paper>
               </Grid>
               <Grid item xs={12} md={6}>
+              <Overflow>
                 <Paper className={classes.paper}>
-                  <div>
-                    <Typography variant="h5" gutterBottom>
-                      Your Favorites
+                    <Typography variant="h6" gutterBottom>
+                      <LiveTicker />
                     </Typography>
-                  </div>
                 </Paper>
-              </Grid>
+              </Overflow>
+              </Grid> 
               <Grid item xs={12} md={12}>
                 <Paper
                   className={classes.paper}
                   style={{ position: "relative" }}
                 >
                   <Typography variant="h5" gutterBottom>
-                    Live Ticker
+                    Your Favorites
                   </Typography>
                 </Paper>
               </Grid>

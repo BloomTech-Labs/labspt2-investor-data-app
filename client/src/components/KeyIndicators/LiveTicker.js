@@ -1,8 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { PageLoading } from '../Styles/StockTicker/TickerBoard'
-import '../Styles/KeyIndicators/LiveTicker.css'
-
+import { Column, TableContainer, TickerContainer, StockSymbol, Star, HeaderContainer } from '../Styles/Dashboard/LiveTickerStyles' 
 
 class LiveTicker extends React.Component{
     constructor(){
@@ -58,6 +57,9 @@ class LiveTicker extends React.Component{
         let deduct = close - start
         let divide = deduct / start 
         let solution = divide * 100
+            if(solution > 0){
+                return "+" + solution.toFixed(2)
+            }
             return solution.toFixed(2)
     }
     changePoints = (close, start) => {  // calculates the change of a stocks gain/loss by points
@@ -113,32 +115,37 @@ class LiveTicker extends React.Component{
         this.state.stocks.forEach( (stock, index) => {  // Loops through array of stock values and creates a table
             console.log(stock)
             rows.push(
-                <div className='live-ticker-container' key={index}>    
-                    <div className='stock-header'> 
-                        <p>{stock.company}</p> 
-                    </div> 
+                <TickerContainer>
+                    <HeaderContainer>
+                        <StockSymbol>        
+                            <p>{stock.company}</p> 
+                        </StockSymbol> 
+                        <Star>
+                            <i className="far fa-star"></i>
+                        </Star> 
+                    </HeaderContainer> 
                     <br /> 
-                    <div className='live-ticker-table'> 
-                        <div className='table-column'> 
+                    <TableContainer> 
+                        <Column>
                             <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
                             <p>volume: {`${this.shortenVolume(stock.values[volume])}`}</p> 
-                        </div> 
-                        <div className='table-column'> 
+                        </Column> 
+                        <Column> 
                             <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
                             <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
-                        </div> 
-                    </div> 
+                        </Column> 
+                    </TableContainer> 
                     <br />
-                    <hr/> 
-                </div>
+                    <hr style={{width: '88%'}}/> 
+                </TickerContainer>
             )
         });
     
         return (
             <div>  
-                <div className='live-ticker-table'>
+                <TableContainer>
                     { rows }   
-                </div>  
+                </TableContainer>  
             </div> 
         )
     }
