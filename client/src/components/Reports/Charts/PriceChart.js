@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class PriceChart extends Component {
+class PriceChart extends Component {
   render() {
     return (
       <div>
@@ -9,3 +9,5 @@ export default class PriceChart extends Component {
     )
   }
 }
+
+export default PriceChart;

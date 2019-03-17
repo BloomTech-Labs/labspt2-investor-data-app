@@ -12,6 +12,9 @@ import {
   InputBase
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import { getData } from "./Charts/utils";
+
+import MAChart from "./Charts/MAChart";
 
 const styles = theme => ({
   root: {
@@ -97,8 +100,15 @@ function TabContainer(props) {
 
 class Reports extends Component {
   state = {
-    tab: 0
+    tab: 0,
+    data: []
   };
+
+  componentDidMount() {
+    getData().then(data => {
+      this.setState({ data });
+    });
+  }
 
   handleChange = (event, value) => {
     this.setState({ value });
@@ -178,7 +188,11 @@ class Reports extends Component {
                   {value === 1 && <TabContainer>ATR Chart...</TabContainer>}
                   {value === 2 && <TabContainer>VMA Chart...</TabContainer>}
                   {value === 3 && <TabContainer>MAC Chart...</TabContainer>}
-                  {value === 4 && <TabContainer>MA Chart...</TabContainer>}
+                  {value === 4 && (
+                    <TabContainer>
+                      <MAChart data={this.state.data} />
+                    </TabContainer>
+                  )}
                 </Paper>
               </Grid>
             </Grid>
