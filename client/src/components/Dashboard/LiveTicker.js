@@ -128,10 +128,10 @@ class LiveTicker extends React.Component{
                     <br />
                     <Row>
                         <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
-                        <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p> 
+                        <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
                     </Row> 
                     <Row> 
-                        <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
+                        <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p> 
                         <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
                     </Row> 
                     <br />
