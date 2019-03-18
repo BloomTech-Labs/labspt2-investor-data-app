@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import SettingsReducer from '../components/Settings/reducers.js';
+import SettingsReducer from './settingsReducers.js';
 
 export default combineReducers({
     SettingsReducer

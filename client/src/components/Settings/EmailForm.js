@@ -2,7 +2,7 @@ import React from 'react';
 
 // Redux imports
 import { connect } from 'react-redux';
-import { getSettings, updateEmail } from './actions';
+import { getSettings, updateEmail } from '../../actions/settingsActions.js';
 
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';
