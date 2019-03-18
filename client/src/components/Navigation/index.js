@@ -17,7 +17,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 //import SigninModal from "./SigninModal";
 //import SignupModal from "./SignupModal";
-import RegisterLogin from "./RegisterLogin";
+// import RegisterLogin from "./RegisterLogin";
 import * as ROUTES from "../../constants/routes";
 
 const styles = {
@@ -61,7 +61,6 @@ class Navigation extends React.Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               Pick Em
             </Typography>
-            <RegisterLogin />
             <IconButton
               aria-owns={open ? "menu-appbar" : undefined}
               aria-haspopup="true"

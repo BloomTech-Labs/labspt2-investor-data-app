@@ -7,7 +7,6 @@ import Landing from "../components/Landing";
 import Dashboard from "../components/Dashboard";
 import Settings from "../components/Settings";
 import Billing from "../components/Billing";
-// import Signin from "../components/Navigation/SigninModal"
 
 import * as ROUTES from "../constants/routes";
 import "./App.css";
@@ -26,7 +25,8 @@ class App extends Component {
     signInOptions : [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-      firebase.auth.GithubAuthProvider.PROVIDER_ID
+      firebase.auth.GithubAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
     callbacks: {
       signInSuccess: () => false
@@ -46,16 +46,20 @@ componentDidMount =() =>{
     
       <div>
         <Navigation />
-        <Route exact path={ROUTES.LANDING} component={Landing} />
+        <br />
+        
         {this.state.isSignedIn ? ( <Switch>
+          <Route exact path={ROUTES.LANDING} component={Landing} />
           <Route path={ROUTES.DASHBOARD} component={Dashboard} />
           <Route path={ROUTES.SETTINGS} component={Settings} />
           <Route path={ROUTES.BILLING} component={Billing} />
           {/* <Route path={ROUTES.REPORTS} component={} /> */}
           {/* <Route path={ROUTES.SIGNIN} component={} />   
           <Route path={ROUTES.SIGNUP} component={} /> */}
-        </Switch> ): (<StyledFirebaseAuth uiConfig = {this.uiConfig} firebaseAuth={fireApp.auth()} />)}
+        </Switch> ): (<StyledFirebaseAuth uiConfig = {this.uiConfig} firebaseAuth={fireApp.auth()} />)
+      } 
 
+        
         
       </div>
     );
