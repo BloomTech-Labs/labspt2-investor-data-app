@@ -92,7 +92,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     getSettings: () => dispatch(getSettings()),
-    updateEmail:  () => dispatch(updateEmail())
+    updateEmail:  (id, updatedEmail) => dispatch(updateEmail(id, updatedEmail))
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(EmailForm));

@@ -31,8 +31,8 @@ module.exports = {
   update: (id, changes) => {
     return db("users")
       .where("id", id)
-      .update(changes);
-      // .then(count => (count > 0 ? this.get(id) : null));
+      .update(changes)
+      .then(count => count > 0 ? db("users").where("id", id).first() : null);
   },
 
   remove: id => {

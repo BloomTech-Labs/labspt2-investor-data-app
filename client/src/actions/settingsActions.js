@@ -37,9 +37,12 @@ export const updateEmail = (id, updatedEmail) => {
     return dispatch => {
         // Dispatch to reducer that current settings are being obtained from API
         dispatch({type: FETCHING});
+        console.log(id, updatedEmail);
         axios
             // Update email on file in database
-            .put(`http://localhost:5000/api/users/${id}`, updatedEmail)
+            .put(`http://localhost:5000/api/users/${id}`, updatedEmail);
+        axios
+            .get(`http://localhost:5000/api/users/1`)
             .then(response => {
                 // Dispatch to reducer that settings have been successfully updated and obtained, pass API response as payload
                 dispatch({
