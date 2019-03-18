@@ -17,6 +17,7 @@ module.exports = router => {
     router.get("/signin", signup);
     router.get("/:id", userById);
     // router.get("/:id", authenticate, userById);
+    router.put("/:id", update);
 }
 
 /************************************ USERS SECTION ***********************************/
@@ -95,6 +96,32 @@ router.get('/:id', (req, res) => {
         });
 });
 
+// Update user's settings
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+    users.update(id, changes)
+        .then(count => {
+            if (count) {
+                // If user's settings have been updated, return count of rows (1) that have been updated.
+                res
+                    .status(201)
+                    .json({ count });
+            }
+            else {
+                // If user does not exist, return 404 error.
+                res
+                    .status(404)
+                    .json({ message: 'The user with the specified ID does not exist.' });
+            }
+        })
+        .catch(err => {
+            // If there's an error in the helper method or database, return a 500 error.
+            res
+                .status(500)
+                .json({ message: `Database error. The user's settings could not be updated at this time.`});
+        });
+});
 
 
 module.exports = router;
