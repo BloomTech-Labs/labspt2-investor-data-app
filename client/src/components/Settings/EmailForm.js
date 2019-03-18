@@ -16,7 +16,7 @@ class EmailForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            newEmail: ''
+            email: ''
         }
     }
 
@@ -34,7 +34,7 @@ class EmailForm extends React.Component {
         event.preventDefault();
         this.props.updateEmail('1', this.state);
         this.setState({
-            newEmail: ''
+            email: ''
         });
     };
 
@@ -60,10 +60,10 @@ class EmailForm extends React.Component {
                 </div>
                 {/* Text field for new email address */}
                 <TextField 
-                    name='newEmail'
+                    name='email'
                     label='New email'
                     className={classes.textField}
-                    value={this.state.newEmail}
+                    value={this.state.email}
                     onChange={this.handleChange}
                     margin='normal'
                 />
