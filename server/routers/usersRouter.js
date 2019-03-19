@@ -103,10 +103,19 @@ router.put('/:id', (req, res) => {
     users.update(id, changes)
         .then(count => {
             if (count) {
-                // If user's settings have been updated, return count of rows (1) that have been updated.
-                res
-                    .status(201)
-                    .json({ count });
+                users.getById(id)
+                    .then(user => {
+                            // If user's settings have been updated, return the updated user settings.
+                            res
+                                .status(201)
+                                .json(user);
+                    })
+                    .catch(err => {
+                        // Return an error if there's an error retrieving that current settings.
+                        res
+                            .status(500)
+                            .json({ message: 'There was an error retrieving the current settings.'});
+                    })
             }
             else {
                 // If user does not exist, return 404 error.
@@ -119,7 +128,7 @@ router.put('/:id', (req, res) => {
             // If there's an error in the helper method or database, return a 500 error.
             res
                 .status(500)
-                .json({ message: `Database error. The user's settings could not be updated at this time.`});
+                .json({ message: `The user's settings could not be updated at this time.`});
         });
 });
 
