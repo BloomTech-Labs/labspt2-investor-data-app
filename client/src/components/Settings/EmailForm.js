@@ -2,7 +2,7 @@ import React from 'react';
 
 // Redux imports
 import { connect } from 'react-redux';
-import { getSettings, updateEmail } from '../../actions/settingsActions.js';
+import { getSettings, updateSettings } from '../../actions/settingsActions.js';
 
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';
@@ -32,7 +32,7 @@ class EmailForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.updateEmail('1', this.state);
+        this.props.updateSettings('1', this.state);
         this.setState({
             email: ''
         });
@@ -92,7 +92,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     getSettings: () => dispatch(getSettings()),
-    updateEmail:  (id, updatedEmail) => dispatch(updateEmail(id, updatedEmail))
+    updateSettings:  (id, updatedEmail) => dispatch(updateSettings(id, updatedEmail))
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(EmailForm));
