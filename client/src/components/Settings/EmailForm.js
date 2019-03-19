@@ -2,7 +2,7 @@ import React from 'react';
 
 // Redux imports
 import { connect } from 'react-redux';
-import { getSettings } from './actions';
+import { getSettings, updateEmail } from '../../actions/settingsActions.js';
 
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';
@@ -13,9 +13,29 @@ import Button from '@material-ui/core/Button';
 import styles from './styles';
 
 class EmailForm extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            newEmail: ''
+        }
+    }
 
     componentDidMount(){
         this.props.getSettings();
+    };
+
+    handleChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    };
+
+    handleSubmit = event => {
+        event.preventDefault();
+        this.props.updateEmail('1', this.state);
+        this.setState({
+            newEmail: ''
+        });
     };
 
     render(){
@@ -26,6 +46,7 @@ class EmailForm extends React.Component {
             <form 
                 className={classes.container}
                 id='emailForm'
+                onSubmit={this.handleSubmit}
             >
                 <div>
                     {/* Current email address header*/}
@@ -39,11 +60,11 @@ class EmailForm extends React.Component {
                 </div>
                 {/* Text field for new email address */}
                 <TextField 
-                    id='newEmail'
+                    name='newEmail'
                     label='New email'
                     className={classes.textField}
-                    value={this.props.newEmail}
-                    onChange={this.props.handleChange('newEmail')}
+                    value={this.state.newEmail}
+                    onChange={this.handleChange}
                     margin='normal'
                 />
                 {/* Button to submit new email address */}
@@ -67,6 +88,11 @@ const mapStateToProps = state => {
         error: state.SettingsReducer.error,
         settings: state.SettingsReducer.settings
     }
-};  
+};
 
-export default withStyles(styles)(connect(mapStateToProps, { getSettings })(EmailForm));
+const mapDispatchToProps = dispatch => ({
+    getSettings: () => dispatch(getSettings()),
+    updateEmail:  () => dispatch(updateEmail())
+});
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(EmailForm));
