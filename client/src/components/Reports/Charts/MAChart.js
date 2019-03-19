@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import { GuardSpinner } from "react-spinners-kit";
+import { SpinnerContainer } from "../../Styles/Reports";
+
 import { format } from "d3-format";
 import { timeFormat } from "d3-time-format";
 
@@ -96,7 +99,11 @@ class MAChart extends Component {
     const xExtents = [start, end];
 
     if (!data.length) {
-      return <p>Loading...</p>;
+      return (
+        <SpinnerContainer>
+          <GuardSpinner size={30} frontColor="#0066ff" backColor="#ff4400" />
+        </SpinnerContainer>
+      );
     }
 
     return (
