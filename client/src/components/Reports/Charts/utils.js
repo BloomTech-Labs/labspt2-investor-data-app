@@ -27,9 +27,9 @@ const parseDate = timeParse("%Y-%m-%d");
 
 export function getData() {
   const promiseMSFT = fetch(
-    "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&outputsize=full&apikey=ZV7Y9QKGXRHCY0A4&datatype=csv"
+    "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&outputsize=compact&apikey=ZV7Y9QKGXRHCY0A4&datatype=csv"
   )
     .then(response => response.text())
-    .then(data => csvParse(data, parseData(parseDate)));
+    .then(data => csvParse(data, parseData(parseDate)).reverse());
   return promiseMSFT;
 }
