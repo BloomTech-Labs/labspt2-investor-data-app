@@ -138,7 +138,7 @@ router.delete('/:id', (req, res) => {
 });
 
 /********* Update User *************/
-router.put('/:id', (req, res) => {
+/* router.put('/:id', (req, res) => {
     const { id } = req.params
     const newUser = req.body
     if (!newUser.email || !newUser.password || !newUser.username || !newUser.firstName || !newUser.lastName) {
@@ -162,6 +162,6 @@ router.put('/:id', (req, res) => {
             res.status(404).json({ message: "The user with the specified ID does not exist." })
         }
     }
-})
+}) */
 
 module.exports = router;
