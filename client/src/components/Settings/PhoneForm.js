@@ -47,6 +47,7 @@ class PhoneForm extends React.Component {
             <form 
                 className={classes.container}
                 id='phoneForm'
+                onSubmit={this.handleSubmit}
             >
                 <div>
                     {/* Current phone number header */}
@@ -56,15 +57,15 @@ class PhoneForm extends React.Component {
                     {/* Error in loading current phone number */}
                     {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
                     {/* Current phone number (Email used as  placeholder) */}
-                    <p className={classes.currentValue}>{this.props.settings.email}</p>
+                    <p className={classes.currentValue}>{this.props.settings.firstName}</p>
                 </div>
                 {/* Text field for new phone number */}
                 <TextField 
-                    id='newPhone'
+                    name='firstName'
                     label='New phone'
                     className={classes.textField}
-                    value={this.props.newPhone}
-                    onChange={this.props.handleChange('newPhone')}
+                    value={this.state.firstName}
+                    onChange={this.handleChange}
                     margin='normal'
                 />
                 {/* Button to submit new phone number */}
