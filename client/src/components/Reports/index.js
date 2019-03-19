@@ -180,10 +180,10 @@ class Reports extends Component {
                       scrollButtons="auto"
                     >
                       <Tab label="Price" />
-                      <Tab label="Average True Range" />
-                      <Tab label="Volume Weighted Average" />
-                      <Tab label="Moving Average Convergence" />
                       <Tab label="Moving Average" />
+                      <Tab label="Moving Average Convergence" />
+                      {/* <Tab label="Average True Range" />
+                      <Tab label="Volume Weighted Average" /> */}
                     </Tabs>
                   </AppBar>
                   {value === 0 && (
@@ -191,18 +191,18 @@ class Reports extends Component {
                       <PriceChart data={this.state.data} />
                     </TabContainer>
                   )}
-                  {value === 1 && <TabContainer>ATR Chart...</TabContainer>}
-                  {value === 2 && <TabContainer>VMA Chart...</TabContainer>}
-                  {value === 3 && (
-                    <TabContainer>
-                      <MACDChart data={this.state.data} />
-                    </TabContainer>
-                  )}
-                  {value === 4 && (
+                  {value === 1 && (
                     <TabContainer>
                       <MAChart data={this.state.data} />
                     </TabContainer>
                   )}
+                  {value === 2 && (
+                    <TabContainer>
+                      <MACDChart data={this.state.data} />
+                    </TabContainer>
+                  )}
+                  {/* {value === 3 && <TabContainer>ATR Chart...</TabContainer>}
+                  {value === 4 && <TabContainer>VMA Chart...</TabContainer>} */}
                 </Paper>
               </Grid>
             </Grid>

@@ -85,7 +85,7 @@ class MAChart extends Component {
       sma20(wma20(tma20(ema50(smaVolume50(initialData)))))
     );
     const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(
-      d => d.date
+      d => d.timestamp
     );
     const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(
       calculatedData
@@ -94,6 +94,10 @@ class MAChart extends Component {
     const start = xAccessor(last(data));
     const end = xAccessor(data[Math.max(0, data.length - 150)]);
     const xExtents = [start, end];
+
+    if (!data.length) {
+      return <p>Loading...</p>;
+    }
 
     return (
       <ChartCanvas
@@ -246,14 +250,14 @@ class MAChart extends Component {
 }
 
 MAChart.propTypes = {
-	data: PropTypes.array.isRequired,
-	width: PropTypes.number.isRequired,
-	ratio: PropTypes.number.isRequired,
-	type: PropTypes.oneOf(["svg", "hybrid"]).isRequired,
+  data: PropTypes.array.isRequired,
+  width: PropTypes.number.isRequired,
+  ratio: PropTypes.number.isRequired,
+  type: PropTypes.oneOf(["svg", "hybrid"]).isRequired
 };
 
 MAChart.defaultProps = {
-	type: "svg",
+  type: "svg"
 };
 
 MAChart = fitWidth(MAChart);

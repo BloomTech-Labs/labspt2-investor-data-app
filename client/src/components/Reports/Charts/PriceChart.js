@@ -1,4 +1,3 @@
-
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -12,82 +11,81 @@ import { last } from "react-stockcharts/lib/utils";
 
 import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale";
 
-import {
-	PriceCoordinate
-} from "react-stockcharts/lib/coordinates";
+import { PriceCoordinate } from "react-stockcharts/lib/coordinates";
 
 class PriceChart extends React.Component {
-	render() {
-		const { type, data: initialData, width, ratio } = this.props;
+  render() {
+    const { type, data: initialData, width, ratio } = this.props;
 
-		const xScaleProvider = discontinuousTimeScaleProvider
-			.inputDateAccessor(d => d.date);
-		const {
-			data,
-			xScale,
-			xAccessor,
-			displayXAccessor,
-		} = xScaleProvider(initialData);
-		const xExtents = [
-			xAccessor(last(data)),
-			xAccessor(data[data.length - 100])
-		];
+    const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(
+      d => d.timestamp
+    );
+    const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(
+      initialData
+    );
+    const xExtents = [
+      xAccessor(last(data)),
+      xAccessor(data[data.length - 100])
+    ];
 
-		return (
-			<ChartCanvas height={400}
-				ratio={ratio}
-				width={width}
-				margin={{ left: 60, right: 60, top: 10, bottom: 30 }}
-				type={type}
-				seriesName="MSFT"
-				data={data}
-				xScale={xScale}
-				xAccessor={xAccessor}
-				displayXAccessor={displayXAccessor}
-				xExtents={xExtents}
-			>
+    if (!data.length) {
+      return <p>Loading...</p>;
+    }
 
-				<Chart id={1} yExtents={d => [d.high, d.low]}>
-					<XAxis axisAt="bottom" orient="bottom" ticks={6}/>
-					<YAxis axisAt="left" orient="left" ticks={5} />
-					<YAxis axisAt="right" orient="right" ticks={5} />
-					<CandlestickSeries />
+    return (
+      <ChartCanvas
+        height={400}
+        ratio={ratio}
+        width={width}
+        margin={{ left: 60, right: 60, top: 10, bottom: 30 }}
+        type={type}
+        seriesName="MSFT"
+        data={data}
+        xScale={xScale}
+        xAccessor={xAccessor}
+        displayXAccessor={displayXAccessor}
+        xExtents={xExtents}
+      >
+        <Chart id={1} yExtents={d => [d.high, d.low]}>
+          <XAxis axisAt="bottom" orient="bottom" ticks={6} />
+          <YAxis axisAt="left" orient="left" ticks={5} />
+          <YAxis axisAt="right" orient="right" ticks={5} />
+          <CandlestickSeries />
 
-					<PriceCoordinate
-						at="left"
-						orient="left"
-						price={60}
-						displayFormat={format(".2f")}
-					/>
+          <PriceCoordinate
+            at="left"
+            orient="left"
+            price={60}
+            displayFormat={format(".2f")}
+          />
 
-					<PriceCoordinate
-						at="right"
-						orient="right"
-						price={55}
-						stroke="#3490DC"
-						strokeWidth={1}
-						fill="#FFFFFF"
-						textFill="#22292F"
-						arrowWidth={7}
-						strokeDasharray="ShortDash"
-						displayFormat={format(".2f")}
-					/>
-
-				</Chart>
-			</ChartCanvas>
-		);
-	}
+          <PriceCoordinate
+            at="right"
+            orient="right"
+            price={55}
+            stroke="#3490DC"
+            strokeWidth={1}
+            fill="#FFFFFF"
+            textFill="#22292F"
+            arrowWidth={7}
+            strokeDasharray="ShortDash"
+            displayFormat={format(".2f")}
+          />
+        </Chart>
+      </ChartCanvas>
+    );
+  }
 }
 
 PriceChart.propTypes = {
-	data: PropTypes.array.isRequired,
-	width: PropTypes.number.isRequired,
-	ratio: PropTypes.number.isRequired,
-	type: PropTypes.oneOf(["svg", "hybrid"]).isRequired,
+  data: PropTypes.array.isRequired,
+  width: PropTypes.number.isRequired,
+  ratio: PropTypes.number.isRequired,
+  type: PropTypes.oneOf(["svg", "hybrid"]).isRequired
 };
 
 PriceChart.defaultProps = {
-	type: "svg",
+  type: "svg"
 };
 PriceChart = fitWidth(PriceChart);
 
