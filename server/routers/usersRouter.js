@@ -13,10 +13,19 @@ const { authenticate, generateToken } = require("../data/auth/authenticate");
 */
 // Added routes for signin and authenticate the username and password for front end use.
 module.exports = router => {
+<<<<<<< HEAD
   router.get("/signin", signin);
   router.get("/signin", signup);
   router.get("/:id", authenticate, userById);
 };
+=======
+    router.get("/signin", signin);
+    router.get("/signin", signup);
+    router.get("/:id", userById);
+    // router.get("/:id", authenticate, userById);
+    router.put("/:id", update)
+}
+>>>>>>> 74f249f99505dbd10d739bf7697ae85e9fcf367c
 
 /************************************ USERS SECTION ***********************************/
 // protect this route, only authenticated users should see it
@@ -75,24 +84,50 @@ signup = (req, res) => {
 };
 
 /********* Get Single User *************/
-router.get("/:id", (req, res) => {
-  const { id } = req.params;
-  users
-    .get(id)
-    .then(user => {
-      if (user) {
-        res.json(user);
-      } else {
-        res
-          .status(404)
-          .json({ message: "The user with the specified ID does not exist." });
-      }
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: "The users information could not be retrieved." });
-    });
+router.get('/:id', (req, res) => {
+    const { id } = req.params
+    users.getById(id)
+        .then(user => {
+            if (user) {
+                res.json(user);
+            } else {
+                res
+                    .status(404)
+                    .json({ message: "The user with the specified ID does not exist." })
+            }
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .json({ error: "The users information could not be retrieved." });
+        });
+});
+
+// Update user's settings
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+    users.update(id, changes)
+        .then(count => {
+            if (count) {
+                // If user's settings have been updated, return count of rows (1) that have been updated.
+                res
+                    .status(201)
+                    .json({ count });
+            }
+            else {
+                // If user does not exist, return 404 error.
+                res
+                    .status(404)
+                    .json({ message: 'The user with the specified ID does not exist.' });
+            }
+        })
+        .catch(err => {
+            // If there's an error in the helper method or database, return a 500 error.
+            res
+                .status(500)
+                .json({ message: `Database error. The user's settings could not be updated at this time.`});
+        });
 });
 
 

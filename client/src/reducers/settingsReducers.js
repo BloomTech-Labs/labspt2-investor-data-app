@@ -1,4 +1,4 @@
-import { FETCHING, SUCCESS, ERROR } from './actions.js';
+import { FETCHING, SUCCESS, ERROR } from '../actions/settingsActions.js';
 
 const initialState = {
     fetchingSettings: false,
