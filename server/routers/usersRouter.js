@@ -13,19 +13,12 @@ const { authenticate, generateToken } = require("../data/auth/authenticate");
 */
 // Added routes for signin and authenticate the username and password for front end use.
 module.exports = router => {
-<<<<<<< HEAD
-  router.get("/signin", signin);
-  router.get("/signin", signup);
-  router.get("/:id", authenticate, userById);
-};
-=======
     router.get("/signin", signin);
     router.get("/signin", signup);
     router.get("/:id", userById);
     // router.get("/:id", authenticate, userById);
     router.put("/:id", update)
 }
->>>>>>> 74f249f99505dbd10d739bf7697ae85e9fcf367c
 
 /************************************ USERS SECTION ***********************************/
 
