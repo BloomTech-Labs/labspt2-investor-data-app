@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { CssBaseline, Paper, Typography, Grid } from "@material-ui/core";
-import LiveTicker from './LiveTicker'
+import LiveTicker from './LiveTicker';
+import YourFavorites from './YourFavorites'; 
 import { BoxShadow } from '../Styles/Dashboard/index'
 
 
@@ -77,7 +78,7 @@ class Dashboard extends Component {
                   style={{ position: "relative" }}
                 >
                   <Typography variant="h5" gutterBottom>
-                    Your Favorites
+                    <YourFavorites /> 
                   </Typography>
                 </Paper>
               </Grid>
