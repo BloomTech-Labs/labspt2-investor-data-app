@@ -91,7 +91,7 @@
 
  @media(max-width: 700px){
    .table {
-     width: 80%; 
+     width: 800%; 
    }
    .container td{
      font-size: 1rem

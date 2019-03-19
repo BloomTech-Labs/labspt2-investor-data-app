@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { CssBaseline, Paper, Typography, Grid } from "@material-ui/core";
 import LiveTicker from './LiveTicker'
+import YourFavorites from './YourFavorites'
 import { BoxShadow } from '../Styles/Dashboard/index'
 
 
@@ -53,16 +54,16 @@ class Dashboard extends Component {
                   </Typography>
                 </div>
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={7}>
                 <Paper className={classes.paper}>
                   <div>
                     <Typography variant="h5" gutterBottom>
-                      Key Indicators
+                        Key Indicators
                     </Typography>
                   </div>
                 </Paper>
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={5}>
               <BoxShadow>
                 <Paper className={classes.paper}>
                     <Typography variant="h6" gutterBottom>
@@ -71,13 +72,13 @@ class Dashboard extends Component {
                 </Paper>
               </BoxShadow>
               </Grid> 
-              <Grid item xs={12} md={12}>
+              <Grid item xs={12} md={7}>
                 <Paper
                   className={classes.paper}
                   style={{ position: "relative" }}
                 >
                   <Typography variant="h5" gutterBottom>
-                    Your Favorites
+                      <YourFavorites />
                   </Typography>
                 </Paper>
               </Grid>
