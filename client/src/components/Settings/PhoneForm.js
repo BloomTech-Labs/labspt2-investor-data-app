@@ -89,6 +89,11 @@ const mapStateToProps = state => {
         error: state.SettingsReducer.error,
         settings: state.SettingsReducer.settings
     }
-};  
+};
 
-export default withStyles(styles)(connect(mapStateToProps, { getSettings })(PhoneForm));
+const mapDispatchToProps = dispatch => ({
+    getSettings: () => dispatch(getSettings()),
+    updateSettings:  (id, updatedPhone) => dispatch(updateSettings(id, updatedPhone))
+});
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(PhoneForm));
