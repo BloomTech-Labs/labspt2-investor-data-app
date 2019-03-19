@@ -10,6 +10,8 @@ import {
   Typography
 } from "@material-ui/core";
 import PropTypes from "prop-types";
+import withStyles from '@material-ui/core/styles/withStyles';
+
 
 function TabContainer(props) {
   return (
@@ -29,8 +31,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper
   }
 });
-
-export default class RegisterLogin extends React.Component {
+class RegisterLogin extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -156,3 +157,5 @@ export default class RegisterLogin extends React.Component {
     );
   }
 }
+
+export default withStyles(styles)(RegisterLogin)

@@ -1,107 +1,70 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-// import TextField from "@material-ui/core/TextField";
-import { SingInModal, CloseButton } from "../Styles/Navigation/Signin";
-import {
-  TextField,
-  DialogContent,
-  Dialog,
-  DialogActions,
-  DialogContentText,
-  DialogTitle
-} from "@material-ui/core";
-
-/* TODO:
- * Create a connection to database
- * Fill in Submit Handler
- * Setup SignUp Model
- * Add in Validation and Testing
- */
-
-export default class FormDialog extends React.Component {
-  state = {
-    email: "",
-    password: "",
-    open: false
-  };
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleSignup = () => {
-    this.setState({ open: false });
-  };
-
-  handleChange = prop => event => {
-    event.preventDefault();
-    this.setState({ [prop]: event.target.value });
-  };
-
-  handleSubmit = e => {
-    this.setState({
-      email: "",
-      password: ""
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <Button color="default" onClick={this.handleClickOpen}>
-          Sign In
-        </Button>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="signin"
-        >
-          <DialogContent>
-            <SingInModal>
-              <CloseButton onClick={this.handleSignup} color="default">
-                X
-              </CloseButton>
-              <DialogTitle id="signin">PICKEM</DialogTitle>
-              <DialogContentText>
-                Please Sign In <p /> {""}
-              </DialogContentText>
-              <TextField
-                autoFocus
-                required
-                placeholder="Email"
-                // margin="dense"
-                id="email"
-                label="Email Address"
-                type="email"
-                name="email"
-                variant="outlined"
-                value={this.state.email}
-                onChange={this.handleChange("email")}
-              />
-              <p />
-              {""}
-              <TextField
-                id="password"
-                type="password"
-                variant="outlined"
-                required
-                name="password"
-                label="Password"
-                value={this.state.password}
-                onChange={this.handleChange("password")}
-              />
-              <DialogActions>
-                <Button onClick={this.handleSignup} color="default">
-                  Sign Up
-                </Button>
-                <Button onClick={this.handleSubmit} color="default">
-                  Sign In
-                </Button>
-              </DialogActions>
-            </SingInModal>
-          </DialogContent>
-        </Dialog>
-      </div>
-    );
+import React from 'react';
+import PropTypes from 'prop-types';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import withStyles from '@material-ui/core/styles/withStyles';
+import {Avatar, Button, CssBaseline, FormControl, FormControlLabel, Checkbox, Input,InputLabel, Paper, Typography} from "@material-ui/core"
+import {styles} from '../Styles/Navigation/Signin'
+class  Signin extends React.Component {
+  constructor(props) {
+    super(props)
+  
+  this.state ={
+    username: '',
+    password: ''
   }
+ 
+  }
+  handleChange = (e) =>{
+    this.setState({[e.target.name]: e.target.value})
+  }
+
+  singin = (e) => {
+    e.preventDefault()
+  }
+  
+  render() {
+    const {classes} = this.props
+    return (
+    <main className={classes.main}>
+      <CssBaseline />
+      <Paper className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <form className={classes.form}>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="username">Username</InputLabel>
+            <Input id="username" name="username" onChange={this.handleChange} autoComplete="username" autoFocus />
+          </FormControl>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <Input name="password" type="password" id="password" onChange={this.handleChange} autoComplete="current-password" />
+          </FormControl>
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Sign in
+          </Button>
+        </form>
+      </Paper>
+    </main>
+  );
 }
+}
+
+Signin.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Signin);
