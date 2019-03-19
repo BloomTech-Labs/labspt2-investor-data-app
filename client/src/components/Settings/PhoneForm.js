@@ -2,7 +2,7 @@ import React from 'react';
 
 // Redux imports
 import { connect } from 'react-redux';
-import { getSettings } from '../../actions/settingsActions.js';
+import { getSettings, updateSettings } from '../../actions/settingsActions.js';
 
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';
@@ -13,9 +13,30 @@ import Button from '@material-ui/core/Button';
 import styles from './styles';
 
 class PhoneForm extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            // Placeholder to use until phone number added as part of user schema
+            firstName: ''
+        }
+    }
 
     componentDidMount(){
         this.props.getSettings();
+    };
+
+    handleChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    };
+
+    handleSubmit = event => {
+        event.preventDefault();
+        this.props.updateSettings('1', this.state);
+        this.setState({
+            firstName: ''
+        });
     };
 
     render(){
