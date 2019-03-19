@@ -2,8 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import TickerStar from './TickerStar'
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles' 
-import { Input, Form } from '../Styles/Dashboard/YourFavorites'
-
+import { Input, Form, SearchIcon } from '../Styles/Dashboard/YourFavorites'
 
 class YourFavorites extends React.Component{
     constructor(){
@@ -149,7 +148,8 @@ class YourFavorites extends React.Component{
         return (
             <div>
                 <Form> 
-                    <Input/> 
+                    <SearchIcon><i className= 'fa fa-search' /></SearchIcon>
+                    <Input type="text" placeholder="Search..."/> 
                 </Form>          
                 <div>
                     { rows }  

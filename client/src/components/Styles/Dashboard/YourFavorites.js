@@ -1,28 +1,29 @@
 import styled from "styled-components";
 
 export const Input = styled.input`
-position: absolute;
-top: 10px;
-left: 38px;
-font-size: 14px;
-background: none;
-color: #5a6674;
-width: 195px;
-height: 20px;
-border: none;
-appearance: none;
-outline: none;
+width: 75%
+height: 32px;
+text-indent: 32px; 
+background: #fcfcfc;
+border: 1px solid #aaa;
+border-radius: 15px;
+box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+outline: none; 
 `
 
 export const Form = styled.form`
 position: relative;
-top: 50%;
-left: 50%;
-width: 350px;
-height: 40px;
-border-radius: 40px;
-box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-transform: translate(-50%, -50%);
-background: #fff;
-transition: all 0.3s ease;
+color: #aaa;
+font-size: 16px;
+width: 100%; 
+display: flex; 
+justify-content: center; 
 `
+
+export const SearchIcon = styled.span`
+position: relative;
+top: 6px;
+left: 28px;
+
+`
+
