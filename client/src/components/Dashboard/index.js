@@ -3,12 +3,17 @@ import PropTypes from 'prop-types'
 import withStyles from "@material-ui/core/styles/withStyles";
 import {Avatar, CssBaseline, Paper, Typography, Grid } from "@material-ui/core";
 import firebase from 'firebase'
+import LiveTicker from './LiveTicker'
+import YourFavorites from './YourFavorites'
+import { BoxShadow } from '../Styles/Dashboard/index'
+
+
 const styles = theme => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.grey["100"],
     overflow: "hidden",
-    height: "100vh"
+    //height: "100vh"
   },
   grid: {
     width: 1200,
@@ -73,21 +78,21 @@ class Dashboard extends Component {
               </Grid>
   
               <Grid item xs={12} md={6}>
+              <BoxShadow>
                 <Paper className={classes.paper}>
-                  <div>
-                    <Typography variant="h5" gutterBottom>
-                      Your Favorites
+                    <Typography variant="h6" gutterBottom>
+                      <LiveTicker />
                     </Typography>
-                  </div>
                 </Paper>
-              </Grid>
+              </BoxShadow>
+              </Grid> 
               <Grid item xs={12} md={12}>
                 <Paper
                   className={classes.paper}
                   style={{ position: "relative" }}
                 >
                   <Typography variant="h5" gutterBottom>
-                    Live Ticker
+                    <YourFavorites /> 
                   </Typography>
                 </Paper>
               </Grid>
