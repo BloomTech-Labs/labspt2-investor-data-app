@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@material-ui/icons": "^3.0.2"
+    "@material-ui/icons": "^3.0.2",
+    "react-stripe-checkout": "^2.6.3"
   }
 }
