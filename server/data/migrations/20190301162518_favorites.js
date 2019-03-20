@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
       .integer("target")
       .unsigned()
       .notNullable();
-    favorites.integer("users_id").unsigned();
+    favorites.string("users_id").unsigned();
   });
 };
 
