@@ -9,6 +9,10 @@ exports.up = function (knex, Promise) {
             .string('lastName', 128)
             .notNullable();
         users
+            .string('username', 128)
+            .notNullable()
+            .unique();
+        users
             .string('email', 128)
             .notNullable()
             .unique();

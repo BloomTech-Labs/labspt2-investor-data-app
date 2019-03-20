@@ -1,36 +1,104 @@
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
+import PropTypes from "prop-types";
+import firebase from 'firebase'
+// Material UI
+import { withStyles } from "@material-ui/core/styles";
 import {
-  NavContainer,
-  MenuDrawer,
-  NavbarLeft,
-  NavbarRight
-} from "../Styles/Navigation/Main";
-import SigninModal from "./SigninModal";
-import SignupModal from "./SignupModal";
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  MenuItem,
+  Menu,
+  Link
+} from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
+
+//import SigninModal from "./SigninModal";
+//import SignupModal from "./SignupModal";
+// import RegisterLogin from "./RegisterLogin";
+import * as ROUTES from "../../constants/routes";
+
+const styles = {
+  root: {
+    flexGrow: 1
+  },
+  grow: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20
+  }
+};
 
 class Navigation extends React.Component {
-  //   constructor() {
-  //     super();
-  //   }
+  state = {
+    anchorEl: null
+  };
 
+  handleMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleMenuClose = () => {
+    this.setState({ anchorEl: null });
+  };
+  
+  signOut = () => {
+    firebase.auth().signOut()
+  }
   render() {
+    const { classes } = this.props;
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
+
     return (
-      <div>
-        <NavContainer>
-          <NavbarLeft>
-            <MenuDrawer>
-              <i className="fas fa-bars" />
-            </MenuDrawer>
-            <h2>Pick Em</h2>
-          </NavbarLeft>
-          <NavbarRight>
-            <SigninModal />
-            <SignupModal />
-          </NavbarRight>
-        </NavContainer>
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" color="inherit" className={classes.grow}>
+              Pick Em
+            </Typography>
+            <IconButton
+              aria-owns={open ? "menu-appbar" : undefined}
+              aria-haspopup="true"
+              onClick={this.handleMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right"
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right"
+              }}
+              open={open}
+              onClose={this.handleMenuClose}
+            >
+              <Link component={RouterLink} to={ROUTES.LANDING} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Home</MenuItem></Link>
+              <Link component={RouterLink} to={ROUTES.DASHBOARD} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Dashboard</MenuItem></Link>
+              <Link component={RouterLink} to={ROUTES.SETTINGS} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Settings</MenuItem></Link>
+              <Link component={RouterLink} to={ROUTES.BILLING} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Billing</MenuItem></Link>
+              <MenuItem onClick={this.signOut}>Sign Out</MenuItem>
+            </Menu>
+        
+          </Toolbar>
+        </AppBar>
       </div>
     );
   }
 }
 
-export default Navigation;
+Navigation.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(Navigation);
