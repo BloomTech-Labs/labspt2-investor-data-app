@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 import withStyles from "@material-ui/core/styles/withStyles";
-import { CssBaseline, Paper, Typography, Grid } from "@material-ui/core";
-import LiveTicker from './LiveTicker';
-import YourFavorites from './YourFavorites'; 
+import {Avatar, CssBaseline, Paper, Typography, Grid } from "@material-ui/core";
+import firebase from 'firebase'
+import LiveTicker from './LiveTicker'
+import YourFavorites from './YourFavorites'
 import { BoxShadow } from '../Styles/Dashboard/index'
 
 
@@ -39,6 +41,15 @@ class Dashboard extends Component {
         <CssBaseline />
         {/* Add Navigation here */}
         <div className={classes.root}>
+        <Grid container justify="flex-end" alignItems="center">
+      
+        <Typography variant='h6' color="inherit" gutterBottom>
+            Welcome, {firebase.auth().currentUser.displayName} <br />
+            </Typography>
+            
+              <Avatar alt="profile-picture" src={firebase.auth().currentUser.photoURL} className={classes.bigAvatar} />
+              </Grid>
+            
           <Grid container justify="center">
             <Grid
               spacing={24}
@@ -49,11 +60,13 @@ class Dashboard extends Component {
             >
               <Grid item xs={12}>
                 <div className={classes.block}>
+             
                   <Typography variant="h6" gutterBottom>
                     Dashboard
                   </Typography>
                 </div>
               </Grid>
+
               <Grid item xs={12} md={6}>
                 <Paper className={classes.paper}>
                   <div>
@@ -63,6 +76,7 @@ class Dashboard extends Component {
                   </div>
                 </Paper>
               </Grid>
+  
               <Grid item xs={12} md={6}>
               <BoxShadow>
                 <Paper className={classes.paper}>
@@ -85,9 +99,13 @@ class Dashboard extends Component {
             </Grid>
           </Grid>
         </div>
-      </React.Fragment>
+      </React.Fragment>    
     );
   }
+}
+
+Dashboard.propTypes = {
+  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(Dashboard);
