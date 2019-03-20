@@ -5,7 +5,7 @@ import App from './components/App';
 
 import { BrowserRouter as Router } from "react-router-dom"
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import rootReducer from './reducers/index';
@@ -32,10 +32,23 @@ const theme = createMuiTheme({
 });
 
 // Middleware for error logging and dispatching
-const middleware = applyMiddleware(logger, thunk);
-
+/* const middleware = applyMiddleware(logger, thunk); */
+const middleware = [thunk, logger];
+const initialState = {};
 // Create Redux store
-const store = createStore(rootReducer, middleware);
+/* const store = createStore(rootReducer, middleware); */
+const store = createStore(
+    rootReducer, 
+    initialState, 
+   compose(
+        applyMiddleware(...middleware), 
+          window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()                 
+   )
+);
+
+
+
+
 
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>

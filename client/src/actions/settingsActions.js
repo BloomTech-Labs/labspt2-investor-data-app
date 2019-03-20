@@ -13,7 +13,8 @@ export const getSettings = () => {
         // Dispatch to reducer that current settings are being obtained from API
         dispatch({type: FETCHING});
         axios
-            .get(`http://localhost:5000/api/users/1`)
+         .get('https://pickemstocks.heroku.com/api/users/2') 
+             /* .get(`http://localhost:5000/api/users/2`)  */
             .then(response => {
                 // Dispatch to reducer that settings have been successfully obtained, pass API response as payload
                 dispatch({
