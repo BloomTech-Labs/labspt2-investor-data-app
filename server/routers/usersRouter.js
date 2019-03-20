@@ -13,31 +13,15 @@ const { authenticate, generateToken } = require("../data/auth/authenticate");
 */
 // Added routes for signin and authenticate the username and password for front end use.
 module.exports = router => {
-<<<<<<< HEAD
-  router.get("/signin", signin);
-  router.get("/signin", signup);
-  router.get("/:id", authenticate, userById);
-};
-=======
     router.get("/signin", signin);
     router.get("/signin", signup);
     router.get("/:id", userById);
     // router.get("/:id", authenticate, userById);
     router.put("/:id", update)
 }
->>>>>>> 74f249f99505dbd10d739bf7697ae85e9fcf367c
 
 /************************************ USERS SECTION ***********************************/
-// protect this route, only authenticated users should see it
-/* router.get('/', protect, (req, res) => {
-    users.findUsers()
-    .then(users => {
-      res.json(users);
-    })
-    .catch(err => {
-      res.status(500).send(err);
-    })
-  }); */
+
 /********* Get Users *************/
 router.get("/", (req, res) => {
   users
@@ -131,5 +115,53 @@ router.put('/:id', (req, res) => {
 });
 
 
+/************* Delete User *************/
+router.delete('/:id', (req, res) => {
+    const { id } = req.params
+    if (id) {
+        users.remove(id)
+            .then(user => {
+                if (user) {
+                    res.json({ message: "The user was successfully deleted" });
+                } else {
+                    res
+                        .status(404)
+                        .json({ message: "The user with the specified ID does not exist." })
+                }
+            })
+            .catch(err => {
+                res
+                    .status(500)
+                    .json({ error: "The user could not be removed." });
+            });
+    }
+});
+
+/********* Update User *************/
+/* router.put('/:id', (req, res) => {
+    const { id } = req.params
+    const newUser = req.body
+    if (!newUser.email || !newUser.password || !newUser.username || !newUser.firstName || !newUser.lastName) {
+        res
+            .status(400)
+            .json({ message: "Please provide email, first name, last name and password." });
+    } else {
+        if (newUser) {
+            users.update(id, newUser)
+                .then(user => {
+                    if (user) {
+                        res.status(201).json(user);
+                    } else {
+                        res.status(404).json({ message: "The user with the specified ID does not exist." })
+                    }
+                })
+                .catch(err => {
+                    res.status(500).json({ error: "The user could not be modified." });
+                });
+        } else {
+            res.status(404).json({ message: "The user with the specified ID does not exist." })
+        }
+    }
+}) */
 
 module.exports = router;
