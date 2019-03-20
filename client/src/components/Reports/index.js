@@ -23,7 +23,7 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.grey["100"],
     overflow: "hidden",
-    height: "100vh"
+    height: "100%"
   },
   grid: {
     width: 1200,
@@ -172,7 +172,7 @@ class Reports extends Component {
                 >
                   <AppBar position="static">
                     <Tabs
-                      value={value}
+                      value={value ? value : 0}
                       onChange={this.handleChange}
                       indicatorColor="primary"
                       textColor="secondary"
