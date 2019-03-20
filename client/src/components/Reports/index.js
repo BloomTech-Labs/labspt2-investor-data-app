@@ -12,7 +12,7 @@ import {
   InputBase
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import { getData } from "./Charts/utils";
+import { getData } from "./utils";
 
 import MAChart from "./Charts/MAChart";
 import MACDChart from "./Charts/MACDChart";
@@ -103,22 +103,28 @@ function TabContainer(props) {
 class Reports extends Component {
   state = {
     tab: 0,
-    data: []
+    data: [],
+    search: ""
   };
 
   componentDidMount() {
-    getData().then(data => {
+    getData(this.state.search).then(data => {
       this.setState({ data });
     });
   }
 
-  handleChange = (event, value) => {
+  handleChange = value => {
     this.setState({ value });
+  };
+
+  inputHandler = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
     const { classes } = this.props;
-    const { value } = this.state;
+    const { value, search } = this.state;
+    console.log(search);
 
     return (
       <React.Fragment>
@@ -142,6 +148,9 @@ class Reports extends Component {
                       <SearchIcon />
                     </div>
                     <InputBase
+                      name="search"
+                      value={search}
+                      onChange={this.inputHandler}
                       placeholder="Search…"
                       classes={{
                         root: classes.inputRoot,
