@@ -107,18 +107,18 @@ class Reports extends Component {
     search: ""
   };
 
-  componentDidMount() {
-    getData(this.state.search).then(data => {
-      this.setState({ data });
+  inputHandler = event => {
+    this.setState({ [event.target.name]: event.target.value }, () => {
+      if (this.state.search && this.state.search.length >= 1) {
+        getData(this.state.search).then(data => {
+          this.setState({ data });
+        });
+      }
     });
-  }
-
-  handleChange = value => {
-    this.setState({ value });
   };
 
-  inputHandler = event => {
-    this.setState({ [event.target.name]: event.target.value });
+  handleChange = (event, value) => {
+    this.setState({ value });
   };
 
   render() {
