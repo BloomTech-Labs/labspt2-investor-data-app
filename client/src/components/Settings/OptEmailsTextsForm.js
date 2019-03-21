@@ -1,5 +1,9 @@
 import React from 'react';
 
+// Redux imports
+import { connect } from 'react-redux';
+import { getSettings, updateSettings } from '../../actions/settingsActions.js';
+
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -46,5 +50,17 @@ class OptEmailsTextsForm extends React.Component {
     };
 };
 
+const mapStateToProps = state => {
+    return {
+        fetchingSettings: state.SettingsReducer.fetchingSettings,
+        error: state.SettingsReducer.error,
+        settings: state.SettingsReducer.settings
+    }
+};
 
-export default withStyles(styles)(OptEmailsTextsForm);
+const mapDispatchToProps = dispatch => ({
+    getSettings: () => dispatch(getSettings()),
+    updateSettings:  (id, updatedEmail) => dispatch(updateSettings(id, updatedEmail))
+});
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(OptEmailsTextsForm));
