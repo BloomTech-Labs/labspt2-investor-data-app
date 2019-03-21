@@ -1,6 +1,6 @@
 
-import firebase from 'firebase';
-
+import app from 'firebase/app'
+import 'firebase/auth'
 const config = {
     apiKey: "AIzaSyCUwftk4QC8QgZP7dPfM4V76U6wMkwiAa4",
     authDomain: "pickem-597ad.firebaseapp.com",
@@ -10,7 +10,7 @@ const config = {
     messagingSenderId: "452859929022"
   };
   
-  const fire = firebase.initializeApp(config)
+  const fireApp = app.initializeApp(config)
 
 
-  export default fire
+  export const fire = fireApp.auth()

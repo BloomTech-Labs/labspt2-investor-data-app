@@ -1,7 +1,7 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import PropTypes from "prop-types";
-import app  from "../Auth/firebaseConfig"
+import { fire }  from "../Auth/firebaseConfig"
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -49,7 +49,7 @@ class Navigation extends React.Component {
   };
   
   signOut = () => {
-      app.auth().signOut()
+    fire.signOut()
   }
 
   

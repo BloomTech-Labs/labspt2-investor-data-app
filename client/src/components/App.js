@@ -8,9 +8,9 @@ import Dashboard from "../components/Dashboard";
 import Settings from "../components/Settings";
 import Billing from "../components/Billing";
 import * as ROUTES from "../constants/routes";
-import app from "./Auth/firebaseConfig"
 import "./App.css";
 import Signin from "../components/Auth/Singin";
+import {  fire  } from './Auth/firebaseConfig'
 
 const AuthenticatedRoute = ({component: Component, authenticated, ...rest}) => {
   return(
@@ -27,24 +27,12 @@ class App extends Component {
   state = {
     authenticated: false,
     currentUser: null, 
+    redirect: false
 
    }
-setCurrentUser = (user) => {
-if (user) {
-  this.setState({
-    currentUser: user,
-    authenticated: true,
-  })
-} else {
-  this.setState({
-    currentUser: null,
-    authenticated: false,
-  })
-}
-}
 
 componentDidMount =() => {
-app.auth().onAuthStateChanged((user) => {
+  this.removeAuthListener = fire.onAuthStateChanged((user) => {
     if (user) {
       this.setState({
         currentUser: user,
@@ -62,8 +50,16 @@ app.auth().onAuthStateChanged((user) => {
   )
 
 }
+componentWillUnmount = () => {
+  this.removeAuthListener()
+}
   render() {
-    
+    const { from } = this.props.location.state || { from: { pathname: '/' } }
+    const { currentUser }= this.state
+    if (this.state.redirect === true) {
+      return <Redirect to={from} />
+      
+    }
     return (
     
       <div>
@@ -76,7 +72,7 @@ app.auth().onAuthStateChanged((user) => {
           <AuthenticatedRoute authenticated={this.state.authenticated} path={ROUTES.SETTINGS} component={Settings} />
           <Route path={ROUTES.BILLING} component={Billing} />
           {/* <Route path={ROUTES.REPORTS} component={} /> */}
-           <Route exact path='/signin' render={(props) =>{return <Signin setCurrentUser ={this.setCurrentUser} {...props}/>}} />   
+           <Route exact path={ROUTES.SIGNIN} render={(props) =>{return <Signin user ={currentUser} {...props}/>}} />   
          {/*} <Route path={ROUTES.SIGNUP} component={} /> */}
         </Switch> 
     
