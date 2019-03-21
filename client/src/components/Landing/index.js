@@ -68,7 +68,11 @@ const Landing = () => {
             </div>
             <div className="step">
               <div className="step__media">
-                <img alt="" src={undraw_financial_data} className="step__image" />
+                <img
+                  alt=""
+                  src={undraw_financial_data}
+                  className="step__image"
+                />
               </div>
               <h4>Professional Investors</h4>
               <p className="step__text">
