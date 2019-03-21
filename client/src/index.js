@@ -46,10 +46,6 @@ const store = createStore(
    )
 );
 
-
-
-
-
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>
         <Provider store={store}>
