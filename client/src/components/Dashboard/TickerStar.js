@@ -1,13 +1,26 @@
 import React from 'react'
 import axios from 'axios'
+import firebase from 'firebase'
 
 class TickerStar extends React.Component{
     constructor(props){
         super(props); 
         this.state = {
             selected: false,
-            star: 'far fa-star'
+            star: 'far fa-star',
+            user_id: null,
+            stock: []
         }
+    }
+
+    componentDidMount() {
+        axios.get(`https://pickemm.herokuapp.com/api/favorites/13`) // needs a user id
+            .then( response => {
+                this.setState({
+                    stock: response.data
+                })
+            })
+            .catch( error => { console.log( 'there was an error')})
     }
 
     selectHandler = (event) => {
@@ -15,29 +28,27 @@ class TickerStar extends React.Component{
         if(this.state.selected === false){
             this.setState({
                 selected: true,
-                star: 'fa fa-star'
-            })   
+                star: 'fa fa-star',
+            })  
             const newSymbol = {
+                id: 15,
                 symbol: this.props.id,
-                target: 1
-
+                target: 1,
+                users_id: 13
             }
-
-
-                   axios.post('http://www.localhost:5000/api/favorites', newSymbol)
-                     .then( response => {
-                         this.setState({
-                             newSymbol: { symbol: '', targets: null, users_id: null}
-                         })
-                     })
-                     .catch( err => { console.log( "we've encountered an error")})
-            console.log(this.props.id)
-         } else {
-             this.setState({
-                 selected: false,
-                 star: 'far fa-star'
-             })
-         }
+            axios.post('https://pickemm.herokuapp.com/api/favorites/13', newSymbol)
+                .then( response => {
+                    this.setState({
+                        newSymbol: { symbol: '', target: null, users_id: null}
+                    })
+                })
+                .catch( err => { console.log( "we've encountered an error")})
+          } else {
+                this.setState({
+                    selected: false,
+                    star: 'far fa-star'
+                })
+        }
     }
 
     render(){

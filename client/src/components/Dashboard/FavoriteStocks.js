@@ -2,18 +2,25 @@ import React from 'react'
 import axios from 'axios'
 import TickerStar from './TickerStar'
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles' 
+import { Input, Form, SearchIcon } from '../Styles/Dashboard/YourFavorites'
 
-class LiveTicker extends React.Component{
-    constructor(){
-        super();
+class FavoriteStocks extends React.Component{
+    constructor(props){
+        super(props);
         this.state = {
             timeStamp: {},
-            companies: ['DJI', 'NDAQ', 'SPX', 'AAPL', 'AMZN'], // stock company symbols
+            companies: [this.props.companies], // stock company symbols
             stocks: [],
+            items: []
         }
     }
       
     componentDidMount(){
+        this.fetchFavorites()
+    }
+      
+
+    fetchFavorites = () => {
         let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
             axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=ZV7Y9QKGXRHCY0A4`));
         this.fetchStocks(promises)
@@ -103,9 +110,9 @@ class LiveTicker extends React.Component{
     
 
     render() {
-        if(!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
-            return <Loading>Loading Stocks...</Loading>
-        }
+       if(!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
+        return <Loading>Loading Stocks...</Loading>
+       } 
     
         let rows = [];
         
@@ -122,7 +129,7 @@ class LiveTicker extends React.Component{
                             <p>{stock.company}</p> 
                         </StockSymbol> 
                         <Star>
-                            <TickerStar stocks={this.state.stocks} id={stock.company} /> 
+                            <TickerStar id={stock.company} /> 
                         </Star> 
                     </Row> 
                     <br />
@@ -141,11 +148,13 @@ class LiveTicker extends React.Component{
         });
     
         return (
-            <div>
-                { rows }  
+            <div>         
+                <div>
+                    { rows }  
+                </div> 
             </div> 
         )
     }
 }
 
-export default LiveTicker
+export default FavoriteStocks
