@@ -114,7 +114,6 @@ class Reports extends Component {
   componentDidMount() {
     getData(this.state.ticker).then(data => {
       this.setState({ data });
-      console.log(data);
     });
   }
 
