@@ -12,6 +12,7 @@ import "./App.css";
 import Signin from "./Auth/Signin";
 import {  fire  } from './Auth/firebaseConfig'
 
+
 const AuthenticatedRoute = ({component: Component, authenticated, ...rest}) => {
   return(
     <Route 
@@ -36,13 +37,15 @@ componentDidMount =() => {
     if (user) {
       this.setState({
         currentUser: user,
-        authenticated: true
+        authenticated: true,
+        redirect: true
       })
       console.log("user", user)
     } else {
       this.setState({
         currentUser: null,
-        authenticated: false
+        authenticated: false,
+        redirect: false
       })
     }
   }
@@ -71,20 +74,21 @@ componentWillUnmount = () => {
 }
   render() {
 
- 
-    return (
+    const { currentUser }= this.state
+    const { redirect } = this.state
     
+   return (
+
       <div>
         <Navigation />
         <br />
        <Switch>
-          
           <Route exact path={ROUTES.LANDING} component={Landing} />
           <AuthenticatedRoute authenticated={this.state.authenticated} path={ROUTES.DASHBOARD} component={Dashboard} />
           <AuthenticatedRoute authenticated={this.state.authenticated} path={ROUTES.SETTINGS} component={Settings} />
           <Route path={ROUTES.BILLING} component={Billing} />
           {/* <Route path={ROUTES.REPORTS} component={} /> */}
-           <Route exact path={ROUTES.SIGNIN} render={(props) =>{return <Signin setCurrentUser={this.setCurrentUser} {...props}/>}} />   
+           <Route exact path={ROUTES.SIGNIN} render={(props) =>{return <Signin user ={currentUser} redirect={redirect} {...props}/>}} />   
          {/*} <Route path={ROUTES.SIGNUP} component={} /> */}
         </Switch> 
     

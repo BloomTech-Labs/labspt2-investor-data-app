@@ -4,12 +4,7 @@ import { fire } from "./firebaseConfig" // This is being used to provide apiKey 
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import { Redirect } from 'react-router-dom'
 export default class Signin extends Component {
-constructor(props) {
-  super(props)
-  this.state = {
-    redirect: false
-}
-}
+
 
    uiConfig = {
     signInFlow:"popup",
@@ -26,19 +21,18 @@ constructor(props) {
 
 
     render(){
-      const redirect = this.state
-      const location  = this.props
-      const { from } = location.state || { from: { pathname: '/' } }
-      if (redirect === true) {
-        return <Redirect to={from} />
-      } 
-     
-      console.log(redirect)
+    const { from } = this.props.location.state || { from: { pathname: '/' } }
+  
+    if (this.props.redirect === true) {
+      return <Redirect to={from} />
+      
+    }
+    console.log(this.props.redirect)
         return(
             <div>
               
                 <StyledFirebaseAuth  uiConfig={this.uiConfig}
-                                firebaseAuth={fire}/>
+                                firebaseAuth={fire}  user={this.props.user}/>
             </div>
     )
     }
