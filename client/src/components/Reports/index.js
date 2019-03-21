@@ -696,10 +696,18 @@ class Reports extends Component {
   state = {
     tab: 0,
     data: [],
+    search: "AAPL",
     single: "",
     popper: "",
     suggestions: []
   };
+
+  componentDidMount() {
+    getData(this.state.search).then(data => {
+      this.setState({ data });
+      console.log(data);
+    });
+  }
 
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({
@@ -714,16 +722,26 @@ class Reports extends Component {
   };
 
   handleChange = name => (event, { newValue }) => {
-    this.setState({
-      [name]: newValue
-    });
+    this.setState(
+      {
+        [name]: newValue,
+        search: newValue
+      },
+      () => {
+        if (this.state.search && this.state.search.length >= 1) {
+          getData(this.state.search).then(data => {
+            this.setState({ data });
+          });
+        }
+      }
+    );
   };
 
-  componentDidMount() {
-    getData("AAPL").then(data => {
-      this.setState({ data });
-    });
-  }
+  // componentDidMount() {
+  //   getData("AAPL").then(data => {
+  //     this.setState({ data });
+  //   });
+  // }
   // inputHandler = event => {
   //   this.setState({ [event.target.name]: event.target.value }, () => {
   //     if (this.state.search && this.state.search.length >= 1) {
@@ -740,7 +758,7 @@ class Reports extends Component {
 
   render() {
     const { classes } = this.props;
-    const { value } = this.state;
+    const { value, data } = this.state;
 
     const autosuggestProps = {
       renderInputComponent,
@@ -766,7 +784,7 @@ class Reports extends Component {
               <Grid item xs={12}>
                 <div className={classes.topBar}>
                   <div className={classes.block}>
-                    <Typography variant="h2">AAPL</Typography>
+                    <Typography variant="h2">{this.state.search}</Typography>
                   </div>
                   <div className={classes.search}>
                     <Autosuggest
@@ -810,15 +828,29 @@ class Reports extends Component {
                 </div>
                 <div className={classes.block}>
                   <div className={classes.stockInfo}>
-                    <Typography variant="h6">Price: $148.29</Typography>
+                    <Typography variant="h6">
+                      Price: ${data.length ? data[data.length - 1].close : ""}
+                    </Typography>
                     <Typography variant="h6" style={{ marginLeft: "50px" }}>
-                      Change: 6.05
+                      Change:{" "}
+                      {data.length
+                        ? data[data.length - 1].open -
+                          data[data.length - 1].close
+                        : ""}
                     </Typography>
                   </div>
                   <div className={classes.stockInfo}>
-                    <Typography variant="h6">Volume: 43.2M</Typography>
+                    <Typography variant="h6">
+                      Volume: {data.length ? data[data.length - 1].volume : ""}
+                    </Typography>
                     <Typography variant="h6" style={{ marginLeft: "50px" }}>
-                      Change %: +2.47
+                      Change %:{" "}
+                      {data.length
+                        ? (100 *
+                            (data[data.length - 1].open -
+                              data[data.length - 1].close)) /
+                          data[data.length - 1].close
+                        : ""}
                     </Typography>
                   </div>
                 </div>
