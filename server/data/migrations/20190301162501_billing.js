@@ -38,9 +38,7 @@ exports.up = function(knex, Promise) {
     billing.integer("accountType").unsigned();
     billing.string("mobilePhone", 128);
     billing.string("homePhone", 128);
-    billing.integer('users_id').unsigned()
-      .references('users.id');
-  
+    billing.integer('users_id').unsigned();
   });
 };
 
