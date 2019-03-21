@@ -10,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import StarIcon from "@material-ui/icons/StarBorder";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+import Checkout from "../Stripe/checkout";
 
 /*
 TODO: 
@@ -64,7 +65,11 @@ const tiers = [
   {
     title: "Newbie",
     price: "5",
-    description: ["price indicator", "Help documentation", "Email support"],
+    description: [
+      "1 indicator included",
+      "Help documentation",
+      "Email support"
+    ],
     buttonText: "Sign up for now",
     buttonVariant: "outlined"
   },
@@ -159,13 +164,11 @@ function Pricing(props) {
                   ))}
                 </CardContent>
                 <CardActions className={classes.cardActions}>
-                  <Button
-                    fullWidth
-                    variant={tier.buttonVariant}
-                    color="primary"
-                  >
-                    {tier.buttonText}
-                  </Button>
+                  
+                  <Checkout
+            name={tier.title}
+            amount={tier.price}
+          />
                 </CardActions>
               </Card>
             </Grid>
