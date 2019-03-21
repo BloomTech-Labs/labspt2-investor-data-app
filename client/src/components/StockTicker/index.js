@@ -91,7 +91,7 @@ class StockTicker extends React.Component {
       <div>  
         <div className="table">
           <LiveClock />
-          <table className="container">
+          <table className="tickerContainer">
 	          <thead>
 		          <tr>
 			          <th><h1>Company</h1></th>

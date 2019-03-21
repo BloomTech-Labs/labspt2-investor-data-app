@@ -43,8 +43,6 @@ class App extends Component {
     return (
       <div>
         <Navigation />
-        <br />
-
         {this.state.isSignedIn ? (
           <Switch>
             <Route exact path={ROUTES.LANDING} component={Landing} />
