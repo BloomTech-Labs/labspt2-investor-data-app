@@ -26,7 +26,7 @@ import MACDChart from "./Charts/MACDChart";
 import PriceChart from "./Charts/PriceChart";
 import {suggestions} from "./suggestions";
 
-function TabContainer(props) {
+const TabContainer = (props) => {
   return (
     <Typography component="div" style={{ padding: 8 * 3 }}>
       {props.children}
@@ -34,7 +34,7 @@ function TabContainer(props) {
   );
 }
 
-function renderInputComponent(inputProps) {
+const renderInputComponent = (inputProps) => {
   const { classes, inputRef = () => {}, ref, ...other } = inputProps;
 
   return (
@@ -54,7 +54,7 @@ function renderInputComponent(inputProps) {
   );
 }
 
-function renderSuggestion(suggestion, { query, isHighlighted }) {
+ const renderSuggestion = (suggestion, { query, isHighlighted }) => {
   const matches = match(suggestion.label, query);
   const parts = parse(suggestion.label, matches);
 
@@ -77,7 +77,7 @@ function renderSuggestion(suggestion, { query, isHighlighted }) {
   );
 }
 
-function getSuggestions(value) {
+const getSuggestions = (value) => {
   const inputValue = deburr(value.trim()).toLowerCase();
   const inputLength = inputValue.length;
   let count = 0;
@@ -97,7 +97,7 @@ function getSuggestions(value) {
       });
 }
 
-function getSuggestionValue(suggestion) {
+const getSuggestionValue = (suggestion) => {
   return suggestion.label;
 }
 
@@ -139,13 +139,12 @@ class Reports extends Component {
   };
 
   onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) =>{
-    //Here you do whatever you want with the values
-    console.log(suggestionValue); //For example alert the selected value
       getData(suggestionValue).then(data => {
         this.setState({ data, ticker: suggestionValue });
       });
-};
+  };
 
+  // TODO: Figure out how to make the first tab be selected by default
   handleTabChange = (event, value) => {
     this.setState({ value });
   };
