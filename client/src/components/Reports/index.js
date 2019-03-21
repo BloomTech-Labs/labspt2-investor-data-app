@@ -692,6 +692,58 @@ function getSuggestionValue(suggestion) {
   return suggestion.label;
 }
 
+changePercent = (close, start) => {
+  // function for calculating the change of a stocks gain/loss by %
+  let deduct = close - start;
+  let divide = deduct / start;
+  let solution = divide * 100;
+  if (solution > 0) {
+    return "+" + solution.toFixed(2);
+  }
+  return solution.toFixed(2);
+};
+
+changePoints = (close, start) => {
+  // calculates the change of a stocks gain/loss by points
+  let solution = close - start;
+  if (solution > 0) {
+    return "+" + solution.toFixed(1);
+  }
+  return solution.toFixed(1);
+};
+
+decimalToFixed = input => {
+  // truncates the numbers following the decimal to two digits
+  input = parseFloat(input).toFixed(2);
+  return input;
+};
+
+shortenVolume = num => {
+  // Crunches the length of the volume into a smaller number while inserting a decimal point and character representing the amount
+  let str,
+    suffix = "";
+
+  let decimalPlaces = 2 || 0;
+
+  num = +num;
+
+  let factor = Math.pow(10, decimalPlaces);
+
+  if (num < 1000) {
+    str = num;
+  } else if (num < 1000000) {
+    str = Math.floor(num / (1000 / factor)) / factor;
+    suffix = "K";
+  } else if (num < 1000000000) {
+    str = Math.floor(num / (1000000 / factor)) / factor;
+    suffix = "M";
+  } else if (num < 1000000000000) {
+    str = Math.floor(num / (1000000000 / factor)) / factor;
+    suffix = "B";
+  }
+  return str + suffix;
+};
+
 class Reports extends Component {
   state = {
     tab: 0,
@@ -736,21 +788,6 @@ class Reports extends Component {
       }
     );
   };
-
-  // componentDidMount() {
-  //   getData("AAPL").then(data => {
-  //     this.setState({ data });
-  //   });
-  // }
-  // inputHandler = event => {
-  //   this.setState({ [event.target.name]: event.target.value }, () => {
-  //     if (this.state.search && this.state.search.length >= 1) {
-  //       getData(this.state.search).then(data => {
-  //         this.setState({ data });
-  //       });
-  //     }
-  //   });
-  // };
 
   handleTabChange = (event, value) => {
     this.setState({ value });
@@ -834,22 +871,27 @@ class Reports extends Component {
                     <Typography variant="h6" style={{ marginLeft: "50px" }}>
                       Change:{" "}
                       {data.length
-                        ? data[data.length - 1].open -
-                          data[data.length - 1].close
+                        ? changePoints(
+                            data[data.length - 1].close,
+                            data[data.length - 1].open
+                          )
                         : ""}
                     </Typography>
                   </div>
                   <div className={classes.stockInfo}>
                     <Typography variant="h6">
-                      Volume: {data.length ? data[data.length - 1].volume : ""}
+                      Volume:{" "}
+                      {data.length
+                        ? shortenVolume(data[data.length - 1].volume)
+                        : ""}
                     </Typography>
                     <Typography variant="h6" style={{ marginLeft: "50px" }}>
                       Change %:{" "}
                       {data.length
-                        ? (100 *
-                            (data[data.length - 1].open -
-                              data[data.length - 1].close)) /
-                          data[data.length - 1].close
+                        ? changePercent(
+                            data[data.length - 1].close,
+                            data[data.length - 1].open
+                          )
                         : ""}
                     </Typography>
                   </div>
