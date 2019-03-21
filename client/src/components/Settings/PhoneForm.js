@@ -2,7 +2,11 @@ import React from 'react';
 
 // Redux imports
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import { getSettings } from '../../actions/settingsActions.js';
+=======
+import { getSettings, updateSettings } from '../../actions/settingsActions.js';
+>>>>>>> 3f903d83a35d500689cbd8af57ccf19a05c419de
 
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';
@@ -13,9 +17,30 @@ import Button from '@material-ui/core/Button';
 import styles from './styles';
 
 class PhoneForm extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            // Placeholder to use until phone number added as part of user schema
+            firstName: ''
+        }
+    }
 
     componentDidMount(){
         this.props.getSettings();
+    };
+
+    handleChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    };
+
+    handleSubmit = event => {
+        event.preventDefault();
+        this.props.updateSettings('1', this.state);
+        this.setState({
+            firstName: ''
+        });
     };
 
     render(){
@@ -26,6 +51,7 @@ class PhoneForm extends React.Component {
             <form 
                 className={classes.container}
                 id='phoneForm'
+                onSubmit={this.handleSubmit}
             >
                 <div>
                     {/* Current phone number header */}
@@ -35,15 +61,15 @@ class PhoneForm extends React.Component {
                     {/* Error in loading current phone number */}
                     {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
                     {/* Current phone number (Email used as  placeholder) */}
-                    <p className={classes.currentValue}>{this.props.settings.email}</p>
+                    <p className={classes.currentValue}>{this.props.settings.firstName}</p>
                 </div>
                 {/* Text field for new phone number */}
                 <TextField 
-                    id='newPhone'
+                    name='firstName'
                     label='New phone'
                     className={classes.textField}
-                    value={this.props.newPhone}
-                    onChange={this.props.handleChange('newPhone')}
+                    value={this.state.firstName}
+                    onChange={this.handleChange}
                     margin='normal'
                 />
                 {/* Button to submit new phone number */}
@@ -67,6 +93,11 @@ const mapStateToProps = state => {
         error: state.SettingsReducer.error,
         settings: state.SettingsReducer.settings
     }
-};  
+};
 
-export default withStyles(styles)(connect(mapStateToProps, { getSettings })(PhoneForm));
+const mapDispatchToProps = dispatch => ({
+    getSettings: () => dispatch(getSettings()),
+    updateSettings:  (id, updatedPhone) => dispatch(updateSettings(id, updatedPhone))
+});
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(PhoneForm));

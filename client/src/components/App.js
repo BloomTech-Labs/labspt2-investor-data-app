@@ -54,6 +54,7 @@ componentWillUnmount = () => {
   this.removeAuthListener()
 }
   render() {
+<<<<<<< HEAD
     const { from } = this.props.location.state || { from: { pathname: '/' } }
     const { currentUser }= this.state
     if (this.state.redirect === true) {
@@ -62,6 +63,9 @@ componentWillUnmount = () => {
     }
     return (
     
+=======
+   return (
+>>>>>>> 3f903d83a35d500689cbd8af57ccf19a05c419de
       <div>
         <Navigation />
         <br />
