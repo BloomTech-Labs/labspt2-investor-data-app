@@ -1,12 +1,20 @@
 {
 "A": [
-    {"word": "a", "definition": "b"}
+    {"term": "Ask", "definition": "This is the lowest price an owner is willing to accept for an asset."},
+    {"term": "Asset", "definition": "Something that has the potential to earn money for you. It is something you own that can reasonably be expected to produce something for you. Assets include stocks, bonds, commodities, real estate, and other investments."},
+    {"term": "Asset Allocation", "definition": "One of the ways to divide up the holdings in your portfolio is to do so by asset class. The idea is that different assets perform opposite to each other, and you can limit some of your risk by allocating your portfolio according to the type of asset you have."}
 ],
 "B": [
-    {"word": "a", "definition": "b"}
+    {"term": "Balance Sheet", "definition": "A statement showing what a company owns, as well as the liabilities the company has, and stating the outstanding shareholder equity."},
+    {"term": "Bear Market", "definition": "This is a market that is falling. A bear market has a downward trend, and someone who believes the market is headed for a drop is often referred to as a “bear."},
+    {"term": "Bid", "definition": "This is the highest price a buyer is willing to pay when buying an investment. Today, electronic trading makes it possible for ask and bid to be matched up automatically and almost instantly."},
+    {"term": "Blue Chip", "definition": "You might hear reporters and others refer to “blue chip stocks.” Blue chips are companies that have a long history of good earnings, good balance sheets, and even regularly increasing dividends. These are solid companies that may not be exciting, but they are likely to provide reasonable returns over time." },
+    {"term": "Bond", "definition": "This is an investment that represents what an entity owes you. Essentially, you lend money to a government or a company, and you are promised that the principal will be returned plus interest."},
+    {"term": "Book Value", "definition": "If you take all the liabilities a company has, and subtract them from the assets and common stock equity of the company, what you would have left over is the book value. Most of the time, the book value is used as part of an evaluative measure, rather than being truly related to a company’s market value."},
+    {"term": "Broker", "definition": "This is the entity that buys and sells investments on your behalf. Usually, you pay a fee for this service. In the case of an online discount broker, you often pay a flat commission per trade. Other brokers, especially if they also manage your assets as a whole, just charge a percentage of your assets each year."},
+    {"term": "Bull Market", "definition": "This is a market that is trending higher, likely to gain. If you think that the market is going to go up, you are considered a “bull.” Additionally, the term, like bear, can be applied to how you feel about an individual investment. If you are “bullish” on a specific company, it means you think the stock price will rise."}
 ],
 "C": [
-    {"word": "a", "definition": "b"}
 ],
 "D": [
     {"word": "a", "definition": "b"}
