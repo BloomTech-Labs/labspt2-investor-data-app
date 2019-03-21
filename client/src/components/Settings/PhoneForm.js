@@ -2,11 +2,10 @@ import React from 'react';
 
 // Redux imports
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-import { getSettings } from '../../actions/settingsActions.js';
-=======
+
+
 import { getSettings, updateSettings } from '../../actions/settingsActions.js';
->>>>>>> 3f903d83a35d500689cbd8af57ccf19a05c419de
+
 
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';
