@@ -17,17 +17,12 @@ class OptEmailsTextsForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            receiveEmails: true,
-            receiveTexts: true
+            receiveEmails: null,
+            receiveTexts: null
         }
     }
 
-    componentDidMount(){
-        this.props.getSettings();
-    };
-
     handleSwitch = name => event => {
-        event.preventDefault();
         this.setState({ [name]: event.target.checked });
         this.props.updateSettings('1', this.state);
     };
