@@ -1,6 +1,4 @@
-export default suggestions;
-
-const suggestions = [
+export const suggestions = [
   { label: "ABT" },
   { label: "ABBV" },
   { label: "ACN" },

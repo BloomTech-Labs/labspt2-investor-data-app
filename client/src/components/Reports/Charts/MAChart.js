@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { GuardSpinner } from "react-spinners-kit";
-import { SpinnerContainer } from "../../Styles/Reports";
+import { SpinnerContainer } from "../../Styles/Reports/Reports";
 
 import { format } from "d3-format";
 import { timeFormat } from "d3-time-format";
