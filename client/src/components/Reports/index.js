@@ -12,7 +12,7 @@ import {
   MenuItem,
   Popper
 } from "@material-ui/core";
-import styles from '../Styles/Reports/styles'
+import styles from "../Styles/Reports/styles";
 
 import deburr from "lodash/deburr";
 import Autosuggest from "react-autosuggest";
@@ -24,17 +24,17 @@ import { getData } from "./utils";
 import MAChart from "./Charts/MAChart";
 import MACDChart from "./Charts/MACDChart";
 import PriceChart from "./Charts/PriceChart";
-import {suggestions} from "./suggestions";
+import { suggestions } from "./suggestions";
 
-const TabContainer = (props) => {
+const TabContainer = props => {
   return (
     <Typography component="div" style={{ padding: 8 * 3 }}>
       {props.children}
     </Typography>
   );
-}
+};
 
-const renderInputComponent = (inputProps) => {
+const renderInputComponent = inputProps => {
   const { classes, inputRef = () => {}, ref, ...other } = inputProps;
 
   return (
@@ -52,9 +52,9 @@ const renderInputComponent = (inputProps) => {
       {...other}
     />
   );
-}
+};
 
- const renderSuggestion = (suggestion, { query, isHighlighted }) => {
+const renderSuggestion = (suggestion, { query, isHighlighted }) => {
   const matches = match(suggestion.label, query);
   const parts = parse(suggestion.label, matches);
 
@@ -75,9 +75,9 @@ const renderInputComponent = (inputProps) => {
       </div>
     </MenuItem>
   );
-}
+};
 
-const getSuggestions = (value) => {
+const getSuggestions = value => {
   const inputValue = deburr(value.trim()).toLowerCase();
   const inputLength = inputValue.length;
   let count = 0;
@@ -95,11 +95,11 @@ const getSuggestions = (value) => {
 
         return keep;
       });
-}
+};
 
-const getSuggestionValue = (suggestion) => {
+const getSuggestionValue = suggestion => {
   return suggestion.label;
-}
+};
 
 class Reports extends Component {
   state = {
@@ -131,17 +131,18 @@ class Reports extends Component {
   };
 
   handleChange = name => (event, { newValue }) => {
-    this.setState(
-      {
-        [name]: newValue
-      }
-    );
+    this.setState({
+      [name]: newValue
+    });
   };
 
-  onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) =>{
-      getData(suggestionValue).then(data => {
-        this.setState({ data, ticker: suggestionValue });
-      });
+  onSuggestionSelected = (
+    event,
+    { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
+  ) => {
+    getData(suggestionValue).then(data => {
+      this.setState({ data, ticker: suggestionValue });
+    });
   };
 
   // TODO: Figure out how to make the first tab be selected by default
@@ -160,7 +161,7 @@ class Reports extends Component {
     }
     return solution.toFixed(2);
   };
-  
+
   changePoints = (close, start) => {
     // calculates the change of a stocks gain/loss by points
     let solution = close - start;
@@ -169,24 +170,24 @@ class Reports extends Component {
     }
     return solution.toFixed(1);
   };
-  
+
   decimalToFixed = input => {
     // truncates the numbers following the decimal to two digits
     input = parseFloat(input).toFixed(2);
     return input;
   };
-  
+
   shortenVolume = num => {
     // Crunches the length of the volume into a smaller number while inserting a decimal point and character representing the amount
     let str,
       suffix = "";
-  
+
     let decimalPlaces = 2 || 0;
-  
+
     num = +num;
-  
+
     let factor = Math.pow(10, decimalPlaces);
-  
+
     if (num < 1000) {
       str = num;
     } else if (num < 1000000) {
@@ -233,7 +234,7 @@ class Reports extends Component {
                   <div className={classes.block}>
                     <Typography variant="h2">{this.state.ticker}</Typography>
                   </div>
-                  <div className={classes.search}>
+                  <div>
                     <Autosuggest
                       {...autosuggestProps}
                       inputProps={{
