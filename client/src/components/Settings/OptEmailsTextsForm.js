@@ -14,7 +14,24 @@ import Switch from '@material-ui/core/Switch';
 import styles from './styles';
 
 class OptEmailsTextsForm extends React.Component {
-    
+    constructor(props){
+        super(props);
+        this.state = {
+            receiveEmails: true,
+            receiveTexts: true
+        }
+    }
+
+    componentDidMount(){
+        this.props.getSettings();
+    };
+
+    handleSwitch = name => event => {
+        event.preventDefault();
+        this.setState({ [name]: event.target.checked });
+        this.props.updateSettings('1', this.state);
+    };
+
     render(){
         
         const { classes } = this.props;
@@ -25,8 +42,8 @@ class OptEmailsTextsForm extends React.Component {
                     control={
                         <Switch
                             checked={this.props.settings.receiveEmails}
-                            onChange={this.props.handleSwitch('optEmails')}
-                            value='optEmails'
+                            onChange={this.handleSwitch('receiveEmails')}
+                            value='receiveEmails'
                             color='primary'
                         />
                     }
@@ -37,8 +54,8 @@ class OptEmailsTextsForm extends React.Component {
                     control={
                         <Switch
                             checked={this.props.settings.receiveTexts}
-                            onChange={this.props.handleSwitch('optTexts')}
-                            value='optTexts'
+                            onChange={this.handleSwitch('receiveTexts')}
+                            value='receiveTexts'
                             color='primary'
                         />
                     }
