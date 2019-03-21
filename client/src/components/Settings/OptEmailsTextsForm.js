@@ -24,7 +24,7 @@ class OptEmailsTextsForm extends React.Component {
                 <FormControlLabel
                     control={
                         <Switch
-                            checked={this.props.optEmails}
+                            checked={this.props.settings.receiveEmails}
                             onChange={this.props.handleSwitch('optEmails')}
                             value='optEmails'
                             color='primary'
@@ -36,7 +36,7 @@ class OptEmailsTextsForm extends React.Component {
                 <FormControlLabel
                     control={
                         <Switch
-                            checked={this.props.optTexts}
+                            checked={this.props.settings.receiveTexts}
                             onChange={this.props.handleSwitch('optTexts')}
                             value='optTexts'
                             color='primary'
@@ -60,7 +60,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     getSettings: () => dispatch(getSettings()),
-    updateSettings:  (id, updatedEmail) => dispatch(updateSettings(id, updatedEmail))
+    updateSettings:  (id, updatedCommPreference) => dispatch(updateSettings(id, updatedCommPreference))
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(OptEmailsTextsForm));
