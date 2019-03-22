@@ -35,62 +35,76 @@
     {"term": "Growth-Style Funds", "definition": "Growth funds focus on future gains. A growth fund manager will typically invest in stocks with earnings that outperform the current market. The manager attempts to achieve success by focusing on rapidly growing sectors of the economy and investing in leading companies with consistent earnings growth. The fund grows primarily as individual share prices climb."}
 ],
 "H": [
-    {"term": "a", "definition": "b"}
+    {"term": "Hard Asset", "definition": "A hard asset is a tangible or physical item or object of worth that is owned by an individual or a corporation. It is listed on the balance sheet as an asset and can be used by analysts to calculate a company's value. Examples of hard assets include property, plant and equipment (PP&E), inventory, and other such items. Inventory is an example of a hard asset that is considered a current asset because it will likely be used within the next year. Long-lived hard assets, such as property, plant, and equipment, are generally utilized over a long period of time and recorded on the balance sheet at their historic value then depreciated based on the applicable schedule. "}
 ],
 "I": [
-    {"word": "Index", "definition": "A tool used to statistically measure the progress of a group of stocks that share characteristics. This can include a group of stocks, a group of bonds, or a group of other assets."},
-    {"term": "Individual Retirement Account (IRA)", "definition": "A tax-deferred account to which an eligible individual can make annual contributions up to $3,000 ($6,000 for a single-income married couple filing a joint income tax return)."}
+    {"term": "Index", "definition": "A tool used to statistically measure the progress of a group of stocks that share characteristics. This can include a group of stocks, a group of bonds, or a group of other assets."},
+    {"term": "Individual Retirement Account (IRA)", "definition": "A tax-deferred account to which an eligible individual can make annual contributions up to $3,000 ($6,000 for a single-income married couple filing a joint income tax return)."},
+    {"term": "Inflation", "definition": "A rise in the prices of goods and services, often equated with loss of purchasing power."},
+    {"term": "Interest Rate", "definition": "The fixed amount of money that an issuer agrees to pay the bondholders. It is most often a percentage of the face value of the bond. Interest rates constitute one of the self-regulating mechanisms of the market, falling in response to economic weakness and rising on strength."},
+    {"term": "Interest-Rate Risk", "definition": "The possibility of a reduction in the value of a security, especially a bond, resulting from a rise in interest rates."}
+
 ],
 "J": [
-    {"word": "a", "definition": "b"}
+    {"term": "Junk Bond", "definition": "A lower-rated, usually higher-yielding bond, with a credit rating of BB or lower."}
 ],
 "K": [
-    {"word": "a", "definition": "b"}
+    {"term": "Key Rate", "definition": "The key rate is the specific interest rate that determines bank lending rates and the cost of credit for borrowers. The two key interest rates in the United States are the discount rate and the Federal Funds rate."}
 ],
 "L": [
-    {"word": "a", "definition": "b"}
+    {"term": "Large-Cap ", "definition": "Large-cap - The market capitalization of the stocks of companies with market values greater than $10 billion."},
+    {"term": "Liquidity", "definition": "The ability to have ready access to invested money. Mutual funds are liquid because their shares can be redeemed for current value (which may be more or less than the original cost) on any business day."}
 ],
 "M": [
-    {"word": "a", "definition": "b"}
+    {"term": "Margin", "definition": "This is essentially borrowed money used to make an investment. You can get credit from a broker to buy more than you have actually money for. The hope is that you will make enough money that you will be able to repay the borrowed amount from your earnings."},
+    {"term": "Market Capitalization", "definition": "The market cap of a company is figured by multiplying its current share price by the number of shares outstanding. The largest companies have market caps in the billions."},
+    {"term": "Market Price", "definition": "The current price of an asset."},
+    {"term": "Market Risk", "definition": "The possibility that an investment will not achieve its target."},
+    {"term": "Mutual Fund", "definition": "Fund operated by an investment company that raises money from shareholders and invests it in stocks, bonds, options, commodities or money market securities."}
 ],
 "N": [
-    {"word": "a", "definition": "b"}
+    {"term": "NASDAQ", "definition": "National Association of Securities Dealers Automated Quotations system, which is owned and operated by the National Association of Securities Dealers. NASDAQ is a computerized system that provides brokers and dealers with price quotations for securities traded over-the-counter as well as for many New York Stock Exchange listed securities."},
+    {"term": "New York Stock Exchange", "definition": "One of the most famous stock exchanges is the NYSE, which trades stocks in companies all over the United States, and even includes stocks of some international companies."}
 ],
 "O": [
-    {"word": "a", "definition": "b"}
+    {"term": "Offer", "definition": "An offer is i) a conditional proposal made by a buyer or seller to buy or sell an asset, which becomes legally enforceable if accepted, ii) the act of offering something for sale, iii) a bid or offer to buy something."}
 ],
 "P": [
-    {"word": "a", "definition": "b"}
+    {"term": "P/E Ratio", "definition": "This measure reflects how much you pay for each dollar that company earns. A company often reports profits on a per-share basis. So a company might say that it has earned $5 per share. If that same stock is selling for $75 a share on the market, you divide $75 by $5 to come up with a P/E ratio of 15. The higher a P/E ratio is, the more there is expectations for higher earnings."},
+    {"term": "Premium", "definition": "The amount by which a bond or stock sells above its par value."}
 ],
 "Q": [
-    {"word": "a", "definition": "b"}
+    {"term": "Quality Distribution", "definition": "The breakdown of a portfolio's assets based on quality rating of the investments."}
 ],
 "R": [
-    {"word": "a", "definition": "b"}
+    {"term": "Registered Investment Advisor (RIA)", "definition": "A financial investment advisor that has been through certain training, and that agrees to abide by certain rules, including ensuring that recommendations, and trades made on your behalf are in your best interest."}
 ],
 "S": [
-    {"word": "a", "definition": "b"}
+    {"term": "Stock", "definition": "A stock represents ownership in a company. Companies divide their ownership stakes into shares, and amount of shares you purchase indicates your level of ownership in the company. Stock is bought in the hopes that the company will be successful, and more people will want a stake, so you can sell your stake later at a higher price than you paid."}
 ],
 "T": [
-    {"word": "a", "definition": "b"}
+    {"term": "Total Return", "definition": "Accounts for all of the dividends and interest earned before deductions for fees and expenses, in addition to any changes in the value of the principal, including share price, assuming the funds' dividends and capital gains are reinvested. Often, this percentage is presented in a specified period of time (one, five, ten years and/or life of fund). Also, a method of calculating an investment's return that takes share price changes and dividends into account."},
+    {"term": "Tracking Error", "definition": "The active risk of the portfolio. It determines the annualized standard deviation of the excess returns between the portfolio and the benchmark."}
 ],
 "U": [
-    {"word": "a", "definition": "b"}
+    {"term": "Ultimate Net Loss", "definition": "Ultimate net loss is a party's total financial obligation when an insured event occurs. The insured's ultimate net loss from costs such as property damage, medical expenses and legal fees will be offset by the portion of the loss that is paid by the insurance company (usually the amount of the claim that exceeds the insured's deductible, up to the policy maximum). Thus, the insured's loss will often be limited to the policy deductible unless the total loss exceeds the policy maximum."}
 ],
 "V": [
-    {"word": "a", "definition": "b"}
+    {"term": "Valuation", "definition": "An estimate of the value or worth of a company; the price investors assign to an individual stock."},
+    {"term": "Volatility", "definition": "The amount and frequency with which an investment fluctuates in value."}
 ],
 "W": [
-    {"word": "a", "definition": "b"}
+    {"term": "Wtd. Avg. Market Cap", "definition": "Most indexes are constructed by weighting the market capitalization of each stock on the index. In such an index, larger companies account for a greater portion of the index. An example is the S&P 500 Index."}
 ],
 "X": [
-    {"word": "a", "definition": "b"}
+    {"term": "XD", "definition": "XD is a symbol used to signify that a security is trading ex-dividend. It is an alphabetic qualifier that acts as shorthand to tell investors key information about a specific security in a stock quote. Sometimes X alone is used to indicate that the stock is trading ex-dividend. Qualifiers can vary depending on where the stock is quoted, because the various news and market data services that provide stock quotes may use different qualifiers."}
 ],
 "Y": [
-    {"word": "a", "definition": "b"}
+    {"term": "Yield", "definition": "This is associated with dividend investing. Your yield represents the ratio between the stock price paid and the dividend paid. A stock trading at $100 per share, with a dividend that amounts to $5 per year, you divide the $5 by $100 and turn it into a percentage. In this case, the yield would be 5%."},
+    {"term": "YTD", "definition": "Year-to-date return on an investment including appreciation and dividends or interest."}
 ],
 "Z": [
-    {"word": "a", "definition": "b"}
+    {"term": "Z-Bond", "definition": "A Z-bond is a type of bond that is the last tranche of a collateralized mortgage obligation (CMO). As the last portion of the debt security, it receives payment last. Unlike other tranches of a CMO, a Z-bond does not distribute payments to its holder until all of the separate tranches are paid. However, the interest will continue to accrue throughout the life of the mortgage. Thus, when the Z-bond does finally pay off, its holder can expect a hefty sum. The bond will pay both principal and interest."}
 ]
 }
 
