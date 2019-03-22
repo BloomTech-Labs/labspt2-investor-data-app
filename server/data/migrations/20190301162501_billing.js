@@ -34,10 +34,11 @@ exports.up = function(knex, Promise) {
       .unsigned();
     billing.string("accountStatus", 128).notNullable();
     billing.integer("targetsUsed").unsigned();
+    
     billing.integer("accountType").unsigned();
     billing.string("mobilePhone", 128);
     billing.string("homePhone", 128);
-    billing.integer('users_id');
+    billing.integer('users_id').unsigned();
   });
 };
 
