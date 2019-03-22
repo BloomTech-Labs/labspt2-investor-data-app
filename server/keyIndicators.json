@@ -15,24 +15,31 @@
     {"term": "Bull Market", "definition": "This is a market that is trending higher, likely to gain. If you think that the market is going to go up, you are considered a “bull.” Additionally, the term, like bear, can be applied to how you feel about an individual investment. If you are “bullish” on a specific company, it means you think the stock price will rise."}
 ],
 "C": [
+    {"term": "Capital", "definition": "The funds invested in a company on a long-term basis and obtained by issuing preferred or common stock, by retaining a portion of the company's earnings from date of incorporation and by long-term borrowing."},
+    {"term": "Capital Gain (Or Loss)", "definition": "This is the difference between what you bought an investment for and what you sell if for. If you buy 100 shares of a stock at $10 a share (spending $1,000) and sell your shares later for $25 a share ($2,500), you have a capital gain of $1,500. A loss occurs when you sell for less than you paid. So, if you sell this stock for $5 instead ($500), you have a capital loss of $500)"}
+
 ],
 "D": [
-    {"word": "a", "definition": "b"}
+    {"term": "Diversity", "definition": "A portfolio characteristic that ensures you have more than one type of asset. It also means choosing to buy investments in different sectors, industries, or geographic locations."},
+    {"term": "Dividend", "definition": " In some cases, a company will offer to divide up some of its income among shareholders. Dividends can be paid once, as a special use of them, or they can be paid more regularly, such as monthly, quarterly, semi-annually, or annually."}
 ],
 "E": [
-    {"word": "a", "definition": "b"}
+    {"term": "Exchange", "definition": "This is a place where investments, including stocks, bonds, commodities, and other assets are bought and sold. It’s a place where brokers (buyers and sellers) and others can connect. While many exchanges of “trading floors” most orders these days are executed electronically."}
 ],
 "F": [
-    {"word": "a", "definition": "b"}
+    {"term": "Fixed Income Security", "definition": "A security that pays a set rate of interest on a regular basis."},
+    {"term": "Fund", "definition": "A pool of money from a group of investors in order to buy securities. The two major ways funds may be offered are (1) by companies in the securities business (these funds are called mutual funds); and (2) by bank trust departments (these are called collective funds)."}
 ],
 "G": [
-    {"word": "a", "definition": "b"}
+    {"term": "Growth Investing", "definition": "Investment strategy that focuses on stocks of companies and stock funds where earnings are growing rapidly and are expected to continue growing."},
+    {"term": "Growth-Style Funds", "definition": "Growth funds focus on future gains. A growth fund manager will typically invest in stocks with earnings that outperform the current market. The manager attempts to achieve success by focusing on rapidly growing sectors of the economy and investing in leading companies with consistent earnings growth. The fund grows primarily as individual share prices climb."}
 ],
 "H": [
-    {"word": "a", "definition": "b"}
+    {"term": "a", "definition": "b"}
 ],
 "I": [
-    {"word": "a", "definition": "b"}
+    {"word": "Index", "definition": "A tool used to statistically measure the progress of a group of stocks that share characteristics. This can include a group of stocks, a group of bonds, or a group of other assets."},
+    {"term": "Individual Retirement Account (IRA)", "definition": "A tax-deferred account to which an eligible individual can make annual contributions up to $3,000 ($6,000 for a single-income married couple filing a joint income tax return)."}
 ],
 "J": [
     {"word": "a", "definition": "b"}
