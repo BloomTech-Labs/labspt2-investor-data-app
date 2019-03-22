@@ -22,7 +22,7 @@ const styles = theme => ({
       justifyContent: "flex-start"
     },
     paper: {
-      padding: theme.spacing.unit * 3,
+      padding: theme.spacing.unit * 2,
       textAlign: "left",
       color: theme.palette.text.secondary
     },
