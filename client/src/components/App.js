@@ -7,6 +7,7 @@ import Landing from "../components/Landing";
 import Dashboard from "../components/Dashboard";
 import Settings from "../components/Settings";
 import Billing from "../components/Billing";
+import Reports from "../components/Reports"
 import * as ROUTES from "../constants/routes";
 import "./App.css";
 import Signin from "./Auth/Signin";
@@ -87,7 +88,7 @@ componentWillUnmount = () => {
           <AuthenticatedRoute authenticated={this.state.authenticated} path={ROUTES.DASHBOARD} component={Dashboard} />
           <AuthenticatedRoute authenticated={this.state.authenticated} path={ROUTES.SETTINGS} component={Settings} />
           <Route path={ROUTES.BILLING} component={Billing} />
-          {/* <Route path={ROUTES.REPORTS} component={} /> */}
+           <AuthenticatedRoute authenticated={this.state.authenticated} path={ROUTES.REPORTS} component={Reports} />
            <Route exact path={ROUTES.SIGNIN} render={(props) =>{return <Signin user ={currentUser} redirect={redirect} {...props}/>}} />   
          {/*} <Route path={ROUTES.SIGNUP} component={} /> */}
         </Switch> 
