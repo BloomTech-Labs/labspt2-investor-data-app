@@ -13,8 +13,10 @@ export const getSettings = () => {
         // Dispatch to reducer that current settings are being obtained from API
         dispatch({type: FETCHING});
         axios
-            .get(`http://localhost:5000/api/users/1`)
+           .get('https://pickemm.herokuapp.com/api/users/1')  
+            //  .get(`http://localhost:5000/api/users/2`) 
             .then(response => {
+                console.log("response.data:", response.data)
                 // Dispatch to reducer that settings have been successfully obtained, pass API response as payload
                 dispatch({
                     type: SUCCESS, 
@@ -31,15 +33,16 @@ export const getSettings = () => {
     };
 };
 
-// Action creator to update current email
+// Action creator to update current settings
 
-export const updateEmail = (id, updatedEmail) => {
+export const updateSettings = (id, updatedSettings) => {
     return dispatch => {
         // Dispatch to reducer that current settings are being obtained from API
         dispatch({type: FETCHING});
         axios
             // Update email on file in database
-            .put(`http://localhost:5000/api/users/${id}`, updatedEmail)
+            .put(`https://pickemm.herokuapp.com/api/users/${id}`, updatedSettings)
+           /*  .put(`http://localhost:5000/api/users/${id}`, updatedSettings) */
             .then(response => {
                 // Dispatch to reducer that settings have been successfully updated and obtained, pass API response as payload
                 dispatch({
@@ -51,7 +54,7 @@ export const updateEmail = (id, updatedEmail) => {
             .catch(err => {
                 dispatch({
                     type: ERROR,
-                    error: `The user's email could not be updated at this time.`
+                    error: `The user's settings could not be updated at this time.`
                 });
             });
     };

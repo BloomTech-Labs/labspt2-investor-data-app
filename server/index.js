@@ -11,9 +11,10 @@ const bcrypt = require('bcryptjs')
 const favoritesRouter = require('./routers/favoritesRouter');
 const billingRouter = require('./routers/billingRouter');
 const usersRouter = require('./routers/usersRouter');
-
 const definitionsRouter = require('./routers/definitionsRouter')
 
+const payment = require('./routers/payment');
+const index = require('./routers/index');
 
 server.use(cors());
 server.use(express.json());
@@ -23,8 +24,11 @@ server.use(helmet());
 server.use('/api/billing', billingRouter);
 server.use('/api/favorites', favoritesRouter);
 server.use('/api/users', usersRouter);
+server.use('/definitions', definitionsRouter);
+server.use(payment);
+server.use(index);
 
-server.use('/definitions', definitionsRouter)
+
 
 //Server response get '/'
 server.get('/', async (req, res) => {

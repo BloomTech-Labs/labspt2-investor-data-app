@@ -1,7 +1,7 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import PropTypes from "prop-types";
-import firebase from 'firebase'
+import { fire }  from "../Auth/firebaseConfig"
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -15,9 +15,7 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
-//import SigninModal from "./SigninModal";
-//import SignupModal from "./SignupModal";
-// import RegisterLogin from "./RegisterLogin";
+
 import * as ROUTES from "../../constants/routes";
 
 const styles = {
@@ -35,7 +33,9 @@ const styles = {
 
 class Navigation extends React.Component {
   state = {
-    anchorEl: null
+    anchorEl: null, 
+    redirect: false,
+    
   };
 
   handleMenu = event => {
@@ -47,13 +47,16 @@ class Navigation extends React.Component {
   };
   
   signOut = () => {
-    firebase.auth().signOut()
+    fire.signOut()
   }
+
+  
+
   render() {
+  
     const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
-
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -83,11 +86,27 @@ class Navigation extends React.Component {
               open={open}
               onClose={this.handleMenuClose}
             >
-              <Link component={RouterLink} to={ROUTES.LANDING} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Home</MenuItem></Link>
-              <Link component={RouterLink} to={ROUTES.DASHBOARD} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Dashboard</MenuItem></Link>
-              <Link component={RouterLink} to={ROUTES.SETTINGS} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Settings</MenuItem></Link>
-              <Link component={RouterLink} to={ROUTES.BILLING} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Billing</MenuItem></Link>
-              <MenuItem onClick={this.signOut}>Sign Out</MenuItem>
+              <Link component={RouterLink} to={ROUTES.LANDING} style={{textDecoration: "none"}}>
+              <MenuItem onClick={this.handleMenuClose}>Home</MenuItem></Link>
+              <Link component={RouterLink} to={ROUTES.BILLING} style={{textDecoration: "none"}}>
+              <MenuItem onClick={this.handleMenuClose}>Billing</MenuItem></Link>
+              {this.props.authenticated 
+              ?
+              (
+                <div>
+                  <Link component={RouterLink} to={ROUTES.DASHBOARD} style={{textDecoration: "none"}}>
+                  <MenuItem onClick={this.handleMenuClose}>Dashboard</MenuItem></Link>
+                  <Link component={RouterLink} to={ROUTES.REPORTS} style={{textDecoration: "none"}}>
+                  <MenuItem onClick={this.handleMenuClose}>Reports</MenuItem></Link>
+                  <Link component={RouterLink} to={ROUTES.SETTINGS} style={{textDecoration: "none"}}>
+                  <MenuItem onClick={this.handleMenuClose}>Settings</MenuItem></Link>
+                  <MenuItem onClick={this.signOut}>Sign Out</MenuItem>
+
+                </div>
+              )
+              :
+              null
+            }
             </Menu>
         
           </Toolbar>

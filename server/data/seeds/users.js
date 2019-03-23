@@ -5,9 +5,11 @@ const faker = require("faker");
 const createFakeUser = () => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
-  userName: faker.internet.userName(),
+  username: faker.internet.userName(),
   email: faker.internet.email(),
-  password: faker.internet.password()
+  password: faker.internet.password(),
+  receiveEmails: faker.random.boolean(),
+  receiveTexts: faker.random.boolean()
 });
 
 // Deletes the existing users seeds, then runs the for loop that runs createFakeUser function to seed database with 500 dummy users

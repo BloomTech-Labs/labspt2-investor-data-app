@@ -1,34 +1,17 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {Avatar, CssBaseline, Paper, Typography, Grid } from "@material-ui/core";
-import LiveTicker from './LiveTicker'
-import YourFavorites from './YourFavorites'
-import firebase from 'firebase'
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.grey["100"],
-    overflow: "hidden",
-    //height: "100vh"
-  },
-  grid: {
-    width: 1200,
-    margin: `0 ${theme.spacing.unit * 2}px`,
-    [theme.breakpoints.down("sm")]: {
-      width: "calc(100% - 20px)"
-    }
-  },
-  paper: {
-    padding: theme.spacing.unit * 3,
-    textAlign: "left",
-    color: theme.palette.text.secondary
-    // height: '40vh',
-  },
-  block: {
-    padding: theme.spacing.unit * 2
-  }
-});
+import {
+  Avatar,
+  CssBaseline,
+  Paper,
+  Typography,
+  Grid
+} from "@material-ui/core";
+import firebase from "firebase";
+import LiveTicker from "./LiveTicker";
+import YourFavorites from "./YourFavorites";
+import styles from "../Styles/Dashboard/styles";
 
 class Dashboard extends Component {
   render() {
@@ -36,17 +19,19 @@ class Dashboard extends Component {
     return (
       <React.Fragment>
         <CssBaseline />
-        {/* Add Navigation here */}
         <div className={classes.root}>
-        <Grid container justify="flex-end" alignItems="center">
-      
-        <Typography variant='h6' color="inherit" gutterBottom>
-            Welcome, {firebase.auth().currentUser.displayName} <br />
+          <Grid container justify="flex-end" alignItems="center">
+            <Typography variant="h6" color="inherit" gutterBottom>
+              Welcome, {firebase.auth().currentUser.displayName} <br />
             </Typography>
-            
-              <Avatar alt="profile-picture" src={firebase.auth().currentUser.photoURL} className={classes.bigAvatar} />
-              </Grid>
-            
+
+            <Avatar
+              alt="profile-picture"
+              src={firebase.auth().currentUser.photoURL}
+              className={classes.bigAvatar}
+            />
+          </Grid>
+
           <Grid container justify="center">
             <Grid
               spacing={24}
@@ -57,7 +42,6 @@ class Dashboard extends Component {
             >
               <Grid item xs={12}>
                 <div className={classes.block}>
-             
                   <Typography variant="h6" gutterBottom>
                     Dashboard
                   </Typography>
@@ -73,33 +57,36 @@ class Dashboard extends Component {
                   </div>
                 </Paper>
               </Grid>
+
               <Grid item xs={12} md={6}>
-                <Paper className={classes.paper}>
+             
+                  <Paper className={classes.paper}>
                     <Typography variant="h6" gutterBottom>
                       <LiveTicker />
                     </Typography>
-                </Paper>
-              </Grid> 
-              <Grid item xs={12} md={7}>
+                  </Paper>
+  
+              </Grid>
+              <Grid item xs={12} md={12}>
                 <Paper
                   className={classes.paper}
                   style={{ position: "relative" }}
                 >
                   <Typography variant="h5" gutterBottom>
-                      <YourFavorites />
+                    <YourFavorites />
                   </Typography>
                 </Paper>
               </Grid>
             </Grid>
           </Grid>
         </div>
-      </React.Fragment>    
+      </React.Fragment>
     );
   }
 }
 
 Dashboard.propTypes = {
-  classes: PropTypes.object.isRequired,
-}
+  classes: PropTypes.object.isRequired
+};
 
 export default withStyles(styles)(Dashboard);

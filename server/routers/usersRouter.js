@@ -17,20 +17,11 @@ module.exports = router => {
     router.get("/signin", signup);
     router.get("/:id", userById);
     // router.get("/:id", authenticate, userById);
-    router.put("/:id", update)
+    router.put("/:id", update);
 }
 
 /************************************ USERS SECTION ***********************************/
-// protect this route, only authenticated users should see it
-/* router.get('/', protect, (req, res) => {
-    users.findUsers()
-    .then(users => {
-      res.json(users);
-    })
-    .catch(err => {
-      res.status(500).send(err);
-    })
-  }); */
+
 /********* Get Users *************/
 router.get("/", (req, res) => {
   users
@@ -103,10 +94,19 @@ router.put('/:id', (req, res) => {
     users.update(id, changes)
         .then(count => {
             if (count) {
-                // If user's settings have been updated, return count of rows (1) that have been updated.
-                res
-                    .status(201)
-                    .json({ count });
+                users.getById(id)
+                    .then(user => {
+                            // If user's settings have been updated, return the updated user settings.
+                            res
+                                .status(201)
+                                .json(user);
+                    })
+                    .catch(err => {
+                        // Return an error if there's an error retrieving that current settings.
+                        res
+                            .status(500)
+                            .json({ message: 'There was an error retrieving the current settings.'});
+                    })
             }
             else {
                 // If user does not exist, return 404 error.
@@ -119,10 +119,57 @@ router.put('/:id', (req, res) => {
             // If there's an error in the helper method or database, return a 500 error.
             res
                 .status(500)
-                .json({ message: `Database error. The user's settings could not be updated at this time.`});
+                .json({ message: `The user's settings could not be updated at this time.`});
         });
 });
 
+/************* Delete User *************/
+router.delete('/:id', (req, res) => {
+    const { id } = req.params
+    if (id) {
+        users.remove(id)
+            .then(user => {
+                if (user) {
+                    res.json({ message: "The user was successfully deleted" });
+                } else {
+                    res
+                        .status(404)
+                        .json({ message: "The user with the specified ID does not exist." })
+                }
+            })
+            .catch(err => {
+                res
+                    .status(500)
+                    .json({ error: "The user could not be removed." });
+            });
+    }
+});
 
-  
+/********* Update User *************/
+/* router.put('/:id', (req, res) => {
+    const { id } = req.params
+    const newUser = req.body
+    if (!newUser.email || !newUser.password || !newUser.username || !newUser.firstName || !newUser.lastName) {
+        res
+            .status(400)
+            .json({ message: "Please provide email, first name, last name and password." });
+    } else {
+        if (newUser) {
+            users.update(id, newUser)
+                .then(user => {
+                    if (user) {
+                        res.status(201).json(user);
+                    } else {
+                        res.status(404).json({ message: "The user with the specified ID does not exist." })
+                    }
+                })
+                .catch(err => {
+                    res.status(500).json({ error: "The user could not be modified." });
+                });
+        } else {
+            res.status(404).json({ message: "The user with the specified ID does not exist." })
+        }
+    }
+}) */
+
 module.exports = router;

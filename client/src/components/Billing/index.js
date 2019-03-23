@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import StarIcon from "@material-ui/icons/StarBorder";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+import Checkout from "../Stripe/checkout";
 
 /*
 TODO: 
@@ -53,9 +52,8 @@ const styles = theme => ({
     [theme.breakpoints.up("sm")]: {
       paddingBottom: theme.spacing.unit * 2
     }
-  },
+  }
 });
-
 
 /* Filled in wording & pricing for now.  I expect we will decide on 
 exact wording later on */
@@ -64,7 +62,11 @@ const tiers = [
   {
     title: "Newbie",
     price: "5",
-    description: ["price indicator", "Help documentation", "Email support"],
+    description: [
+      "1 indicator included",
+      "Help documentation",
+      "Email support"
+    ],
     buttonText: "Sign up for now",
     buttonVariant: "outlined"
   },
@@ -157,16 +159,11 @@ function Pricing(props) {
                       {line}
                     </Typography>
                   ))}
+
+                  <center>
+                    <Checkout name={tier.title} amount={tier.price} />
+                  </center>
                 </CardContent>
-                <CardActions className={classes.cardActions}>
-                  <Button
-                    fullWidth
-                    variant={tier.buttonVariant}
-                    color="primary"
-                  >
-                    {tier.buttonText}
-                  </Button>
-                </CardActions>
               </Card>
             </Grid>
           ))}
