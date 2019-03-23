@@ -14,7 +14,7 @@ class TickerStar extends React.Component{
     }
 
     componentDidMount() {
-        axios.get(`https://pickemm.herokuapp.com/api/favorites/13`) // needs a user id
+        axios.get(`https://pickemm.herokuapp.com/api/favorites`) // needs a user id
             .then( response => {
                 this.setState({
                     stock: response.data
@@ -31,12 +31,12 @@ class TickerStar extends React.Component{
                 star: 'fa fa-star',
             })  
             const newSymbol = {
-                id: 15,
+                id: 17,
                 symbol: this.props.id,
                 target: 1,
-                users_id: 13
+                users_id: 15
             }
-            axios.post('https://pickemm.herokuapp.com/api/favorites/13', newSymbol)
+            axios.post('https://pickemm.herokuapp.com/api/favorites', newSymbol)
                 .then( response => {
                     this.setState({
                         newSymbol: { symbol: '', target: null, users_id: null}

@@ -18,6 +18,8 @@ font-size: 16px;
 width: 100%; 
 display: flex; 
 justify-content: center; 
+padding-bottom: 20px; 
+
 `
 
 export const SearchIcon = styled.span`
