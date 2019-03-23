@@ -74,7 +74,7 @@ class StockTicker extends React.Component {
     const close = '4. close'
 
     this.state.stocks.forEach( (stock, index) => {  // Loops through array of stock values and creates a table
-      console.log(stock)
+      /* console.log(stock) */
       rows.push(
         <tr key={index}>     
           <td>{ stock.company }</td> 
@@ -91,7 +91,7 @@ class StockTicker extends React.Component {
       <div>  
         <div className="table">
           <LiveClock />
-          <table className="container">
+          <table className="tickerContainer">
 	          <thead>
 		          <tr>
 			          <th><h1>Company</h1></th>

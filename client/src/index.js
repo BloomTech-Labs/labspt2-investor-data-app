@@ -5,7 +5,7 @@ import App from './components/App';
 
 import { BrowserRouter as Router } from "react-router-dom"
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import rootReducer from './reducers/index';
@@ -17,25 +17,34 @@ const theme = createMuiTheme({
     palette: {
         primary: {
             // light: will be calculated from palette.primary.main,
-            main: '#ff4400',
+            main: 'rgb(146, 28, 36, 0.96)',
             // dark: will be calculated from palette.primary.main,
             // contrastText: will be calculated to contrast with palette.primary.main
         },
         secondary: {
-            light: '#0066ff',
-            main: '#0044ff',
+            light: '#f9f9f9',
+            main: '#e2e2e2',
             // dark: will be calculated from palette.secondary.main,
-            contrastText: '#ffcc00',
+            contrastText: '#c1c1c1',
         },
         // error: will use the default color
     },
 });
 
 // Middleware for error logging and dispatching
-const middleware = applyMiddleware(logger, thunk);
-
+/* const middleware = applyMiddleware(logger, thunk); */
+const middleware = [thunk, logger];
+const initialState = {};
 // Create Redux store
-const store = createStore(rootReducer, middleware);
+/* const store = createStore(rootReducer, middleware); */
+const store = createStore(
+    rootReducer, 
+    initialState, 
+   compose(
+        applyMiddleware(...middleware), 
+          window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()                 
+   )
+);
 
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>

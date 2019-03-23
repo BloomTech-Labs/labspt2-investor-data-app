@@ -1,7 +1,7 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import PropTypes from "prop-types";
-import firebase from 'firebase'
+import { fire }  from "../Auth/firebaseConfig"
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -35,7 +35,9 @@ const styles = {
 
 class Navigation extends React.Component {
   state = {
-    anchorEl: null
+    anchorEl: null, 
+    redirect: false,
+    
   };
 
   handleMenu = event => {
@@ -47,13 +49,16 @@ class Navigation extends React.Component {
   };
   
   signOut = () => {
-    firebase.auth().signOut()
+    fire.signOut()
   }
+
+  
+
   render() {
+  
     const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
-
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -85,6 +90,7 @@ class Navigation extends React.Component {
             >
               <Link component={RouterLink} to={ROUTES.LANDING} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Home</MenuItem></Link>
               <Link component={RouterLink} to={ROUTES.DASHBOARD} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Dashboard</MenuItem></Link>
+              <Link component={RouterLink} to={ROUTES.REPORTS} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Reports</MenuItem></Link>
               <Link component={RouterLink} to={ROUTES.SETTINGS} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Settings</MenuItem></Link>
               <Link component={RouterLink} to={ROUTES.BILLING} style={{textDecoration: "none"}}><MenuItem onClick={this.handleMenuClose}>Billing</MenuItem></Link>
               <MenuItem onClick={this.signOut}>Sign Out</MenuItem>
