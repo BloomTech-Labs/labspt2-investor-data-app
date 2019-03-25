@@ -11,7 +11,6 @@ import {
 import firebase from "firebase";
 import LiveTicker from "./LiveTicker";
 import YourFavorites from "./YourFavorites";
-import { BoxShadow } from "../Styles/Dashboard/index";
 import styles from "../Styles/Dashboard/styles";
 
 class Dashboard extends Component {
@@ -60,13 +59,13 @@ class Dashboard extends Component {
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <BoxShadow>
+             
                   <Paper className={classes.paper}>
                     <Typography variant="h6" gutterBottom>
                       <LiveTicker />
                     </Typography>
                   </Paper>
-                </BoxShadow>
+  
               </Grid>
               <Grid item xs={12} md={12}>
                 <Paper

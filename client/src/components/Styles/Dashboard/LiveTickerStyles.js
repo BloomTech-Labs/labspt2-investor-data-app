@@ -6,18 +6,17 @@ export const Loading = styled.div `
   display: flex;
   justify-content: center; 
   align-items: center; 
-  color: #0044ff; 
+  color: #FFF; 
 `
 export const TickerContainer = styled.div`
     width: 100%; 
     color: white; 
-    background-color: #ff4400;
-    padding: 10px 10%; 
+    padding: 0px 10%; 
 `
 
 export const StockSymbol = styled.div`  
     text-decoration: underline;   
-    font-size: 1.2rem; 
+    font-size: 1.0rem; 
 `
 
 export const Star = styled.div`
@@ -31,7 +30,7 @@ export const Row = styled.div `
     display: flex; 
     flex-wrap: wrap; 
     justify-content: space-between;  
-    font-size: 1rem; 
+    font-size: .5rem; 
     width: 100%; 
 `
 
