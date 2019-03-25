@@ -9,7 +9,9 @@ const initialState = {
         lastName: '', 
         username: '',
         email: '', 
-        password: ''
+        password: '',
+        receiveEmails: false,
+        receiveTexts: false
     }
 };
 
