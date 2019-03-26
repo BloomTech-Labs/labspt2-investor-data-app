@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from 'firebase';
 
 // Redux imports
 import { connect } from 'react-redux';
@@ -16,11 +17,14 @@ class EmailForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            currentEmail: '',
             email: ''
         }
     }
 
     componentDidMount(){
+        const currentEmail = firebase.auth().currentUser.email;
+        this.setState({ currentEmail: currentEmail });
         this.props.getSettings();
     };
 
@@ -56,7 +60,7 @@ class EmailForm extends React.Component {
                     {/* Error in loading current email */}
                     {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
                     {/* Current email address */}
-                    <p className={classes.currentValue}>{this.props.settings.email}</p>
+                    <p className={classes.currentValue}>{this.state.currentEmail}</p>
                 </div>
                 {/* Text field for new email address */}
                 <TextField 
