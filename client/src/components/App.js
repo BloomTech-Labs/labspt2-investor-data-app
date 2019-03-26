@@ -82,7 +82,7 @@ class App extends Component {
 
     return (
       <div>
-        <Navigation />
+        <Navigation authenticated={this.state.authenticated}/>
         <Switch>
           <Route exact path={ROUTES.LANDING} component={Landing} />
           <AuthenticatedRoute

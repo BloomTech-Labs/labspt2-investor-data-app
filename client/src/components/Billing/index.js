@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -54,9 +52,8 @@ const styles = theme => ({
     [theme.breakpoints.up("sm")]: {
       paddingBottom: theme.spacing.unit * 2
     }
-  },
+  }
 });
-
 
 /* Filled in wording & pricing for now.  I expect we will decide on 
 exact wording later on */
@@ -162,14 +159,11 @@ function Pricing(props) {
                       {line}
                     </Typography>
                   ))}
+
+                  <center>
+                    <Checkout name={tier.title} amount={tier.price} />
+                  </center>
                 </CardContent>
-                <CardActions className={classes.cardActions}>
-                  
-                  <Checkout
-            name={tier.title}
-            amount={tier.price}
-          />
-                </CardActions>
               </Card>
             </Grid>
           ))}
