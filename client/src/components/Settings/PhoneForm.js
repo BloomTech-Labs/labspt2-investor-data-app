@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from 'firebase';
 
 // Redux imports
 import { connect } from 'react-redux';
@@ -17,11 +18,14 @@ class PhoneForm extends React.Component {
         super(props);
         this.state = {
             // Placeholder to use until phone number added as part of user schema
-            firstName: ''
+            currentPhone: '',
+            phoneNumber: ''
         }
     }
 
     componentDidMount(){
+        const currentPhone = firebase.auth().currentUser.phoneNumber;
+        this.setState({ currentPhone: currentPhone });
         this.props.getSettings();
     };
 
@@ -35,7 +39,7 @@ class PhoneForm extends React.Component {
         event.preventDefault();
         this.props.updateSettings('1', this.state);
         this.setState({
-            firstName: ''
+            phoneNumber: ''
         });
     };
 
@@ -57,14 +61,14 @@ class PhoneForm extends React.Component {
                     {/* Error in loading current phone number */}
                     {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
                     {/* Current phone number (Email used as  placeholder) */}
-                    <p className={classes.currentValue}>{this.props.settings.firstName}</p>
+                    <p className={classes.currentValue}>{this.state.currentPhone}</p>
                 </div>
                 {/* Text field for new phone number */}
                 <TextField 
-                    name='firstName'
+                    name='phoneNumber'
                     label='New phone'
                     className={classes.textField}
-                    value={this.state.firstName}
+                    value={this.state.phoneNumber}
                     onChange={this.handleChange}
                     margin='normal'
                 />
