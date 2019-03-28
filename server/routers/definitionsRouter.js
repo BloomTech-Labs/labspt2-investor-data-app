@@ -12,3 +12,5 @@ router.get('/definitions', (req, res) => {
                 .json({err: 'There was an error retrieving the definitions'})
         })
 })
+
+module.exports = router;
