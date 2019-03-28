@@ -16,16 +16,10 @@ module.exports = {
     return db("users");
   },
 
-  getByUser: username => {
-    return db("users")
-      .where("username", username)
-      .first();
-  },
-
   insert: user => {
     return db("users")
       .insert(user)
-      .then(([id]) => this.get(id));
+      // .then(([id]) => this.get(id));
   },
 
   update: (id, changes) => {
@@ -40,7 +34,7 @@ module.exports = {
       .del();
   },
 
-  findByUsername: (username) => {
+  findByUsername: username => {
     return db("users")
       .where("username", username)
       .first();
@@ -60,4 +54,3 @@ module.exports = {
     return db("users").select("id", "username");
   }
 };
-
