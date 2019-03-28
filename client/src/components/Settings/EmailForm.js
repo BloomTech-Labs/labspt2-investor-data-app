@@ -36,10 +36,12 @@ class EmailForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.updateSettings('1', this.state);
-        this.setState({
-            email: ''
-        });
+        if (this.state.email !== '') {
+            this.props.updateSettings('1', this.state);
+            this.setState({
+                email: ''
+            });
+        }
     };
 
     render(){
