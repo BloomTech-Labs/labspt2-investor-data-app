@@ -61,6 +61,7 @@ class App extends Component {
           userUID: user.uid
         });
         // If the user is the Authenticated use pass their information to the database
+        
         this.addCurrentUser(user);
 
       } else {
@@ -94,7 +95,7 @@ class App extends Component {
   };
 
   // Add current user method will grab the information from state create new user in our database
-  addCurrentUser = newUser => {
+  addCurrentUser = ()=> {
   
     function newUser(firstName, lastName, email, uid) {
       this.firstName = firstName;
@@ -102,7 +103,7 @@ class App extends Component {
       this.email = email;
       this.uid = uid;
     }
-    const me = new newUser(
+    const creds = new newUser(
       this.state.firstName,
       this.state.lastName,
       this.state.currentEmail,
@@ -110,7 +111,7 @@ class App extends Component {
       );
       const endpoint = "http://localhost:5000/api/users";
       axios
-      .post(endpoint, me)
+      .post(endpoint, creds)
       .then(res => {
         console.log(res)
       })

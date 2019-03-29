@@ -12,6 +12,8 @@
     "test": "cross-env DB_ENV=testing jest --watch --verbose",
     "start": "node index.js"
   },
+  
+  "batch": "knex migrate:rollback && knex migrate:latest && knex seed:run",
   "dependencies": {
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
@@ -19,6 +21,7 @@
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "express-validator": "^5.3.1",
     "faker": "^4.1.0",
     "helmet": "^3.15.1",
     "jsonwebtoken": "^8.5.0",

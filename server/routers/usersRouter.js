@@ -34,21 +34,34 @@ router.get("/", (req, res) => {
     });
 });
 /****** Add a User ******/
-router.post('/', async (req, res) => {
-    const { user }= req.body
+router.post('/', (req, res) => {
+    const user = req.body
+    // check if user in database has the same email as user loging in. Log the user in
+    users.checkEmail(user.email).then(addUser=>{
+        if(addUser.length){
+            res.status(200).json({message: "Logged In Successfully"})
+        }else {
+         users.insert(user)
+                .then(user => {
+            
+                res.status(201).json(user)
+                })
+                .catch(err => {
+                    res.status(500).send(err)
+                })
 
-    await users.insert(req.body)
-    .then(user => {
-    res.status(201).json(user)
+        }
     })
-    .catch(err => {
-        res.status(500).send(err)
-    })
+
+               
+    
+
+   
 })
 /********* Get Single User *************/
-router.get('/:id', (req, res) => {
-    const { id } = req.params
-    users.getById(id)
+router.get('/:uid', (req, res) => {
+    const { uid } = req.params
+    users.getById(uid)
         .then(user => {
             if (user) {
                 res.json(user);

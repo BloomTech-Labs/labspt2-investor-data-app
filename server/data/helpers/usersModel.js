@@ -7,15 +7,18 @@ module.exports = {
     return db("users");
   },
 
-  getById: id => {
+  getById: uid => {
     let query = db("users");
-    if (id) {
-      query.where("users.id", id).first();
+    if (uid) {
+      query.where("users.uid", uid).first();
       return query;
     }
     return db("users");
   },
 
+  checkEmail: email => {
+    return db("users").where('email', email)
+  }, 
   insert: user => {
     return db("users")
       .insert(user)
@@ -40,9 +43,9 @@ module.exports = {
       .first();
   },
 
-  findById: id => {
+  findById: uid => {
     return db("users")
-      .where("id", id)
+      .where("uid", uid)
       .first();
   },
 
