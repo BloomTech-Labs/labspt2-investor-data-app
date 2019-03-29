@@ -37,10 +37,12 @@ class PhoneForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.updateSettings('1', this.state);
-        this.setState({
-            phoneNumber: ''
-        });
+        if (this.state.phoneNumber !== '') {
+            this.props.updateSettings('1', this.state);
+            this.setState({
+                phoneNumber: ''
+            });
+        }
     };
 
     render(){
