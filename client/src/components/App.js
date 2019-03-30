@@ -48,7 +48,7 @@ class App extends Component {
   componentDidMount = () => {
     this.removeAuthListener = fire.onAuthStateChanged(user => {
       if (user) {
-        // Last # of occurrance of Space
+        // Last # of occurrence of Space
         let space = user.displayName.lastIndexOf(" "); 
         
         this.setState({
@@ -75,25 +75,9 @@ class App extends Component {
       }
     });
   };
-
-  setCurrentUser = user => {
-    if (user) {
-      this.setState({
-        currentUser: user,
-        currentEmail: user.email,
-        userUID: user.uid,
-        authenticated: true
-      });
-    } else {
-      this.setState({
-        currentUser: null,
-        authenticated: true,
-        currentEmail: null,
-        userUID: null
-      });
-    }
-  };
-
+  //To sign out an get no error with firebase dropping the widget
+  removeAuthListener: any;
+ 
   // Add current user method will grab the information from state create new user in our database
   addCurrentUser = ()=> {
   
@@ -123,8 +107,6 @@ class App extends Component {
   render() {
     const { currentUser } = this.state;
     const { redirect } = this.state;
-    //Add current user from sign in.
-    const { addCurrentUser } = this.state
 
     return (
       <div>
@@ -152,11 +134,10 @@ class App extends Component {
             path={ROUTES.SIGNIN}
             render={props => {
               return (
-                <Signin user={currentUser} addCurrentUser = {addCurrentUser} redirect={redirect} {...props} />
+                <Signin user={currentUser}  redirect={redirect} {...props} />
               );
             }}
           />
-          {/*} <Route path={ROUTES.SIGNUP} component={} /> */}
         </Switch>
       </div>
     );

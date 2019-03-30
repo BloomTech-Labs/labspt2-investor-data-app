@@ -2,23 +2,12 @@ const express = require("express");
 const router = express.Router();
 const users = require("../data/helpers/usersModel");
 const axios = require("axios");
-const bcrypt = require("bcryptjs");
-const { authenticate, generateToken } = require("../data/auth/authenticate");
-
-/* TODO:
-    Add either a route get/users and authenticate the route for
-    front end use and viewing. 
 
 
-*/
-// Added routes for signin and authenticate the username and password for front end use.
 module.exports = router => {
-    router.get("/signin", signin);
-    router.get("/signin", signup);
     router.get("/:id", userById);
-    // router.get("/:id", authenticate, userById);
     router.put("/:id", update);
-}
+} 
 
 /************************************ USERS SECTION ***********************************/
 
@@ -36,12 +25,12 @@ router.get("/", (req, res) => {
 /****** Add a User ******/
 router.post('/', (req, res) => {
     const user = req.body
-    // check if user in database has the same email as user loging in. Log the user in
+    // check if user in database has the same email as user loging in. Go ahead and log the user in
     users.checkEmail(user.email).then(addUser=>{
         if(addUser.length){
             res.status(200).json({message: "Logged In Successfully"})
         }else {
-         users.insert(user)
+        users.insert(user)
                 .then(user => {
             
                 res.status(201).json(user)
@@ -53,10 +42,6 @@ router.post('/', (req, res) => {
         }
     })
 
-               
-    
-
-   
 })
 /********* Get Single User *************/
 router.get('/:uid', (req, res) => {
