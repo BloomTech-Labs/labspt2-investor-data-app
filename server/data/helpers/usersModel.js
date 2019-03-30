@@ -10,7 +10,7 @@ module.exports = {
   getById: id => {
     let query = db("users");
     if (id) {
-      query.where("users.id", id).first();
+      query.where("id", id).first();
       return query;
     }
     return db("users");
