@@ -30,7 +30,7 @@ export const Row = styled.div `
     display: flex; 
     flex-wrap: wrap; 
     justify-content: space-between;  
-    font-size: .5rem; 
+    font-size: 1.0rem; 
     width: 100%; 
 `
 

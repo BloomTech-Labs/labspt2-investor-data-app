@@ -17,7 +17,7 @@ const styles = theme => ({
     textAlign: "left",
     color: theme.palette.text.secondary,
     // height: '40vh',
-    backgroundColor: 'rgb(146, 28, 36, 0.96)'
+    backgroundColor: '#921C24'
   
   },
   block: {
