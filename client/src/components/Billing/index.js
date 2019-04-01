@@ -156,7 +156,7 @@ function Pricing(props) {
                   ))}
 
                   <center>
-                  <Checkout name={tier.title} amount={tier.price} accountType={tier.accountType}/>
+                  <Checkout name={tier.title} amount={tier.price} />
                   </center>
                 </CardContent>
               </Card>
