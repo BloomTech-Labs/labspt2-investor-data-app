@@ -9,6 +9,7 @@ import { getSettings, updateSettings } from '../../actions/settingsActions.js';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
 import Button from '@material-ui/core/Button';
+import Typography from "@material-ui/core/Typography";
 
 // WithStyles
 import styles from './styles';
@@ -56,7 +57,7 @@ class EmailForm extends React.Component {
             >
                 <div>
                     {/* Current email address header*/}
-                    <h3 className={classes.currentHeader}>Current email address:</h3>
+                    <Typography variant='h6'>Current email address:</Typography>
                     {/* Loading current email... */}
                     {this.props.fetchingSettings ? <p className={classes.currentValue}>Loading...</p> : null }
                     {/* Error in loading current email */}

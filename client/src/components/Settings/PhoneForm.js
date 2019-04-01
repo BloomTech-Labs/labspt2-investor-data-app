@@ -9,6 +9,7 @@ import { getSettings, updateSettings } from '../../actions/settingsActions.js';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
 import Button from '@material-ui/core/Button';
+import Typography from "@material-ui/core/Typography";
 
 // WithStyles
 import styles from './styles';
@@ -57,7 +58,7 @@ class PhoneForm extends React.Component {
             >
                 <div>
                     {/* Current phone number header */}
-                    <h3 className={classes.currentHeader}>Current phone:</h3>
+                    <Typography variant='h6'>Current phone:</Typography>
                     {/* Loading current phone number... */}
                     {this.props.fetchingSettings ? <p className={classes.currentValue}>Loading...</p> : null }
                     {/* Error in loading current phone number */}
