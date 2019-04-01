@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
-import PAYMENT_SERVER_URL from '../../constants/payment_server';
-import STRIPE_PUBLISHABLE from '../../constants/publisher_key';
+import STRIPE_PUBLISHABLE from '../../constants/stripe';
+import PAYMENT_SERVER_URL from '../../constants/server';
 
 const CURRENCY = 'USD';
 
@@ -18,15 +18,16 @@ const errorPayment = data => {
 
 const onToken = (amount) => token =>
   axios.post(PAYMENT_SERVER_URL,
-    {
-      source: token.id,
+    { source: token.id,
       currency: CURRENCY,
       amount: fromUSDToCent(amount)
+      
     })
+    
     .then(successPayment)
     .catch(errorPayment);
 
-const Checkout = ({ name, amount }) =>
+const Checkout = ({ amount, name }) =>
   <StripeCheckout
     name={name}
     amount={fromUSDToCent(amount)}

@@ -8,15 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import StarIcon from "@material-ui/icons/StarBorder";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-import Checkout from "../Stripe/checkout";
-
-/*
-TODO: 
-1) Change signup link on main navigation to route to here.
-2) Considering deleting signup component if not needed
-3) Make links at bottom of tier choices active to create users
-4) Settle on exact wording to use
-*/
+import Checkout from "../Stripe/Checkout";
 
 const styles = theme => ({
   "@global": {
@@ -61,6 +53,7 @@ exact wording later on */
 const tiers = [
   {
     title: "Newbie",
+    accountType: 1,
     price: "5",
     description: [
       "1 indicator included",
@@ -72,6 +65,7 @@ const tiers = [
   },
   {
     title: "Investor",
+    accountType: 2,
     subheader: "Most popular",
     price: "15",
     description: [
@@ -84,6 +78,7 @@ const tiers = [
   },
   {
     title: "Pro",
+    accountType: 3,
     price: "30",
     description: [
       "5 indicators included",
@@ -161,7 +156,7 @@ function Pricing(props) {
                   ))}
 
                   <center>
-                    <Checkout name={tier.title} amount={tier.price} />
+                  <Checkout name={tier.title} amount={tier.price} accountType={tier.accountType}/>
                   </center>
                 </CardContent>
               </Card>
