@@ -3,6 +3,7 @@ import React from 'react';
 // Material UI Components
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
+import Typography from "@material-ui/core/Typography";
 
 // WithStyles
 import styles from './styles';
@@ -29,11 +30,17 @@ class Settings extends React.Component {
         const { classes } = this.props;
 
         return(
-            <div>
+            <div className={classes.parent}>
                 <CssBaseline />
-                <h2 className={classes.header}>
-                        Settings
-                </h2>
+                <Typography
+                    component="h1"
+                    variant="h2"
+                    align="center"
+                    color="textPrimary"
+                    gutterBottom
+                >
+                    Settings
+                </Typography>
                 {/* Form to update email address */}
                 <EmailForm /> 
                 {/* Form to update phone number */}
