@@ -11,6 +11,7 @@ import {
 import firebase from "firebase";
 import LiveTicker from "./LiveTicker";
 import YourFavorites from "./YourFavorites";
+import KeyIndicators from './KeyIndicators'
 import styles from "../Styles/Dashboard/styles";
 
 class Dashboard extends Component {
@@ -52,7 +53,7 @@ class Dashboard extends Component {
                 <Paper className={classes.paper}>
                   <div>
                     <Typography variant="h5" gutterBottom>
-                        Key Indicators
+                        <KeyIndicators/>
                     </Typography>
                   </div>
                 </Paper>
