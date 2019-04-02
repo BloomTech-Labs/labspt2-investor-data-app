@@ -2,15 +2,15 @@ import styled from "styled-components";
 
 
 export const Loading = styled.div `
-  font-size: 28px; 
+  font-size: 22px; 
   display: flex;
   justify-content: center; 
   align-items: center; 
-  color: #FFF; 
+  color: #000; 
 `
 export const TickerContainer = styled.div`
     width: 100%; 
-    color: white; 
+    color: #000; 
     padding: 0px 10%; 
 `
 

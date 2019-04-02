@@ -15,14 +15,21 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing.unit * 3,
     textAlign: "left",
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     // height: '40vh',
-    backgroundColor: '#921C24'
+    backgroundColor: '#D8DBE2'
   
   },
   block: {
     padding: theme.spacing.unit * 2
+  },
+  bigAvatar: {
+    margin: 10,
+    width: 40,
+    height: 40,
+
   }
+
 });
 
 export default styles;
