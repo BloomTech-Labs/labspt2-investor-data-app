@@ -33,7 +33,7 @@ import { ema, rsi, sma, atr } from "react-stockcharts/lib/indicator";
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from "react-stockcharts/lib/utils";
 
-class CandleStickChartWithRSIIndicator extends React.Component {
+class RSIChart extends React.Component {
 	render() {
 		const ema26 = ema()
 			.id(0)
@@ -67,7 +67,7 @@ class CandleStickChartWithRSIIndicator extends React.Component {
 
 		const calculatedData = ema26(ema12(smaVolume50(rsiCalculator(atr14(initialData)))));
 		const xScaleProvider = discontinuousTimeScaleProvider
-			.inputDateAccessor(d => d.date);
+			.inputDateAccessor(d => d.timestamp);
 		const {
 			data,
 			xScale,
@@ -191,8 +191,6 @@ class CandleStickChartWithRSIIndicator extends React.Component {
 						yAccessor={atr14.accessor()}
 						yLabel={`ATR (${atr14.options().windowSize})`}
 						yDisplayFormat={format(".2f")}
-						/* valueStroke={atr14.stroke()} - optional prop */
-						/* labelStroke="#4682B4" - optional prop */
 						origin={[-40, 15]}/>
 				</Chart>
 				<CrossHairCursor />
@@ -201,16 +199,16 @@ class CandleStickChartWithRSIIndicator extends React.Component {
 	}
 }
 
-CandleStickChartWithRSIIndicator.propTypes = {
+RSIChart.propTypes = {
 	data: PropTypes.array.isRequired,
 	width: PropTypes.number.isRequired,
 	ratio: PropTypes.number.isRequired,
 	type: PropTypes.oneOf(["svg", "hybrid"]).isRequired,
 };
 
-CandleStickChartWithRSIIndicator.defaultProps = {
+RSIChart.defaultProps = {
 	type: "svg",
 };
-CandleStickChartWithRSIIndicator = fitWidth(CandleStickChartWithRSIIndicator);
+RSIChart = fitWidth(RSIChart);
 
-export default CandleStickChartWithRSIIndicator;
+export default RSIChart;
