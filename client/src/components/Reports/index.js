@@ -24,7 +24,8 @@ import { getData } from "./utils";
 import MAChart from "./Charts/MAChart";
 import MACDChart from "./Charts/MACDChart";
 import PriceChart from "./Charts/PriceChart";
-import RSIChart from "./Charts/RSIChart"
+import RSIChart from "./Charts/RSIChart";
+import SARChart from "./Charts/SARChart";
 import { suggestions } from "./suggestions";
 
 const TabContainer = props => {
@@ -323,11 +324,10 @@ class Reports extends Component {
                       scrollButtons="auto"
                     >
                       <Tab label="Price" />
-                      <Tab label="Moving Average" />
-                      <Tab label="Moving Average Convergence" />
-                      <Tab label="Relative Strength Index" />
-                      {/* <Tab label="Average True Range" />
-                      <Tab label="Volume Weighted Average" /> */}
+                      <Tab label="Moving Average (MA)" />
+                      <Tab label="Moving Average Convergence (MACD)" />
+                      <Tab label="Relative Strength Index (RSI)" />
+                      <Tab label="Parabolic Stop and Reverse (SAR)" />
                     </Tabs>
                   </AppBar>
                   {value === 0 && (
@@ -350,8 +350,11 @@ class Reports extends Component {
                       <RSIChart data={this.state.data} />
                     </TabContainer>
                   )}
-                  {/* {value === 3 && <TabContainer>ATR Chart...</TabContainer>}
-                  {value === 4 && <TabContainer>VMA Chart...</TabContainer>} */}
+                  {value === 4 && (
+                    <TabContainer>
+                      <SARChart data={this.state.data} />
+                    </TabContainer>
+                  )}
                 </Paper>
               </Grid>
             </Grid>
