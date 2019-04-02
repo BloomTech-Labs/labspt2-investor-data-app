@@ -24,6 +24,7 @@ export const Star = styled.div`
     flex-wrap: wrap; 
     align-items: center;  
     font-size: 1.7rem; 
+    color: #DAA520;
 `
 
 export const Row = styled.div `
