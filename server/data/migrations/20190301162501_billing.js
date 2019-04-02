@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function (knex, Promise) {
   return knex.schema.createTable("billing", billing => {
     billing.increments("id");
     billing.string("street", 255).notNullable();
@@ -34,14 +34,17 @@ exports.up = function(knex, Promise) {
       .unsigned();
     billing.string("accountStatus", 128).notNullable();
     billing.integer("targetsUsed").unsigned();
-    
+
     billing.integer("accountType").unsigned();
     billing.string("mobilePhone", 128);
     billing.string("homePhone", 128);
-    billing.integer('users_id').unsigned();
+    billing
+      .integer('users_id')
+      .unsigned()
+      .references('users.id');
   });
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function (knex, Promise) {
   return knex.schema.dropTableIfExists("billing");
 };

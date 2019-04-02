@@ -7,7 +7,10 @@ exports.up = function (knex, Promise) {
         .integer("target")
         .unsigned()
         .notNullable();
-      favorites.integer('users_id').unsigned();
+      favorites
+        .integer('users_id')
+        .unsigned()
+        .references('users.id');
     })
   ])
 };
@@ -18,3 +21,4 @@ exports.down = function (knex, Promise) {
     knex.schema.dropTableIfExists('favorites')
   ]);
 };
+
