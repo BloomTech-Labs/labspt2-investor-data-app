@@ -12,6 +12,7 @@ import * as ROUTES from "../constants/routes";
 import "./App.css";
 import Signin from "./Auth/Signin";
 import { fire } from "./Auth/firebaseConfig";
+import axios from "axios";
 
 const AuthenticatedRoute = ({
   component: Component,
@@ -37,42 +38,69 @@ class App extends Component {
   state = {
     authenticated: false,
     currentUser: null,
+    firstName: null,
+    lastName: null,
+    currentEmail: null,
+    userUID: null,
     redirect: false
   };
 
   componentDidMount = () => {
     this.removeAuthListener = fire.onAuthStateChanged(user => {
       if (user) {
+        // Last # of occurrence of Space
+        let space = user.displayName.lastIndexOf(" "); 
+        
         this.setState({
           currentUser: user,
           authenticated: true,
-          redirect: true
+          redirect: true,
+          currentEmail: user.email,
+          firstName: user.displayName.substring(0, space),
+          lastName: user.displayName.substring(space + 1),
+          userUID: user.uid
         });
-        console.log("user", user);
+        // If the user is the Authenticated use pass their information to the database
+        
+        this.addCurrentUser(user);
+
       } else {
         this.setState({
           currentUser: null,
           authenticated: false,
-          redirect: false
+          redirect: false,
+          currentEmail: null,
+          userUID: null
         });
       }
     });
   };
-
-  setCurrentUser = user => {
-    if (user) {
-      this.setState({
-        currentUser: user,
-        authenticated: true
-      });
-    } else {
-      this.setState({
-        currentUser: null,
-        authenticated: true
-      });
+  //To sign out an get no error with firebase dropping the widget
+  removeAuthListener: any;
+ 
+  // Add current user method will grab the information from state create new user in our database
+  addCurrentUser = ()=> {
+  
+    function newUser(firstName, lastName, email, uid) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.email = email;
+      this.uid = uid;
     }
-  };
-
+    const creds = new newUser(
+      this.state.firstName,
+      this.state.lastName,
+      this.state.currentEmail,
+      this.state.userUID
+      );
+      const endpoint = "http://localhost:5000/api/users";
+      axios
+      .post(endpoint, creds)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log(err));
+  }
   componentWillUnmount = () => {
     this.removeAuthListener();
   };
@@ -82,7 +110,7 @@ class App extends Component {
 
     return (
       <div>
-        <Navigation authenticated={this.state.authenticated}/>
+        <Navigation authenticated={this.state.authenticated} />
         <Switch>
           <Route exact path={ROUTES.LANDING} component={Landing} />
           <AuthenticatedRoute
@@ -106,11 +134,10 @@ class App extends Component {
             path={ROUTES.SIGNIN}
             render={props => {
               return (
-                <Signin user={currentUser} redirect={redirect} {...props} />
+                <Signin user={currentUser}  redirect={redirect} {...props} />
               );
             }}
           />
-          {/*} <Route path={ROUTES.SIGNUP} component={} /> */}
         </Switch>
       </div>
     );
