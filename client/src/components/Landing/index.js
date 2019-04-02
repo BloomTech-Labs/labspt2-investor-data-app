@@ -107,9 +107,9 @@ const Landing = () => {
       <div className="footer footer--dark">
         <div className="container">
           <div className="footer__inner">
-            <a href="index.html" className="footer__textLogo">
+            <Link to={ROUTES.LANDING} className="footer__textLogo">
               Pick Em
-            </a>
+            </Link>
             <div className="footer__data">
               <div className="footer__data__item">
                 <div className="footer__row">Created by:</div>
