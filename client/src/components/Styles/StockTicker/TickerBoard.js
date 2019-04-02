@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const Header = styled.h1 `
   font-size: 2rem; 
-  text-align: left
+  text-align: left;
   color: #4DC3FA;
   display: flex; 
   flex-wrap: wrap

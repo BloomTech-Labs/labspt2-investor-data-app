@@ -85,11 +85,11 @@ const Landing = () => {
       </div>
 
       <div className="expanded landing__section">
-        <div className="container">
+        {/* <div className="container"> */}
           <div className="expanded__inner">
             <StockTicker />
           </div>
-        </div>
+        {/* </div> */}
       </div>
       <div className="cta cta--reverse">
         <div className="container">

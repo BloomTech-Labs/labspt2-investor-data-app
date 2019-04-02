@@ -59,7 +59,7 @@ class Navigation extends React.Component {
     const open = Boolean(anchorEl);
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" color="secondary">
           <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow}>
               Pick Em
