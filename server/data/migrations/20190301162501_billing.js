@@ -4,7 +4,6 @@ exports.up = function (knex, Promise) {
     billing.string("street", 255).notNullable();
     billing.string("city", 128).notNullable();
     billing.string("state", 128).notNullable();
-
     billing.string("country", 255).notNullable();
     billing.integer("zipcode").notNullable();
     billing.string("mailingStreet", 255).notNullable();
@@ -34,7 +33,6 @@ exports.up = function (knex, Promise) {
       .unsigned();
     billing.string("accountStatus", 128).notNullable();
     billing.integer("targetsUsed").unsigned();
-
     billing.integer("accountType").unsigned();
     billing.string("mobilePhone", 128);
     billing.string("homePhone", 128);
