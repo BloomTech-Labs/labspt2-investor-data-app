@@ -15,8 +15,10 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing.unit * 3,
     textAlign: "left",
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
     // height: '40vh',
+    backgroundColor: 'rgb(146, 28, 36, 0.96)'
+  
   },
   block: {
     padding: theme.spacing.unit * 2

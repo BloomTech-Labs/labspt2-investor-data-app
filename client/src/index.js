@@ -17,7 +17,7 @@ const theme = createMuiTheme({
     palette: {
         primary: {
             // light: will be calculated from palette.primary.main,
-            main: 'rgb(146, 28, 36, 0.96)',
+            main: '#921c24',
             // dark: will be calculated from palette.primary.main,
             // contrastText: will be calculated to contrast with palette.primary.main
         },
@@ -41,8 +41,9 @@ const store = createStore(
     rootReducer, 
     initialState, 
    compose(
-        applyMiddleware(...middleware), 
-          window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()                 
+        applyMiddleware(...middleware)
+        // *******Commented out to address deployment error*******
+        //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()                 
    )
 );
 

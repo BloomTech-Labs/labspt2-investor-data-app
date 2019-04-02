@@ -1,5 +1,9 @@
 import React from 'react';
 
+// Redux imports
+import { connect } from 'react-redux';
+import { getSettings, updateSettings } from '../../actions/settingsActions.js';
+
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -10,7 +14,19 @@ import Switch from '@material-ui/core/Switch';
 import styles from './styles';
 
 class OptEmailsTextsForm extends React.Component {
-    
+    constructor(props){
+        super(props);
+        this.state = {
+            receiveEmails: null,
+            receiveTexts: null
+        }
+    }
+
+    handleSwitch = name => event => {
+        this.setState({ [name]: event.target.checked });
+        this.props.updateSettings('1', this.state);
+    };
+
     render(){
         
         const { classes } = this.props;
@@ -20,9 +36,9 @@ class OptEmailsTextsForm extends React.Component {
                 <FormControlLabel
                     control={
                         <Switch
-                            checked={this.props.optEmails}
-                            onChange={this.props.handleSwitch('optEmails')}
-                            value='optEmails'
+                            checked={this.props.settings.receiveEmails}
+                            onChange={this.handleSwitch('receiveEmails')}
+                            value='receiveEmails'
                             color='primary'
                         />
                     }
@@ -32,9 +48,9 @@ class OptEmailsTextsForm extends React.Component {
                 <FormControlLabel
                     control={
                         <Switch
-                            checked={this.props.optTexts}
-                            onChange={this.props.handleSwitch('optTexts')}
-                            value='optTexts'
+                            checked={this.props.settings.receiveTexts}
+                            onChange={this.handleSwitch('receiveTexts')}
+                            value='receiveTexts'
                             color='primary'
                         />
                     }
@@ -46,5 +62,17 @@ class OptEmailsTextsForm extends React.Component {
     };
 };
 
+const mapStateToProps = state => {
+    return {
+        fetchingSettings: state.SettingsReducer.fetchingSettings,
+        error: state.SettingsReducer.error,
+        settings: state.SettingsReducer.settings
+    }
+};
 
-export default withStyles(styles)(OptEmailsTextsForm);
+const mapDispatchToProps = dispatch => ({
+    getSettings: () => dispatch(getSettings()),
+    updateSettings:  (id, updatedCommPreference) => dispatch(updateSettings(id, updatedCommPreference))
+});
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(OptEmailsTextsForm));

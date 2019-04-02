@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from 'firebase';
 
 // Redux imports
 import { connect } from 'react-redux';
@@ -8,6 +9,7 @@ import { getSettings, updateSettings } from '../../actions/settingsActions.js';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
 import Button from '@material-ui/core/Button';
+import Typography from "@material-ui/core/Typography";
 
 // WithStyles
 import styles from './styles';
@@ -16,11 +18,14 @@ class EmailForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            currentEmail: '',
             email: ''
         }
     }
 
     componentDidMount(){
+        const currentEmail = firebase.auth().currentUser.email;
+        this.setState({ currentEmail: currentEmail });
         this.props.getSettings();
     };
 
@@ -32,10 +37,12 @@ class EmailForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.updateSettings('1', this.state);
-        this.setState({
-            email: ''
-        });
+        if (this.state.email !== '') {
+            this.props.updateSettings('1', this.state);
+            this.setState({
+                email: ''
+            });
+        }
     };
 
     render(){
@@ -50,13 +57,13 @@ class EmailForm extends React.Component {
             >
                 <div>
                     {/* Current email address header*/}
-                    <h3 className={classes.currentHeader}>Current email address:</h3>
+                    <Typography variant='h6'>Current email address:</Typography>
                     {/* Loading current email... */}
                     {this.props.fetchingSettings ? <p className={classes.currentValue}>Loading...</p> : null }
                     {/* Error in loading current email */}
                     {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
                     {/* Current email address */}
-                    <p className={classes.currentValue}>{this.props.settings.email}</p>
+                    <p className={classes.currentValue}>{this.state.currentEmail}</p>
                 </div>
                 {/* Text field for new email address */}
                 <TextField 

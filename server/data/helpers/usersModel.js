@@ -10,22 +10,19 @@ module.exports = {
   getById: id => {
     let query = db("users");
     if (id) {
-      query.where("users.id", id).first();
+      query.where("id", id).first();
       return query;
     }
     return db("users");
   },
 
-  getByUser: username => {
-    return db("users")
-      .where("username", username)
-      .first();
-  },
-
+  checkEmail: email => {
+    return db("users").where('email', email)
+  }, 
   insert: user => {
     return db("users")
       .insert(user)
-      .then(([id]) => this.get(id));
+      // .then(([id]) => this.get(id));
   },
 
   update: (id, changes) => {
@@ -40,15 +37,15 @@ module.exports = {
       .del();
   },
 
-  findByUsername: (username) => {
+  findByUsername: username => {
     return db("users")
       .where("username", username)
       .first();
   },
 
-  findById: id => {
+  findById: uid => {
     return db("users")
-      .where("id", id)
+      .where("uid", uid)
       .first();
   },
 
@@ -60,4 +57,3 @@ module.exports = {
     return db("users").select("id", "username");
   }
 };
-
