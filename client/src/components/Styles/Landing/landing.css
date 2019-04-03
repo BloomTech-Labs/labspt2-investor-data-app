@@ -435,7 +435,7 @@ select::-ms-expand {
     color: #fff;
     padding: 48pt 0;
     text-align: center;
-    min-width: 100vw;
+
 }
 
 .cta--reverse {
@@ -475,7 +475,7 @@ select::-ms-expand {
 .footer {
     background-color: #fff;
     padding: 36pt 0;
-    min-width: 100vw;
+
 }
 
 .footer__inner {
