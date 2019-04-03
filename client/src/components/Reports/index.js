@@ -316,8 +316,8 @@ class Reports extends Component {
                     <Tabs
                       value={value ? value : 0}
                       onChange={this.handleTabChange}
-                      indicatorColor="primary"
-                      textColor="secondary"
+                      indicatorColor="secondary"
+                      color="secondary"
                       variant="scrollable"
                       scrollButtons="auto"
                     >
