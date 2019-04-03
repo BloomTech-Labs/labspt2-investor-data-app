@@ -13,13 +13,13 @@ a {
 }
 
 .link {
-    color: #6c63ff;
+    color: #fefeff;
     text-decoration: underline;
 }
 
 @media (min-width: 992px) {
     .link:hover {
-        color: #463aff;
+        color: #c9c6ee;
     }
 }
 
@@ -28,8 +28,8 @@ button {
     display: inline-block;
     padding: 6pt 20pt;
     line-height: 1.7;
-    border: 1px solid #6c63ff;
-    color: #6c63ff;
+    border: 1px solid #dedcf7;
+    color: #e3e2fd;
     font-weight: 400;
     -webkit-transition: 0.7s;
     white-space: nowrap;
@@ -53,8 +53,8 @@ button:hover {
 
     .button:hover,
     button:hover {
-        border-color: #463aff;
-        color: #332bac;
+        border-color: #e8e6fc;
+        color: #d6d3fd;
     }
 }
 
@@ -132,8 +132,8 @@ select::-ms-expand {
     position: relative;
     width: 100%;
     background-image: url(../../Landing/images/big_background.jpeg);
-    -webkit-box-shadow: 0 4px 11px rgba(124, 146, 169, 0.5);
-    box-shadow: 0 4px 11px rgba(124, 146, 169, 0.5);
+    -webkit-box-shadow: 0 4px 11px rgba(244, 247, 250, 0.5);
+    box-shadow: 0 4px 11px rgba(20, 38, 63, 0.5);
     background-size: cover;
     background-position: 50%;
     background-repeat: no-repeat;
@@ -151,7 +151,7 @@ select::-ms-expand {
     width: 100%;
     opacity: 0.96;
     z-index: 1;
-    background-color: #A9BCD0;
+    background-color: rgb(118, 130, 156);
 }
 
 .hero__overlay--gradient {
@@ -160,7 +160,7 @@ select::-ms-expand {
         right top,
         from(#A9BCD0),
         to(#373F51));
-    background: linear-gradient(90deg, rgb(169, 188, 208), rgb(55, 63,
+    background: linear-gradient(90deg, rgb(55, 70, 107), rgb(55, 63,
         81));
 }
 
@@ -170,7 +170,7 @@ select::-ms-expand {
         left bottom,
         from(rgb(146, 28, 36)),
         to(rgb(143, 16, 24)));
-    background: linear-gradient(180deg, rgb(146, 28, 36), rgb(143, 16, 24));
+    background: linear-gradient(180deg, #373F51, #373F51);
 }
 
 .hero__mask {
@@ -427,11 +427,9 @@ select::-ms-expand {
     background: -webkit-gradient(linear,
         left top,
         right top,
-        from(#A9BCD0),
-        to(#373F51));
-    background: linear-gradient(90deg, rgb(55, 63,
-        81), rgb(55, 63,
-        81));
+        from(#102542),
+        to(#102542));
+    background: linear-gradient(90deg, #102542, #102542);
     color: #fff;
     padding: 48pt 0;
     text-align: center;
