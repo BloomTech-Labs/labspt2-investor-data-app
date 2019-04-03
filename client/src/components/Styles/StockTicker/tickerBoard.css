@@ -1,65 +1,65 @@
 .table {
-  font-family: "Open Sans", sans-serif;
-  margin: 50px auto;
-  width: 100%;
-  color: #a7a1ae;
-  background-color: #1f2739;
-  border-radius: 10px;
-  box-shadow: 1px 0px 3px 2px rgb(2, 2, 148);
-  padding: 10px 15px;
-  max-width: 600px;
+    font-family: "Open Sans", sans-serif;
+    margin: auto;
+    width: 100vw;
+    color: #a7a1ae;
+    background-color: #1f2739;
+    border-radius: 10px;
+    box-shadow: 1px 0px 3px 2px rgb(2, 2, 148);
+    padding: 10px 15px;
+    max-width: 650px;
 }
 
 .tickerContainer {
-  text-align: left;
-  border-radius: 10px;
-  overflow: hidden;
-  width: 100%;
-  margin: 0 auto;
-  display: table;
+    text-align: left;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    display: table;
 }
 
 .tickerContainer th h1 {
-  font-weight: bold;
-  font-size: 1em;
-  text-align: left;
-  color: #185875;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: left;
+    color: #185875;
 }
 
 .tickerContainer td {
-  font-weight: normal;
-  font-size: 1em;
-  box-shadow: 0 2px 2px -2px #0e1119;
+    font-weight: normal;
+    font-size: 1em;
+    box-shadow: 0 2px 2px -2px #0e1119;
 }
 
 .tickerContainer td,
 .tickerContainer th {
-  padding-bottom: 2%;
-  padding-top: 2%;
-  padding-left: 2%;
+    padding-bottom: 2%;
+    padding-top: 2%;
+    padding-left: 2%;
 }
 
 /* Background-color of the odd rows */
 .tickerContainer tr:nth-child(odd) {
-  background-color: #323c50;
+    background-color: #323c50;
 }
 
 /* Background-color of the even rows */
 .tickerContainer tr:nth-child(even) {
-  background-color: #2c3446;
+    background-color: #2c3446;
 }
 
 .tickerContainer th {
-  background-color: #1f2739;
+    background-color: #1f2739;
 }
 
 .tickerContainer td:first-child {
-  color: rgb(98, 248, 28);
+    color: rgb(98, 248, 28);
 }
 
 .tickerContainer tr:hover {
-  background-color: #464a52;
-  box-shadow: 0 6px 6px -6px #0e1119;
+    background-color: #464a52;
+    box-shadow: 0 6px 6px -6px #0e1119;
 }
 
 <<<<<<< HEAD
@@ -73,65 +73,72 @@
  }
 =======
 .tickerContainer td:hover {
-  background-color: #fff842;
-  color: #403e10;
-  font-weight: bold;
-  box-shadow: rgb(47, 95, 168) -1px 1px, #7f7c21 -2px 2px, #7f7c21 -3px 3px,
-    #7f7c21 -4px 4px, #7f7c21 -5px 5px, #7f7c21 -6px 6px;
-  transform: translate3d(6px, -6px, 0);
-  transition-delay: 0s;
-  transition-duration: 0.4s;
-  transition-property: all;
-  transition-timing-function: line;
+    background-color: #fff842;
+    color: #403e10;
+    font-weight: bold;
+    box-shadow: rgb(47, 95, 168) -1px 1px, #7f7c21 -2px 2px, #7f7c21 -3px 3px,
+        #7f7c21 -4px 4px, #7f7c21 -5px 5px, #7f7c21 -6px 6px;
+    transform: translate3d(6px, -6px, 0);
+    transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all;
+    transition-timing-function: line;
 }
 >>>>>>> 3939f9b6b99451438fa3342aa14905a3fa5d0689
 
 h4 {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 @media (max-width: 800px) {
-  /* eliminates "high" and "low" from the table" */
-  .tickerContainer td:nth-child(3),
-  .tickerContainer th:nth-child(3) {
-    display: none;
-  }
-  .tickerContainer td:nth-child(4),
-  .tickerContainer th:nth-child(4) {
-    display: none;
-  }
+
+    /* eliminates "high" and "low" from the table" */
+    .tickerContainer td:nth-child(3),
+    .tickerContainer th:nth-child(3) {
+        display: none;
+    }
+
+    .tickerContainer td:nth-child(4),
+    .tickerContainer th:nth-child(4) {
+        display: none;
+    }
 }
 
 @media (max-width: 700px) {
-  .table {
-    width: 80%;
-  }
-  .tickerContainer td {
-    font-size: 1rem;
-  }
+    .table {
+        width: 100%;
+    }
+
+    .tickerContainer td {
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 600px) {
-  .table {
-    width: 80%;
-  }
-  .tickerContainer td {
-    font-size: 0.8rem;
-  }
-  .tickerContainer th h1 {
-    font-size: 0.8em;
-  }
+    .table {
+        width: 100%;
+    }
+
+    .tickerContainer td {
+        font-size: 0.8rem;
+    }
+
+    .tickerContainer th h1 {
+        font-size: 0.8em;
+    }
 }
 
 @media (max-width: 470px) {
-  .table {
-    width: 90%;
-  }
-  .tickerContainer th h1 {
-    font-size: 0.8rem;
-  }
-  .tickerContainer td {
-    font-size: 0.8rem;
-  }
+    .table {
+        width: 100%;
+    }
+
+    .tickerContainer th h1 {
+        font-size: 0.8rem;
+    }
+
+    .tickerContainer td {
+        font-size: 0.8rem;
+    }
 }

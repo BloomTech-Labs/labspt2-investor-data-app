@@ -23,7 +23,9 @@ const styles = {
     flexGrow: 1
   },
   grow: {
-    flexGrow: 1
+    flexGrow: 1,
+    fontFamily: 'MADEEvolveSansRegular',
+    fontSize: 22
   },
   menuButton: {
     marginLeft: -12,
