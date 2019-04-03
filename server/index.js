@@ -23,7 +23,8 @@ server.use('/api/billing', billingRouter);
 server.use('/api/favorites', favoritesRouter);
 server.use('/api/users', usersRouter);
 server.use('/api/stripe',stripeRouter);
-server.use(bodyParser);
+server.use(bodyParser.urlencoded({extended: false}));
+server.use(bodyParser.json());
 
 //Server response get '/'
 server.get('/', async (req, res) => {
