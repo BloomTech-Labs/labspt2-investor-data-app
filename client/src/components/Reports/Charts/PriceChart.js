@@ -21,7 +21,7 @@ class PriceChart extends React.Component {
     const { type, data: initialData, width, ratio } = this.props;
 
     const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(
-      d => d.timestamp
+      d => d.date
     );
     const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(
       initialData

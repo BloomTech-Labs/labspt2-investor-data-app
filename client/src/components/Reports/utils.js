@@ -3,7 +3,7 @@ import { timeParse } from "d3-time-format";
 
 function parseData(parse) {
   return function(d) {
-    d.timestamp = parse(d.timestamp);
+    d.date = parse(d.timestamp);
     d.open = +d.open;
     d.high = +d.high;
     d.low = +d.low;

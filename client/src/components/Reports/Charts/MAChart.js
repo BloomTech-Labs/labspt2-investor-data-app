@@ -88,7 +88,7 @@ class MAChart extends Component {
       sma20(wma20(tma20(ema50(smaVolume50(initialData)))))
     );
     const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(
-      d => d.timestamp
+      d => d.date
     );
     const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(
       calculatedData

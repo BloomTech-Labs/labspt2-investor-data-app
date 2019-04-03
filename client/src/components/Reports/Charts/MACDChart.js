@@ -97,7 +97,7 @@ class MACDChart extends React.Component {
       macdCalculator(ema12(ema26(initialData)))
     );
     const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(
-      d => d.timestamp
+      d => d.date
     );
     const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(
       calculatedData
