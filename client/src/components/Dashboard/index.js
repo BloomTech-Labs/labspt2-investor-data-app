@@ -20,16 +20,19 @@ class Dashboard extends Component {
       <React.Fragment>
         <CssBaseline />
         <div className={classes.root}>
+        
+        
           <Grid container justify="flex-end" alignItems="center">
-            <Typography variant="h6" color="inherit" gutterBottom>
-              Welcome, {firebase.auth().currentUser.displayName} <br />
+          
+            <Typography variant="h6" color="inherit" gutterBottom className='AvatarContainer'>
+             Welcome, {firebase.auth().currentUser.displayName} <br />
             </Typography>
 
             <Avatar
               alt="profile-picture"
               src={firebase.auth().currentUser.photoURL}
               className={classes.bigAvatar}
-            />
+            /> 
           </Grid>
 
           <Grid container justify="center">

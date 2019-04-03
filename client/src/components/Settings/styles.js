@@ -1,4 +1,10 @@
 const styles = theme => ({
+    parent: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        paddingTop: '30px'
+    },
     container: {
         display: 'flex',
         flexWrap: 'wrap',
