@@ -12,7 +12,8 @@ export const Header = styled.h1 `
 export const PageLoading = styled.div `
   font-size: 28px; 
   display: flex;
-  justify-content: center; 
+  justify-content: center;
+  align-items: center; 
   margin-top: 150px; 
 `
 
