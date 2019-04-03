@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 
 
 /********* Get Single Favorite *************/
-router.get('/:uid', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const { id } = req.params
   await favorites.get(id)
         .then(favorite => {

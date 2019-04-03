@@ -3,10 +3,10 @@ const db = require('../dbConfig.js');
 module.exports = {
 
 
-    get: async function (uid) {
+    get: async function (id) {
         let query = db('favorites');
-        if (uid) {
-            query.where('favorites.uid', uid).first();
+        if (id) {
+            query.where('favorites.id', id).first();
             return query;
         }
         return db('favorites')

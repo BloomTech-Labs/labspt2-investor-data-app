@@ -3,11 +3,11 @@ import styled from 'styled-components'
 export const CharContainer = styled.div `
     margin: 0px auto 15px auto; 
     text-align: center;  
-    color: white; 
+    color: black; 
 `
 export const Character = styled.button`
     border: none; 
-    color: white; 
+    color: black; 
     font-size: .6rem; 
     width: 1%; 
 `
