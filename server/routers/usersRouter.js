@@ -44,9 +44,9 @@ router.post('/', (req, res) => {
 
 })
 /********* Get Single User *************/
-router.get('/:uid', (req, res) => {
-    const { uid } = req.params
-    users.getById(uid)
+router.get('/:id', (req, res) => {
+    const { id } = req.params
+    users.getById(id)
         .then(user => {
             if (user) {
                 res.json(user);
