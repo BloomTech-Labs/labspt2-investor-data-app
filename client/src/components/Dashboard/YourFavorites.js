@@ -15,14 +15,18 @@ class YourFavorites extends React.Component{
     }
       
     componentDidMount(){
-        axios.get(`https://pickemm.herokuapp.com/api/favorites/13`) // needs a user id added here
-            .then( response =>      
+        axios.get(`https://pickemm.herokuapp.com/api/favorites`)
+            .then( response => {
                 this.setState({
-                    companies: response.data.symbol
-                })
+                   stocks: response.data
+                   // companies: response.data.symbol
+                })  
+                }
             )
             .catch( err => {console.log( 'there was an error')})
     }
+
+    
       
 
  render(){
