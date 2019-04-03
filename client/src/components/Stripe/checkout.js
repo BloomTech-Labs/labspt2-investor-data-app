@@ -33,6 +33,7 @@ const onToken = amount => token => {
 const Checkout = ({amount, name}) => (
   <StripeCheckout
     name={name}
+    email={fire.currentUser.email}
     amount={fromUSDToCent (amount)}
     token={onToken (amount)}
     currency={CURRENCY}
