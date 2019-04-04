@@ -310,7 +310,7 @@ class Reports extends Component {
               <Grid item xs={12} md={12}>
                 <Paper
                   className={classes.paper}
-                  style={{ position: "relative" }}
+                  style={{ position: "relative"}}
                 >
                   <AppBar position="static">
                     <Tabs
