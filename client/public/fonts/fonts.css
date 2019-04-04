@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'MADEEvolveSansRegular';
+    font-family: 'Arkhip-Regular';
     font-weight: normal;
     font-style: normal;
-    src: local('MADEEvolveSansRegular'), url('./MADE\ Evolve\ Sans\ Medium\ EVO\ \(PERSONAL\ USE\).otf') format('opentype');
+    src: local('Arkhip-Regular'), url('./Arkhip-Regular.otf') format('opentype');
 }
