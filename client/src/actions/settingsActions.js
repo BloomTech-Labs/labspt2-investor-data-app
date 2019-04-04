@@ -8,14 +8,13 @@ export const ERROR = 'ERROR';
 
 // Action creator to get current settings
 
-export const getSettings = () => {
+export const getSettings = (uid) => {
     return dispatch => {
         // Dispatch to reducer that current settings are being obtained from API
         dispatch({type: FETCHING});
         axios
-           .get('https://pickemm.herokuapp.com/api/users/1')  
-            //  .get(`http://localhost:5000/api/users/2`) 
-            .then(response => {
+           .get(`https://pickemm.herokuapp.com/api/users/${uid}`)
+           .then(response => {
                 console.log("response.data:", response.data)
                 // Dispatch to reducer that settings have been successfully obtained, pass API response as payload
                 dispatch({
@@ -29,7 +28,7 @@ export const getSettings = () => {
                     type: ERROR, 
                     error: `The user's current settings could not be obtained at this time.`
                 });
-            });
+        });
     };
 };
 

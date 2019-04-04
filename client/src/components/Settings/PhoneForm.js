@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from 'firebase';
 
 // Redux imports
 import { connect } from 'react-redux';
@@ -22,7 +23,8 @@ class PhoneForm extends React.Component {
     }
 
     componentDidMount(){
-        this.props.getSettings();
+        const uid = firebase.auth().currentUser.uid;
+        this.props.getSettings(uid);
     };
 
     handleChange = event => {
@@ -94,7 +96,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    getSettings: () => dispatch(getSettings()),
+    getSettings: (uid) => dispatch(getSettings(uid)),
     updateSettings:  (id, updatedPhone) => dispatch(updateSettings(id, updatedPhone))
 });
 
