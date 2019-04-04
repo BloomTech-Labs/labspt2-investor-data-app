@@ -106,6 +106,9 @@ class MAChart extends Component {
       );
     }
 
+    console.log(width)
+    console.log(ratio)
+
     return (
       <ChartCanvas
         height={400}
@@ -113,7 +116,7 @@ class MAChart extends Component {
         ratio={ratio}
         margin={{ left: 70, right: 70, top: 10, bottom: 30 }}
         type={type}
-        seriesName="MSFT"
+        seriesName="MA"
         data={data}
         xScale={xScale}
         xAccessor={xAccessor}
@@ -130,7 +133,7 @@ class MAChart extends Component {
             ema20.accessor(),
             ema50.accessor()
           ]}
-          padding={{ top: 10, bottom: 20 }}
+          padding={{ top: 60, bottom: 10 }}
         >
           <XAxis axisAt="bottom" orient="bottom" />
           <YAxis axisAt="right" orient="right" ticks={5} />

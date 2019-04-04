@@ -106,7 +106,7 @@ class MACDChart extends React.Component {
     if (!data.length) {
       return (
         <SpinnerContainer>
-          <GuardSpinner size={30} frontColor="#0066ff" backColor="#ff4400" />
+          <GuardSpinner size={30} frontColor="#373f51" backColor="#ff4400" />
         </SpinnerContainer>
       );
     }
@@ -128,7 +128,7 @@ class MACDChart extends React.Component {
           id={1}
           height={400}
           yExtents={[d => [d.high, d.low], ema26.accessor(), ema12.accessor()]}
-          padding={{ top: 10, bottom: 20 }}
+          padding={{ top: 60, bottom: 20 }}
         >
           <XAxis
             axisAt="bottom"
@@ -226,7 +226,7 @@ class MACDChart extends React.Component {
           height={150}
           yExtents={macdCalculator.accessor()}
           origin={(w, h) => [0, h - 150]}
-          padding={{ top: 10, bottom: 10 }}
+          padding={{ top: 30, bottom: 10 }}
         >
           <XAxis axisAt="bottom" orient="bottom" />
           <YAxis axisAt="right" orient="right" ticks={2} />

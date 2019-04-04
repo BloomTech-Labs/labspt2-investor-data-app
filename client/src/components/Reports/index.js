@@ -28,7 +28,7 @@ import { suggestions } from "./suggestions";
 
 const TabContainer = props => {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{ padding: 8 * 2 }}>
       {props.children}
     </Typography>
   );
