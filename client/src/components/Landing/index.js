@@ -42,7 +42,7 @@ const Landing = () => {
 
       <div className="steps landing__section">
         <div className="container">
-          <h2>Who uses Pick Em?</h2>
+          <h2>Who uses our application?</h2>
         </div>
         <div className="container">
           <div className="steps__inner">
@@ -108,7 +108,7 @@ const Landing = () => {
         <div className="container">
           <div className="footer__inner">
             <a href="index.html" className="footer__textLogo">
-              Pick Em
+              PICKEM
             </a>
             <div className="footer__data">
               <div className="footer__data__item">
