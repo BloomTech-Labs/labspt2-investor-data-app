@@ -19,7 +19,7 @@ a {
 
 @media (min-width: 992px) {
     .link:hover {
-        color: #c9c6ee;
+        color: #262174;
     }
 }
 
@@ -28,8 +28,8 @@ button {
     display: inline-block;
     padding: 6pt 20pt;
     line-height: 1.7;
-    border: 1px solid #dedcf7;
-    color: #e3e2fd;
+    border: 1px solid #7407a7;
+    color: #7407a7;
     font-weight: 400;
     -webkit-transition: 0.7s;
     white-space: nowrap;
@@ -53,35 +53,37 @@ button:hover {
 
     .button:hover,
     button:hover {
-        border-color: #e8e6fc;
-        color: #d6d3fd;
+        border-color: rgb(48, 58, 65);
+        background-color: #7407a7;
+
+        color: #7407a7;
     }
 }
 
 .button__primary {
-    background-color: #6c63ff;
-    border-color: #6c63ff;
+    background-color: #7407a7;
+    border-color: rgb(48, 58, 65);
     color: #fff;
 }
 
 @media (min-width: 992px) {
     .button__primary:hover {
-        background-color: #463aff;
-        border-color: #463aff;
+        background-color: #9e07e4;
+        border-color: rgb(48, 58, 65);
         color: #fff;
     }
 }
 
 .button__accent {
-    background-color: rgb(70, 168, 184);
-    border-color: #58A4B0;
+    background-color: rgb(127, 2, 165);
+    border-color: rgb(48, 58, 65);
     color: #fff;
 }
 
 @media (min-width: 992px) {
     .button__accent:hover {
-        background-color: rgb(30, 200, 226);
-        border-color: rgb(101, 214, 231);
+        background-color: #9e07e4;
+        border-color: rgb(48, 58, 65);
         color: #fff;
     }
 }
@@ -158,19 +160,18 @@ select::-ms-expand {
     background: -webkit-gradient(linear,
         left top,
         right top,
-        from(#A9BCD0),
-        to(#373F51));
-    background: linear-gradient(90deg, rgb(55, 70, 107), rgb(55, 63,
-        81));
+        from(#160c2e),
+        to(rgb(31, 12, 61)));
+    background: linear-gradient(90deg, #2a0142, rgb(73, 55, 81));
 }
 
 .hero__overlay--gradientVertical {
     background: -webkit-gradient(linear,
         left top,
-        left bottom,
-        from(rgb(146, 28, 36)),
-        to(rgb(143, 16, 24)));
-    background: linear-gradient(180deg, #373F51, #373F51);
+        right top,
+        from(#160c2e),
+        to(rgb(31, 12, 61)));
+    background: linear-gradient(90deg, #2a0142, rgb(73, 55, 81));
 }
 
 .hero__mask {
@@ -427,9 +428,9 @@ select::-ms-expand {
     background: -webkit-gradient(linear,
         left top,
         right top,
-        from(#102542),
-        to(#102542));
-    background: linear-gradient(90deg, #102542, #102542);
+        from(#160c2e),
+        to(rgb(31, 12, 61)));
+    background: linear-gradient(90deg, #2a0142, rgb(76, 44, 90));
     color: #fff;
     padding: 48pt 0;
     text-align: center;
@@ -440,15 +441,18 @@ select::-ms-expand {
     background: -webkit-gradient(linear,
         left top,
         right top,
-        from(#A9BCD0),
-        to(#373F51));
-    background: linear-gradient(90deg, rgb(85, 96, 122), rgb(55, 63,
-        81));
+        from(#160c2e),
+        to(rgb(31, 12, 61)));
+    background: linear-gradient(90deg, #2a0142, rgb(73, 55, 81));
 }
 
 .cta--plain {
-    background: rgb(55, 63,
-        81);
+    background: -webkit-gradient(linear,
+        left top,
+        right top,
+        from(#160c2e),
+        to(rgb(31, 12, 61)));
+    background: linear-gradient(90deg, #2a0142, rgb(73, 55, 81));
 }
 
 .cta--secondary {
@@ -506,7 +510,14 @@ select::-ms-expand {
     display: block;
     cursor: pointer;
     color: #6c63ff;
-    font-size: 1.225rem;
+
+
+    font-family: 'Arkhip-Regular';
+    font-weight: normal;
+    font-style: normal;
+    src: local('Arkhip-Regular'), url('/client/public/fonts/Arkhip-Regular.otf') format('opentype');
+    letter-spacing: .8rem;
+    font-size: 1.35rem;
     min-width: 33%;
     margin-bottom: 1.5rem;
 }
@@ -520,7 +531,7 @@ select::-ms-expand {
 @media (min-width: 992px) {
     .footer__textLogo {
         min-width: 25%;
-        font-size: 1.325rem;
+        font-size: 1.5rem;
     }
 }
 
@@ -543,6 +554,7 @@ select::-ms-expand {
     -ms-flex-direction: column;
     flex-direction: column;
     font-size: 0.9rem;
+
 }
 
 @media (min-width: 992px) {
@@ -571,7 +583,7 @@ select::-ms-expand {
 
 @media (min-width: 992px) {
     .footer__link:hover {
-        color: rgb(146, 28, 36);
+        color: rgb(123, 28, 146);
     }
 }
 
@@ -580,7 +592,7 @@ select::-ms-expand {
 }
 
 .footer--dark {
-    background-color: #333c44;
+    background-color: #0c0514;
 }
 
 .footer--dark .footer__textLogo {

@@ -108,7 +108,7 @@ const Landing = () => {
         <div className="container">
           <div className="footer__inner">
             <a href="index.html" className="footer__textLogo">
-              Pick Em
+              PICKEM
             </a>
             <div className="footer__data">
               <div className="footer__data__item">
