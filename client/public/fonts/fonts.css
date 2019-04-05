@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'Arkhip-Regular';
+    font-weight: normal;
+    font-style: normal;
+    src: local('Arkhip-Regular'), url('./Arkhip-Regular.otf') format('opentype');
+}

@@ -11,6 +11,7 @@ import {
 import firebase from "firebase";
 import LiveTicker from "./LiveTicker";
 import YourFavorites from "./YourFavorites";
+import KeyIndicators from './KeyIndicators'
 import styles from "../Styles/Dashboard/styles";
 
 class Dashboard extends Component {
@@ -20,16 +21,19 @@ class Dashboard extends Component {
       <React.Fragment>
         <CssBaseline />
         <div className={classes.root}>
+        
+        
           <Grid container justify="flex-end" alignItems="center">
-            <Typography variant="h6" color="inherit" gutterBottom>
-              Welcome, {firebase.auth().currentUser.displayName} <br />
+          
+            <Typography variant="h6" color="inherit" gutterBottom className='AvatarContainer'>
+             Welcome, {firebase.auth().currentUser.displayName} <br />
             </Typography>
 
             <Avatar
               alt="profile-picture"
               src={firebase.auth().currentUser.photoURL}
               className={classes.bigAvatar}
-            />
+            /> 
           </Grid>
 
           <Grid container justify="center">
@@ -52,7 +56,7 @@ class Dashboard extends Component {
                 <Paper className={classes.paper}>
                   <div>
                     <Typography variant="h5" gutterBottom>
-                      Key Indicators
+                        <KeyIndicators/>
                     </Typography>
                   </div>
                 </Paper>
