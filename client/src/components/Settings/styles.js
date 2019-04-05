@@ -2,13 +2,15 @@ const styles = theme => ({
     parent: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        paddingTop: '30px'
+        width: '60%',
+        paddingTop: '30px',
+        margin: '0 auto'
     },
     container: {
         display: 'flex',
         flexWrap: 'wrap',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     header: {
         marginLeft: theme.spacing.unit,

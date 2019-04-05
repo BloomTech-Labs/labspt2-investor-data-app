@@ -34,14 +34,13 @@ export const getSettings = (uid) => {
 
 // Action creator to update current settings
 
-export const updateSettings = (id, updatedSettings) => {
+export const updateSettings = (uid, updatedSettings) => {
     return dispatch => {
         // Dispatch to reducer that current settings are being obtained from API
         dispatch({type: FETCHING});
         axios
             // Update email on file in database
-            .put(`https://pickemm.herokuapp.com/api/users/${id}`, updatedSettings)
-           /*  .put(`http://localhost:5000/api/users/${id}`, updatedSettings) */
+            .put(`https://pickemm.herokuapp.com/api/users/${uid}`, updatedSettings)
             .then(response => {
                 // Dispatch to reducer that settings have been successfully updated and obtained, pass API response as payload
                 dispatch({

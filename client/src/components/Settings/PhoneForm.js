@@ -35,8 +35,9 @@ class PhoneForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        const uid = firebase.auth().currentUser.uid;
         if (this.state.phoneNumber !== '') {
-            this.props.updateSettings('1', this.state);
+            this.props.updateSettings(uid, this.state);
             this.setState({
                 phoneNumber: ''
             });
@@ -49,7 +50,7 @@ class PhoneForm extends React.Component {
 
         return(
             <form 
-                className={classes.container}
+                // className={classes.container}
                 id='phoneForm'
                 onSubmit={this.handleSubmit}
             >
@@ -60,7 +61,7 @@ class PhoneForm extends React.Component {
                     {this.props.fetchingSettings ? <p className={classes.currentValue}>Loading...</p> : null }
                     {/* Error in loading current phone number */}
                     {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
-                    {/* Current phone number (Email used as  placeholder) */}
+                    {/* Current phone number */}
                     <p className={classes.currentValue}>{this.props.settings.phoneNumber}</p>
                 </div>
                 {/* Text field for new phone number */}
@@ -97,7 +98,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     getSettings: (uid) => dispatch(getSettings(uid)),
-    updateSettings:  (id, updatedPhone) => dispatch(updateSettings(id, updatedPhone))
+    updateSettings:  (uid, updatedPhone) => dispatch(updateSettings(uid, updatedPhone))
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(PhoneForm));

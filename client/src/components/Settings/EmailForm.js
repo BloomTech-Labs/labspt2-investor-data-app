@@ -50,41 +50,44 @@ class EmailForm extends React.Component {
         const { classes } = this.props;
 
         return(
-            <form 
-                className={classes.container}
-                id='emailForm'
-                onSubmit={this.handleSubmit}
-            >
-                <div>
+            // <form 
+            //     className={classes.container}
+            //     id='emailForm'
+            //     onSubmit={this.handleSubmit}
+            // >
+                <div 
+                    id='currentEmail'
+                    // className={classes.container}
+                >
                     {/* Current email address header*/}
                     <Typography variant='h6'>Current email address:</Typography>
                     {/* Loading current email... */}
-                    {this.props.fetchingSettings ? <p className={classes.currentValue}>Loading...</p> : null }
+                    {/* {this.props.fetchingSettings ? <p className={classes.currentValue}>Loading...</p> : null } */}
                     {/* Error in loading current email */}
-                    {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
+                    {/* {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null } */}
                     {/* Current email address */}
                     <p className={classes.currentValue}>{this.state.currentEmail}</p>
                 </div>
-                {/* Text field for new email address */}
-                <TextField 
-                    name='email'
-                    label='New email'
-                    className={classes.textField}
-                    value={this.state.email}
-                    onChange={this.handleChange}
-                    margin='normal'
-                />
-                {/* Button to submit new email address */}
-                <Button 
-                    variant='contained' 
-                    color='primary'
-                    className={classes.button}
-                    type='submit'
-                    form='emailForm'
-                >
-                    Update email
-                </Button>
-            </form>
+            //     {/* Text field for new email address */}
+            //     <TextField 
+            //         name='email'
+            //         label='New email'
+            //         className={classes.textField}
+            //         value={this.state.email}
+            //         onChange={this.handleChange}
+            //         margin='normal'
+            //     />
+            //     {/* Button to submit new email address */}
+            //     <Button 
+            //         variant='contained' 
+            //         color='primary'
+            //         className={classes.button}
+            //         type='submit'
+            //         form='emailForm'
+            //     >
+            //         Update email
+            //     </Button>
+            // </form>
         )
     };
 };
