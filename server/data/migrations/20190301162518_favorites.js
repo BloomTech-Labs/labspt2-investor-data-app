@@ -3,7 +3,14 @@ exports.up = function (knex, Promise) {
     knex.schema.createTable('favorites', (favorites) => {
       favorites.increments();
       favorites.string('symbol', 128).notNullable();
-      favorites.string('users_id').unsigned();
+      favorites
+        .integer("target")
+        .unsigned()
+        .notNullable();
+      favorites
+        .integer('users_id')
+        .unsigned()
+        .references('users.id');
     })
   ])
 };
@@ -14,3 +21,4 @@ exports.down = function (knex, Promise) {
     knex.schema.dropTableIfExists('favorites')
   ]);
 };
+
