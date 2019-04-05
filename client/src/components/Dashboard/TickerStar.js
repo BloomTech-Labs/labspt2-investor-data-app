@@ -23,7 +23,7 @@ class TickerStar extends React.Component{
                 
                 symbol: this.props.id,
                 target: 1,
-                users_id: 3
+                users_id: 10
             }
             axios.post('http://www.localhost:5000/api/favorites', newSymbol)
                 .then( response => {
@@ -45,7 +45,6 @@ class TickerStar extends React.Component{
         //firebase.auth().onAuthStateChanged( user => {
         //    if (user) { this.state.uid = user.uid }
         //  });
-        console.log(this.state.uid)
         return(
             <div>
                 <i onClick={this.selectHandler} className={this.state.star}></i>

@@ -34,7 +34,6 @@ class YourFavorites extends React.Component{
      //    return <div>Loading...</div> 
      //}
      console.log(this.state.stocks)
-    console.log(localStorage.getItem('email'))
         return (
             <div>
                 <Form> 
