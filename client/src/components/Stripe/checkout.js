@@ -22,17 +22,15 @@ class Checkout extends Component {
     super(props);
     this.state = {
       accountType: null,
-      uid: fire.currentUser.uid,
+      usersId: fire.currentUser.uid,
     };
   }
 
   componentDidMount() {
     this.typeAcct(this.props.amount);
-    console.log('Test', typeof this.props.amount);
   }
 
   typeAcct = amount => {
-    console.log('TypeAcct', amount);
     if (Number(amount) === 5) {
       this.setState({accountType: 1});
     } else if (Number(amount) === 15) {
@@ -51,11 +49,10 @@ class Checkout extends Component {
           amount: fromUSDToCent(this.props.amount),
         })
         .then(successPayment => {
-          console.log(this.state.accountType);
           if (successPayment) {
             const bill = this.state;
             console.log('OnToken:', bill);
-            const endpoint = 'http://localhost:5000/api/billing';
+            const endpoint = 'https://pickemm.herokuapp.com/api/billing';
             axios
               .post(endpoint, bill)
               .then(successPayment)
