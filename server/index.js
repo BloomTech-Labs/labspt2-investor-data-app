@@ -26,6 +26,8 @@ server.use('/api/stripe',stripeRouter);
 server.use(bodyParser.urlencoded({extended: false}));
 server.use(bodyParser.json());
 
+
+
 //Server response get '/'
 server.get('/', async (req, res) => {
     res.status(200).json({ response: 'PICKEM Investor-Data App Successfully Launched' })
