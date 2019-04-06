@@ -150,7 +150,7 @@ select::-ms-expand {
   position: absolute;
   height: 100%;
   width: 100%;
-  opacity: 0.78;
+  opacity: 0.79;
   z-index: 1;
   background-color: rgb(146, 28, 36);
 }
