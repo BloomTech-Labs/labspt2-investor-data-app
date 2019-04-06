@@ -34,11 +34,11 @@ module.exports = {
       .del();
   },
 
-  findByUsername: username => {
-    return db("users")
-      .where("username", username)
-      .first();
-  },
+ // findByUsername: username => {
+ //   return db("users")
+ //     .where("username", username)
+ //     .first();
+//  },
 
   findById: uid => {
     return db("users")
