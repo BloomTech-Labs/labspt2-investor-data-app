@@ -15,19 +15,15 @@ class YourFavorites extends React.Component{
     }
       
     componentDidMount(){
-        axios.get(`http://www.localhost:5000/api/favorites/10`)
+        axios.get(`http://www.localhost:5000/api/favorites/10`) // <----user favorites
             .then( response => {
                 this.setState({
                    stocks: response.data
-                   // companies: response.data.symbol
                 })  
-                }
-            )
+            })
             .catch( err => {console.log( 'there was an error')})
     }
-
     
-      
 
  render(){
      //if(!this.state.companies.length){

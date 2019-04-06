@@ -122,7 +122,7 @@ class LiveTicker extends React.Component{
                             <p>{stock.company}</p> 
                         </StockSymbol> 
                         <Star>
-                            <TickerStar stocks={this.state.stocks} id={stock.company} /> 
+                            <TickerStar stocks={this.state.stocks} id={stock.company}/> 
                         </Star> 
                     </Row> 
                     <br />
