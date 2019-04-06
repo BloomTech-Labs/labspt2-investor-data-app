@@ -26,15 +26,19 @@ class Checkout extends Component {
     };
   }
 
+  componentDidMount() {
+    this.typeAcct(this.props.amount);
+    console.log('Test', typeof this.props.amount);
+  }
+
   typeAcct = amount => {
-    if (amount === 5) {
+    console.log('TypeAcct', amount);
+    if (Number(amount) === 5) {
       this.setState({accountType: 1});
-    } else if (amount === 15) {
+    } else if (Number(amount) === 15) {
       this.setState({accountType: 2});
-    } else if (amount === 30) {
+    } else if (Number(amount) === 30) {
       this.setState({accountType: 3});
-    } else {
-      this.setState({accountType: null});
     }
   };
 
@@ -47,11 +51,10 @@ class Checkout extends Component {
           amount: fromUSDToCent(this.props.amount),
         })
         .then(successPayment => {
-          this.typeAcct(amount);
           console.log(this.state.accountType);
           if (successPayment) {
             const bill = this.state;
-            console.log(bill);
+            console.log('OnToken:', bill);
             const endpoint = 'http://localhost:5000/api/billing';
             axios
               .post(endpoint, bill)
@@ -63,7 +66,8 @@ class Checkout extends Component {
     }
   };
   render() {
-    console.log(this.props.amount);
+    if (this.state.accountType === null) return null;
+
     return (
       <StripeCheckout
         name={this.props.name}
