@@ -1,7 +1,5 @@
 const db = require("../dbConfig.js");
 
-/* Removed Function turned it into arrow for ES6 */
-
 module.exports = {
   get: () => {
     return db("users");
