@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
     billing
       .string('usersId')
       .unsigned()
-      .references('users.id');
+      .references('users.uid');
   });
 };
 
