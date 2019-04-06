@@ -106,9 +106,6 @@ class MAChart extends Component {
       );
     }
 
-    console.log(width)
-    console.log(ratio)
-
     return (
       <ChartCanvas
         height={400}
