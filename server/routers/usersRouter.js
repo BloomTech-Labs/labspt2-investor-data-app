@@ -3,7 +3,7 @@ const router = express.Router();
 const users = require("../data/helpers/usersModel");
 //const axios = require("axios");
 const jwt = require('jsonwebtoken');
-const secret = 'shhhthisissecret';
+const secret = 'shhhisthisasecret';
 
 module.exports = router => {
     router.get("/:id", userById);
