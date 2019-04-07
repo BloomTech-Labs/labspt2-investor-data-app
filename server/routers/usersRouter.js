@@ -55,7 +55,7 @@ router.post('/', (req, res) => {
         if (addUser.length) {
             const token = generateToken(user)
             res.status(201).json({ id: user.id, token });
-            //   res.status(200).json({message: "Logged In Successfully"})
+            res.status(200).json({message: "Logged In Successfully"})
         } else {
             users.insert(user)
                 .then(user => {
