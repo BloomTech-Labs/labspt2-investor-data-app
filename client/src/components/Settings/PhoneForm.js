@@ -50,7 +50,7 @@ class PhoneForm extends React.Component {
 
         return(
             <form 
-                // className={classes.container}
+                className={classes.container}
                 id='phoneForm'
                 onSubmit={this.handleSubmit}
             >
