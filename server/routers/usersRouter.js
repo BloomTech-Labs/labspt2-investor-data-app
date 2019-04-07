@@ -22,6 +22,7 @@ function protect(req, res, next) {
         }
     });
 }
+
 //************************************************** */
 function generateToken(user) {
     const payload = {
@@ -32,6 +33,7 @@ function generateToken(user) {
     };
     return jwt.sign(payload, secret, options);
 }
+
 /********* Get Users *************/
 router.get('/', protect, (req, res) => {
     //router.get("/", (req, res) => {
@@ -44,6 +46,7 @@ router.get('/', protect, (req, res) => {
             res.status(500).json({ error: "The users could not be retrieved." });
         });
 });
+
 /****** Add a User ******/
 router.post('/', (req, res) => {
     const user = req.body
@@ -68,6 +71,7 @@ router.post('/', (req, res) => {
     })
 
 })
+
 /********* Get Single User *************/
 router.get('/:id', protect, (req, res) => {
     const { id } = req.params
