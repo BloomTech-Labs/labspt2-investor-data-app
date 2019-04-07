@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
 
 })
 /********* Get Single User *************/
-router.get('/:uid', (req, res) => {
+router.get('/:id', (req, res) => {
     const { id } = req.params
     users.getById(id)
         .then(user => {
@@ -120,32 +120,5 @@ router.delete('/:id', (req, res) => {
             });
     }
 });
-
-/********* Update User *************/
-/* router.put('/:id', (req, res) => {
-    const { id } = req.params
-    const newUser = req.body
-    if (!newUser.email || !newUser.password || !newUser.username || !newUser.firstName || !newUser.lastName) {
-        res
-            .status(400)
-            .json({ message: "Please provide email, first name, last name and password." });
-    } else {
-        if (newUser) {
-            users.update(id, newUser)
-                .then(user => {
-                    if (user) {
-                        res.status(201).json(user);
-                    } else {
-                        res.status(404).json({ message: "The user with the specified ID does not exist." })
-                    }
-                })
-                .catch(err => {
-                    res.status(500).json({ error: "The user could not be modified." });
-                });
-        } else {
-            res.status(404).json({ message: "The user with the specified ID does not exist." })
-        }
-    }
-}) */
 
 module.exports = router;

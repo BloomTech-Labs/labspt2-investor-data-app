@@ -1,7 +1,5 @@
 const db = require("../dbConfig.js");
 
-/* Removed Function turned it into arrow for ES6 */
-
 module.exports = {
   get: () => {
     return db("users");
@@ -22,8 +20,7 @@ module.exports = {
   insert: user => {
     return db("users")
       .insert(user)
-      // .then(([id]) => this.get(id));
-  },
+   },
 
   update: (id, changes) => {
     return db("users")
@@ -37,11 +34,11 @@ module.exports = {
       .del();
   },
 
-  findByUsername: username => {
-    return db("users")
-      .where("username", username)
-      .first();
-  },
+ // findByUsername: username => {
+ //   return db("users")
+ //     .where("username", username)
+ //     .first();
+//  },
 
   findById: uid => {
     return db("users")
@@ -49,11 +46,11 @@ module.exports = {
       .first();
   },
 
-  findUsers: () => {
-    return db("users").select("id", "username");
-  },
+//  findUsers: () => {
+ //   return db("users").select("id", "username");
+//  },
 
-  find: () => {
-    return db("users").select("id", "username");
-  }
+ // find: () => {
+ //   return db("users").select("id", "username");
+//  }
 };

@@ -17,7 +17,7 @@ class StockTicker extends React.Component {
 
   componentDidMount(){
     let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
-      axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=ZV7Y9QKGXRHCY0A4`));
+      axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`));
     this.fetchStocks(promises)
   }
 
