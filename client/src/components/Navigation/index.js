@@ -11,7 +11,8 @@ import {
   IconButton,
   MenuItem,
   Menu,
-  Link
+  Link,
+  FormHelperText
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -23,9 +24,13 @@ const styles = {
     flexGrow: 1
   },
   grow: {
-    flexGrow: 1,
-    fontFamily: 'MADEEvolveSansRegular',
-    fontSize: 22
+    flexGrow: 2,
+    fontFamily: 'Arkhip-Regular',
+    fontSize: 25,
+    letterSpacing: 3.5,
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignSelf: 'center'
   },
   menuButton: {
     marginLeft: -12,
@@ -64,7 +69,7 @@ class Navigation extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              Pick Em
+              _-| PICKEM
             </Typography>
             <IconButton
               aria-owns={open ? "menu-appbar" : undefined}

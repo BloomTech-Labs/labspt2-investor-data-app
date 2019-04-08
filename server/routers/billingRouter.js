@@ -7,9 +7,9 @@ const billing = require('../data/helpers/billingModel');
 /********* Get Billing *************/
 router.get('/', async (req, res) => {
   await billing
-    .get()
-    .then(bills => {
-      res.json(bills);
+    .get ()
+    .then (bills => {
+      res.json (bills);
     })
     .catch(err => {
       res.status(500).json({error: 'The billing could not be retrieved.'});
@@ -20,17 +20,17 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const {id} = req.params;
   await billing
-    .get(id)
-    .then(bills => {
+    .get (id)
+    .then (bills => {
       if (bills) {
-        res.json(bills);
+        res.json (bills);
       } else {
         res
           .status(404)
           .json({message: 'The bill with the specified ID does not exist.'});
       }
     })
-    .catch(err => {
+    .catch (err => {
       res
         .status(500)
         .json({error: 'The bill information could not be retrieved.'});
