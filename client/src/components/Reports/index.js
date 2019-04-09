@@ -30,7 +30,7 @@ import { suggestions } from "./suggestions";
 
 const TabContainer = props => {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{ padding: 8 * 2 }}>
       {props.children}
     </Typography>
   );
@@ -312,14 +312,14 @@ class Reports extends Component {
               <Grid item xs={12} md={12}>
                 <Paper
                   className={classes.paper}
-                  style={{ position: "relative" }}
+                  style={{ position: "relative"}}
                 >
                   <AppBar position="static">
                     <Tabs
                       value={value ? value : 0}
                       onChange={this.handleTabChange}
-                      indicatorColor="primary"
-                      textColor="secondary"
+                      indicatorColor="secondary"
+                      color="secondary"
                       variant="scrollable"
                       scrollButtons="auto"
                     >
