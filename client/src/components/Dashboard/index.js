@@ -71,7 +71,7 @@ class Dashboard extends Component {
                   </Paper>
   
               </Grid>
-              <Grid item xs={12} md={12}>
+              <Grid item xs={12} md={6}>
                 <Paper
                   className={classes.paper}
                   style={{ position: "relative" }}

@@ -30,7 +30,7 @@ class YourFavorites extends React.Component{
     
  stockHandler = () => {
      let stock = []
-     {this.state.stocks.map( (item) => {
+     {this.state.stocks.map(item => {
         return stock.push(item.symbol)
      })}
      this.setState({
@@ -44,7 +44,7 @@ class YourFavorites extends React.Component{
      if(!this.state.companies.length){
           return "one moment"
      }
-     
+      console.log(this.state.companies)
 
         return (
             <div>

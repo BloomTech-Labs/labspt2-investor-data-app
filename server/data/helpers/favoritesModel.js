@@ -25,9 +25,9 @@ module.exports = {
             .then(count => (count > 0 ? this.get(id) : null));
     },
 
-    remove: function (id) {
+    remove: function (symbol) {
         return db('favorites')
-            .where('id', id)
+            .where('symbol', symbol)
             .del();
     }
 

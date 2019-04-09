@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import TickerStar from './TickerStar'
+import FavoriteTickerstar from './favoriteTickerstar'
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles' 
 
 class FavoriteStocks extends React.Component{
@@ -121,7 +121,6 @@ class FavoriteStocks extends React.Component{
         const volume = '5. volume'
     
         this.state.stocks.forEach( (stock, index) => {  // Loops through array of stock values and creates a table
-            console.log(stock)
             rows.push(
                 <TickerContainer key={index}>
                     <Row>
@@ -129,7 +128,7 @@ class FavoriteStocks extends React.Component{
                             <p>{stock.company}</p> 
                         </StockSymbol> 
                         <Star>
-                            <TickerStar id={stock.company} /> 
+                            <FavoriteTickerstar stock={this.state.stocks} id={stock.company} /> 
                         </Star> 
                     </Row> 
                     <br />
