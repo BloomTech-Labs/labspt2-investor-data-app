@@ -3,9 +3,9 @@ exports.up = function(knex, Promise) {
     billing.increments('id');
     billing.integer('accountType').unsigned();
     billing
-      .integer('usersId')
+      .string('usersId')
       .unsigned()
-      .references('users.id');
+      .references('users.uid');
   });
 };
 

@@ -14,8 +14,8 @@ module.exports = {
     return db('billing');
   },
 
-  insert: async function(bill) {
-    return db('billing').insert(bill);
+  insert: function(bills) {
+    return db('billing').insert(bills);
   },
 
   update: function(id, changes) {
