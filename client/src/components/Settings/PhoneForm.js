@@ -18,16 +18,13 @@ class PhoneForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            // Placeholder to use until phone number added as part of user schema
-            currentPhone: '',
             phoneNumber: ''
         }
     }
 
     componentDidMount(){
-        const currentPhone = firebase.auth().currentUser.phoneNumber;
-        this.setState({ currentPhone: currentPhone });
-        this.props.getSettings();
+        const uid = firebase.auth().currentUser.uid;
+        this.props.getSettings(uid);
     };
 
     handleChange = event => {
@@ -38,8 +35,9 @@ class PhoneForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        const uid = firebase.auth().currentUser.uid;
         if (this.state.phoneNumber !== '') {
-            this.props.updateSettings('1', this.state);
+            this.props.updateSettings(uid, this.state);
             this.setState({
                 phoneNumber: ''
             });
@@ -63,8 +61,8 @@ class PhoneForm extends React.Component {
                     {this.props.fetchingSettings ? <p className={classes.currentValue}>Loading...</p> : null }
                     {/* Error in loading current phone number */}
                     {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
-                    {/* Current phone number (Email used as  placeholder) */}
-                    <p className={classes.currentValue}>{this.state.currentPhone}</p>
+                    {/* Current phone number */}
+                    <p className={classes.currentValue}>{this.props.settings.phoneNumber}</p>
                 </div>
                 {/* Text field for new phone number */}
                 <TextField 
@@ -99,8 +97,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    getSettings: () => dispatch(getSettings()),
-    updateSettings:  (id, updatedPhone) => dispatch(updateSettings(id, updatedPhone))
+    getSettings: (uid) => dispatch(getSettings(uid)),
+    updateSettings:  (uid, updatedPhone) => dispatch(updateSettings(uid, updatedPhone))
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(PhoneForm));
