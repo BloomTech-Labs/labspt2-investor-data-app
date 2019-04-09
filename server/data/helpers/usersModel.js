@@ -24,7 +24,7 @@ module.exports = {
 
   update: (uid, changes) => {
     return db("users")
-      .where("uid", Number(uid))
+      .where("uid", uid)
       .update(changes);
   },
 
