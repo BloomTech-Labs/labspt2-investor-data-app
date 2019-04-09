@@ -63,9 +63,10 @@ router.get('/:id', (req, res) => {
         });
 });
 
+
 // Update user's settings
 router.put('/:id', (req, res) => {
-    const { id } = req.params;
+    const { id } = req.body;
     const changes = req.body;
     users.update(id, changes)
         .then(count => {

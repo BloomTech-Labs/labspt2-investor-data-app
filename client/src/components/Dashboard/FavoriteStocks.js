@@ -8,7 +8,7 @@ class FavoriteStocks extends React.Component{
         super(props);
         this.state = {
             timeStamp: {},
-            companies: [this.props.companies], // stock company symbols
+            companies: this.props.companies, // stock company symbols
             stocks: [],
             items: []
         }
@@ -16,12 +16,13 @@ class FavoriteStocks extends React.Component{
       
     componentDidMount(){
         this.fetchFavorites()
+        console.log(this.state.companies)
     }
       
 
     fetchFavorites = () => {
         let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
-            axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=ZV7Y9QKGXRHCY0A4`));
+            axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`));
         this.fetchStocks(promises)
     }
       

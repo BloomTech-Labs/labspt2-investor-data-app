@@ -3,10 +3,10 @@ const db = require('../dbConfig.js');
 module.exports = {
 
 
-    get: async function (users_id) {
+    get: async function (uid) {
         let query = db('favorites');
-        if (users_id) {
-            query.where('users_id', users_id).first();
+        if (uid) {
+            query.where('uid', uid).first();
             return query;
         }
         return db('favorites')
@@ -15,7 +15,7 @@ module.exports = {
     insert: function (favorite) {
         return db('favorites')
             .insert(favorite)
-            .then(([id]) => this.get(id));
+            .then((uid) => this.get(uid));
     },
 
     update: function (id, changes) {

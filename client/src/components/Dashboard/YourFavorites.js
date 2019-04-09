@@ -2,34 +2,50 @@ import React from 'react'
 import axios from 'axios'
 import { Input, Form, SearchIcon } from '../Styles/Dashboard/YourFavorites'
 import FavoriteStocks from './FavoriteStocks'
+import firebase from 'firebase'
 
 class YourFavorites extends React.Component{
     constructor(){
         super();
         this.state = {
             timeStamp: {},
-            companies: ['DJI'], // stock company symbols
+            companies: [], // stock company symbols
             stocks: [],
-            items: []
+            items: [],
+            uid: firebase.auth().currentUser.uid,
+
         }
     }
       
     componentDidMount(){
-        axios.get(`http://www.localhost:5000/api/favorites/10`) // <----user favorites
+        axios.get(`http://www.localhost:5000/api/favorites/?uid=${this.state.uid}`) // <----user favorites
             .then( response => {
                 this.setState({
                    stocks: response.data
                 })  
+                this.stockHandler()
             })
             .catch( err => {console.log( 'there was an error')})
     }
     
+ stockHandler = () => {
+     let stock = []
+     {this.state.stocks.map( (item) => {
+        return stock.push(item.symbol)
+     })}
+     this.setState({
+         companies: stock
+     })
+
+     
+ }
 
  render(){
-     //if(!this.state.companies.length){
-     //    return <div>Loading...</div> 
-     //}
-     console.log(this.state.stocks)
+     if(!this.state.companies.length){
+          return "one moment"
+     }
+     
+
         return (
             <div>
                 <Form> 

@@ -18,9 +18,9 @@ router.get('/', async (req, res) => {
 
 
 /********* Get Single Favorite *************/
-router.get('/:users_id', async (req, res) => {
-    const { users_id } = req.params
-  await favorites.get(users_id)
+router.get('/:uid', async (req, res) => {
+    const {uid} = req.params
+  await favorites.get(uid)
         .then(favorite => {
             if (favorite) {
                 res.json(favorite);
@@ -63,7 +63,7 @@ router.delete('/:id', (req, res) => {
 
 /********* Update Favorite *************/
 router.put('/:id', (req, res) => {
-    const { id } = req.params
+    const { id } = req.body
     const newFavorite = req.body
     if (!newFavorite.symbol || !newFavorite.target || !newFavorite.users_id) {
         res
@@ -100,7 +100,7 @@ router.put('/:id', (req, res) => {
 /********* Create New Favorite *************/
 router.post('/', (req, res, next) => {
     const favorite = req.body;
-    if (favorite.symbol && favorite.target && favorite.users_id) {
+    if (favorite.symbol && favorite.uid) {
         favorites.insert(favorite)
             .then(favorite => {
                 res.status(201)

@@ -9,9 +9,11 @@ class TickerStar extends React.Component{
             selected: false,
             star: 'far fa-star',
             stock: [],
-            uid: firebase.auth().currentUser.uid
+            uid: firebase.auth().currentUser.uid,
         }
     }
+
+    
 
     selectHandler = (event) => {
         event.preventDefault(); 
@@ -22,13 +24,13 @@ class TickerStar extends React.Component{
             })  
             const newSymbol = {
                 symbol: this.props.id,
-                target: 1,
-                users_id: 11
+                                          //<------user data to be passed into favorites
+                uid: this.state.uid
             }
             axios.post('http://www.localhost:5000/api/favorites', newSymbol)
                 .then( response => {
                     this.setState({
-                        newSymbol: { symbol: '', target: null, users_id: null}
+                        newSymbol: { symbol: '', uid: ''}
                     })
                 })
                 .catch( err => { console.log( "we've encountered an error")})
@@ -40,18 +42,8 @@ class TickerStar extends React.Component{
         }
     }
 
-  
-    
     render(){
-
-        //firebase.auth().onAuthStateChanged( user => {
-        //    if (user) { this.state.uid = user.uid }
-        //  });
-        
         console.log(this.state.uid)
-        console.log(firebase.auth().currentUser.getIdToken().then(data => console.log(data)))
-
-        
         return(
             <div>
                 <i onClick={this.selectHandler} className={this.state.star}></i>
