@@ -8,12 +8,12 @@
     "url": "git+https://github.com/Lambda-School-Labs/labspt2-investor-data-app.git"
   },
   "scripts": {
+    "batch": "knex migrate:rollback && knex migrate:latest && knex seed:run",
     "server": "nodemon index.js",
     "test": "cross-env DB_ENV=testing jest --watch --verbose",
     "start": "node index.js"
   },
   
-  "batch": "knex migrate:rollback && knex migrate:latest && knex seed:run",
   "dependencies": {
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
@@ -22,12 +22,15 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "faker": "^4.1.0",
+    "firebase": "^5.9.1",
     "helmet": "^3.15.1",
+    "jest-resolve": "^24.1.0",
     "jsonwebtoken": "^8.5.0",
     "knex": "^0.16.3",
     "morgan": "^1.9.1",
     "pg": "^7.8.2",
     "pug": "^2.0.3",
+    "react": "^16.8.5",
     "sqlite3": "^4.0.6",
     "stripe": "^6.28.0"
   },

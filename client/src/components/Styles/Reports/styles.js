@@ -1,7 +1,7 @@
 const styles = theme => ({
     root: {
       flexGrow: 1,
-      backgroundColor: theme.palette.grey["100"],
+      backgroundColor: theme.palette.grey["50"],
       overflow: "hidden",
       height: "100%"
     },

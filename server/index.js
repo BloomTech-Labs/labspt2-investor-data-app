@@ -11,8 +11,8 @@ const bcrypt = require('bcryptjs')
 const favoritesRouter = require('./routers/favoritesRouter');
 const billingRouter = require('./routers/billingRouter');
 const usersRouter = require('./routers/usersRouter');
-const payment = require('./routers/payment');
-const index = require('./routers/index');
+const stripeRouter = require('./routers/stripeRouter');
+const bodyParser = require('body-parser');
 
 server.use(cors());
 server.use(express.json());
@@ -22,8 +22,11 @@ server.use(helmet());
 server.use('/api/billing', billingRouter);
 server.use('/api/favorites', favoritesRouter);
 server.use('/api/users', usersRouter);
-server.use(payment);
-server.use(index);
+server.use('/api/stripe',stripeRouter);
+server.use(bodyParser.urlencoded({extended: false}));
+server.use(bodyParser.json());
+
+
 
 //Server response get '/'
 server.get('/', async (req, res) => {
