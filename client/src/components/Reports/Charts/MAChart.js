@@ -88,7 +88,7 @@ class MAChart extends Component {
       sma20(wma20(tma20(ema50(smaVolume50(initialData)))))
     );
     const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(
-      d => d.timestamp
+      d => d.date
     );
     const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(
       calculatedData
@@ -101,7 +101,7 @@ class MAChart extends Component {
     if (!data.length) {
       return (
         <SpinnerContainer>
-          <GuardSpinner size={30} frontColor="#0066ff" backColor="#ff4400" />
+          <GuardSpinner size={30} frontColor="#373f51" backColor="#ff4400" />
         </SpinnerContainer>
       );
     }
@@ -113,7 +113,7 @@ class MAChart extends Component {
         ratio={ratio}
         margin={{ left: 70, right: 70, top: 10, bottom: 30 }}
         type={type}
-        seriesName="MSFT"
+        seriesName="MA"
         data={data}
         xScale={xScale}
         xAccessor={xAccessor}
@@ -130,7 +130,7 @@ class MAChart extends Component {
             ema20.accessor(),
             ema50.accessor()
           ]}
-          padding={{ top: 10, bottom: 20 }}
+          padding={{ top: 60, bottom: 10 }}
         >
           <XAxis axisAt="bottom" orient="bottom" />
           <YAxis axisAt="right" orient="right" ticks={5} />
@@ -178,35 +178,30 @@ class MAChart extends Component {
                 type: "SMA",
                 stroke: sma20.stroke(),
                 windowSize: sma20.options().windowSize,
-                echo: "some echo here"
               },
               {
                 yAccessor: wma20.accessor(),
                 type: "WMA",
                 stroke: wma20.stroke(),
                 windowSize: wma20.options().windowSize,
-                echo: "some echo here"
               },
               {
                 yAccessor: tma20.accessor(),
                 type: "TMA",
                 stroke: tma20.stroke(),
                 windowSize: tma20.options().windowSize,
-                echo: "some echo here"
               },
               {
                 yAccessor: ema20.accessor(),
                 type: "EMA",
                 stroke: ema20.stroke(),
                 windowSize: ema20.options().windowSize,
-                echo: "some echo here"
               },
               {
                 yAccessor: ema50.accessor(),
                 type: "EMA",
                 stroke: ema50.stroke(),
                 windowSize: ema50.options().windowSize,
-                echo: "some echo here"
               }
             ]}
           />
