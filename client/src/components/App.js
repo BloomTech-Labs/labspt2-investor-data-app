@@ -1,20 +1,24 @@
-import React, {Component} from 'react';
-import {withRouter} from 'react-router';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import React, { Component } from "react";
+import { withRouter } from "react-router";
+import { Switch, Route, Redirect } from "react-router-dom";
 
-import Navigation from '../components/Navigation';
-import Landing from '../components/Landing';
-import Dashboard from '../components/Dashboard';
-import Settings from '../components/Settings';
-import Billing from '../components/Billing';
-import Reports from '../components/Reports';
-import * as ROUTES from '../constants/routes';
-import './App.css';
-import Signin from './Auth/Signin';
-import {fire} from './Auth/firebaseConfig';
-import axios from 'axios';
+import Navigation from "../components/Navigation";
+import Landing from "../components/Landing";
+import Dashboard from "../components/Dashboard";
+import Settings from "../components/Settings";
+import Billing from "../components/Billing";
+import Reports from "../components/Reports";
+import * as ROUTES from "../constants/routes";
+import "./App.css";
+import Signin from "./Auth/Signin";
+import { fire } from "./Auth/firebaseConfig";
+import axios from "axios";
 
-const AuthenticatedRoute = ({component: Component, authenticated, ...rest}) => {
+const AuthenticatedRoute = ({
+  component: Component,
+  authenticated,
+  ...rest
+}) => {
   return (
     <Route
       {...rest}
@@ -22,7 +26,9 @@ const AuthenticatedRoute = ({component: Component, authenticated, ...rest}) => {
         authenticated === true ? (
           <Component {...props} {...rest} />
         ) : (
-          <Redirect to={{pathname: '/signin', state: {from: props.location}}} />
+          <Redirect
+            to={{ pathname: "/signin", state: { from: props.location } }}
+          />
         )
       }
     />
@@ -36,14 +42,14 @@ class App extends Component {
     lastName: null,
     currentEmail: null,
     userUID: null,
-    redirect: false,
+    redirect: false
   };
 
   componentDidMount = () => {
     this.removeAuthListener = fire.onAuthStateChanged(user => {
       if (user) {
         // Last # of occurrence of Space
-        let space = user.displayName.lastIndexOf(' ');
+        let space = user.displayName.lastIndexOf(" ");
 
         this.setState({
           currentUser: user,
@@ -52,7 +58,7 @@ class App extends Component {
           currentEmail: user.email,
           firstName: user.displayName.substring(0, space),
           lastName: user.displayName.substring(space + 1),
-          userUID: user.uid,
+          userUID: user.uid
         });
         // If the user is the Authenticated use pass their information to the database
 
@@ -63,7 +69,7 @@ class App extends Component {
           authenticated: false,
           redirect: false,
           currentEmail: null,
-          userUID: null,
+          userUID: null
         });
       }
     });
@@ -84,13 +90,8 @@ class App extends Component {
       this.state.lastName,
       this.state.currentEmail,
       this.state.userUID
-<<<<<<< HEAD
     );
-    const endpoint = 'https://pickemm.herokuapp.com/api/users';
-=======
-      );
-      const endpoint = "https://pickemm.herokuapp.com/api/users";
->>>>>>> d2b84f3fe3ce2a7ade689a848a49f7200efe3557
+    const endpoint = "https://pickemm.herokuapp.com/api/users";
     axios
       .post(endpoint, creds)
       .then(res => {
@@ -102,8 +103,8 @@ class App extends Component {
     this.removeAuthListener();
   };
   render() {
-    const {currentUser} = this.state;
-    const {redirect} = this.state;
+    const { currentUser } = this.state;
+    const { redirect } = this.state;
 
     return (
       <div>
