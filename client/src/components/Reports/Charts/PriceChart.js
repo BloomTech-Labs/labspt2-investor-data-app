@@ -21,7 +21,7 @@ class PriceChart extends React.Component {
     const { type, data: initialData, width, ratio } = this.props;
 
     const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(
-      d => d.timestamp
+      d => d.date
     );
     const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(
       initialData
@@ -34,7 +34,7 @@ class PriceChart extends React.Component {
     if (!data.length) {
       return (
         <SpinnerContainer>
-          <GuardSpinner size={30} frontColor="#0066ff" backColor="#ff4400" />
+          <GuardSpinner size={30} frontColor="#373f51" backColor="#ff4400" />
         </SpinnerContainer>
       );
     }
