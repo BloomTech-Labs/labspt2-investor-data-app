@@ -35,7 +35,7 @@ function generateToken(user) {
 }
 
 /********* Get Users *************/
-router.get('/', protect, (req, res) => {
+router.get('/', (req, res) => {
     //router.get("/", (req, res) => {
     users
         .get()
@@ -73,7 +73,7 @@ router.post('/', (req, res) => {
 })
 
 /********* Get Single User *************/
-router.get('/:id', protect, (req, res) => {
+router.get('/:id', (req, res) => {
     const { id } = req.params
     users.getById(id)
         .then(user => {

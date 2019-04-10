@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     billing.integer('accountType').unsigned();
     billing
       .string('usersId')
-      .unsigned()
+      .unique()
       .references('users.uid');
   });
 };

@@ -14,6 +14,12 @@ module.exports = {
     return db('billing');
   },
 
+  // checkAcctType: function(accountType) {
+  //   return db('billing')
+  //         .join('users', 'billing.usersId', '=', 'users.uid')
+  //         .where('accountType', accountType)
+  // },
+
   insert: function(bills) {
     return db('billing').insert(bills);
   },
