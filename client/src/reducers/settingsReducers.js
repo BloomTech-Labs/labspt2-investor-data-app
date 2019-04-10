@@ -7,11 +7,10 @@ const initialState = {
         id: null, 
         firstName: '', 
         lastName: '', 
-        username: '',
         email: '', 
-        password: '',
         receiveEmails: false,
-        receiveTexts: false
+        receiveTexts: false,
+        phoneNumber: ''
     }
 };
 
