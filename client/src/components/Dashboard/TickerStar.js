@@ -24,7 +24,7 @@ class TickerStar extends React.Component{
                 symbol: this.props.id,
                 uid: this.state.uid
             }
-            axios.post('http://www.localhost:5000/api/favorites', newSymbol)
+            axios.post('https://pickemm.herokuapp.com/api/favorites', newSymbol)
                 .then( response => {
                     this.setState({
                         newSymbol: { symbol: '', uid: ''}

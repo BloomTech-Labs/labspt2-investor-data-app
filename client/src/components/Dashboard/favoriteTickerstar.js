@@ -15,15 +15,15 @@ class FavoriteTickerstar extends React.Component{
     }
 
 
-        componentDidMount(){
-            axios.get(`http://www.localhost:5000/api/favorites/?uid=${this.state.uid}`) // <----user favorites
-            .then( response => {
-                this.setState({
-                   stocks: response.data
-                })  
-            })
-            .catch( err => {console.log( 'there was an error')}) 
-        }
+    componentDidMount(){
+        axios.get(`http://www.localhost:5000/api/favorites/?uid=${this.state.uid}`) // <----user favorites
+        .then( response => {
+            this.setState({
+               stocks: response.data
+            })  
+        })
+        .catch( err => {console.log( 'there was an error')}) 
+    }
     
 
     selectHandler = (event) => {
@@ -33,8 +33,7 @@ class FavoriteTickerstar extends React.Component{
                 selected: false,
                 star: 'far fa-star',
             })  
-            
-            axios.delete(`http://www.localhost:5000/api/favorites/${this.state.id}`)
+            axios.delete(`https://pickemm.herokuapp.com/api/favorites/${this.state.id}`)
                 .then( response => {
                     this.setState({
                         stocks: response.data

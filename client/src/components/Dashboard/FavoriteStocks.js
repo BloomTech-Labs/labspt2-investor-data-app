@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import FavoriteTickerstar from './favoriteTickerstar'
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles' 
-import { Input, Form, SearchIcon } from '../Styles/Dashboard/YourFavorites'
 
 
 class FavoriteStocks extends React.Component{
@@ -13,7 +12,6 @@ class FavoriteStocks extends React.Component{
             companies: this.props.companies, // stock company symbols
             stocks: [],
             items: [],
-            search: ''
         }
     }
       
@@ -60,7 +58,6 @@ class FavoriteStocks extends React.Component{
             });
     }
       
-    
     changePercent = (close, start) => {  // function for calculating the change of a stocks gain/loss by %
         let deduct = close - start
         let divide = deduct / start 
