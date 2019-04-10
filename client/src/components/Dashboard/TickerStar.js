@@ -13,8 +13,6 @@ class TickerStar extends React.Component{
         }
     }
 
-    
-
     selectHandler = (event) => {
         event.preventDefault(); 
         if(this.state.selected === false){
@@ -24,7 +22,6 @@ class TickerStar extends React.Component{
             })  
             const newSymbol = {
                 symbol: this.props.id,
-                                          //<------user data to be passed into favorites
                 uid: this.state.uid
             }
             axios.post('http://www.localhost:5000/api/favorites', newSymbol)
@@ -32,6 +29,7 @@ class TickerStar extends React.Component{
                     this.setState({
                         newSymbol: { symbol: '', uid: ''}
                     })
+                    window.location.reload()
                 })
                 .catch( err => { console.log( "we've encountered an error")})
           } else {
@@ -43,7 +41,6 @@ class TickerStar extends React.Component{
     }
 
     render(){
-        console.log(this.state.uid)
         return(
             <div>
                 <i onClick={this.selectHandler} className={this.state.star}></i>

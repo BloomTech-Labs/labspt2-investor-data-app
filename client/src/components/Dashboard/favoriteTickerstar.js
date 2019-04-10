@@ -17,12 +17,12 @@ class FavoriteTickerstar extends React.Component{
 
         componentDidMount(){
             axios.get(`http://www.localhost:5000/api/favorites/?uid=${this.state.uid}`) // <----user favorites
-                .then( response => {
-                    this.setState({
-                       stocks: response.data
-                    })  
-                })
-                .catch( err => {console.log( 'there was an error')})
+            .then( response => {
+                this.setState({
+                   stocks: response.data
+                })  
+            })
+            .catch( err => {console.log( 'there was an error')}) 
         }
     
 
@@ -39,6 +39,7 @@ class FavoriteTickerstar extends React.Component{
                     this.setState({
                         stocks: response.data
                     })
+                    window.location.reload()
                 })
                 .catch( err => { console.log( "we've encountered an error")})
           } else {

@@ -13,7 +13,7 @@ class YourFavorites extends React.Component{
             stocks: [],
             items: [],
             uid: firebase.auth().currentUser.uid,
-
+            search: ''
         }
     }
       
@@ -28,36 +28,37 @@ class YourFavorites extends React.Component{
             .catch( err => {console.log( 'there was an error')})
     }
     
- stockHandler = () => {
-     let stock = []
-     {this.state.stocks.map(item => {
-        return stock.push(item.symbol)
-     })}
-     this.setState({
-         companies: stock
-     })
-
-     
- }
-
- render(){
-     if(!this.state.companies.length){
-          return "one moment"
-     }
-      console.log(this.state.companies)
-
-        return (
-            <div>
-                <Form> 
-                    <SearchIcon><i className= 'fa fa-search' /></SearchIcon>
-                    <Input type="text" placeholder="Search..."/> 
-                </Form>          
-                <div>
-                 <FavoriteStocks companies={this.state.companies} /> 
-                </div> 
-            </div> 
-        )
+    stockHandler = () => {
+        let stock = []
+        {this.state.stocks.map(item => {
+           return stock.push(item.symbol)
+        })}
+        this.setState({
+            companies: Array.from(new Set(stock))
+        }) 
     }
-}
 
-export default YourFavorites
+
+    render(){
+
+        if(!this.state.companies.length){
+             return "You currently have no favorites"
+        }
+
+           return (
+               <div>
+                   <Form> 
+                       <SearchIcon><i className= 'fa fa-search' /></SearchIcon>
+                       <Input id='search-bar' 
+                              type="text" 
+                              placeholder="Search..."/>              
+                   </Form>          
+                   <div>
+                    <FavoriteStocks companies={this.state.companies} /> 
+                   </div> 
+               </div> 
+           )
+       }
+    }
+
+    export default YourFavorites

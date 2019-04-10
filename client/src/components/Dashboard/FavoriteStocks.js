@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import FavoriteTickerstar from './favoriteTickerstar'
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles' 
+import { Input, Form, SearchIcon } from '../Styles/Dashboard/YourFavorites'
+
 
 class FavoriteStocks extends React.Component{
     constructor(props){
@@ -10,15 +12,14 @@ class FavoriteStocks extends React.Component{
             timeStamp: {},
             companies: this.props.companies, // stock company symbols
             stocks: [],
-            items: []
+            items: [],
+            search: ''
         }
     }
       
     componentDidMount(){
         this.fetchFavorites()
-        console.log(this.state.companies)
     }
-      
 
     fetchFavorites = () => {
         let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
@@ -128,7 +129,7 @@ class FavoriteStocks extends React.Component{
                             <p>{stock.company}</p> 
                         </StockSymbol> 
                         <Star>
-                            <FavoriteTickerstar stock={this.state.stocks} id={stock.company} /> 
+                            <FavoriteTickerstar id={stock.company} /> 
                         </Star> 
                     </Row> 
                     <br />
