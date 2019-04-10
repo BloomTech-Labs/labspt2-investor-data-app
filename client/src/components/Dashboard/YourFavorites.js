@@ -8,14 +8,14 @@ class YourFavorites extends React.Component{
         super();
         this.state = {
             timeStamp: {},
-            companies: [], // stock company symbols
+            companies: ['DJI'], // stock company symbols
             stocks: [],
             items: []
         }
     }
       
     componentDidMount(){
-        axios.get(`https://pickemm.herokuapp.com/api/favorites`)
+        axios.get(`http://www.localhost:5000/api/favorites/10`)
             .then( response => {
                 this.setState({
                    stocks: response.data
@@ -30,10 +30,10 @@ class YourFavorites extends React.Component{
       
 
  render(){
-     if(!this.state.companies.length){
-         return <div>Loading...</div> 
-     }
-    console.log(this.state.companies)
+     //if(!this.state.companies.length){
+     //    return <div>Loading...</div> 
+     //}
+     console.log(this.state.stocks)
         return (
             <div>
                 <Form> 
@@ -41,7 +41,7 @@ class YourFavorites extends React.Component{
                     <Input type="text" placeholder="Search..."/> 
                 </Form>          
                 <div>
-                    <FavoriteStocks companies={this.state.companies} /> 
+                 <FavoriteStocks companies={this.state.companies} /> 
                 </div> 
             </div> 
         )
