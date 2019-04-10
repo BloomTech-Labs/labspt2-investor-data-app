@@ -42,11 +42,17 @@ class Settings extends React.Component {
                     Settings
                 </Typography>
                 {/* Form to update email address */}
-                <EmailForm /> 
+                <EmailForm 
+                    className={classes.container}   
+                /> 
                 {/* Form to update phone number */}
-                <PhoneForm /> 
+                <PhoneForm 
+                    className={classes.container}
+                /> 
                 {/* Form to opt in/out for texts and emails */}
-                <OptEmailsTextsForm/>
+                <OptEmailsTextsForm
+                    className={classes.container}
+                />
             </div>
         )
     };

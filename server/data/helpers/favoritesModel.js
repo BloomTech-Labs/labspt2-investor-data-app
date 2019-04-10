@@ -2,8 +2,7 @@ const db = require('../dbConfig.js');
 
 module.exports = {
 
-
-    get: async function (users_id) {
+    get: async function (id) {
         let query = db('favorites');
         if (users_id) {
             query.where('users_id', users_id).first();

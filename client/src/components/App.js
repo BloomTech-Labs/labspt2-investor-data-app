@@ -49,8 +49,8 @@ class App extends Component {
     this.removeAuthListener = fire.onAuthStateChanged(user => {
       if (user) {
         // Last # of occurrence of Space
-        let space = user.displayName.lastIndexOf(" "); 
-        
+        let space = user.displayName.lastIndexOf(" ");
+
         this.setState({
           currentUser: user,
           authenticated: true,
@@ -61,9 +61,8 @@ class App extends Component {
           userUID: user.uid
         });
         // If the user is the Authenticated use pass their information to the database
-        
-        this.addCurrentUser(user);
 
+        this.addCurrentUser(user);
       } else {
         this.setState({
           currentUser: null,
@@ -77,10 +76,9 @@ class App extends Component {
   };
   //To sign out an get no error with firebase dropping the widget
   removeAuthListener: any;
- 
+
   // Add current user method will grab the information from state create new user in our database
-  addCurrentUser = ()=> {
-  
+  addCurrentUser = () => {
     function newUser(firstName, lastName, email, uid) {
       this.firstName = firstName;
       this.lastName = lastName;
@@ -92,15 +90,15 @@ class App extends Component {
       this.state.lastName,
       this.state.currentEmail,
       this.state.userUID
-      );
-      const endpoint = "https://pickemm.herokuapp.com/api/users";
-      axios
+    );
+    const endpoint = "https://pickemm.herokuapp.com/api/users";
+    axios
       .post(endpoint, creds)
       .then(res => {
-        console.log(res)
+        console.log(res);
       })
       .catch(err => console.log(err));
-  }
+  };
   componentWillUnmount = () => {
     this.removeAuthListener();
   };
@@ -123,7 +121,14 @@ class App extends Component {
             path={ROUTES.SETTINGS}
             component={Settings}
           />
-          <Route path={ROUTES.BILLING} component={Billing} />
+          <Route
+            path={ROUTES.BILLING}
+            render={props => {
+              return (
+                <Billing authenticated={this.state.authenticated} {...props} />
+              );
+            }}
+          />
           <AuthenticatedRoute
             authenticated={this.state.authenticated}
             path={ROUTES.REPORTS}
@@ -134,7 +139,7 @@ class App extends Component {
             path={ROUTES.SIGNIN}
             render={props => {
               return (
-                <Signin user={currentUser}  redirect={redirect} {...props} />
+                <Signin user={currentUser} redirect={redirect} {...props} />
               );
             }}
           />
