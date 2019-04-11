@@ -15,9 +15,9 @@ module.exports = {
   },
 
   checkAcctType: function(acct) {
-    return db('billing')
-          .join('users', 'billing.usersId', 'users.uid')
-          .where('accountType', acct)
+    let query = db('billing');
+      query.where('usersId', acct)
+      return query
   },
 
   insert: function(bills) {
