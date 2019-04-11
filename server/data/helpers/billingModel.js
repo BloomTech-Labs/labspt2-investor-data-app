@@ -14,11 +14,11 @@ module.exports = {
     return db('billing');
   },
 
-  // checkAcctType: function(accountType) {
-  //   return db('billing')
-  //         .join('users', 'billing.usersId', '=', 'users.uid')
-  //         .where('accountType', accountType)
-  // },
+  checkAcctType: function(acct) {
+    return db('billing')
+          .join('users', 'billing.usersId', 'users.uid')
+          .where('accountType', acct)
+  },
 
   insert: function(bills) {
     return db('billing').insert(bills);

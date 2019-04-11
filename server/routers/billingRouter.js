@@ -37,20 +37,7 @@ router.get('/:id', async (req, res) => {
     });
 });
 
-router.get('/acct', async (req, res) => {
-  const {acct} = req.params;
 
-  await billing.checkAcctType(acct.accountType)
-    .then(type => {
-    if(Number(type)) {
-      res.json(typeof type)
-    }
-    else {
-      res.status(500).send({message: 'The account does not exists'})
-    }
-  })
-  
-});
 
 
 // /************* Delete Bill *************/

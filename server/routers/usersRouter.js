@@ -4,7 +4,7 @@ const users = require("../data/helpers/usersModel");
 //const axios = require("axios");
 const jwt = require('jsonwebtoken');
 const secret = 'shhhisthisasecret';
-
+const billing = require('../data/helpers/billingModel')
 module.exports = router => {
     router.get("/:id", userById);
     router.put("/:id", update);
@@ -71,6 +71,32 @@ router.post('/', (req, res) => {
     })
 
 })
+
+
+router.get('/:id/:acct', async (req, res) => {
+    const {acct} = req.params;
+    const {id} = req.params
+    console.log(acct)
+   
+    await users.getById(id).then( id => {
+    if(id) {  
+        billing.checkAcctType(acct)
+        .then(type => {
+            console.log("Billing UID", acct)  
+          if(type.accountType){
+            console.log(type)
+              console.log('Billing Response', type.accountType)
+            res.status(200).json(type)
+          }
+          else {
+            res.status(500).send({message: 'The account does not exists'})
+          }
+        })
+    
+}    }
+    )
+    
+  });
 
 /********* Get Single User *************/
 router.get('/:id', (req, res) => {
