@@ -2,50 +2,61 @@ import React from 'react'
 import axios from 'axios'
 import { Input, Form, SearchIcon } from '../Styles/Dashboard/YourFavorites'
 import FavoriteStocks from './FavoriteStocks'
+import firebase from 'firebase'
 
 class YourFavorites extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             timeStamp: {},
-            companies: ['DJI'], // stock company symbols
+            companies: [], // stock company symbols
             stocks: [],
-            items: []
+            items: [],
+            uid: firebase.auth().currentUser.uid,
         }
     }
       
     componentDidMount(){
-        axios.get(`http://www.localhost:5000/api/favorites/10`)
+        axios.get(`https://pickemm.herokuapp.com/api/favorites/?uid=${this.state.uid}`) // <----user favorites
             .then( response => {
                 this.setState({
                    stocks: response.data
-                   // companies: response.data.symbol
                 })  
-                }
-            )
+                this.stockHandler()
+            })
             .catch( err => {console.log( 'there was an error')})
     }
-
     
-      
-
- render(){
-     //if(!this.state.companies.length){
-     //    return <div>Loading...</div> 
-     //}
-     console.log(this.state.stocks)
-        return (
-            <div>
-                <Form> 
-                    <SearchIcon><i className= 'fa fa-search' /></SearchIcon>
-                    <Input type="text" placeholder="Search..."/> 
-                </Form>          
-                <div>
-                 <FavoriteStocks companies={this.state.companies} /> 
-                </div> 
-            </div> 
-        )
+    stockHandler = () => {
+        let stock = []
+        {this.state.stocks.map(item => {
+           return stock.push(item.symbol)
+        })}
+        this.setState({
+            companies: Array.from(new Set(stock))
+        }) 
     }
-}
 
-export default YourFavorites
+    render(){
+
+        if(!this.state.companies.length){
+             return "You currently have no favorites"
+        }
+
+           return (
+               <div>
+                   <Form> 
+                       <SearchIcon><i className= 'fa fa-search' /></SearchIcon>
+                       <Input id='search-bar' 
+                              type="text" 
+                              placeholder="Search..."/>              
+                   </Form>          
+                   <div>
+                       <FavoriteStocks companies={this.state.companies} /> 
+                   </div> 
+               </div> 
+           )
+       }
+    }
+
+    export default YourFavorites
