@@ -1,4 +1,6 @@
 import React from 'react';
+import firebase from 'firebase';
+
 
 // Redux imports
 import { connect } from 'react-redux';
@@ -22,9 +24,20 @@ class OptEmailsTextsForm extends React.Component {
         }
     }
 
+    componentDidMount(){
+        const uid = firebase.auth().currentUser.uid;
+        this.props.getSettings('4');
+        const currentSettings = this.props.settings;
+        this.setState({
+            receiveEmails: currentSettings.receiveEmails,
+            receiveTexts: currentSettings.receiveTexts
+        });
+    };
+
     handleSwitch = name => event => {
+        event.preventDefault();
         this.setState({ [name]: event.target.checked });
-        this.props.updateSettings('1', this.state);
+        this.props.updateSettings('4', this.state);
     };
 
     render(){
@@ -32,11 +45,11 @@ class OptEmailsTextsForm extends React.Component {
         const { classes } = this.props;
 
         return(
-            <FormGroup row>
+            <div>
                 <FormControlLabel
                     control={
                         <Switch
-                            checked={this.props.settings.receiveEmails}
+                            checked={this.state.receiveEmails}
                             onChange={this.handleSwitch('receiveEmails')}
                             value='receiveEmails'
                             color='primary'
@@ -48,7 +61,7 @@ class OptEmailsTextsForm extends React.Component {
                 <FormControlLabel
                     control={
                         <Switch
-                            checked={this.props.settings.receiveTexts}
+                            checked={this.state.receiveTexts}
                             onChange={this.handleSwitch('receiveTexts')}
                             value='receiveTexts'
                             color='primary'
@@ -57,7 +70,7 @@ class OptEmailsTextsForm extends React.Component {
                     label='Texts?'
                     className={classes.optSwitch}
                 />
-            </FormGroup>
+            </div>
         );
     };
 };
