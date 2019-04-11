@@ -178,7 +178,7 @@ class Pricing extends Component {
                         <Button
                           fullWidth
                           variant={tier.buttonVariant}
-                          color="primary"
+                          color="secondary"
                         >
                           <Link to={ROUTES.SIGNIN} style={{color: 'white'}}>
                             Get Started
