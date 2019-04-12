@@ -15,7 +15,7 @@ import {Link} from 'react-router-dom';
 
 import * as ROUTES from '../../constants/routes';
 import Checkout from '../Stripe/checkout';
-import {fire} from '../Auth/firebaseConfig';
+// import {fire} from '../Auth/firebaseConfig';
 
 const styles = theme => ({
   '@global': {
@@ -93,9 +93,9 @@ const tiers = [
   },
 ];
 class Pricing extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     const {classes} = this.props;

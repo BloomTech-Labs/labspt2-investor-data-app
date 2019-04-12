@@ -4,10 +4,11 @@ const users = require("../data/helpers/usersModel");
 //const axios = require("axios");
 const jwt = require('jsonwebtoken');
 const secret = 'shhhisthisasecret';
-
+const billing = require('../data/helpers/billingModel')
 module.exports = router => {
     router.get("/:uid", userById);
     router.put("/:uid", update);
+    router.get("/:id/:acct", userByAcct )
 }
 
 /************************************ USERS SECTION ***********************************/
@@ -35,7 +36,7 @@ function generateToken(user) {
 }
 
 /********* Get Users *************/
-router.get('/', protect, (req, res) => {
+router.get('/', (req, res) => {
     //router.get("/", (req, res) => {
     users
         .get()
@@ -53,8 +54,8 @@ router.post('/', (req, res) => {
     // check if user in database has the same email as user loging in. Go ahead and log the user in
     users.checkEmail(user.email).then(addUser => {
         if (addUser.length) {
-            const token = generateToken(user)
-            res.status(201).json({ id: user.id, token });
+            // const token = generateToken(user)
+            // res.status(201).json({ id: user.id, token });
             res.status(200).json({message: "Logged In Successfully"})
         } else {
             users.insert(user)
@@ -72,8 +73,28 @@ router.post('/', (req, res) => {
 
 });
 
+// Get the user associated with billing account
+router.get('/:id/:acct', async (req, res) => {
+    const {acct} = req.params;
+    const {id} = req.params
+   
+    await users.getById(id).then(id => {
+        if(id){
+            billing.checkAcctType(acct).then(type =>{
+                if(acct === id.uid){
+                    res.status(200).json(type)
+                }
+                else {
+                    res.status(500).json({message: "The account is not associated with that billing account"})
+                }
+            })
+        }
+    })
+  });
+
+  
 /********* Get Single User *************/
-router.get('/:uid', protect, (req, res) => {
+router.get('/:uid', (req, res) => {
     const { uid } = req.params
     users.getByUid(uid)
         .then(user => {
