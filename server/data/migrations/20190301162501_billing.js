@@ -3,8 +3,7 @@ exports.up = function(knex, Promise) {
     billing.increments('id');
     billing.integer('accountType').unsigned();
     billing
-      .string('uid')
-      .unsigned()
+      .string('usersId')
       .references('users.uid');
   });
 };

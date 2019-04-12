@@ -91,9 +91,8 @@ class App extends Component {
       this.state.currentEmail,
       this.state.userUID
     );
-    //const endpoint = "https://pickemm.herokuapp.com/api/users";
-    const endpoint = "http://localhost:5000/api/users";
-    axios
+    const endpoint = "https://pickemm.herokuapp.com/api/users";
+   axios
       .post(endpoint, creds)
       .then(res => {
         console.log(res);

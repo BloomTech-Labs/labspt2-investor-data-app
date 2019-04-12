@@ -5,7 +5,12 @@ module.exports = {
     return db("users");
   },
 
-  getById: uid => {
+  getById: id =>{
+   return db('users')
+          .where('id', id)
+          .first()
+  },
+  getByUid: uid => {
     let query = db("users");
     if (uid) {
       query.where("uid", uid).first();
@@ -34,23 +39,9 @@ module.exports = {
       .del();
   },
 
- // findByUsername: username => {
- //   return db("users")
- //     .where("username", username)
- //     .first();
-//  },
-
-  findById: uid => {
+  findByUid: uid => {
     return db("users")
       .where("uid", uid)
       .first();
-  },
-
-//  findUsers: () => {
- //   return db("users").select("id", "username");
-//  },
-
- // find: () => {
- //   return db("users").select("id", "username");
-//  }
+  }
 };

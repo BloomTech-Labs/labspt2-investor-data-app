@@ -4,8 +4,8 @@ module.exports = {
 
     get: async function (uid) {
         let query = db('favorites');
-        if (uid) {
-            query.where('favorites.uid', uid).first();
+        if (users_id) {
+            query.where('users_id', users_id).first();
             return query;
         }
         return db('favorites')
