@@ -5,7 +5,27 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from '@material-ui/core/Tooltip';
 import { Typography } from "@material-ui/core";
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles'
+
+const styles = {
+    card: {
+      //minWidth: 175,
+    },
+    bullet: {
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)',
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 4,
+    },
+  };
 
 class LiveTicker extends React.Component {
     constructor() {
@@ -116,10 +136,13 @@ class LiveTicker extends React.Component {
         const open = '1. open'
         const close = '4. close'
         const volume = '5. volume'
+        const { classes } = this.props;
 
         this.state.stocks.forEach((stock, index) => {  // Loops through array of stock values and creates a table
             console.log(stock)
             rows.push(
+                <Card className={classes.card} key={index}>
+                 <CardContent>
                 <TickerContainer key={index}>
                     <Row>
                         <StockSymbol>
@@ -142,9 +165,9 @@ class LiveTicker extends React.Component {
                         <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p>
                         <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
                     </Row>
-                    <br />
-                    <hr />
                 </TickerContainer>
+                </CardContent>
+                </Card> 
             )
         });
 
@@ -156,4 +179,4 @@ class LiveTicker extends React.Component {
     }
 }
 
-export default LiveTicker
+export default  withStyles(styles)(LiveTicker);

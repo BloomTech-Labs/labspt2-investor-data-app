@@ -54,15 +54,15 @@ router.post('/', (req, res) => {
     // check if user in database has the same email as user loging in. Go ahead and log the user in
     users.checkEmail(user.email).then(addUser => {
         if (addUser.length) {
-            // const token = generateToken(user)
-            // res.status(201).json({ id: user.id, token });
+         //    const token = generateToken(user)
+         //    res.status(201).json({ id: user.id, token });
             res.status(200).json({message: "Logged In Successfully"})
         } else {
             users.insert(user)
                 .then(user => {
                     const token = generateToken(user)
                     res.status(201).json({ id: user.id, token });
-                    // res.status(201).json(user)
+                     res.status(201).json(user)
                 })
                 .catch(err => {
                     res.status(500).send(err)

@@ -41,8 +41,7 @@ class Dashboard extends Component {
               alignItems="center"
               justify="center"
               container
-              className={classes.grid}
-            >
+              className={classes.grid}>
               <Grid item xs={12}>
                 <div className={classes.block}>
                   <Typography variant="h6" gutterBottom>
