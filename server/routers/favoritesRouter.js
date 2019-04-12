@@ -18,9 +18,9 @@ router.get('/', async (req, res) => {
 
 
 /********* Get Single Favorite *************/
-router.get('/:id', async (req, res) => {
-    const { id } = req.params
-  await favorites.get(id)
+router.get('/:uid', async (req, res) => {
+    const { uid } = req.params
+  await favorites.get(uid)
         .then(favorite => {
             if (favorite) {
                 res.json(favorite);
@@ -39,11 +39,11 @@ router.get('/:id', async (req, res) => {
 
 
 /************* Delete Favorite *************/
-router.delete('/:id', (req, res) => {
-    const { id } = req.params
+router.delete('/:uid', (req, res) => {
+    const { uid } = req.params
 
-    if (id) {
-        favorites.remove(id)
+    if (uid) {
+        favorites.remove(uid)
             .then(favorite => {
                 if (favorite) {
                     res.json({ message: "The favorite was successfully deleted" });
@@ -62,17 +62,17 @@ router.delete('/:id', (req, res) => {
 });
 
 /********* Update Favorite *************/
-router.put('/:id', (req, res) => {
-    const { id } = req.params
+router.put('/:uid', (req, res) => {
+    const { uid } = req.params
     const newFavorite = req.body
-    if (!newFavorite.symbol || !newFavorite.target || !newFavorite.users_id) {
+    if (!newFavorite.symbol || !newFavorite.uid) {
         res
             .status(400)
             .json({ message: "Please provide symbol, target and users_id for the favorite." });
     } else {
        
         if (newFavorite) {
-            favorites.update(id, newFavorite)
+            favorites.update(uid, newFavorite)
                 .then(favorite => {  
                         if (favorite) {
                             res
@@ -98,9 +98,9 @@ router.put('/:id', (req, res) => {
 })
 
 /********* Create New Favorite *************/
-router.post('/', (req, res, next) => {
+router.post('/', (req, res) => {
     const favorite = req.body;
-    if (favorite.symbol && favorite.target && favorite.users_id) {
+    if (favorite.symbol && favorite.uid) {
         favorites.insert(favorite)
             .then(favorite => {
                 res.status(201)
@@ -114,7 +114,7 @@ router.post('/', (req, res, next) => {
     } else {
         res
             .status(400)
-            .json({ message: "missing symbol, target and/or users_id." })
+            .json({ message: "missing symbol, target and/or usersId." })
     }
 });
 

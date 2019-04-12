@@ -4,13 +4,9 @@ exports.up = function (knex, Promise) {
       favorites.increments();
       favorites.string('symbol', 128).notNullable();
       favorites
-        .integer("target")
+        .string('uid')
         .unsigned()
-        .notNullable();
-      favorites
-        .integer('users_id')
-        .unsigned()
-        .references('users.id');
+        .references('users.uid');
     })
   ])
 };

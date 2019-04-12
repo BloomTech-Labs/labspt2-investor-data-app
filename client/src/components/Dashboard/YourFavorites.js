@@ -15,10 +15,12 @@ class YourFavorites extends React.Component{
     }
       
     componentDidMount(){
-        axios.get(`https://pickemm.herokuapp.com/api/favorites`)
+       axios.get(`http://localhost:5000/api/favorites`)
+      //  axios.get(`https://pickemm.herokuapp.com/api/favorites`)
             .then( response => {
                 this.setState({
                    stocks: response.data
+                  // companies: response.data
                    // companies: response.data.symbol
                 })  
                 }

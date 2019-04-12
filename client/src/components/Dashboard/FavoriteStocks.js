@@ -21,7 +21,7 @@ class FavoriteStocks extends React.Component{
 
     fetchFavorites = () => {
         let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
-            axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=ZV7Y9QKGXRHCY0A4`));
+            axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`));
         this.fetchStocks(promises)
     }
       
@@ -120,7 +120,7 @@ class FavoriteStocks extends React.Component{
         const volume = '5. volume'
     
         this.state.stocks.forEach( (stock, index) => {  // Loops through array of stock values and creates a table
-            console.log(stock)
+            console.log("stock:", stock)
             rows.push(
                 <TickerContainer key={index}>
                     <Row>

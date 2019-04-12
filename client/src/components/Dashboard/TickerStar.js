@@ -21,15 +21,18 @@ class TickerStar extends React.Component{
                 star: 'fa fa-star',
             })  
             const newSymbol = {
-                id: 9,
                 symbol: this.props.id,
-                target: 1,
-                users_id: 10
+               // symbol: "MSFT",
+               usersId: this.state.uid
             }
-            axios.post('http://www.localhost:5000/api/favorites', newSymbol)
-                .then( response => {
+            console.log( "new symbol:", newSymbol)
+            
+            axios.post('http://localhost:5000/api/favorites', newSymbol)
+          //  axios.post('https://pickemm.herokuapp.com/api/favorites', newSymbol)
+                
+            .then( response => {
                     this.setState({
-                        newSymbol: { symbol: '', target: null, users_id: null}
+                        newSymbol: { symbol: '', usersId: ""}
                     })
                 })
                 .catch( err => { console.log( "we've encountered an error")})
@@ -45,7 +48,7 @@ class TickerStar extends React.Component{
         //firebase.auth().onAuthStateChanged( user => {
         //    if (user) { this.state.uid = user.uid }
         //  });
-       console.log(this.state.uid)
+       console.log("uid:", this.state.uid)
         return(
             <div>
                 <i onClick={this.selectHandler} className={this.state.star}></i>

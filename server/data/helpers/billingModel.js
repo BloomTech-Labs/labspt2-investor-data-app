@@ -5,10 +5,10 @@ module.exports = {
     return db('billing');
   },
 
-  get: function(id) {
+  get: function(uid) {
     let query = db('billing');
-    if (id) {
-      query.where('billing.id', id).first();
+    if (uid) {
+      query.where('billing.uid', uid).first();
       return query;
     }
     return db('billing');
@@ -18,16 +18,16 @@ module.exports = {
     return db('billing').insert(bills);
   },
 
-  update: function(id, changes) {
+  update: function(uid, changes) {
     return db('billing')
-      .where('id', id)
+      .where('uid', uid)
       .update(changes)
-      .then(count => (count > 0 ? this.get(id) : null));
+      .then(count => (count > 0 ? this.get(uid) : null));
   },
 
-  remove: function(id) {
+  remove: function(uid) {
     return db('billing')
-      .where('id', id)
+      .where('uid', uid)
       .del();
   },
 };

@@ -6,8 +6,8 @@ const jwt = require('jsonwebtoken');
 const secret = 'shhhisthisasecret';
 
 module.exports = router => {
-    router.get("/:id", userById);
-    router.put("/:id", update);
+    router.get("/:uid", userById);
+    router.put("/:uid", update);
 }
 
 /************************************ USERS SECTION ***********************************/
@@ -26,7 +26,7 @@ function protect(req, res, next) {
 //************************************************** */
 function generateToken(user) {
     const payload = {
-        user: user.id,
+        users: user.uid,
     };
     const options = {
         expiresIn: '1h'
@@ -54,13 +54,13 @@ router.post('/', (req, res) => {
     users.checkEmail(user.email).then(addUser => {
         if (addUser.length) {
             const token = generateToken(user)
-            res.status(201).json({ id: user.id, token });
-            res.status(200).json({message: "Logged In Successfully"})
+            res.status(201).json({ uid: user.uid, token });
+           res.status(200).json({message: "Logged In Successfully"})
         } else {
             users.insert(user)
                 .then(user => {
                     const token = generateToken(user)
-                    res.status(201).json({ id: user.id, token });
+                    res.status(201).json({ uid: user.uid, token });
                     // res.status(201).json(user)
                 })
                 .catch(err => {
@@ -73,9 +73,9 @@ router.post('/', (req, res) => {
 })
 
 /********* Get Single User *************/
-router.get('/:id', protect, (req, res) => {
-    const { id } = req.params
-    users.getById(id)
+router.get('/:uid', protect, (req, res) => {
+    const { uid } = req.params
+    users.getById(uid)
         .then(user => {
             if (user) {
                 res.json(user);
@@ -93,13 +93,13 @@ router.get('/:id', protect, (req, res) => {
 });
 
 // Update user's settings
-router.put('/:id', (req, res) => {
-    const { id } = req.params;
+router.put('/:uid', (req, res) => {
+    const { uid } = req.params;
     const changes = req.body;
-    users.update(id, changes)
+    users.update(uid, changes)
         .then(count => {
             if (count) {
-                users.getById(id)
+                users.getById(uid)
                     .then(user => {
                         // If user's settings have been updated, return the updated user settings.
                         res

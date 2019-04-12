@@ -5,10 +5,10 @@ exports.seed = function(knex, Promise) {
     .then(function() {
       // Inserts seed entries
       return knex('billing').insert([
-        {id: 1, accountType: 1, usersId: '5XVDcbsvwka_bnC'},
-        {id: 2, accountType: 2, usersId: 'luY3BUF5OpoaYiM'},
-        {id: 3, accountType: 3, usersId: '8ar9mNLYHaslfyj'},
-        {id: 4, accountType: 1, usersId: 'R8xKCmhr89UuOM_'},
+        {id: 1, accountType: 1},
+        {id: 2, accountType: 2},
+        {id: 3, accountType: 3},
+        {id: 4, accountType: 1},
       ]);
     });
 };
