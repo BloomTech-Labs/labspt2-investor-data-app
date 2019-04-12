@@ -7,7 +7,10 @@ exports.up = function(knex, Promise) {
       .string("email", 128)
       .notNullable()
       .unique();
-    users.string("uid", 128).unique().notNullable();
+    users
+      .string("uid", 128)
+      .notNullable()
+      .unique();
     users.boolean("receiveEmails").defaultTo(false);
     users.boolean("receiveTexts").defaultTo(false);
   });

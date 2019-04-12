@@ -6,8 +6,9 @@ const jwt = require('jsonwebtoken');
 const secret = 'shhhisthisasecret';
 const billing = require('../data/helpers/billingModel')
 module.exports = router => {
-    router.get("/:id", userById);
-    router.put("/:id", update);
+    router.get("/:uid", userById);
+    router.put("/:uid", update);
+    router.get("/:id/:acct", userByAcct )
 }
 
 /************************************ USERS SECTION ***********************************/
@@ -70,9 +71,9 @@ router.post('/', (req, res) => {
         }
     })
 
-})
+});
 
-
+// Get the user associated with billing account
 router.get('/:id/:acct', async (req, res) => {
     const {acct} = req.params;
     const {id} = req.params
@@ -91,34 +92,35 @@ router.get('/:id/:acct', async (req, res) => {
     })
   });
 
+  
 /********* Get Single User *************/
-router.get('/:id', (req, res) => {
-    const { id } = req.params
-    users.getById(id)
+router.get('/:uid', (req, res) => {
+    const { uid } = req.params
+    users.getByUid(uid)
         .then(user => {
             if (user) {
                 res.json(user);
             } else {
                 res
                     .status(404)
-                    .json({ message: "The user with the specified ID does not exist." })
+                    .json({ message: "The user with the specified user ID does not exist." })
             }
         })
         .catch(err => {
             res
                 .status(500)
-                .json({ error: "The users information could not be retrieved." });
+                .json({ error: "The user's information could not be retrieved." });
         });
 });
 
-// Update user's settings
-router.put('/:id', (req, res) => {
-    const { id } = req.params;
+/************* Update User *************/
+router.put('/:uid', (req, res) => {
+    const { uid } = req.params;
     const changes = req.body;
-    users.update(id, changes)
+    users.update(uid, changes)
         .then(count => {
             if (count) {
-                users.getById(id)
+                users.getByUid(uid)
                     .then(user => {
                         // If user's settings have been updated, return the updated user settings.
                         res
@@ -136,7 +138,7 @@ router.put('/:id', (req, res) => {
                 // If user does not exist, return 404 error.
                 res
                     .status(404)
-                    .json({ message: 'The user with the specified ID does not exist.' });
+                    .json({ message: 'The user with the specified user ID does not exist.' });
             }
         })
         .catch(err => {
@@ -148,13 +150,13 @@ router.put('/:id', (req, res) => {
 });
 
 /************* Delete User *************/
-router.delete('/:id', (req, res) => {
-    const { id } = req.params
-    if (id) {
-        users.remove(id)
+router.delete('/:uid', (req, res) => {
+    const { uid } = req.params
+    if (uid) {
+        users.remove(uid)
             .then(user => {
                 if (user) {
-                    res.json({ message: "The user was successfully deleted" });
+                    res.json({ message: "The user was successfully deleted." });
                 } else {
                     res
                         .status(404)
@@ -166,6 +168,11 @@ router.delete('/:id', (req, res) => {
                     .status(500)
                     .json({ error: "The user could not be removed." });
             });
+    }
+    else {
+        res
+            .status(400)
+            .json({ error: 'No user ID was provided.'})
     }
 });
 
