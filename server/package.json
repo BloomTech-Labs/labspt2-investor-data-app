@@ -8,7 +8,7 @@
     "url": "git+https://github.com/Lambda-School-Labs/labspt2-investor-data-app.git"
   },
   "scripts": {
-    "batch": "knex migrate:rollback && knex migrate:latest && knex seed:run",
+    "batch": "knex migrate:rollback && knex migrate:latest",
     "server": "nodemon index.js",
     "test": "cross-env DB_ENV=testing jest --watch --verbose",
     "start": "node index.js"
