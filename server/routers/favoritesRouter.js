@@ -18,9 +18,9 @@ router.get('/', async (req, res) => {
 
 
 /********* Get Single Favorite *************/
-router.get('/:id', async (req, res) => {
-    const { id } = req.params
-  await favorites.get(id)
+router.get('/:users_id', async (req, res) => {
+    const { users_id } = req.params
+  await favorites.get(users_id)
         .then(favorite => {
             if (favorite) {
                 res.json(favorite);

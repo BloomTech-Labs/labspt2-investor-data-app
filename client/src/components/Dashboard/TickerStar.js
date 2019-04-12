@@ -9,7 +9,6 @@ class TickerStar extends React.Component{
             selected: false,
             star: 'far fa-star',
             stock: [],
-            uid: firebase.auth().currentUser.uid
         }
     }
 
@@ -21,7 +20,7 @@ class TickerStar extends React.Component{
                 star: 'fa fa-star',
             })  
             const newSymbol = {
-                id: 9,
+                
                 symbol: this.props.id,
                 target: 1,
                 users_id: 10
@@ -42,10 +41,10 @@ class TickerStar extends React.Component{
     }
 
     render(){
+
         //firebase.auth().onAuthStateChanged( user => {
         //    if (user) { this.state.uid = user.uid }
         //  });
-       console.log(this.state.uid)
         return(
             <div>
                 <i onClick={this.selectHandler} className={this.state.star}></i>
