@@ -48,7 +48,7 @@ router.get('/', (req, res) => {
 });
 
 /****** Add a User ******/
-router.post('/', (req, res) => {
+router.post('/',protect, (req, res) => {
     const user = req.body
     // check if user in database has the same email as user loging in. Go ahead and log the user in
     users.checkEmail(user.email).then(addUser => {
