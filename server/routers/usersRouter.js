@@ -36,7 +36,6 @@ function generateToken(user) {
 
 /********* Get Users *************/
 router.get('/', protect, (req, res) => {
-    // router.get("/", (req, res) => {
     users
         .get()
         .then(user => {
