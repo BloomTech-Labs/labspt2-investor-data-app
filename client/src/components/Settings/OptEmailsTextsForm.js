@@ -18,20 +18,11 @@ import styles from './styles';
 class OptEmailsTextsForm extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            receiveEmails: null,
-            receiveTexts: null
-        };
     };
 
     componentDidMount(){
         const uid = firebase.auth().currentUser.uid;
         this.props.getSettings('vcd20i1k50ferUq');
-        const currentSettings = this.props.settings;
-        this.setState({
-            receiveEmails: currentSettings.receiveEmails,
-            receiveTexts: currentSettings.receiveTexts
-        });
     };
 
     handleSwitch = name => event => {
