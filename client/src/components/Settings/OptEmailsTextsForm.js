@@ -22,12 +22,13 @@ class OptEmailsTextsForm extends React.Component {
 
     componentDidMount(){
         const uid = firebase.auth().currentUser.uid;
-        this.props.getSettings('vcd20i1k50ferUq');
+        this.props.getSettings(uid);
     };
 
     handleSwitch = name => event => {
+        const uid = firebase.auth().currentUser.uid;
         const switchState = { [name]: event.target.checked };
-        this.props.updateSettings('vcd20i1k50ferUq', switchState);
+        this.props.updateSettings(uid, switchState);
     };
 
     render(){
