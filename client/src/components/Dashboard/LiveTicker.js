@@ -8,24 +8,9 @@ import { Typography } from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import styles from "../Styles/Dashboard/styles";
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles'
 
-const styles = {
-    card: {
-      //minWidth: 175,
-    },
-    bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
-    },
-    title: {
-      fontSize: 14,
-    },
-    pos: {
-      marginBottom: 4,
-    },
-  };
 
 class LiveTicker extends React.Component {
     constructor() {
@@ -142,32 +127,32 @@ class LiveTicker extends React.Component {
             console.log(stock)
             rows.push(
                 <Card className={classes.card} key={index}>
-                 <CardContent>
-                <TickerContainer key={index}>
-                    <Row>
-                        <StockSymbol>
-                            <p>{stock.company}</p>
-                        </StockSymbol>
-                        <Tooltip disableFocusListener title={
-                            <Typography color="inherit">Click here to Add/Remove stocks from your favorites</Typography>
-                        }>
-                            <Star>
-                                <TickerStar stocks={this.state.stocks} id={stock.company} />
-                            </Star>
-                        </Tooltip >
-                    </Row>
-                    <br />
-                    <Row>
-                        <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
-                        <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
-                    </Row>
-                    <Row>
-                        <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p>
-                        <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
-                    </Row>
-                </TickerContainer>
-                </CardContent>
-                </Card> 
+                    <CardContent>
+                        <TickerContainer key={index}>
+                            <Row>
+                                <StockSymbol>
+                                    <p>{stock.company}</p>
+                                </StockSymbol>
+                                <Tooltip disableFocusListener title={
+                                    <Typography color="inherit">Click here to Add/Remove stocks from your favorites</Typography>
+                                    }>
+                                    <Star>
+                                        <TickerStar stocks={this.state.stocks} id={stock.company} />
+                                    </Star>
+                                </Tooltip >
+                            </Row>
+                            <br />
+                            <Row>
+                                <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
+                                <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
+                            </Row>
+                            <Row>
+                                <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p>
+                                <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
+                            </Row>
+                        </TickerContainer>
+                    </CardContent>
+                </Card>
             )
         });
 
@@ -179,4 +164,4 @@ class LiveTicker extends React.Component {
     }
 }
 
-export default  withStyles(styles)(LiveTicker);
+export default withStyles(styles)(LiveTicker);

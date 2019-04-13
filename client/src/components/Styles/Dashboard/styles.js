@@ -28,7 +28,10 @@ const styles = theme => ({
     margin: 10,
     width: 40,
     height: 40,
-
+  },
+  card: {
+    marginBottom: 4, 
+    minWidth: 175,
   }
 
 });
