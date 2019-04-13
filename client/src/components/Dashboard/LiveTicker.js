@@ -10,6 +10,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import styles from "../Styles/Dashboard/styles";
 import Slide from '@material-ui/core/Slide';
+import Button from '@material-ui/core/Button';
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles'
 
 
@@ -159,6 +160,14 @@ class LiveTicker extends React.Component {
                             </Row>
                         </TickerContainer>
                     </CardContent>
+                  
+                    <CardActions>
+                    <Tooltip disableFocusListener title={
+                                    <Typography color="inherit">Click here to view the Stock Indicator Charts</Typography>
+                                    }>
+        <Button size="small">Open Report</Button></Tooltip >
+      </CardActions>
+      
                 </Card>
                 </Slide>
             )
