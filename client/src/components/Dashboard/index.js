@@ -61,11 +61,11 @@ class Dashboard extends Component {
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Paper className={classes.paper}>
+              {/*   <Paper className={classes.paper}> */}
                   <Typography variant="h6" gutterBottom>
                     <LiveTicker />
                   </Typography>
-                </Paper>
+            {/*     </Paper> */}
               </Grid>
 
               <Grid item xs={12} md={12}>
