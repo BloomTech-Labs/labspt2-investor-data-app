@@ -11,6 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import styles from "../Styles/Dashboard/styles";
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
+import Zoom from '@material-ui/core/Zoom';
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles'
 
 
@@ -30,7 +31,7 @@ class LiveTicker extends React.Component {
         let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
             axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`));
         this.fetchStocks(promises)
-      
+
         console.log("thisstate:", this.state)
     }
 
@@ -129,47 +130,49 @@ class LiveTicker extends React.Component {
         const volume = '5. volume'
         const { classes } = this.props;
         const { checked } = this.state;
+        let x = 1000;
 
         this.state.stocks.forEach((stock, index) => {  // Loops through array of stock values and creates a table
             console.log(stock)
             rows.push(
-                <Slide direction="left" in={checked} mountOnEnter unmountOnExit key={index}>
-               <Card className={classes.card} key={index}>
-                    <CardContent>
-                        <TickerContainer key={index}>
-                            <Row>
-                                <StockSymbol>
-                                    <p>{stock.company}</p>
-                                </StockSymbol>
-                                <Tooltip disableFocusListener title={
-                                    <Typography color="inherit">Click here to Add/Remove stocks from your favorites</Typography>
+             /*    <Slide direction="left" in={checked} mountOnEnter unmountOnExit key={index}> */
+                 <Zoom in={checked} style={{ transitionDelay: checked ? '0ms' : '0ms' }} key={index}>
+                    <Card className={classes.card} key={index}>
+                        <CardContent>
+                            <TickerContainer key={index}>
+                                <Row>
+                                    <StockSymbol>
+                                        <p>{stock.company}</p>
+                                    </StockSymbol>
+                                    <Tooltip disableFocusListener title={
+                                        <Typography color="inherit">Click here to Add/Remove stocks from your favorites</Typography>
                                     }>
-                                    <Star>
-                                        <TickerStar stocks={this.state.stocks} id={stock.company} />
-                                    </Star>
-                                </Tooltip >
-                            </Row>
-                            <br />
-                            <Row>
-                                <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
-                                <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
-                            </Row>
-                            <Row>
-                                <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p>
-                                <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
-                            </Row>
-                        </TickerContainer>
-                    </CardContent>
-                  
-                    <CardActions>
-                    <Tooltip disableFocusListener title={
-                                    <Typography color="inherit">Click here to view the Stock Indicator Charts</Typography>
-                                    }>
-        <Button size="small">Open Report</Button></Tooltip >
-      </CardActions>
-      
-                </Card>
-                </Slide>
+                                        <Star>
+                                            <TickerStar stocks={this.state.stocks} id={stock.company} />
+                                        </Star>
+                                    </Tooltip >
+                                </Row>
+                                <br />
+                                <Row>
+                                    <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
+                                    <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
+                                </Row>
+                                <Row>
+                                    <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p>
+                                    <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
+                                </Row>
+                            </TickerContainer>
+                        </CardContent>
+                        <CardActions>
+                            <Tooltip disableFocusListener title={
+                                <Typography color="inherit">Click here to view the Stock Indicator Charts</Typography>
+                            }>
+                                <Button size="small">Open Report</Button></Tooltip >
+                        </CardActions>
+
+                    </Card>
+                    </Zoom>
+               /*  </Slide> */
             )
         });
 
