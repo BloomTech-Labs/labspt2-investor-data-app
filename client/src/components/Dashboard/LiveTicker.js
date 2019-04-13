@@ -2,9 +2,10 @@ import React from 'react'
 import axios from 'axios'
 import TickerStar from './TickerStar'
 import PropTypes from "prop-types";
+import { Link as RouterLink } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from '@material-ui/core/Tooltip';
-import { Typography } from "@material-ui/core";
+import { Typography, Link } from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,7 +14,7 @@ import styles from "../Styles/Dashboard/styles";
 import Button from '@material-ui/core/Button';
 import Zoom from '@material-ui/core/Zoom';
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles'
-
+import * as ROUTES from "../../constants/routes";
 
 class LiveTicker extends React.Component {
     constructor() {
@@ -116,7 +117,8 @@ class LiveTicker extends React.Component {
     }
 
     stockHandler = (symbol) => {
-        //using the current stock open the reports page
+        // need to open the reports page using the current symbol
+        // need to speak to colin...
         console.log("symbol:", symbol)
     }
 
@@ -137,44 +139,50 @@ class LiveTicker extends React.Component {
         this.state.stocks.forEach((stock, index) => {  // Loops through array of stock values and creates a table
             console.log(stock)
             rows.push(
-             /*    <Slide direction="left" in={checked} mountOnEnter unmountOnExit key={index}> */
-                 <Zoom in={checked} style={{ transitionDelay: checked ? '0ms' : '0ms' }} key={index}>
-                    <Card className={classes.card} key={index}>
-                        <CardContent>
-                            <TickerContainer key={index}>
-                                <Row>
-                                    <StockSymbol>
-                                        <p>{stock.company}</p>
-                                    </StockSymbol>
-                                    <Tooltip disableFocusListener title={
-                                        <Typography color="inherit">Click here to Add/Remove stocks from your favorites</Typography>
-                                    }>
-                                        <Star>
-                                            <TickerStar stocks={this.state.stocks} id={stock.company} />
-                                        </Star>
-                                    </Tooltip >
-                                </Row>
-                                <br />
-                                <Row>
-                                    <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
-                                    <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
-                                </Row>
-                                <Row>
-                                    <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p>
-                                    <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
-                                </Row>
-                            </TickerContainer>
-                        </CardContent>
-                        <CardActions>
-                            <Tooltip disableFocusListener title={
-                                <Typography color="inherit">Click here to view the Stock Indicator Charts</Typography>
-                            }>
-                                <Button size="small" onClick={() => this.stockHandler(stock.company)}>Open Report</Button></Tooltip >
-                        </CardActions>
-
-                    </Card>
+                <Link component={RouterLink} to={ROUTES.REPORTS} style={{ textDecoration: "none" }}>
+                    <Zoom in={checked} key={index}> 
+                        <Card className={classes.card} key={index}>
+                            <CardContent>
+                                <TickerContainer key={index}>
+                                    <Row>
+                                        <StockSymbol>
+                                            <p>{stock.company}</p>
+                                        </StockSymbol>
+                                        <Tooltip disableFocusListener title={
+                                            <Typography color="inherit">Click here to Add/Remove stocks from your favorites</Typography>
+                                        }>
+                                            <Star>
+                                                <TickerStar stocks={this.state.stocks} id={stock.company} />
+                                            </Star>
+                                        </Tooltip >
+                                    </Row>
+                                    <br />
+                                    <Row>
+                                        <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
+                                        <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
+                                    </Row>
+                                    <Row>
+                                        <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p>
+                                        <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
+                                    </Row>
+                                </TickerContainer>
+                            </CardContent>
+                            <CardActions>
+                                <Tooltip disableFocusListener title={
+                                    <Typography color="inherit">Click here to view the Stock Indicator Reports</Typography>
+                                }>
+                                    <Button
+                                        variant='contained'
+                                        color='secondary'
+                                        className={classes.button}
+                                        onClick={() => this.stockHandler(stock.company)}
+                                    >
+                                        Open Report</Button>
+                                </Tooltip >
+                            </CardActions>
+                        </Card>
                     </Zoom>
-               /*  </Slide> */
+                </Link>
             )
         });
 
