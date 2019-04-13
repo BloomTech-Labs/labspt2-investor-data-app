@@ -36,7 +36,7 @@ function generateToken(user) {
 
 /********* Get Users *************/
 router.get('/', protect, (req, res) => {
-    //router.get("/", (req, res) => {
+    // router.get("/", (req, res) => {
     users
         .get()
         .then(user => {
@@ -73,7 +73,8 @@ router.post('/', (req, res) => {
 });
 
 /********* Get Single User *************/
-router.get('/:uid', protect, (req, res) => {
+// router.get('/:uid', protect, (req, res) => {
+router.get('/:uid', (req, res) => {
     const { uid } = req.params
     users.getByUid(uid)
         .then(user => {
@@ -93,6 +94,7 @@ router.get('/:uid', protect, (req, res) => {
 });
 
 /************* Update User *************/
+// router.put('/:uid', protect, (req, res) => {
 router.put('/:uid', (req, res) => {
     const { uid } = req.params;
     const changes = req.body;

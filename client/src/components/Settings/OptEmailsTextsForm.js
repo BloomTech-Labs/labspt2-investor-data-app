@@ -21,12 +21,12 @@ class OptEmailsTextsForm extends React.Component {
         this.state = {
             receiveEmails: null,
             receiveTexts: null
-        }
-    }
+        };
+    };
 
     componentDidMount(){
         const uid = firebase.auth().currentUser.uid;
-        this.props.getSettings('4');
+        this.props.getSettings('vcd20i1k50ferUq');
         const currentSettings = this.props.settings;
         this.setState({
             receiveEmails: currentSettings.receiveEmails,
@@ -35,9 +35,8 @@ class OptEmailsTextsForm extends React.Component {
     };
 
     handleSwitch = name => event => {
-        event.preventDefault();
-        this.setState({ [name]: event.target.checked });
-        this.props.updateSettings('4', this.state);
+        const switchState = { [name]: event.target.checked };
+        this.props.updateSettings('vcd20i1k50ferUq', switchState);
     };
 
     render(){
@@ -49,7 +48,7 @@ class OptEmailsTextsForm extends React.Component {
                 <FormControlLabel
                     control={
                         <Switch
-                            checked={this.state.receiveEmails}
+                            checked={this.props.settings.receiveEmails}
                             onChange={this.handleSwitch('receiveEmails')}
                             value='receiveEmails'
                             color='primary'
@@ -61,7 +60,7 @@ class OptEmailsTextsForm extends React.Component {
                 <FormControlLabel
                     control={
                         <Switch
-                            checked={this.state.receiveTexts}
+                            checked={this.props.settings.receiveTexts}
                             onChange={this.handleSwitch('receiveTexts')}
                             value='receiveTexts'
                             color='primary'
@@ -84,8 +83,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    getSettings: () => dispatch(getSettings()),
-    updateSettings:  (id, updatedCommPreference) => dispatch(updateSettings(id, updatedCommPreference))
+    getSettings: (uid) => dispatch(getSettings(uid)),
+    updateSettings:  (uid, updatedCommPreference) => dispatch(updateSettings(uid, updatedCommPreference))
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(OptEmailsTextsForm));

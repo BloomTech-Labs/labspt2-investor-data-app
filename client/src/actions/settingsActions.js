@@ -13,8 +13,9 @@ export const getSettings = (uid) => {
         // Dispatch to reducer that current settings are being obtained from API
         dispatch({type: FETCHING});
         axios
-           .get(`https://pickemm.herokuapp.com/api/users/${uid}`)
-           .then(response => {
+            // .get(`https://pickemm.herokuapp.com/api/users/${uid}`)
+            .get(`http://localhost:5000/api/users/${uid}`)
+            .then(response => {
                 console.log("response.data:", response.data)
                 // Dispatch to reducer that settings have been successfully obtained, pass API response as payload
                 dispatch({
@@ -40,7 +41,8 @@ export const updateSettings = (uid, updatedSettings) => {
         dispatch({type: FETCHING});
         axios
             // Update email on file in database
-            .put(`https://pickemm.herokuapp.com/api/users/${uid}`, updatedSettings)
+            // .put(`https://pickemm.herokuapp.com/api/users/${uid}`, updatedSettings)
+            .put(`http://localhost:5000/api/users/${uid}`, updatedSettings)
             .then(response => {
                 // Dispatch to reducer that settings have been successfully updated and obtained, pass API response as payload
                 dispatch({
