@@ -13,8 +13,19 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 class Signin extends Component {
+
+  isIOS = () => {
+    // IF this is IOS redirect if its web use popup
+    if('standalone' in window.navigator && !window.navigator.standalone){
+      return 'redirect'
+    }
+    else {
+      return 'popup'
+    }
+  }
+
   uiConfig = {
-    signInFlow: 'popup',
+    signInFlow: this.isIOS(),
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.FacebookAuthProvider.PROVIDER_ID,
@@ -47,7 +58,7 @@ class Signin extends Component {
           <StyledFirebaseAuth
             uiConfig={this.uiConfig}
             firebaseAuth={fire}
-            user={this.props.user}
+            user={fire.currentUser}
           />
         </Paper>
       </main>

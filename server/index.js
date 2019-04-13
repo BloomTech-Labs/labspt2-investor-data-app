@@ -30,7 +30,7 @@ server.use(bodyParser.json());
 
 //Server response get '/'
 server.get('/', async (req, res) => {
-    res.status(200).json({ response: 'PICKEM Investor-Data App Successfully Launched' })
+    await res.status(200).json({ response: 'PICKEM Investor-Data App Successfully Launched' })
 })
 
 

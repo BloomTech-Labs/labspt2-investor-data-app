@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import firebase from 'firebase'
+
 
 class TickerStar extends React.Component{
     constructor(props){
@@ -25,7 +25,7 @@ class TickerStar extends React.Component{
                 target: 1,
                 users_id: 10
             }
-            axios.post('http://www.localhost:5000/api/favorites', newSymbol)
+            axios.post('https://pickemm.herokuapp.com/api/favorites', newSymbol)
                 .then( response => {
                     this.setState({
                         newSymbol: { symbol: '', target: null, users_id: null}
