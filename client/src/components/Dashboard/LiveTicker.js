@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import styles from "../Styles/Dashboard/styles";
-import Slide from '@material-ui/core/Slide';
+//import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import Zoom from '@material-ui/core/Zoom';
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles'
@@ -31,8 +31,6 @@ class LiveTicker extends React.Component {
         let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
             axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`));
         this.fetchStocks(promises)
-
-        console.log("thisstate:", this.state)
     }
 
     fetchStocks = (promises) => {  // Receives array of companies and returns values of the stock symbols from the api 
@@ -117,6 +115,10 @@ class LiveTicker extends React.Component {
         return str + suffix;
     }
 
+    stockHandler = (symbol) => {
+        //using the current stock open the reports page
+        console.log("symbol:", symbol)
+    }
 
     render() {
         if (!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
@@ -167,7 +169,7 @@ class LiveTicker extends React.Component {
                             <Tooltip disableFocusListener title={
                                 <Typography color="inherit">Click here to view the Stock Indicator Charts</Typography>
                             }>
-                                <Button size="small">Open Report</Button></Tooltip >
+                                <Button size="small" onClick={() => this.stockHandler(stock.company)}>Open Report</Button></Tooltip >
                         </CardActions>
 
                     </Card>
