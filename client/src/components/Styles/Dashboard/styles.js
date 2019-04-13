@@ -7,7 +7,7 @@ const styles = theme => ({
   },
   grid: {
    // width: 1200,
-    width: 600,
+    width: 900,
     margin: `0 ${theme.spacing.unit * 2}px`,
     [theme.breakpoints.down("sm")]: {
       width: "calc(100% - 20px)"
@@ -22,7 +22,7 @@ const styles = theme => ({
   
   },
   block: {
-    padding: theme.spacing.unit * 2
+    padding: theme.spacing.unit * 1
   },
   bigAvatar: {
     margin: 10,

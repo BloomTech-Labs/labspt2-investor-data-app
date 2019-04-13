@@ -15,7 +15,7 @@ export const Form = styled.form`
 position: relative;
 color: #aaa;
 font-size: 16px;
-width: 80%; 
+width: 100%; 
 display: flex; 
 justify-content: center; 
 padding-bottom: 20px; 
