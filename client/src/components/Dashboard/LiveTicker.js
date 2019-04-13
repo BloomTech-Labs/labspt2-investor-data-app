@@ -9,6 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import styles from "../Styles/Dashboard/styles";
+import Slide from '@material-ui/core/Slide';
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles'
 
 
@@ -19,13 +20,17 @@ class LiveTicker extends React.Component {
             timeStamp: {},
             companies: ['DJI', 'NDAQ', 'SPX', 'AAPL', 'AMZN'], // stock company symbols
             stocks: [],
+            checked: false
         }
     }
 
     componentDidMount() {
+        this.setState(state => ({ checked: !state.checked }));
         let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
             axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`));
         this.fetchStocks(promises)
+      
+        console.log("thisstate:", this.state)
     }
 
     fetchStocks = (promises) => {  // Receives array of companies and returns values of the stock symbols from the api 
@@ -122,11 +127,13 @@ class LiveTicker extends React.Component {
         const close = '4. close'
         const volume = '5. volume'
         const { classes } = this.props;
+        const { checked } = this.state;
 
         this.state.stocks.forEach((stock, index) => {  // Loops through array of stock values and creates a table
             console.log(stock)
             rows.push(
-                <Card className={classes.card} key={index}>
+                <Slide direction="left" in={checked} mountOnEnter unmountOnExit key={index}>
+               <Card className={classes.card} key={index}>
                     <CardContent>
                         <TickerContainer key={index}>
                             <Row>
@@ -153,6 +160,7 @@ class LiveTicker extends React.Component {
                         </TickerContainer>
                     </CardContent>
                 </Card>
+                </Slide>
             )
         });
 

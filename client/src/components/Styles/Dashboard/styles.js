@@ -7,7 +7,7 @@ const styles = theme => ({
   },
   grid: {
    // width: 1200,
-    width: 800,
+    width: 600,
     margin: `0 ${theme.spacing.unit * 2}px`,
     [theme.breakpoints.down("sm")]: {
       width: "calc(100% - 20px)"
@@ -30,8 +30,8 @@ const styles = theme => ({
     height: 40,
   },
   card: {
-    marginBottom: 4 
-   // minWidth: 175,
+    marginBottom: 4, 
+    maxWidth: 260
   }
 
 });
