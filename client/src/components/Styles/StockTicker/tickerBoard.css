@@ -62,7 +62,7 @@
     box-shadow: 0 6px 6px -6px #0e1119;
 }
 
-.tickerContainer td:hover {
+/* .tickerContainer td:hover {
     background-color: #fff842;
     color: #403e10;
     font-weight: bold;
@@ -73,7 +73,7 @@
     transition-duration: 0.4s;
     transition-property: all;
     transition-timing-function: line;
-}
+} */
 
 h4 {
     display: flex;
