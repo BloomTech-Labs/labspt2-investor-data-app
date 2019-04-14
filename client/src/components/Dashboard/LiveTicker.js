@@ -7,11 +7,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from '@material-ui/core/Tooltip';
 import { Typography, Link } from "@material-ui/core";
 import Card from '@material-ui/core/Card';
-//import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import styles from "../Styles/Dashboard/styles";
-//import Slide from '@material-ui/core/Slide';
-//import Button from '@material-ui/core/Button';
 import Zoom from '@material-ui/core/Zoom';
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles'
 import * as ROUTES from "../../constants/routes";
@@ -117,7 +114,7 @@ class LiveTicker extends React.Component {
         return str + suffix;
     }
 
-   render() {
+    render() {
         if (!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
             return <Loading>Loading Stocks...</Loading>
         }
@@ -134,14 +131,18 @@ class LiveTicker extends React.Component {
             console.log(stock)
             rows.push(
                 <Link component={RouterLink} to={ROUTES.REPORTS} key={index} style={{ textDecoration: "none" }}>
-                    <Zoom in={checked} key={index}> 
+                    <Zoom in={checked} key={index}>
                         <Card color='secondary' className={classes.card} key={index}>
                             <CardContent>
                                 <TickerContainer key={index}>
                                     <Row>
-                                        <StockSymbol>
-                                            <p>{stock.company}</p>
-                                        </StockSymbol>
+                                        <Tooltip disableFocusListener title={
+                                            <Typography color="inherit">Click on this card to view the Stock Indicator Reports</Typography>
+                                        }>
+                                            <StockSymbol>
+                                                <p>{stock.company}</p>
+                                            </StockSymbol>
+                                        </Tooltip >
                                         <Tooltip disableFocusListener title={
                                             <Typography color="inherit">Click here to Add/Remove stocks from your favorites</Typography>
                                         }>
@@ -150,7 +151,7 @@ class LiveTicker extends React.Component {
                                             </Star>
                                         </Tooltip >
                                     </Row>
-                                   {/*  <br /> */}
+                                    {/*  <br /> */}
                                     <Row>
                                         <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
                                         <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
@@ -161,20 +162,6 @@ class LiveTicker extends React.Component {
                                     </Row>
                                 </TickerContainer>
                             </CardContent>
-                             {/* Had a button with a tool tip here, didnt know if it looked ok. */}
-                           {/*  <CardActions>
-                                <Tooltip disableFocusListener title={
-                                    <Typography color="inherit">Click here to view the Stock Indicator Reports</Typography>
-                                }>
-                                   <Button
-                                        variant='contained'
-                                        color='secondary'
-                                        className={classes.button}
-                                        onClick={() => this.stockHandler(stock.company)}
-                                    >
-                                        Open Report</Button>
-                                </Tooltip >
-                            </CardActions> */}
                         </Card>
                     </Zoom>
                 </Link>
