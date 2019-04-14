@@ -3,10 +3,8 @@ import axios from "axios";
 import "../Styles/StockTicker/tickerBoard.css";
 import LiveClock from "./clock";
 
-import { GuardSpinner } from "react-spinners-kit";
+import { ImpulseSpinner } from "react-spinners-kit";
 import { SpinnerContainer } from "../Styles/Reports/Reports";
-
-import { PageLoading } from "../Styles/StockTicker/TickerBoard";
 
 class StockTicker extends React.Component {
   constructor(props) {
@@ -81,7 +79,7 @@ class StockTicker extends React.Component {
   render() {
     if (!this.state.stocks.length) {
       // returns loading sign while data is being retrieved from API
-      return <SpinnerContainer><GuardSpinner size={30} frontColor="#373f51" backColor="#ff4400" /></SpinnerContainer>;
+      return <SpinnerContainer><ImpulseSpinner size={30} frontColor="#EFEFEF" backColor="#301548" /></SpinnerContainer>;
     }
 
     let rows = [];
@@ -97,10 +95,10 @@ class StockTicker extends React.Component {
       rows.push(
         <tr key={index}>
           <td>{stock.company}</td>
-          <td>{stock.values[open]}</td>
-          <td>{stock.values[high]}</td>
-          <td>{stock.values[low]}</td>
-          <td>{stock.values[close]}</td>
+          <td>{this.decimalToFixed(stock.values[open])}</td>
+          <td>{this.decimalToFixed(stock.values[high])}</td>
+          <td>{this.decimalToFixed(stock.values[low])}</td>
+          <td>{this.decimalToFixed(stock.values[close])}</td>
           <td>{`${this.change(stock.values[close], stock.values[open])}%`}</td>
         </tr>
       );
