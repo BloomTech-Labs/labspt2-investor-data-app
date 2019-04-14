@@ -42,7 +42,7 @@ const Landing = () => {
 
       <div className="steps landing__section">
         <div className="container">
-          <h2>Who uses our application?</h2>
+          <h2>Who uses our Pick Em?</h2>
         </div>
         <div className="container">
           <div className="steps__inner">
