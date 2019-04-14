@@ -91,19 +91,6 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <div className="cta cta--reverse">
-        <div className="container">
-          <div className="cta__inner">
-            <h2 className="cta__title">Get started now</h2>
-            <p className="cta__sub cta__sub--center">
-              Sign up to use Pick Em now.
-            </p>
-            <Link to={ROUTES.SIGNIN} className="button button__accent">
-              Sign Up
-            </Link>
-          </div>
-        </div>
-      </div>
       <div className="footer footer--dark">
         <div className="container">
           <div className="footer__inner">
