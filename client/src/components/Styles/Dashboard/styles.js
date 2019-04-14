@@ -31,7 +31,8 @@ const styles = theme => ({
   },
   card: {
     marginBottom: 4, 
-    minWidth: 175
+    minWidth: 175,
+    backgroundColor: "#e8eaf6"
   }
 
 });

@@ -1,20 +1,21 @@
 import React from 'react'
 import axios from 'axios'
 import TickerStar from './TickerStar'
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import { Link as RouterLink } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from '@material-ui/core/Tooltip';
 import { Typography, Link } from "@material-ui/core";
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
+//import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import styles from "../Styles/Dashboard/styles";
 //import Slide from '@material-ui/core/Slide';
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
 import Zoom from '@material-ui/core/Zoom';
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles'
 import * as ROUTES from "../../constants/routes";
+
 
 class LiveTicker extends React.Component {
     constructor() {
@@ -116,13 +117,7 @@ class LiveTicker extends React.Component {
         return str + suffix;
     }
 
-    stockHandler = (symbol) => {
-        // need to open the reports page using the current symbol
-        // need to speak to colin...
-        console.log("symbol:", symbol)
-    }
-
-    render() {
+   render() {
         if (!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
             return <Loading>Loading Stocks...</Loading>
         }
@@ -134,14 +129,13 @@ class LiveTicker extends React.Component {
         const volume = '5. volume'
         const { classes } = this.props;
         const { checked } = this.state;
-        let x = 1000;
 
         this.state.stocks.forEach((stock, index) => {  // Loops through array of stock values and creates a table
             console.log(stock)
             rows.push(
-                <Link component={RouterLink} to={ROUTES.REPORTS} style={{ textDecoration: "none" }}>
+                <Link component={RouterLink} to={ROUTES.REPORTS} key={index} style={{ textDecoration: "none" }}>
                     <Zoom in={checked} key={index}> 
-                        <Card className={classes.card} key={index}>
+                        <Card color='secondary' className={classes.card} key={index}>
                             <CardContent>
                                 <TickerContainer key={index}>
                                     <Row>
@@ -156,7 +150,7 @@ class LiveTicker extends React.Component {
                                             </Star>
                                         </Tooltip >
                                     </Row>
-                                    <br />
+                                   {/*  <br /> */}
                                     <Row>
                                         <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
                                         <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
@@ -167,11 +161,12 @@ class LiveTicker extends React.Component {
                                     </Row>
                                 </TickerContainer>
                             </CardContent>
-                            <CardActions>
+                             {/* Had a button with a tool tip here, didnt know if it looked ok. */}
+                           {/*  <CardActions>
                                 <Tooltip disableFocusListener title={
                                     <Typography color="inherit">Click here to view the Stock Indicator Reports</Typography>
                                 }>
-                                    <Button
+                                   <Button
                                         variant='contained'
                                         color='secondary'
                                         className={classes.button}
@@ -179,7 +174,7 @@ class LiveTicker extends React.Component {
                                     >
                                         Open Report</Button>
                                 </Tooltip >
-                            </CardActions>
+                            </CardActions> */}
                         </Card>
                     </Zoom>
                 </Link>
