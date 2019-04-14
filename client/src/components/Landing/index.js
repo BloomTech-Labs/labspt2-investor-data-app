@@ -32,7 +32,7 @@ const Landing = () => {
                   whether a buy signal is warranted.
                 </p>
                 <Link to={ROUTES.SIGNIN} className="button button__accent">
-                  Sign Up
+                  Get Started
                 </Link>
               </div>
             </div>
