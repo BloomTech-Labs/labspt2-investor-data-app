@@ -3,11 +3,12 @@ const router = express.Router();
 const users = require("../data/helpers/usersModel");
 const jwt = require('jsonwebtoken');
 const secret = 'shhhisthisasecret';
-
+const billing = require('../data/helpers/billingModel')
 module.exports = router => {
     router.get("/:uid", userById);
     router.put("/:uid", update);
-};
+    router.get("/:id/:acct", userByAcct )
+}
 
 /************************************ USERS SECTION ***********************************/
 function protect(req, res, next) {
@@ -87,6 +88,26 @@ router.post('/', (req, res) => {
     });
 });
 
+// Get the user associated with billing account
+router.get('/:id/:acct', async (req, res) => {
+    const {acct} = req.params;
+    const {id} = req.params
+   
+    await users.getById(id).then(id => {
+        if(id){
+            billing.checkAcctType(acct).then(type =>{
+                if(acct === id.uid){
+                    res.status(200).json(type)
+                }
+                else {
+                    res.status(500).json({message: "The account is not associated with that billing account"})
+                }
+            })
+        }
+    })
+  });
+
+  
 /********* Get Single User *************/
 // UNCOMMENT TO PROTECT THE ROUTE!
 // router.get('/:uid', protect, (req, res) => {

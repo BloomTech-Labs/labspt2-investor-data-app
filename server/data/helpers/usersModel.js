@@ -5,6 +5,11 @@ module.exports = {
     return db("users");
   },
 
+  getById: id =>{
+   return db('users')
+          .where('id', id)
+          .first()
+  },
   getByUid: uid => {
     let query = db("users");
     if (uid) {
