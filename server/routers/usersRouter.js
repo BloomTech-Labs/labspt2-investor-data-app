@@ -36,7 +36,9 @@ function generateToken(user) {
 };
 
 /********* Get Users *************/
-router.get('/', protect, (req, res) => {
+// UNCOMMENT TO PROTECT THE ROUTE!
+// router.get('/', protect, (req, res) => {
+router.get('/', (req, res) => {
     users
         .get()
         .then(user => {
@@ -52,7 +54,9 @@ router.get('/', protect, (req, res) => {
 });
 
 /****** Add a User ******/
-router.post('/', protect, (req, res) => {
+// UNCOMMENT TO PROTECT THE ROUTE!
+// router.post('/', protect, (req, res) => {
+router.post('/', (req, res) => {
     const user = req.body
     // check if user in database has the same email as user loging in. Go ahead and log the user in
     users
@@ -84,7 +88,9 @@ router.post('/', protect, (req, res) => {
 });
 
 /********* Get Single User *************/
-router.get('/:uid', protect, (req, res) => {
+// UNCOMMENT TO PROTECT THE ROUTE!
+// router.get('/:uid', protect, (req, res) => {
+router.get('/:uid', (req, res) => {
     const { uid } = req.params
     users
         .getByUid(uid)
@@ -105,7 +111,9 @@ router.get('/:uid', protect, (req, res) => {
 });
 
 /************* Update User *************/
-router.put('/:uid', protect, (req, res) => {
+// UNCOMMENT TO PROTECT THE ROUTE!
+// router.put('/:uid', protect, (req, res) => {
+router.put('/:uid', (req, res) => {
     const { uid } = req.params;
     const changes = req.body;
     users
@@ -141,7 +149,9 @@ router.put('/:uid', protect, (req, res) => {
 });
 
 /************* Delete User *************/
-router.delete('/:uid', protect, (req, res) => {
+// UNCOMMENT TO PROTECT THE ROUTE!
+// router.delete('/:uid', protect, (req, res) => {
+router.delete('/:uid', (req, res) => {
     const { uid } = req.params
     if (uid) {
         users.remove(uid)
