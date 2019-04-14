@@ -219,7 +219,7 @@ select::-ms-expand {
 .hero__text {
   opacity: 0.85;
   line-height: 1.7;
-  text-align: left;
+  text-align: center;
   font-size: 1.1em;
 }
 
