@@ -8,7 +8,6 @@ import { getSettings, updateSettings } from '../../actions/settingsActions.js';
 
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
@@ -43,7 +42,7 @@ class OptEmailsTextsForm extends React.Component {
                             checked={this.props.settings.receiveEmails}
                             onChange={this.handleSwitch('receiveEmails')}
                             value='receiveEmails'
-                            color='primary'
+                            color='secondary'
                         />
                     }
                     label='Emails?'
@@ -55,7 +54,7 @@ class OptEmailsTextsForm extends React.Component {
                             checked={this.props.settings.receiveTexts}
                             onChange={this.handleSwitch('receiveTexts')}
                             value='receiveTexts'
-                            color='primary'
+                            color='secondary'
                         />
                     }
                     label='Texts?'
