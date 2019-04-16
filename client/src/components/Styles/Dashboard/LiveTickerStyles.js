@@ -11,7 +11,7 @@ export const Loading = styled.div `
 export const TickerContainer = styled.div`
     width: 100%; 
     color: #000; 
-    padding: 0px 10%; 
+    padding: 0px 5%; 
 `
 
 export const StockSymbol = styled.div`  

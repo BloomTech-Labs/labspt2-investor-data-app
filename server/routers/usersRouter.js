@@ -64,13 +64,9 @@ router.post('/', (req, res) => {
         .checkEmail(user.email)
         .then(addUser => {
         if (addUser.length) {
-            const token = generateToken(user)
-            res
-                .status(201)
-                .json({ id: user.id, token });
-            res
-                .status(200)
-                .json({message: "Logged In Successfully"})
+         //    const token = generateToken(user)
+         //    res.status(201).json({ id: user.id, token });
+            res.status(200).json({message: "Logged In Successfully"})
         } else {
             users.insert(user)
                 .then(user => {

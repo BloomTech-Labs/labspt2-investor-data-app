@@ -62,17 +62,7 @@
     box-shadow: 0 6px 6px -6px #0e1119;
 }
 
-<<<<<<< HEAD
- @media(max-width: 700px){
-   .table {
-     width: 800%; 
-   }
-   .container td{
-     font-size: 1rem
-   }
- }
-=======
-.tickerContainer td:hover {
+/* .tickerContainer td:hover {
     background-color: #fff842;
     color: #403e10;
     font-weight: bold;
@@ -83,8 +73,7 @@
     transition-duration: 0.4s;
     transition-property: all;
     transition-timing-function: line;
-}
->>>>>>> 3939f9b6b99451438fa3342aa14905a3fa5d0689
+} */
 
 h4 {
     display: flex;
