@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import FavoriteTickerstar from './favoriteTickerstar'
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles' 
+import { Input, Form, SearchIcon, ReturnButton} from '../Styles/Dashboard/YourFavorites'
 
 
 class FavoriteStocks extends React.Component{
@@ -11,7 +12,6 @@ class FavoriteStocks extends React.Component{
             timeStamp: {},
             companies: this.props.companies, // stock company symbols
             stocks: [],
-            items: [],
         }
     }
       
@@ -105,9 +105,40 @@ class FavoriteStocks extends React.Component{
         } 
             return str + suffix;
         }
+
+
+        searchHandler = (e) => {
+            
+            const searchFilter = this.state.stocks.filter(item => {
+              return item.company.includes(e.target.value.toUpperCase())
+             })
+             if(this.state.search.indexOf(this.state.stocks.company)){
+                 this.setState({
+                     stocks:searchFilter
+                 })
+                 }
+                 else{
+                     this.setState({
+                         companies: this.props.companies,
+                         stocks: []
+                     })
+                     this.fetchFavorites();
+                 }
+        }
+
+        returnHandler = (e) => {
+            this.setState({
+                companies: this.props.companies,
+                stocks: []
+            })
+            this.fetchFavorites();
+        }
+
+      
     
 
     render() {
+
        if(!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
         return <Loading>Loading Stocks...</Loading>
        } 
@@ -145,7 +176,14 @@ class FavoriteStocks extends React.Component{
         });
     
         return (
-            <div>         
+            <div>   
+                <Form> 
+                       <SearchIcon><i className= 'fa fa-search' /></SearchIcon>
+                       <Input onKeyUp={this.searchHandler} 
+                              type="text" 
+                              placeholder="Search..."/>  
+                        <ReturnButton onClick={this.returnHandler}>Reset</ReturnButton>                                       
+                   </Form>       
                 <div>
                     { rows }  
                 </div> 

@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import firebase from 'firebase'
 
+
 class FavoriteTickerstar extends React.Component{
     constructor(props){
         super(props); 
@@ -33,7 +34,7 @@ class FavoriteTickerstar extends React.Component{
                 selected: false,
                 star: 'far fa-star',
             })  
-            axios.delete(`https://pickemm.herokuapp.com/api/favorites/${this.state.id}`)
+            axios.delete(`http://www.localhost:5000/api/favorites/${this.state.id}`)
                 .then( response => {
                     this.setState({
                         stocks: response.data
@@ -50,7 +51,6 @@ class FavoriteTickerstar extends React.Component{
     }
 
     render(){
-        console.log(this.props.id)
         return(
             <div>
                 <i onClick={this.selectHandler} className={this.state.star}></i>

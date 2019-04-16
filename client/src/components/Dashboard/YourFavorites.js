@@ -13,11 +13,12 @@ class YourFavorites extends React.Component{
             stocks: [],
             items: [],
             uid: firebase.auth().currentUser.uid,
+            search: ''
         }
     }
       
     componentDidMount(){
-        axios.get(`https://pickemm.herokuapp.com/api/favorites/${this.state.uid}`) // <----user favorites
+        axios.get(`http://www.localhost:5000/api/favorites/?uid=${this.state.uid}`) // <----user favorites
             .then( response => {
                 this.setState({
                    stocks: response.data
@@ -36,6 +37,7 @@ class YourFavorites extends React.Component{
             companies: Array.from(new Set(stock))
         }) 
     }
+    
 
     render(){
 
@@ -45,12 +47,7 @@ class YourFavorites extends React.Component{
 
            return (
                <div>
-                   <Form> 
-                       <SearchIcon><i className= 'fa fa-search' /></SearchIcon>
-                       <Input id='search-bar' 
-                              type="text" 
-                              placeholder="Search..."/>              
-                   </Form>          
+                            
                    <div>
                        <FavoriteStocks companies={this.state.companies} /> 
                    </div> 
@@ -60,3 +57,8 @@ class YourFavorites extends React.Component{
     }
 
     export default YourFavorites
+
+
+
+
+   
