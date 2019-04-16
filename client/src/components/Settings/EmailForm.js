@@ -26,7 +26,7 @@ class EmailForm extends React.Component {
         const { classes } = this.props;
 
         return(
-                <div className={classes.formContainer}>
+                <div className={classes.emailContainer}>
                     <Typography variant='h6'>Email address</Typography>
                     <p className={classes.currentValue}>{this.state.currentEmail}</p>
                 </div>

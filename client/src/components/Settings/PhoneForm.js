@@ -49,11 +49,8 @@ class PhoneForm extends React.Component {
         const { classes } = this.props;
 
         return(
-            <div>
-                <div 
-                    className={classes.formContainer}
-                >
-                    <div>
+            <div className={classes.phoneFormContainer}>
+                    <div className={classes.currentPhoneContainer}>
                         {/* Current phone number header */}
                         <Typography variant='h6'>Phone number</Typography>
                         {/* Error in loading current phone number */}
@@ -61,7 +58,7 @@ class PhoneForm extends React.Component {
                         {/* Current phone number */}
                         <p className={classes.currentValue}>{this.props.settings.phoneNumber}</p>
                     </div>
-                </div>
+
                     {/* Text field for new phone number */}
                 <form
                     id='phoneForm'
@@ -87,7 +84,6 @@ class PhoneForm extends React.Component {
                     </Button>
                 </form>
             </div>
-
         )
     };
 };

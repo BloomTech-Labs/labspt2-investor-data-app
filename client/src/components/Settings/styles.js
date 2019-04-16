@@ -14,7 +14,19 @@ const styles = theme => ({
         flexWrap: 'no-wrap',
         flexDirection: 'column',
     },
-    formContainer:{
+    emailContainer:{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%'
+    },
+    phoneFormContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%'
+    },
+    currentPhoneContainer: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
