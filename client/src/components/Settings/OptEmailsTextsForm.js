@@ -1,4 +1,6 @@
 import React from 'react';
+import firebase from 'firebase';
+
 
 // Redux imports
 import { connect } from 'react-redux';
@@ -16,15 +18,17 @@ import styles from './styles';
 class OptEmailsTextsForm extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            receiveEmails: null,
-            receiveTexts: null
-        }
-    }
+    };
+
+    componentDidMount(){
+        const uid = firebase.auth().currentUser.uid;
+        this.props.getSettings(uid);
+    };
 
     handleSwitch = name => event => {
-        this.setState({ [name]: event.target.checked });
-        this.props.updateSettings('1', this.state);
+        const uid = firebase.auth().currentUser.uid;
+        const switchState = { [name]: event.target.checked };
+        this.props.updateSettings(uid, switchState);
     };
 
     render(){
@@ -32,7 +36,7 @@ class OptEmailsTextsForm extends React.Component {
         const { classes } = this.props;
 
         return(
-            <FormGroup row>
+            <div>
                 <FormControlLabel
                     control={
                         <Switch
@@ -57,7 +61,7 @@ class OptEmailsTextsForm extends React.Component {
                     label='Texts?'
                     className={classes.optSwitch}
                 />
-            </FormGroup>
+            </div>
         );
     };
 };
@@ -71,8 +75,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    getSettings: () => dispatch(getSettings()),
-    updateSettings:  (id, updatedCommPreference) => dispatch(updateSettings(id, updatedCommPreference))
+    getSettings: (uid) => dispatch(getSettings(uid)),
+    updateSettings:  (uid, updatedCommPreference) => dispatch(updateSettings(uid, updatedCommPreference))
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(OptEmailsTextsForm));

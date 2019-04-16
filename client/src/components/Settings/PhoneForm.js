@@ -57,8 +57,6 @@ class PhoneForm extends React.Component {
                 <div>
                     {/* Current phone number header */}
                     <Typography variant='h6'>Current phone:</Typography>
-                    {/* Loading current phone number... */}
-                    {this.props.fetchingSettings ? <p className={classes.currentValue}>Loading...</p> : null }
                     {/* Error in loading current phone number */}
                     {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
                     {/* Current phone number */}
