@@ -15,11 +15,14 @@ const styles = theme => ({
     topBar: {
       display: "flex",
       justifyContent: "space-between",
-      alignItems: "center"
+      alignItems: "center",
+      
     },
     stockInfo: {
       display: "flex",
-      justifyContent: "flex-start"
+      justifyContent: "flex-start",
+     
+      
     },
     paper: {
       padding: theme.spacing.unit * 2,
@@ -28,6 +31,7 @@ const styles = theme => ({
     },
     block: {
       padding: theme.spacing.unit * 2
+      
     },
     suggestionsContainerOpen: {
       position: "absolute",
@@ -40,6 +44,7 @@ const styles = theme => ({
       display: "block"
     },
     suggestionsList: {
+      
       margin: 0,
       padding: 0,
       listStyleType: "none"

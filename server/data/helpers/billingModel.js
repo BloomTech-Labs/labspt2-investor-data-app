@@ -14,6 +14,12 @@ module.exports = {
     return db('billing');
   },
 
+  checkAcctType: function(acct) {
+    let query = db('billing');
+      query.where('usersId', acct)
+      return query
+  },
+
   insert: function(bills) {
     return db('billing').insert(bills);
   },

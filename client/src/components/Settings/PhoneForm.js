@@ -76,7 +76,7 @@ class PhoneForm extends React.Component {
                 {/* Button to submit new phone number */}
                 <Button 
                     variant='contained' 
-                    color='primary'
+                    color='secondary'
                     className={classes.button}
                     type='submit'
                     form='phoneForm'
