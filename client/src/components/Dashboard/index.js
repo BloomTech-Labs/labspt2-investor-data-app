@@ -51,21 +51,25 @@ class Dashboard extends Component {
               </Grid>
 
               <Grid item xs={12} md={6}>
+              <div className="ticker-card">
                 <Paper className={classes.paper}>
                   <div>
                     <Typography variant="h5" gutterBottom>
                       <KeyIndicators />
                     </Typography>
                   </div>
-                </Paper>
+                </Paper>  
+                </div>       
               </Grid>
 
               <Grid item xs={12} md={6}>
-                 <Paper className={classes.paper}> 
+              <div className="ticker-card">
+               {/*   <Paper className={classes.paper}>  */}
                   <Typography variant="h6" gutterBottom>
                     <LiveTicker />
                   </Typography>
-                </Paper> 
+              {/*   </Paper>  */}
+                </div>
               </Grid>
 
               <Grid item xs={12} md={12}>

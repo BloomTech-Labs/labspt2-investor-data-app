@@ -1,23 +1,33 @@
 import React from 'react'
 import axios from 'axios'
 import TickerStar from './TickerStar'
+
 //import PropTypes from "prop-types";
 import { Link as RouterLink } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from '@material-ui/core/Tooltip';
-import { Typography, Link } from "@material-ui/core";
+
+import { Typography, Link} from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import "../Styles/Dashboard/LiveTicker.css"
 import styles from "../Styles/Dashboard/styles";
 import Zoom from '@material-ui/core/Zoom';
-import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles'
+import {
+    Loading,
+    Row,
+    TickerContainer,
+    StockSymbol,
+    Star
+} from '../Styles/Dashboard/LiveTickerStyles';
 import * as ROUTES from "../../constants/routes";
 
 
 class LiveTicker extends React.Component {
     constructor() {
         super();
-        this.state = {
+
+        this.state= {
             timeStamp: {},
             companies: ['DJI', 'NDAQ', 'SPX', 'AAPL', 'AMZN'], // stock company symbols
             stocks: [],
@@ -29,7 +39,7 @@ class LiveTicker extends React.Component {
         this.setState(state => ({ checked: !state.checked }));
         let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
             axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`));
-        this.fetchStocks(promises)
+this.fetchStocks(promises)
     }
 
     fetchStocks = (promises) => {  // Receives array of companies and returns values of the stock symbols from the api 
@@ -63,54 +73,67 @@ class LiveTicker extends React.Component {
             .catch(error => {
                 console.error('There was an error with the network requests', error)
             });
-    }
+}
 
 
-    changePercent = (close, start) => {  // function for calculating the change of a stocks gain/loss by %
-        let deduct = close - start
-        let divide = deduct / start
-        let solution = divide * 100
+    changePercent=(close, start)=> {
+
+        // function for calculating the change of a stocks gain/loss by %
+        let deduct=close - start 
+        let divide=deduct / start 
+        let solution=divide * 100 
         if (solution > 0) {
-            return "+" + solution.toFixed(2)
+            return "+"+ solution.toFixed(2)
         }
+
         return solution.toFixed(2)
     }
 
-    changePoints = (close, start) => {  // calculates the change of a stocks gain/loss by points
-        let solution = close - start;
+    changePoints=(close, start)=> {
+        // calculates the change of a stocks gain/loss by points
+        let solution=close - start;
+
         if (solution > 0) {
-            return "+" + solution.toFixed(1)
+            return "+"+ solution.toFixed(1)
         }
+
         return solution.toFixed(1)
     }
 
-    decimalToFixed = (input) => {  // truncates the numbers following the decimal to two digits 
-        input = parseFloat(input).toFixed(2)
+    decimalToFixed=(input)=> {
+        // truncates the numbers following the decimal to two digits 
+        input=parseFloat(input).toFixed(2) 
         return input
     }
 
-    shortenVolume = (num) => {  // Crunches the length of the volume into a smaller number while inserting a decimal point and character representing the amount
-        let str,
-            suffix = '';
+    shortenVolume=(num)=> {
+        // Crunches the length of the volume into a smaller number while inserting a decimal point and character representing the amount
+        let str, suffix='';
 
-        let decimalPlaces = 2 || 0;
+        let decimalPlaces=2 || 0;
 
-        num = +num;
+        num=+num;
 
-        let factor = Math.pow(10, decimalPlaces);
+        let factor=Math.pow(10, decimalPlaces);
 
-        if (num < 1000) {
-            str = num;
-        } else if (num < 1000000) {
-            str = Math.floor(num / (1000 / factor)) / factor;
-            suffix = 'K';
-        } else if (num < 1000000000) {
-            str = Math.floor(num / (1000000 / factor)) / factor;
-            suffix = 'M';
-        } else if (num < 1000000000000) {
-            str = Math.floor(num / (1000000000 / factor)) / factor;
-            suffix = 'B';
+        if (num < 1000) { str=num;
+         }
+
+        else if (num < 1000000) {
+            str=Math.floor(num / (1000 / factor)) / factor;
+            suffix='K';
         }
+
+        else if (num < 1000000000) {
+            str=Math.floor(num / (1000000 / factor)) / factor;
+            suffix='M';
+        }
+
+        else if (num < 1000000000000) {
+            str=Math.floor(num / (1000000000 / factor)) / factor;
+            suffix='B';
+        }
+
         return str + suffix;
     }
 
@@ -175,5 +198,6 @@ class LiveTicker extends React.Component {
         )
     }
 }
+
 
 export default withStyles(styles)(LiveTicker);
