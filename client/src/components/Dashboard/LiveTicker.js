@@ -1,8 +1,12 @@
 import React from 'react'
 import axios from 'axios'
 import TickerStar from './TickerStar'
-import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles' 
-
+import { Loading, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles' 
+import GridContainer from "../Styles/Dashboard/GridContainer.jsx"
+import GridItem from "../Styles/Dashboard/GridItem.jsx"
+import Card from '../Styles/Dashboard/Card'
+import styles from '../Styles/Dashboard/styles';
+import { withStyles } from '@material-ui/core';
 class LiveTicker extends React.Component{
     constructor(){
         super();
@@ -106,6 +110,7 @@ class LiveTicker extends React.Component{
         if(!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
             return <Loading>Loading Stocks...</Loading>
         }
+        const { classes } = this.props;
     
         let rows = [];
         
@@ -114,29 +119,29 @@ class LiveTicker extends React.Component{
         const volume = '5. volume'
     
         this.state.stocks.forEach( (stock, index) => {  // Loops through array of stock values and creates a table
-            console.log(stock)
+        
             rows.push(
-                <TickerContainer key={index}>
-                    <Row>
+                <GridContainer>
+                     <GridItem xs={12} sm={3} md={6}>
+                   <Card>
+                      
                         <StockSymbol>        
-                            <p>{stock.company}</p> 
+                            <p className={classes.cardCategory}>{stock.company}</p> 
                         </StockSymbol> 
-                        <Star>
+                        <Star className={classes.cardTitle}>
                             <TickerStar stocks={this.state.stocks} id={stock.company} /> 
                         </Star> 
-                    </Row> 
-                    <br />
-                    <Row>
+                    
                         <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
                         <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
-                    </Row> 
-                    <Row> 
+                    
                         <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p> 
                         <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
-                    </Row> 
+         
                     <br />
-                    <hr/> 
-                </TickerContainer>
+                    </ Card>
+                    </GridItem>
+                </GridContainer>
             )
         });
     
@@ -148,4 +153,4 @@ class LiveTicker extends React.Component{
     }
 }
 
-export default LiveTicker
+export default withStyles(styles)(LiveTicker)
