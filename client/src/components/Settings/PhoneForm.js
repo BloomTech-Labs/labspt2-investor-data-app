@@ -49,39 +49,45 @@ class PhoneForm extends React.Component {
         const { classes } = this.props;
 
         return(
-            <form 
-                className={classes.container}
-                id='phoneForm'
-                onSubmit={this.handleSubmit}
-            >
-                <div>
-                    {/* Current phone number header */}
-                    <Typography variant='h6'>Current phone:</Typography>
-                    {/* Error in loading current phone number */}
-                    {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
-                    {/* Current phone number */}
-                    <p className={classes.currentValue}>{this.props.settings.phoneNumber}</p>
-                </div>
-                {/* Text field for new phone number */}
-                <TextField 
-                    name='phoneNumber'
-                    label='New phone'
-                    className={classes.textField}
-                    value={this.state.phoneNumber}
-                    onChange={this.handleChange}
-                    margin='normal'
-                />
-                {/* Button to submit new phone number */}
-                <Button 
-                    variant='contained' 
-                    color='secondary'
-                    className={classes.button}
-                    type='submit'
-                    form='phoneForm'
+            <div>
+                <div 
+                    className={classes.formContainer}
                 >
-                    Update phone
-                </Button>
-            </form>
+                    <div>
+                        {/* Current phone number header */}
+                        <Typography variant='h6'>Phone number</Typography>
+                        {/* Error in loading current phone number */}
+                        {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
+                        {/* Current phone number */}
+                        <p className={classes.currentValue}>{this.props.settings.phoneNumber}</p>
+                    </div>
+                </div>
+                    {/* Text field for new phone number */}
+                <form
+                    id='phoneForm'
+                    onSubmit={this.handleSubmit}
+                >
+                    <TextField 
+                        name='phoneNumber'
+                        label='New phone'
+                        className={classes.textField}
+                        value={this.state.phoneNumber}
+                        onChange={this.handleChange}
+                        margin='normal'
+                    />
+                    {/* Button to submit new phone number */}
+                    <Button 
+                        variant='contained' 
+                        color='secondary'
+                        className={classes.button}
+                        type='submit'
+                        form='phoneForm'
+                    >
+                        Update phone
+                    </Button>
+                </form>
+            </div>
+
         )
     };
 };

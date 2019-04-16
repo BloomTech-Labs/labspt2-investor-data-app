@@ -6,13 +6,20 @@ const styles = theme => ({
         flexDirection: 'column',
         alignItems: 'baseline',
         paddingTop: '30px',
-        paddingLeft: '10%',
-        margin: '0 auto'
+        width: '80%',
+        margin: '0 auto',
     },
     container: {
         display: 'flex',
         flexWrap: 'no-wrap',
         flexDirection: 'column',
+    },
+    formContainer:{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%'
     },
     header: {
         marginLeft: theme.spacing.unit,

@@ -47,7 +47,6 @@ class Settings extends React.Component {
                 /> 
                 {/* Form to update phone number */}
                 <PhoneForm 
-                    className={classes.container}
                 /> 
                 {/* Form to opt in/out for texts and emails */}
                 <OptEmailsTextsForm
