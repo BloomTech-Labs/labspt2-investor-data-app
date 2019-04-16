@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import FavoriteTickerstar from './favoriteTickerstar'
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles' 
-import { Input, Form, SearchIcon, ReturnButton} from '../Styles/Dashboard/YourFavorites'
+import { Input, Form, SearchIcon, ReturnButton } from '../Styles/Dashboard/YourFavorites'
 
 
 class FavoriteStocks extends React.Component{
@@ -12,6 +12,8 @@ class FavoriteStocks extends React.Component{
             timeStamp: {},
             companies: this.props.companies, // stock company symbols
             stocks: [],
+            items: [],
+            search: ''
         }
     }
       
@@ -106,9 +108,14 @@ class FavoriteStocks extends React.Component{
             return str + suffix;
         }
 
+        setSearchState = (e) => {
+            e.preventDefault(); 
+            this.setState({
+                search: e.target.value
+            })
+        }
 
         searchHandler = (e) => {
-            
             const searchFilter = this.state.stocks.filter(item => {
               return item.company.includes(e.target.value.toUpperCase())
              })
@@ -116,17 +123,16 @@ class FavoriteStocks extends React.Component{
                  this.setState({
                      stocks:searchFilter
                  })
-                 }
-                 else{
-                     this.setState({
-                         companies: this.props.companies,
-                         stocks: []
-                     })
-                     this.fetchFavorites();
-                 }
+            }else{
+                 this.setState({
+                    companies: this.props.companies,
+                    stocks: []
+                 })
+                 this.fetchFavorites();
+            }
         }
 
-        returnHandler = (e) => {
+        returnHandler = () => {
             this.setState({
                 companies: this.props.companies,
                 stocks: []
@@ -134,8 +140,6 @@ class FavoriteStocks extends React.Component{
             this.fetchFavorites();
         }
 
-      
-    
 
     render() {
 
@@ -179,10 +183,12 @@ class FavoriteStocks extends React.Component{
             <div>   
                 <Form> 
                        <SearchIcon><i className= 'fa fa-search' /></SearchIcon>
-                       <Input onKeyUp={this.searchHandler} 
+                       <Input value={this.state.search}
+                              onChange={this.setSearchState}
+                              onKeyUp={this.searchHandler} 
                               type="text" 
                               placeholder="Search..."/>  
-                        <ReturnButton onClick={this.returnHandler}>Reset</ReturnButton>                                       
+                        <ReturnButton onClick={this.returnHandler}>Reset</ReturnButton>                                         
                    </Form>       
                 <div>
                     { rows }  

@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import { Input, Form, SearchIcon } from '../Styles/Dashboard/YourFavorites'
 import FavoriteStocks from './FavoriteStocks'
 import firebase from 'firebase'
 
