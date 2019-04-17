@@ -66,7 +66,7 @@ class Dashboard extends Component {
               </Grid>
 
               <Grid item xs={12} md={12}>
-                <Paper>
+                <Paper className={classes.paper}>
                   <Typography variant="h5" gutterBottom>
                     <YourFavorites />
                   </Typography>

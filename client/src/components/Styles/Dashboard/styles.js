@@ -1,5 +1,6 @@
 const styles = theme => ({
   root: {
+    padding: theme.spacing.unit * 3,
     margin: '0 auto'
   },
   grid: {
@@ -18,11 +19,22 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing.unit * 3,
-    // textAlign: "left",
-    // color: theme.palette.text.primary,
-    // // height: '40vh',
-    // backgroundColor: '#887291'
+    borderBottom: '2px solid #4C046B',
+    textAlign: "left",
+    width: '60%',
+    color: theme.palette.text.primary,
+    // height: '40vh',
+    // backgroundColor: '#f4f2ff'
+    [theme.breakpoints.down("sm")]: {
+   
+      width: '60%',
   
+      },
+    [theme.breakpoints.down("xs")]: {
+   
+      width: '100%',
+  
+      },
   },
   block: {
     padding: theme.spacing.unit * 2,
@@ -62,7 +74,7 @@ const styles = theme => ({
   },
   liveticker :{
     position: 'relative',
-    top: -70,
+    top: -139,
     right:44,
     [theme.breakpoints.down("sm")]: {
       top: -72,
