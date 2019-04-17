@@ -4,7 +4,7 @@ const styles = theme => ({
     parent: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'baseline',
+        alignItems: 'center',
         paddingTop: '30px',
         width: '80%',
         margin: '0 auto',
@@ -24,7 +24,8 @@ const styles = theme => ({
     phoneFormContainer: {
         display: 'flex',
         flexDirection: 'column',
-        width: '100%'
+        width: '100%',
+        marginBottom: theme.spacing.unit
     },
     currentPhoneContainer: {
         display: 'flex',
@@ -41,8 +42,7 @@ const styles = theme => ({
         width: '100%'
     },
     header: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
+        alignSelf: 'flex-start'
     },
     currentHeader: {
         marginLeft: theme.spacing.unit,
@@ -65,6 +65,9 @@ const styles = theme => ({
     },
     optSwitch: {
         margin: theme.spacing.unit,
+    },
+    divider: {
+        width: '100%'
     }
 });
 
