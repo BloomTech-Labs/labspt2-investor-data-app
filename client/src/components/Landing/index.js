@@ -6,9 +6,9 @@ import StockTicker from "../StockTicker";
 
 import "../Styles/Landing/landing.css";
 
-import undraw_investing from "./images/undraw_investing.png";
-import undraw_finance from "./images/undraw_finance.png";
-import undraw_financial_data from "./images/undraw_financial_data.png";
+import undraw_investing from "./images/undraw_investing1.png";
+import undraw_finance from "./images/undraw_finance1.png";
+import undraw_financial_data from "./images/undraw_financial_data1.png";
 
 const Landing = () => {
   return (
