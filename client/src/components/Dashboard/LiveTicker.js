@@ -6,8 +6,9 @@ import GridContainer from "../Styles/Dashboard/GridContainer.jsx"
 import GridItem from "../Styles/Dashboard/GridItem.jsx"
 import Card from '../Styles/Dashboard/Card'
 import styles from '../Styles/Dashboard/styles';
-import ROUTES from ''
-import { withStyles, Tooltip, Typography } from '@material-ui/core';
+import { Link as RouterLink } from "react-router-dom";
+import * as ROUTES from "../../constants/routes";
+import { withStyles, Tooltip, Typography, Zoom } from '@material-ui/core';
 class LiveTicker extends React.Component{
     constructor(){
         super();
@@ -123,6 +124,7 @@ class LiveTicker extends React.Component{
         
             rows.push(
                 <Link component={RouterLink} to={ROUTES.REPORTS} key={index} style={{ textDecoration: "none" }}>
+                <Zoom>
                 <GridContainer key={index}>
                      <GridItem xs={12} sm={3} md={6}>
                    <Card>
@@ -147,7 +149,9 @@ class LiveTicker extends React.Component{
                     </ Card>
                     </GridItem>
                 </GridContainer>
+                </Zoom>
                 </ Link>
+
             )
         });
     
