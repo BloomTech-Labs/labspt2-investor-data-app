@@ -45,13 +45,12 @@ class Checkout extends Component {
       axios
         .post(PAYMENT_SERVER_URL, {
           source: token.id,
-          currency: CURRENCY,
-          amount: fromUSDToCent(this.props.amount)
+          plan: "plan_ErV25voxUOIHIx"
         })
         .then(successPayment => {
           if (successPayment) {
             const bill = this.state;
-            console.log("OnToken:", bill);
+            console.log("Success:", token, bill);
             const endpoint = "https://pickemm.herokuapp.com/api/billing";
             axios
               .post(endpoint, bill)
@@ -68,6 +67,7 @@ class Checkout extends Component {
     return (
       <StripeCheckout
         name={this.props.name}
+        customer={fire.currentUser}
         email={fire.currentUser.email}
         amount={fromUSDToCent(this.props.amount)}
         token={this.onToken(this.props.amount, this.state.accountType)}
