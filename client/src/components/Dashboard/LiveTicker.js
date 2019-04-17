@@ -121,7 +121,7 @@ class LiveTicker extends React.Component{
         this.state.stocks.forEach( (stock, index) => {  // Loops through array of stock values and creates a table
         
             rows.push(
-                <GridContainer>
+                <GridContainer key={index}>
                      <GridItem xs={12} sm={3} md={6}>
                    <Card>
                       
