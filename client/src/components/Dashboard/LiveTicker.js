@@ -8,7 +8,7 @@ import Card from '../Styles/Dashboard/Card'
 import styles from '../Styles/Dashboard/styles';
 import { Link as RouterLink } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
-import { withStyles, Tooltip, Typography, Zoom } from '@material-ui/core';
+import { withStyles, Link, Tooltip, Typography, Zoom } from '@material-ui/core';
 class LiveTicker extends React.Component{
     constructor(){
         super();
@@ -124,7 +124,7 @@ class LiveTicker extends React.Component{
         
             rows.push(
                 <Link component={RouterLink} to={ROUTES.REPORTS} key={index} style={{ textDecoration: "none" }}>
-                <Zoom>
+                <Zoom in={checked} key={index}>
                 <GridContainer key={index}>
                      <GridItem xs={12} sm={3} md={6}>
                    <Card>
