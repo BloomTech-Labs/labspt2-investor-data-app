@@ -45,7 +45,8 @@ class Checkout extends Component {
       axios
         .post(PAYMENT_SERVER_URL, {
           source: token.id,
-          plan: "plan_ErV25voxUOIHIx"
+          plan: "plan_ErV25voxUOIHIx",
+          email: fire.currentUser.email
         })
         .then(successPayment => {
           if (successPayment) {
