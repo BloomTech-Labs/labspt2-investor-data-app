@@ -20,7 +20,6 @@ class PhoneForm extends React.Component {
         super(props);
         this.state = {
             phoneNumber: '',
-            expanded: true
         }
     }
 
