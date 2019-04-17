@@ -6,14 +6,15 @@ const styles = theme => ({
     //height: "100vh"
   },
   grid: {
-    width: 1200,
+    //width: 1200,
+    width: 1000,
     margin: `0 ${theme.spacing.unit * 2}px`,
     [theme.breakpoints.down("sm")]: {
       width: "calc(100% - 20px)"
     }
   },
   paper: {
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 2,
     textAlign: "left",
     color: theme.palette.text.primary,
     // height: '40vh',
@@ -21,14 +22,19 @@ const styles = theme => ({
   
   },
   block: {
-    padding: theme.spacing.unit * 2
+    padding: theme.spacing.unit * 1
   },
   bigAvatar: {
     margin: 10,
     width: 40,
     height: 40,
-
-  }
+  },
+  card: {
+    marginBottom: 4, 
+    minWidth: 175,
+    //maxWidth: 300,
+    backgroundColor: "#e8eaf6"
+   }
 
 });
 
