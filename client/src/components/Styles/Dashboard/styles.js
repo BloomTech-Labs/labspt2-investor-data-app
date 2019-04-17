@@ -7,8 +7,8 @@ const styles = theme => ({
   },
 
   grid: {
-    //width: 1200,
-    width: 1000,
+    width: 1200,
+    //width: 1000,
     margin: `0 $ {theme.spacing.unit * 2} px`,
     [theme.breakpoints.down("sm")]: { width: "calc(100% - 20px)" }
   }
