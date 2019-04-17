@@ -8,7 +8,7 @@ export const CharContainer = styled.div `
 export const Character = styled.button`
     border: none; 
     color: black; 
-    font-size: .6rem; 
+    font-size: .8rem; 
     width: 1%; 
 `
 

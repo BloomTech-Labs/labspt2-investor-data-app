@@ -21,14 +21,24 @@ class Dashboard extends Component {
       <React.Fragment>
         <CssBaseline />
         <div className={classes.root}>
+<<<<<<< HEAD
         <GridContainer>
           <Grid container justify="space-between" alignItems="flex-end">
             <br />
+=======
+
+          <Grid container justify="flex-end" alignItems="center">
+
+            <Typography variant="h6" color="inherit" gutterBottom className='AvatarContainer'>
+              Welcome, {firebase.auth().currentUser.displayName} <br />
+            </Typography>
+
+>>>>>>> 3167ba7ab085f09404694b48345e47da530961d1
             <Avatar
               alt="profile-picture"
               src={fire.currentUser.photoURL}
               className={classes.bigAvatar}
-            /> 
+            />
           </Grid>
 
           <Grid container justify="center">
@@ -37,19 +47,31 @@ class Dashboard extends Component {
               alignItems="center"
               justify="center"
               container
+<<<<<<< HEAD
               className={classes.grid}
             >
+=======
+              className={classes.grid}>
+              <Grid item xs={12}>
+                <div className={classes.block}>
+                  <Typography variant="h6" gutterBottom>
+                    Dashboard
+                  </Typography>
+                </div>
+              </Grid>
+>>>>>>> 3167ba7ab085f09404694b48345e47da530961d1
 
               <GridItem xs={12} md={12}>
                 
                   <div>
                     <Typography variant="h5" gutterBottom>
-                        <KeyIndicators/>
+                      <KeyIndicators />
                     </Typography>
                   </div>
              
               </GridItem>
 
+<<<<<<< HEAD
               <Grid item xs={12} md={4} sm={3} className={classes.liveticker}>
              
                   
@@ -59,7 +81,16 @@ class Dashboard extends Component {
                     </Typography>
                 
   
+=======
+              <Grid item xs={12} md={6}>
+                 <Paper className={classes.paper}> 
+                  <Typography variant="h6" gutterBottom>
+                    <LiveTicker />
+                  </Typography>
+                </Paper> 
+>>>>>>> 3167ba7ab085f09404694b48345e47da530961d1
               </Grid>
+
               <Grid item xs={12} md={12}>
                 
                   <Typography variant="h5" gutterBottom>

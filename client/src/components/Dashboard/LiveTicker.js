@@ -26,7 +26,7 @@ class LiveTicker extends React.Component{
             axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`));
         this.fetchStocks(promises)
     }
-      
+
     fetchStocks = (promises) => {  // Receives array of companies and returns values of the stock symbols from the api 
         let stocks = []
         let timeStamp
@@ -34,22 +34,22 @@ class LiveTicker extends React.Component{
             .all(promises)
             .then(results => {
                 results.forEach(result => {  // loops through keys to access targeted values of stock(s)
-              
+
                     if (result.data.Note) {
-                      throw new Error()
+                        throw new Error()
                     }
-      
+
                     let data = result.data['Time Series (Daily)'] //Accesses correct object within API
                     let timeStamps = Object.keys(data)
                     let current = data[timeStamps[0]]
-                    timeStamp = timeStamps[0]  
-                    
+                    timeStamp = timeStamps[0]
+
                     stocks.push({
                         company: result.data['Meta Data']['2. Symbol'], // Collects stock symbol
                         values: current
                     })
                 });
-      
+
                 this.setState({
                     stocks,
                     timeStamp
@@ -59,41 +59,41 @@ class LiveTicker extends React.Component{
                 console.error('There was an error with the network requests', error)
             });
     }
-      
-    
+
+
     changePercent = (close, start) => {  // function for calculating the change of a stocks gain/loss by %
         let deduct = close - start
-        let divide = deduct / start 
+        let divide = deduct / start
         let solution = divide * 100
-            if(solution > 0){
-                return "+" + solution.toFixed(2)
-            }
-            return solution.toFixed(2)
+        if (solution > 0) {
+            return "+" + solution.toFixed(2)
+        }
+        return solution.toFixed(2)
     }
 
     changePoints = (close, start) => {  // calculates the change of a stocks gain/loss by points
         let solution = close - start;
-            if(solution > 0){
-                return "+" + solution.toFixed(1)
-            }
-            return solution.toFixed(1)
+        if (solution > 0) {
+            return "+" + solution.toFixed(1)
+        }
+        return solution.toFixed(1)
     }
 
-    decimalToFixed = ( input ) => {  // truncates the numbers following the decimal to two digits 
+    decimalToFixed = (input) => {  // truncates the numbers following the decimal to two digits 
         input = parseFloat(input).toFixed(2)
-            return input
+        return input
     }
 
     shortenVolume = (num) => {  // Crunches the length of the volume into a smaller number while inserting a decimal point and character representing the amount
         let str,
             suffix = '';
-        
+
         let decimalPlaces = 2 || 0;
 
         num = +num;
-        
+
         let factor = Math.pow(10, decimalPlaces);
-        
+
         if (num < 1000) {
             str = num;
         } else if (num < 1000000) {
@@ -105,20 +105,19 @@ class LiveTicker extends React.Component{
         } else if (num < 1000000000000) {
             str = Math.floor(num / (1000000000 / factor)) / factor;
             suffix = 'B';
-        } 
-            return str + suffix;
         }
-    
+        return str + suffix;
+    }
 
     render() {
-        if(!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
+        if (!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
             return <Loading>Loading Stocks...</Loading>
         }
         const { classes } = this.props;
         const { checked } = this.state;
 
         let rows = [];
-        
+
         const open = '1. open'
         const close = '4. close'
         const volume = '5. volume'
@@ -157,11 +156,11 @@ class LiveTicker extends React.Component{
 
             )
         });
-    
+
         return (
             <div>
-                { rows }  
-            </div> 
+                {rows}
+            </div>
         )
     }
 }
