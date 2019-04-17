@@ -9,10 +9,6 @@ const CURRENCY = "USD";
 
 const fromUSDToCent = amount => amount * 100;
 
-const successPayment = data => {
-  alert("Payment Successful");
-};
-
 const errorPayment = data => {
   alert("Payment Error");
 };
@@ -45,8 +41,8 @@ class Checkout extends Component {
       axios
         .post(PAYMENT_SERVER_URL, {
           source: token.id,
-          plan: "plan_ErV25voxUOIHIx",
-          email: fire.currentUser.email
+          email: fire.currentUser.email,
+          plan: this.props.stripePlan
         })
         .then(successPayment => {
           if (successPayment) {
@@ -70,6 +66,7 @@ class Checkout extends Component {
         name={this.props.name}
         customer={fire.currentUser}
         email={fire.currentUser.email}
+        stripeplan={this.props.stripePlan}
         amount={fromUSDToCent(this.props.amount)}
         token={this.onToken(this.props.amount, this.state.accountType)}
         currency={CURRENCY}

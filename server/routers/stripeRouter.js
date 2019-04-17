@@ -22,7 +22,7 @@ router.post ('/', (req, res) => {
   console.log('body !!!', req.body);
   stripe.customers.create ({
     source: req.body.source,
-    email: req.body.email
+    email: req.body.email,
   },
   
   function(err, customer
