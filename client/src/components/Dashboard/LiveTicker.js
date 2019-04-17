@@ -16,10 +16,12 @@ class LiveTicker extends React.Component{
             timeStamp: {},
             companies: ['DJI', 'NDAQ', 'SPX', 'AAPL', 'AMZN'], // stock company symbols
             stocks: [],
+            checked: false,
         }
     }
       
     componentDidMount(){
+        this.setState(state => ({ checked: !state.checked }));
         let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
             axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`));
         this.fetchStocks(promises)
@@ -113,7 +115,7 @@ class LiveTicker extends React.Component{
             return <Loading>Loading Stocks...</Loading>
         }
         const { classes } = this.props;
-    
+        
         let rows = [];
         
         const open = '1. open'
