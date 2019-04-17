@@ -50,7 +50,7 @@ class Dashboard extends Component {
              
               </GridItem>
 
-              <Grid container xs={12} md={4} sm={3} className={classes.liveticker}>
+              <Grid item xs={12} md={4} sm={3} className={classes.liveticker}>
              
                   
                     <Typography variant="h6" gutterBottom>

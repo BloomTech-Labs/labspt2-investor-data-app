@@ -49,9 +49,10 @@ const styles = theme => ({
     
    display: 'none',
     [theme.breakpoints.down("sm")]: {
-   
+    display: 'inline-block',
     width: 25,
     height: 25,
+    top:16,
     right: 10,
 
     },

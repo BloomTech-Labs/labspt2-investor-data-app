@@ -132,11 +132,11 @@ class LiveTicker extends React.Component{
                             <TickerStar stocks={this.state.stocks} id={stock.company} /> 
                         </Star> 
                     
-                        <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
-                        <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
-                    
-                        <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p> 
-                        <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
+                        <p className={classes.cardCategory}>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
+                        {/* <p style={{color: 'white' ,background: Math.sign(this.changePoints(stock.values[close], stock.values[open])) < 0 ? "#CE0000" : "#00CC00", width:'35%'}} >Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
+                     */}
+                        <p className={classes.cardCategory}>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p> 
+                        <p className={classes.cardTitle} style={{ fontSize: 'small', borderRadius:'2px',position:'relative', top:'9px',color: 'white' ,background: Math.sign(this.changePercent(stock.values[close], stock.values[open])) < 0 ? "#ff2900" : "#21ab42", width:'22%'}}>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
          
                     <br />
                     </ Card>
