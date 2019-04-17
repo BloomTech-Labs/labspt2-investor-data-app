@@ -135,7 +135,8 @@ class FavoriteStocks extends React.Component{
         returnHandler = () => {
             this.setState({
                 companies: this.props.companies,
-                stocks: []
+                stocks: [],
+                search: ''
             })
             this.fetchFavorites();
         }

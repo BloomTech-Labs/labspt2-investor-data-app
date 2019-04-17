@@ -2,7 +2,6 @@ const db = require('../dbConfig.js');
 
 module.exports = {
 
-
     get: async function (uid) {
         let query = db('favorites');
         if (uid) {

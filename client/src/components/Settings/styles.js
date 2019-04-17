@@ -1,3 +1,5 @@
+import { elementType } from "prop-types";
+
 const styles = theme => ({
     parent: {
         display: 'flex',
@@ -31,7 +33,9 @@ const styles = theme => ({
     },
     button: {
         margin: theme.spacing.unit,
-        width: 200
+        width: 200,
+        backgroundColor:theme.palette.secondary.main,
+        color:theme.palette.primary.main
     },
     optSwitch: {
         margin: theme.spacing.unit,

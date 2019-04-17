@@ -4,8 +4,8 @@ import FavoriteStocks from './FavoriteStocks'
 import firebase from 'firebase'
 
 class YourFavorites extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             timeStamp: {},
             companies: [], // stock company symbols
@@ -45,8 +45,7 @@ class YourFavorites extends React.Component{
         }
 
            return (
-               <div>
-                            
+               <div>      
                    <div>
                        <FavoriteStocks companies={this.state.companies} /> 
                    </div> 
@@ -56,8 +55,3 @@ class YourFavorites extends React.Component{
     }
 
     export default YourFavorites
-
-
-
-
-   
