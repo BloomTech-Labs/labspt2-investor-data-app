@@ -48,12 +48,14 @@ const styles = theme => ({
   bigAvatar: {
     
    display: 'none',
+   top: 25,
+   right: 19,
     [theme.breakpoints.down("sm")]: {
     display: 'inline-block',
     width: 25,
     height: 25,
-    top:16,
-    right: 10,
+    top:-10,
+    right: 50,
 
     },
 
@@ -70,6 +72,23 @@ const styles = theme => ({
         top: 2,
             right: 10
         },
+  },
+  welcome : {
+     position: 'relative',
+      right: -1190,
+      [theme.breakpoints.down("md")]: {
+     
+        right: -680
+    },
+    [theme.breakpoints.down("sm")]: {
+     
+      right:-680
+  },
+
+  [theme.breakpoints.down("sm")]: {
+   
+        right: -25
+    },
   }
 
 });

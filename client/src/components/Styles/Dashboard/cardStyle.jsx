@@ -27,7 +27,7 @@ const cardStyle = {
       // minWidth: "0",
       wordWrap: "break-word",
       fontSize: ".875rem",
-      
+      padding: '0 10px'
  
       }
     

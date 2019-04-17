@@ -5,7 +5,8 @@ import {
   Avatar,
   CssBaseline,
   Typography,
-  Grid
+  Grid,
+  Paper
 } from "@material-ui/core";
 import {fire} from '../Auth/firebaseConfig'
 import LiveTicker from "./LiveTicker";
@@ -23,7 +24,10 @@ class Dashboard extends Component {
         <div className={classes.root}>
         <GridContainer>
           <Grid container justify="space-between" alignItems="flex-end">
-            <br />
+          <Typography variant="h6" gutterBottom className={classes.welcome}>
+          Welcome, {""}{fire.currentUser.displayName} {""} <br />
+         </Typography>
+         <p />
             <Avatar
               alt="profile-picture"
               src={fire.currentUser.photoURL}
@@ -62,17 +66,17 @@ class Dashboard extends Component {
               </Grid>
 
               <Grid item xs={12} md={12}>
-                
+                <Paper>
                   <Typography variant="h5" gutterBottom>
                     <YourFavorites />
                   </Typography>
-               
+                  </Paper>
               </Grid>
               <Grid item xs={12}>
                 <div className={classes.block}>
-                  <Typography variant="h6" gutterBottom>
-                 Welcome, {""}{fire.currentUser.displayName}<p /> 
-                  Dashboard
+                  <p />
+                  <Typography variant="h5" gutterBottom>
+                      Dashboard 
                   </Typography>
                 </div>
               </Grid>

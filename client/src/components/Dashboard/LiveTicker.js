@@ -133,9 +133,9 @@ class LiveTicker extends React.Component{
                    <Tooltip disableFocusListener title={
                         <Typography color="inherit">Click on this card to view the Stock Indicator Reports</Typography>
                     }>
-                        <StockSymbol>        
+                         
                             <p className={classes.cardCategory}>{stock.company}</p> 
-                        </StockSymbol> 
+                     
                     </Tooltip>
                         <Star className={classes.cardTitle}>
                             <TickerStar stocks={this.state.stocks} id={stock.company} /> 
