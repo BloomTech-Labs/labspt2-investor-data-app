@@ -21,19 +21,18 @@ class Dashboard extends Component {
       <React.Fragment>
         <CssBaseline />
         <div className={classes.root}>
-        
-        
+
           <Grid container justify="flex-end" alignItems="center">
-          
+
             <Typography variant="h6" color="inherit" gutterBottom className='AvatarContainer'>
-             Welcome, {firebase.auth().currentUser.displayName} <br />
+              Welcome, {firebase.auth().currentUser.displayName} <br />
             </Typography>
 
             <Avatar
               alt="profile-picture"
               src={firebase.auth().currentUser.photoURL}
               className={classes.bigAvatar}
-            /> 
+            />
           </Grid>
 
           <Grid container justify="center">
@@ -42,8 +41,7 @@ class Dashboard extends Component {
               alignItems="center"
               justify="center"
               container
-              className={classes.grid}
-            >
+              className={classes.grid}>
               <Grid item xs={12}>
                 <div className={classes.block}>
                   <Typography variant="h6" gutterBottom>
@@ -56,22 +54,21 @@ class Dashboard extends Component {
                 <Paper className={classes.paper}>
                   <div>
                     <Typography variant="h5" gutterBottom>
-                        <KeyIndicators/>
+                      <KeyIndicators />
                     </Typography>
                   </div>
                 </Paper>
               </Grid>
 
               <Grid item xs={12} md={6}>
-             
-                  <Paper className={classes.paper}>
-                    <Typography variant="h6" gutterBottom>
-                      <LiveTicker />
-                    </Typography>
-                  </Paper>
-  
+                 <Paper className={classes.paper}> 
+                  <Typography variant="h6" gutterBottom>
+                    <LiveTicker />
+                  </Typography>
+                </Paper> 
               </Grid>
-              <Grid item xs={12} md={6}>
+
+              <Grid item xs={12} md={12}>
                 <Paper
                   className={classes.paper}
                   style={{ position: "relative" }}

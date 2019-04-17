@@ -5,8 +5,8 @@ import FavoriteStocks from './FavoriteStocks'
 import firebase from 'firebase'
 
 class YourFavorites extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             timeStamp: {},
             companies: [], // stock company symbols
@@ -17,7 +17,7 @@ class YourFavorites extends React.Component{
     }
       
     componentDidMount(){
-        axios.get(`https://pickemm.herokuapp.com/api/favorites/${this.state.uid}`) // <----user favorites
+        axios.get(`https://pickemm.herokuapp.com/api/favorites/?uid=${this.state.uid}`) // <----user favorites
             .then( response => {
                 this.setState({
                    stocks: response.data

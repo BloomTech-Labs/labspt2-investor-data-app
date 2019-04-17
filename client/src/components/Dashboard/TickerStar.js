@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import firebase from 'firebase'
 
+
 class TickerStar extends React.Component{
     constructor(props){
         super(props); 
