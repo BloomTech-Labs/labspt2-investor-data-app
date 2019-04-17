@@ -6,7 +6,8 @@ import GridContainer from "../Styles/Dashboard/GridContainer.jsx"
 import GridItem from "../Styles/Dashboard/GridItem.jsx"
 import Card from '../Styles/Dashboard/Card'
 import styles from '../Styles/Dashboard/styles';
-import { withStyles } from '@material-ui/core';
+import ROUTES from ''
+import { withStyles, Tooltip, Typography } from '@material-ui/core';
 class LiveTicker extends React.Component{
     constructor(){
         super();
@@ -121,13 +122,17 @@ class LiveTicker extends React.Component{
         this.state.stocks.forEach( (stock, index) => {  // Loops through array of stock values and creates a table
         
             rows.push(
+                <Link component={RouterLink} to={ROUTES.REPORTS} key={index} style={{ textDecoration: "none" }}>
                 <GridContainer key={index}>
                      <GridItem xs={12} sm={3} md={6}>
                    <Card>
-                      
+                   <Tooltip disableFocusListener title={
+                        <Typography color="inherit">Click on this card to view the Stock Indicator Reports</Typography>
+                    }>
                         <StockSymbol>        
                             <p className={classes.cardCategory}>{stock.company}</p> 
                         </StockSymbol> 
+                    </Tooltip>
                         <Star className={classes.cardTitle}>
                             <TickerStar stocks={this.state.stocks} id={stock.company} /> 
                         </Star> 
@@ -142,6 +147,7 @@ class LiveTicker extends React.Component{
                     </ Card>
                     </GridItem>
                 </GridContainer>
+                </ Link>
             )
         });
     
