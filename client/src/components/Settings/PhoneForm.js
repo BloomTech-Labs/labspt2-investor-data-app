@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
+import Collapse from '@material-ui/core/Collapse';
 
 // WithStyles
 import styles from './styles';
@@ -18,7 +19,8 @@ class PhoneForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            phoneNumber: ''
+            phoneNumber: '',
+            expanded: true
         }
     }
 
@@ -63,6 +65,7 @@ class PhoneForm extends React.Component {
                 <form
                     id='phoneForm'
                     onSubmit={this.handleSubmit}
+                    className={classes.phoneField}
                 >
                     <TextField 
                         name='phoneNumber'
@@ -71,6 +74,8 @@ class PhoneForm extends React.Component {
                         value={this.state.phoneNumber}
                         onChange={this.handleChange}
                         margin='normal'
+                        inputProps={{
+                            style: { textAlign: "right" }}}
                     />
                     {/* Button to submit new phone number */}
                     <Button 

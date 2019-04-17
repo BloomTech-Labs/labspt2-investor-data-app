@@ -6,7 +6,7 @@ const styles = theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         paddingTop: '30px',
-        width: '80%',
+        width: '85%',
         margin: '0 auto',
     },
     container: {
@@ -53,9 +53,10 @@ const styles = theme => ({
         marginRight: theme.spacing.unit
     },
     textField: {
+        marginTop: 0,
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        width: 200
+        width: 200,
     },
     button: {
         margin: theme.spacing.unit,
@@ -68,6 +69,11 @@ const styles = theme => ({
     },
     divider: {
         width: '100%'
+    },
+    phoneField: {
+        alignSelf: 'flex-end',
+        display: 'flex',
+        flexDirection: 'column'
     }
 });
 
