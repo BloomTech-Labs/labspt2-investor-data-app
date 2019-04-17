@@ -2,10 +2,10 @@ import React from 'react'
 import axios from 'axios'
 import TickerStar from './TickerStar'
 //import PropTypes from "prop-types";
-import { Link as RouterLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from '@material-ui/core/Tooltip';
-import { Typography, Link } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import styles from "../Styles/Dashboard/styles";
@@ -130,7 +130,14 @@ class LiveTicker extends React.Component {
         this.state.stocks.forEach((stock, index) => {  // Loops through array of stock values and creates a table
             console.log(stock)
             rows.push(
-                <Link component={RouterLink} to={ROUTES.REPORTS} key={index} style={{ textDecoration: "none" }}>
+                <Link 
+                    to={{
+                            pathname: ROUTES.REPORTS,
+                            state: {ticker: stock.company}
+                        }} 
+                    key={index} 
+                    style={{ textDecoration: "none" }}
+                >
                     <Zoom in={checked} key={index}>
                         <Card color='secondary' className={classes.card} key={index}>
                             <CardContent>

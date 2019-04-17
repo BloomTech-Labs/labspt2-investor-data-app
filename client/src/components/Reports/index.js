@@ -114,6 +114,12 @@ class Reports extends Component {
   };
 
   componentDidMount() {
+    // if (this.props.location.state.ticker) {
+
+    // } else {
+
+    // }
+
     getData(this.state.ticker).then(data => {
       this.setState({ data });
     });
