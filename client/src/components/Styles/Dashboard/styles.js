@@ -3,14 +3,9 @@ const styles = theme => ({
     margin: '0 auto'
   },
   grid: {
-<<<<<<< HEAD
     width: 1200,
     flexWrap: 'wrap-reverse',
     justifyContent: 'flex-end',
-=======
-    //width: 1200,
-    width: 1000,
->>>>>>> 3167ba7ab085f09404694b48345e47da530961d1
     margin: `0 ${theme.spacing.unit * 2}px`,
     [theme.breakpoints.down("sm")]: {
       width: "calc(100% - 75px)"
@@ -22,7 +17,6 @@ const styles = theme => ({
    
   },
   paper: {
-<<<<<<< HEAD
     padding: theme.spacing.unit * 3,
     // textAlign: "left",
     // color: theme.palette.text.primary,
@@ -69,37 +63,14 @@ const styles = theme => ({
     top: -70,
     right:44,
     [theme.breakpoints.down("sm")]: {
-      top: 2,
-          right: 25
+      top: -72,
+          right: 75
       },
       [theme.breakpoints.down("xs")]: {
         top: 2,
-            right: 25
+            right: 10
         },
   }
-=======
-    padding: theme.spacing.unit * 2,
-    textAlign: "left",
-    color: theme.palette.text.primary,
-    // height: '40vh',
-    backgroundColor: '#D8DBE2'
-  
-  },
-  block: {
-    padding: theme.spacing.unit * 1
-  },
-  bigAvatar: {
-    margin: 10,
-    width: 40,
-    height: 40,
-  },
-  card: {
-    marginBottom: 4, 
-    minWidth: 175,
-    //maxWidth: 300,
-    backgroundColor: "#e8eaf6"
-   }
->>>>>>> 3167ba7ab085f09404694b48345e47da530961d1
 
 });
 
