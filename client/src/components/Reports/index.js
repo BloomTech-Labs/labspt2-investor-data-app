@@ -107,22 +107,26 @@ class Reports extends Component {
   state = {
     tab: 0,
     data: [],
-    ticker: "AAPL",
+    ticker: "",
     single: "",
     popper: "",
     suggestions: []
   };
 
   componentDidMount() {
-    // if (this.props.location.state.ticker) {
+    if (this.props.location.state) {
+      getData(this.props.location.state.ticker).then(data => {
+        this.setState({ data, ticker: this.props.location.state.ticker });
+      })
+    } else {
+      getData("AAPL").then(data => {
+        this.setState({ data, ticker: "AAPL" });
+      })
+    }
 
-    // } else {
-
-    // }
-
-    getData(this.state.ticker).then(data => {
-      this.setState({ data });
-    });
+    // getData("AAPL").then(data => {
+    //   this.setState({ data, ticker: "AAPL" });
+    // })
   }
 
   handleSuggestionsFetchRequested = ({ value }) => {
@@ -284,7 +288,7 @@ class Reports extends Component {
                 <div className={classes.block}>
                   <div className={classes.stockInfo}>
                     <Typography variant="h6">
-                      Price: ${data.length ? data[data.length - 1].close : ""}
+                      Price: ${data.length ? this.decimalToFixed(data[data.length - 1].close) : ""}
                     </Typography>
                     <Typography variant="h6" style={{ marginLeft: "50px" }}>
                       Change:{" "}
