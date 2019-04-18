@@ -15,6 +15,9 @@ import Collapse from '@material-ui/core/Collapse';
 // WithStyles
 import styles from './styles';
 
+// NumberFormat for text input
+import NumberFormat from 'react-number-format';
+
 class PhoneForm extends React.Component {
     constructor(props){
         super(props);
