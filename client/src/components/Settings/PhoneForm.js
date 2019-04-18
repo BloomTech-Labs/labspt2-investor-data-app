@@ -62,14 +62,14 @@ class PhoneForm extends React.Component {
                         {/* Current phone number */}
                         <p className={classes.currentValue}>{this.props.settings.phoneNumber}</p>
                     </div>
-
-                    {/* Text field for new phone number */}
+                {/* New phone number form */}
                 <form
                     id='phoneForm'
                     onSubmit={this.handleSubmit}
                     className={classes.phoneField}
                 >
-                    <TextField 
+                    {/* Text field for new phone number */}
+                    <NumberFormat 
                         name='phoneNumber'
                         label='Type new phone'
                         variant="outlined"
@@ -78,7 +78,11 @@ class PhoneForm extends React.Component {
                         onChange={this.handleChange}
                         margin='normal'
                         inputProps={{
-                            style: { textAlign: "right" }}}
+                            style: { textAlign: "right" }}
+                        }
+                        format="+1 (###) ###-####" 
+                        mask="_" 
+                        customInput={TextField}
                     />
                     {/* Button to submit new phone number */}
                     <Button 
