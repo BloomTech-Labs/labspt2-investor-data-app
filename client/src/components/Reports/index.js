@@ -107,7 +107,7 @@ const getSuggestionValue = suggestion => {
 
 class Reports extends Component {
   state = {
-    tab: 0,
+    value: 0,
     data: [],
     ticker: "",
     single: "",
@@ -247,7 +247,7 @@ class Reports extends Component {
                       ) : (
                         <LoadingContainer>
                           <ImpulseSpinner
-                            size={30}
+                            size={35}
                             frontColor="#EFEFEF"
                             backColor="#301548"
                           />
