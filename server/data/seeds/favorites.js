@@ -5,11 +5,11 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('favorites').insert([
-        {id: 1, symbol: 'MSFT'},
-        {id: 2, symbol: 'AAAA'},
-        {id: 3, symbol: 'BBBB'},
-        {id: 4, symbol: 'CCCC'},
-        {id: 5, symbol: 'DDDD'},
+        {id: 1, symbol: 'MSFT', uid: 'xHgfakdKhnageK'},
+        {id: 2, symbol: 'AAAA', uid: 'yneoKndKaeIggH'},
+        {id: 3, symbol: 'BBBB', uid: 'xHYoeIhgKnKaeH'},
+        {id: 4, symbol: 'CCCC', uid: 'PeKaKheiHgxNgL'},
+        {id: 5, symbol: 'DDDD', uid: 'XedINdLhaEkLhG'},
       ]);
     });
 };

@@ -19,10 +19,10 @@ class YourFavorites extends React.Component{
       
     componentDidMount(){
         this.props.getSettings(this.state.uid)
-        if(!this.props.settings.id === null){
-        return this.fetchUserStocks()
-     }
+    
+            this.fetchUserStocks()
     }
+
     fetchUserStocks = () => {
         axios.get(`http://www.localhost:5000/api/favorites/${this.props.settings.id}`) // <----user favorites
             .then( response => {
@@ -31,7 +31,7 @@ class YourFavorites extends React.Component{
                 })  
                 this.stockHandler()
             })
-            .catch( err => {console.log( 'there was an error')})
+            .catch( err => {console.log( 'We"ve encountered an error')})
     }
 
     stockHandler = () => {

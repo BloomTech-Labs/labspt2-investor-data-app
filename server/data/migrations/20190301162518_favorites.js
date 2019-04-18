@@ -1,19 +1,17 @@
 exports.up = function (knex, Promise) {
-  return Promise.all([
-    knex.schema.createTable('favorites', (favorites) => {
+  return knex.schema.createTable('favorites', (favorites) => {
       favorites.increments();
       favorites.string('symbol', 128).notNullable();
       favorites
-        .string('uid')
+        .string('user_id')
+        .unique()
         .unsigned()
+        .references('users.id')
     })
-  ])
 };
 
 
 exports.down = function (knex, Promise) {
-  return Promise.all([
-    knex.schema.dropTableIfExists('favorites')
-  ]);
+  return knex.schema.dropTableIfExists('favorites')
 };
 
