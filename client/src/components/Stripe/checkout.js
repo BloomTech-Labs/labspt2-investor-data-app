@@ -51,7 +51,7 @@ class Checkout extends Component {
             axios
               .post(endpoint, bill)
               .then(successPayment)
-              .catch(err => console.log(err));
+              .catch(err);
           }
         })
         .catch(errorPayment);
