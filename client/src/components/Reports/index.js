@@ -141,9 +141,15 @@ class Reports extends Component {
     event,
     { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
   ) => {
-    getData(suggestionValue).then(data => {
-      this.setState({ data, ticker: suggestionValue });
-    });
+    getData(suggestionValue)
+      .then(data => {
+        this.setState({ data, ticker: suggestionValue });
+      })
+      .catch(err => {
+        alert("The stock you selected is not available at this time.");
+
+        this.setState({ data: [], ticker: "" });
+      });
   };
 
   // TODO: Figure out how to make the first tab be selected by default
@@ -312,7 +318,7 @@ class Reports extends Component {
               <Grid item xs={12} md={12}>
                 <Paper
                   className={classes.paper}
-                  style={{ position: "relative"}}
+                  style={{ position: "relative" }}
                 >
                   <AppBar position="static">
                     <Tabs
