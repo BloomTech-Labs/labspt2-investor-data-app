@@ -468,7 +468,6 @@ export const suggestions = [
   { label: "VZ" },
   { label: "VRTX" },
   { label: "VIAB" },
-  
   { label: "V" },
   { label: "VNO" },
   { label: "VMC" },
