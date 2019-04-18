@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import { Input, Form, SearchIcon } from '../Styles/Dashboard/YourFavorites'
 import FavoriteStocks from './FavoriteStocks'
+import { connect } from 'react-redux';
+import { getSettings, updateSettings } from '../../actions/settingsActions.js';
 import firebase from 'firebase'
 
 class YourFavorites extends React.Component{
@@ -11,13 +13,18 @@ class YourFavorites extends React.Component{
             timeStamp: {},
             companies: [], // stock company symbols
             stocks: [],
-            items: [],
             uid: firebase.auth().currentUser.uid,
         }
     }
       
     componentDidMount(){
-        axios.get(`https://pickemm.herokuapp.com/api/favorites/?uid=${this.state.uid}`) // <----user favorites
+        this.props.getSettings(this.state.uid)
+        if(!this.props.settings.id === null){
+        return this.fetchUserStocks()
+     }
+    }
+    fetchUserStocks = () => {
+        axios.get(`http://www.localhost:5000/api/favorites/${this.props.settings.id}`) // <----user favorites
             .then( response => {
                 this.setState({
                    stocks: response.data
@@ -26,7 +33,7 @@ class YourFavorites extends React.Component{
             })
             .catch( err => {console.log( 'there was an error')})
     }
-    
+
     stockHandler = () => {
         let stock = []
         {this.state.stocks.map(item => {
@@ -59,4 +66,17 @@ class YourFavorites extends React.Component{
        }
     }
 
-    export default YourFavorites
+    const mapStateToProps = state => {
+        return {
+            fetchingSettings: state.SettingsReducer.fetchingSettings,
+            error: state.SettingsReducer.error,
+            settings: state.SettingsReducer.settings
+        }
+    };
+    
+    const mapDispatchToProps = dispatch => ({
+        getSettings: (uid) => dispatch(getSettings(uid)),
+        updateSettings:  (uid, updatedPhone) => dispatch(updateSettings(uid, updatedPhone))
+    });
+    
+    export default (connect(mapStateToProps, mapDispatchToProps)(YourFavorites));

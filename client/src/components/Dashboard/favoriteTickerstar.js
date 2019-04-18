@@ -16,7 +16,7 @@ class FavoriteTickerstar extends React.Component{
 
 
     componentDidMount(){
-        axios.get(`https://pickemm.herokuapp.com/api/favorites/?uid=${this.state.uid}`) // <----user favorites
+        axios.get(`http://www.localhost:5000/api/favorites/?uid=${this.state.uid}`) // <----user favorites
         .then( response => {
             this.setState({
                stocks: response.data
