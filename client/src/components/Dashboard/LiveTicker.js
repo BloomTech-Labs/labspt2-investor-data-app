@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import TickerStar from './TickerStar'
-//import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from '@material-ui/core/Tooltip';

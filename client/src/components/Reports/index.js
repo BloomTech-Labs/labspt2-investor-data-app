@@ -13,6 +13,8 @@ import {
   Popper
 } from "@material-ui/core";
 import styles from "../Styles/Reports/styles";
+import {LoadingContainer} from '../Styles/Reports/Reports'
+import { ImpulseSpinner } from "react-spinners-kit";
 
 import deburr from "lodash/deburr";
 import Autosuggest from "react-autosuggest";
@@ -123,10 +125,6 @@ class Reports extends Component {
         this.setState({ data, ticker: "AAPL" });
       })
     }
-
-    // getData("AAPL").then(data => {
-    //   this.setState({ data, ticker: "AAPL" });
-    // })
   }
 
   handleSuggestionsFetchRequested = ({ value }) => {
@@ -243,7 +241,7 @@ class Reports extends Component {
               <Grid item xs={12}>
                 <div className={classes.topBar}>
                   <div className={classes.block}>
-                    <Typography variant="h2">{this.state.ticker}</Typography>
+                    <Typography variant="h2">{this.state.ticker ? this.state.ticker : <LoadingContainer><ImpulseSpinner size={30} frontColor="#EFEFEF" backColor="#301548" /></LoadingContainer>}</Typography>
                   </div>
                   <div>
                     <Autosuggest
