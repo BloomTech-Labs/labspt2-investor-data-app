@@ -1,5 +1,3 @@
-import { elementType } from "prop-types";
-
 const styles = theme => ({
     parent: {
         display: 'flex',
