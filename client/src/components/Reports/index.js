@@ -105,7 +105,7 @@ const getSuggestionValue = suggestion => {
 
 class Reports extends Component {
   state = {
-    tab: 0,
+    value: 0,
     data: [],
     ticker: "AAPL",
     single: "",

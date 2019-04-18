@@ -9,10 +9,6 @@ const CURRENCY = "USD";
 
 const fromUSDToCent = amount => amount * 100;
 
-const successPayment = data => {
-  alert("Payment Successful");
-};
-
 const errorPayment = data => {
   alert("Payment Error");
 };
@@ -45,18 +41,14 @@ class Checkout extends Component {
       axios
         .post(PAYMENT_SERVER_URL, {
           source: token.id,
-          currency: CURRENCY,
-          amount: fromUSDToCent(this.props.amount)
+          email: fire.currentUser.email,
+          plan: this.props.stripePlan
         })
         .then(successPayment => {
           if (successPayment) {
             const bill = this.state;
-            console.log("OnToken:", bill);
             const endpoint = "https://pickemm.herokuapp.com/api/billing";
-            axios
-              .post(endpoint, bill)
-              .then(successPayment)
-              .catch(err => console.log(err));
+            axios.post(endpoint, bill).then(successPayment);
           }
         })
         .catch(errorPayment);
@@ -68,7 +60,9 @@ class Checkout extends Component {
     return (
       <StripeCheckout
         name={this.props.name}
+        customer={fire.currentUser}
         email={fire.currentUser.email}
+        stripeplan={this.props.stripePlan}
         amount={fromUSDToCent(this.props.amount)}
         token={this.onToken(this.props.amount, this.state.accountType)}
         currency={CURRENCY}

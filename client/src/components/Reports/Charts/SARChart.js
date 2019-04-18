@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { format } from "d3-format";
 import { timeFormat } from "d3-time-format";
 
-import { GuardSpinner } from "react-spinners-kit";
+import { ImpulseSpinner } from "react-spinners-kit";
 import { SpinnerContainer } from "../../Styles/Reports/Reports";
 
 import { ChartCanvas, Chart } from "react-stockcharts";
@@ -55,7 +55,7 @@ class SARChart extends React.Component {
     if (!data.length) {
       return (
         <SpinnerContainer>
-          <GuardSpinner size={30} frontColor="#373f51" backColor="#ff4400" />
+          <ImpulseSpinner size={30} frontColor="#EFEFEF" backColor="#301548" />
         </SpinnerContainer>
       );
     }
