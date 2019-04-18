@@ -6,9 +6,9 @@ import StockTicker from "../StockTicker";
 
 import "../Styles/Landing/landing.css";
 
-import undraw_investing from "./images/undraw_investing1.png";
-import undraw_finance from "./images/undraw_finance1.png";
-import undraw_financial_data from "./images/undraw_financial_data1.png";
+import undraw_investing from "./images/undraw_investing.svg";
+import undraw_finance from "./images/undraw_finance.svg";
+import undraw_financial_data from "./images/undraw_financial_data.svg";
 
 const Landing = () => {
   return (
@@ -32,7 +32,7 @@ const Landing = () => {
                   whether a buy signal is warranted.
                 </p>
                 <Link to={ROUTES.SIGNIN} className="button button__accent">
-                  Sign Up
+                  Get Started
                 </Link>
               </div>
             </div>
@@ -42,7 +42,7 @@ const Landing = () => {
 
       <div className="steps landing__section">
         <div className="container">
-          <h2>Who uses our application?</h2>
+          <h2>Who uses our Pick Em?</h2>
         </div>
         <div className="container">
           <div className="steps__inner">
@@ -88,19 +88,6 @@ const Landing = () => {
         <div className="container">
           <div className="expanded__inner">
             <StockTicker />
-          </div>
-        </div>
-      </div>
-      <div className="cta cta--reverse">
-        <div className="container">
-          <div className="cta__inner">
-            <h2 className="cta__title">Get started now</h2>
-            <p className="cta__sub cta__sub--center">
-              Sign up to use Pick Em now.
-            </p>
-            <Link to={ROUTES.SIGNIN} className="button button__accent">
-              Sign Up
-            </Link>
           </div>
         </div>
       </div>
