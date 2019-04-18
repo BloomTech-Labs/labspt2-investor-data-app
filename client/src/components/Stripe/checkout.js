@@ -48,11 +48,7 @@ class Checkout extends Component {
           if (successPayment) {
             const bill = this.state;
             const endpoint = "https://pickemm.herokuapp.com/api/billing";
-            axios
-              .post(endpoint, bill)
-              .then(successPayment)
-              // eslint-disable-next-line no-undef
-              .catch(err);
+            axios.post(endpoint, bill).then(successPayment);
           }
         })
         .catch(errorPayment);
