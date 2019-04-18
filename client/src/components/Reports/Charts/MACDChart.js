@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { GuardSpinner } from "react-spinners-kit";
+import { ImpulseSpinner } from "react-spinners-kit";
 import { SpinnerContainer } from "../../Styles/Reports/Reports";
 
 import { format } from "d3-format";
@@ -106,7 +106,7 @@ class MACDChart extends React.Component {
     if (!data.length) {
       return (
         <SpinnerContainer>
-          <GuardSpinner size={30} frontColor="#373f51" backColor="#ff4400" />
+          <ImpulseSpinner size={30} frontColor="#EFEFEF" backColor="#301548" />
         </SpinnerContainer>
       );
     }
