@@ -44,26 +44,17 @@ class Dashboard extends Component {
               className={classes.grid}
             >
 
-              <GridItem xs={12} md={12}>
+              <Grid item xs={12} md={12}>
                 
-                  <div>
-                    <Typography variant="h5" gutterBottom>
+                  <div className={classes.liveticker}>
+                    <Typography variant="h5" gutterBottom> 
                       <KeyIndicators />
                     </Typography>
                   </div>
              
-              </GridItem>
-
-              <Grid item xs={12} md={4} sm={3} className={classes.liveticker}>
-             
-                  
-                    <Typography variant="h6" gutterBottom>
-                    
-                      <LiveTicker />
-                    </Typography>
-                
-  
               </Grid>
+
+            
 
               <Grid item xs={12} md={12}>
                 <Paper className={classes.paper}>
@@ -78,7 +69,13 @@ class Dashboard extends Component {
                   <Typography variant="h5" gutterBottom>
                       Dashboard 
                   </Typography>
-                </div>
+
+             <p />
+                <Typography variant="h6" gutterBottom>
+                    
+                    <LiveTicker />
+                  </Typography>
+                  </div>
               </Grid>
             </Grid>
           </Grid>

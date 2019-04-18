@@ -5,11 +5,9 @@ import {withStyles, Grid} from '@material-ui/core'
 const style = {
     grid: {
         // margin: "10px !important",
-        padding: '10px',
         width: "unset",
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
+        display: 'inline-flex',
+
     } 
 
  
