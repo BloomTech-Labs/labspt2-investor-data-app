@@ -5,9 +5,15 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        paddingTop: '30px',
-        width: '85%',
-        margin: '0 auto',
+        width: '55%',
+        padding: '30px',
+        margin: '20px auto',
+        border: '1px solid #DCDCDC',
+        borderRadius: '15px',
+        [theme.breakpoints.down('xs')]: {
+            border: '0',
+            width: '90%'
+        },
     },
     container: {
         display: 'flex',

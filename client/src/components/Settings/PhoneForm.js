@@ -68,7 +68,8 @@ class PhoneForm extends React.Component {
                 >
                     <TextField 
                         name='phoneNumber'
-                        label='New phone'
+                        label='New phone number'
+                        variant="outlined"
                         className={classes.textField}
                         value={this.state.phoneNumber}
                         onChange={this.handleChange}
