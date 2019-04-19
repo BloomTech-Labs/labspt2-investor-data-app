@@ -4,16 +4,17 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import {
   Avatar,
   CssBaseline,
-  Paper,
   Typography,
-  Grid
+  Grid,
+  Paper
 } from "@material-ui/core";
-import firebase from "firebase";
+import {fire} from '../Auth/firebaseConfig'
 import LiveTicker from "./LiveTicker";
 import YourFavorites from "./YourFavorites";
 import KeyIndicators from './KeyIndicators'
 import styles from "../Styles/Dashboard/styles";
-
+import GridItem from "../Styles/Dashboard/GridItem.jsx"
+import GridContainer from '../Styles/Dashboard/GridContainer.jsx'
 class Dashboard extends Component {
   render() {
     const { classes } = this.props;
@@ -21,16 +22,15 @@ class Dashboard extends Component {
       <React.Fragment>
         <CssBaseline />
         <div className={classes.root}>
-
-          <Grid container justify="flex-end" alignItems="center">
-
-            <Typography variant="h6" color="inherit" gutterBottom className='AvatarContainer'>
-              Welcome, {firebase.auth().currentUser.displayName} <br />
-            </Typography>
-
+        <GridContainer>
+          <Grid container justify="space-between" alignItems="flex-end">
+          <Typography variant="h6" gutterBottom className={classes.welcome}>
+          Welcome, {""}{fire.currentUser.displayName} {""} <br />
+         </Typography>
+         <p />
             <Avatar
               alt="profile-picture"
-              src={firebase.auth().currentUser.photoURL}
+              src={fire.currentUser.photoURL}
               className={classes.bigAvatar}
             />
           </Grid>
@@ -41,45 +41,45 @@ class Dashboard extends Component {
               alignItems="center"
               justify="center"
               container
-              className={classes.grid}>
-              <Grid item xs={12}>
-                <div className={classes.block}>
-                  <Typography variant="h6" gutterBottom>
-                    Dashboard
-                  </Typography>
-                </div>
-              </Grid>
+              className={classes.grid}
+            >
 
-              <Grid item xs={12} md={6}>
-                <Paper className={classes.paper}>
-                  <div>
-                    <Typography variant="h5" gutterBottom>
+              <Grid item xs={12} md={12}>
+                
+                  <div className={classes.liveticker}>
+                    <Typography variant="h5" gutterBottom> 
                       <KeyIndicators />
                     </Typography>
                   </div>
-                </Paper>
+             
               </Grid>
 
-              <Grid item xs={12} md={6}>
-                 <Paper className={classes.paper}> 
-                  <Typography variant="h6" gutterBottom>
-                    <LiveTicker />
-                  </Typography>
-                </Paper> 
-              </Grid>
+            
 
               <Grid item xs={12} md={12}>
-                <Paper
-                  className={classes.paper}
-                  style={{ position: "relative" }}
-                >
+                <Paper className={classes.paper}>
                   <Typography variant="h5" gutterBottom>
                     <YourFavorites />
                   </Typography>
-                </Paper>
+                  </Paper>
+              </Grid>
+              <Grid item xs={12}>
+                <div className={classes.block}>
+                  <p />
+                  <Typography variant="h5" gutterBottom>
+                      Dashboard 
+                  </Typography>
+
+             <p />
+                <Typography variant="h6" gutterBottom>
+                    
+                    <LiveTicker />
+                  </Typography>
+                  </div>
               </Grid>
             </Grid>
           </Grid>
+          </GridContainer> 
         </div>
       </React.Fragment>
     );
