@@ -16,9 +16,6 @@ import Typography from "@material-ui/core/Typography";
 import styles from './styles';
 
 class OptEmailsTextsForm extends React.Component {
-    constructor(props){
-        super(props);
-    };
 
     componentDidMount(){
         const uid = firebase.auth().currentUser.uid;
