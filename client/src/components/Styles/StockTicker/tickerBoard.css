@@ -2,10 +2,10 @@
     font-family: "Open Sans", sans-serif;
     margin: auto;
     width: 100vw;
-    color: #a7a1ae;
-    background-color: #1f2739;
+    color: #b9b4c2;
+    background-color: #2b1f39;
     border-radius: 10px;
-    box-shadow: 1px 0px 3px 2px rgb(2, 2, 148);
+    box-shadow: 1px 0px 3px 2px rgb(54, 4, 77);
     padding: 10px 15px;
     max-width: 650px;
 }
@@ -23,13 +23,13 @@
     font-weight: bold;
     font-size: 1em;
     text-align: left;
-    color: #185875;
+    color: #695381;
 }
 
 .tickerContainer td {
     font-weight: normal;
     font-size: 1em;
-    box-shadow: 0 2px 2px -2px #0e1119;
+    box-shadow: 0 2px 2px -2px #2e1c3d;
 }
 
 .tickerContainer td,
@@ -54,7 +54,7 @@
 }
 
 .tickerContainer td:first-child {
-    color: rgb(98, 248, 28);
+    color: rgb(245, 205, 255);
 }
 
 .tickerContainer tr:hover {
@@ -62,6 +62,11 @@
     box-shadow: 0 6px 6px -6px #0e1119;
 }
 
+<<<<<<< HEAD
+.table {
+    width: 800%;
+}
+=======
 /* .tickerContainer td:hover {
     background-color: #fff842;
     color: #403e10;
@@ -74,10 +79,10 @@
     transition-property: all;
     transition-timing-function: line;
 } */
+>>>>>>> 3167ba7ab085f09404694b48345e47da530961d1
 
-h4 {
-    display: flex;
-    align-items: center;
+.container td {
+    font-size: 1rem
 }
 
 @media (max-width: 800px) {
