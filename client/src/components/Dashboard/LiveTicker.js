@@ -161,10 +161,21 @@ class LiveTicker extends React.Component {
                   >
                     <p className={classes.cardCategory}>{stock.company}</p>
                   </Tooltip>
-                  <Star className={classes.cardTitle}>
-                    <TickerStar stocks={this.state.stocks} id={stock.company} />
-                  </Star>
-
+                  <Tooltip
+                    disableFocusListener
+                    title={
+                      <Typography color="inherit">
+                        Click here to Add/Remove stocks from your favorites
+                      </Typography>
+                    }
+                  >
+                    <Star className={classes.cardTitle}>
+                      <TickerStar
+                        stocks={this.state.stocks}
+                        id={stock.company}
+                      />
+                    </Star>
+                  </Tooltip>
                   <p className={classes.cardCategory}>
                     Price: ${`${this.decimalToFixed(stock.values[close])}`}
                   </p>
