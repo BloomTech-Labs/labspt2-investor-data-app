@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
+import Collapse from '@material-ui/core/Collapse';
 
 // WithStyles
 import styles from './styles';
@@ -18,7 +19,7 @@ class PhoneForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            phoneNumber: ''
+            phoneNumber: '',
         }
     }
 
@@ -49,39 +50,45 @@ class PhoneForm extends React.Component {
         const { classes } = this.props;
 
         return(
-            <form 
-                className={classes.container}
-                id='phoneForm'
-                onSubmit={this.handleSubmit}
-            >
-                <div>
-                    {/* Current phone number header */}
-                    <Typography variant='h6'>Current phone:</Typography>
-                    {/* Error in loading current phone number */}
-                    {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
-                    {/* Current phone number */}
-                    <p className={classes.currentValue}>{this.props.settings.phoneNumber}</p>
-                </div>
-                {/* Text field for new phone number */}
-                <TextField 
-                    name='phoneNumber'
-                    label='New phone'
-                    className={classes.textField}
-                    value={this.state.phoneNumber}
-                    onChange={this.handleChange}
-                    margin='normal'
-                />
-                {/* Button to submit new phone number */}
-                <Button 
-                    variant='contained' 
-                    color='secondary'
-                    className={classes.button}
-                    type='submit'
-                    form='phoneForm'
+            <div className={classes.phoneFormContainer}>
+                    <div className={classes.currentPhoneContainer}>
+                        {/* Current phone number header */}
+                        <Typography variant='h6'>Phone number</Typography>
+                        {/* Error in loading current phone number */}
+                        {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
+                        {/* Current phone number */}
+                        <p className={classes.currentValue}>{this.props.settings.phoneNumber}</p>
+                    </div>
+
+                    {/* Text field for new phone number */}
+                <form
+                    id='phoneForm'
+                    onSubmit={this.handleSubmit}
+                    className={classes.phoneField}
                 >
-                    Update phone
-                </Button>
-            </form>
+                    <TextField 
+                        name='phoneNumber'
+                        label='Type new phone'
+                        variant="outlined"
+                        className={classes.textField}
+                        value={this.state.phoneNumber}
+                        onChange={this.handleChange}
+                        margin='normal'
+                        inputProps={{
+                            style: { textAlign: "right" }}}
+                    />
+                    {/* Button to submit new phone number */}
+                    <Button 
+                        variant='contained' 
+                        color='secondary'
+                        className={classes.button}
+                        type='submit'
+                        form='phoneForm'
+                    >
+                        Update phone
+                    </Button>
+                </form>
+            </div>
         )
     };
 };
