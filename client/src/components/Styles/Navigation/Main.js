@@ -17,7 +17,7 @@ export const NavbarLeft = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  width: 60%;
+  width: 100%;
 `;
 
 export const MenuDrawer = styled.div`

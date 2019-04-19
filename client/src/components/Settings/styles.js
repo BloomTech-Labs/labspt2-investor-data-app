@@ -1,22 +1,52 @@
-import { elementType } from "prop-types";
-
 const styles = theme => ({
     parent: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'baseline',
-        paddingTop: '30px',
-        paddingLeft: '10%',
-        margin: '0 auto'
+        alignItems: 'center',
+        width: '55%',
+        padding: '30px',
+        margin: '20px auto',
+        border: '1px solid #DCDCDC',
+        borderRadius: '15px',
+        [theme.breakpoints.down('xs')]: {
+            border: '0',
+            width: '90%'
+        },
     },
     container: {
         display: 'flex',
         flexWrap: 'no-wrap',
         flexDirection: 'column',
     },
+    emailContainer:{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%'
+    },
+    phoneFormContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        marginBottom: theme.spacing.unit
+    },
+    currentPhoneContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%'
+    },
+    emailTextContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%'
+    },
     header: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
+        alignSelf: 'flex-start'
     },
     currentHeader: {
         marginLeft: theme.spacing.unit,
@@ -27,9 +57,10 @@ const styles = theme => ({
         marginRight: theme.spacing.unit
     },
     textField: {
+        marginTop: 0,
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        width: 200
+        width: 200,
     },
     button: {
         margin: theme.spacing.unit,
@@ -39,6 +70,14 @@ const styles = theme => ({
     },
     optSwitch: {
         margin: theme.spacing.unit,
+    },
+    divider: {
+        width: '100%'
+    },
+    phoneField: {
+        alignSelf: 'flex-end',
+        display: 'flex',
+        flexDirection: 'column'
     }
 });
 
