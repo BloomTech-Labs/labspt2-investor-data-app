@@ -79,7 +79,11 @@ class StockTicker extends React.Component {
   render() {
     if (!this.state.stocks.length) {
       // returns loading sign while data is being retrieved from API
-      return <SpinnerContainer><ImpulseSpinner size={30} frontColor="#EFEFEF" backColor="#301548" /></SpinnerContainer>;
+      return (
+        <SpinnerContainer>
+          <ImpulseSpinner size={30} frontColor="#EFEFEF" backColor="#301548" />
+        </SpinnerContainer>
+      );
     }
 
     let rows = [];

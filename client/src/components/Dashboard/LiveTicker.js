@@ -1,23 +1,18 @@
 import React from "react";
 import axios from "axios";
 import TickerStar from "./TickerStar";
-import { Link } from "react-router-dom";
-import withStyles from "@material-ui/core/styles/withStyles";
-import Tooltip from "@material-ui/core/Tooltip";
-import { Typography } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import styles from "../Styles/Dashboard/styles";
-import Zoom from "@material-ui/core/Zoom";
 import {
   Loading,
-  Row,
-  TickerContainer,
   StockSymbol,
   Star
 } from "../Styles/Dashboard/LiveTickerStyles";
+import GridContainer from "../Styles/Dashboard/GridContainer.jsx";
+import GridItem from "../Styles/Dashboard/GridItem.jsx";
+import Card from "../Styles/Dashboard/Card";
+import styles from "../Styles/Dashboard/styles";
+import { Link as RouterLink } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
-
+import { withStyles, Link, Tooltip, Typography, Zoom } from "@material-ui/core";
 class LiveTicker extends React.Component {
   constructor() {
     super();
@@ -133,88 +128,93 @@ class LiveTicker extends React.Component {
       // returns loading sign while data is being retrieved from API
       return <Loading>Loading Stocks...</Loading>;
     }
+    const { classes } = this.props;
+    const { checked } = this.state;
 
     let rows = [];
 
     const open = "1. open";
     const close = "4. close";
     const volume = "5. volume";
-    const { classes } = this.props;
-    const { checked } = this.state;
 
     this.state.stocks.forEach((stock, index) => {
       // Loops through array of stock values and creates a table
-      console.log(stock);
+
       rows.push(
         <Link
-          to={{
-            pathname: ROUTES.REPORTS,
-            state: { ticker: stock.company }
-          }}
+          component={RouterLink}
+          to={ROUTES.REPORTS}
           key={index}
           style={{ textDecoration: "none" }}
         >
           <Zoom in={checked} key={index}>
-            <Card color="secondary" className={classes.card} key={index}>
-              <CardContent>
-                <TickerContainer key={index}>
-                  <Row>
-                    <Tooltip
-                      disableFocusListener
-                      title={
-                        <Typography color="inherit">
-                          Click on this card to view the Stock Indicator Reports
-                        </Typography>
-                      }
-                    >
-                      <StockSymbol>
-                        <p>{stock.company}</p>
-                      </StockSymbol>
-                    </Tooltip>
-                    <Tooltip
-                      disableFocusListener
-                      title={
-                        <Typography color="inherit">
-                          Click here to Add/Remove stocks from your favorites
-                        </Typography>
-                      }
-                    >
-                      <Star>
-                        <TickerStar
-                          stocks={this.state.stocks}
-                          id={stock.company}
-                        />
-                      </Star>
-                    </Tooltip>
-                  </Row>
-                  {/*  <br /> */}
-                  <Row>
-                    <p>
-                      Price: ${`${this.decimalToFixed(stock.values[close])}`}
-                    </p>
-                    <p>
-                      Change:{" "}
-                      {`${this.changePoints(
-                        stock.values[close],
-                        stock.values[open]
-                      )}`}
-                    </p>
-                  </Row>
-                  <Row>
-                    <p>
-                      Volume: {`${this.shortenVolume(stock.values[volume])}`}
-                    </p>
-                    <p>
-                      Change %:{" "}
-                      {`${this.changePercent(
-                        stock.values[close],
-                        stock.values[open]
-                      )}`}
-                    </p>
-                  </Row>
-                </TickerContainer>
-              </CardContent>
-            </Card>
+            <GridContainer key={index}>
+              <GridItem xs={12} sm={3} md={6}>
+                <Card>
+                  <Tooltip
+                    disableFocusListener
+                    title={
+                      <Typography color="inherit">
+                        Click on this card to view the Stock Indicator Reports
+                      </Typography>
+                    }
+                  >
+                    <p className={classes.cardCategory}>{stock.company}</p>
+                  </Tooltip>
+                  <Tooltip
+                    disableFocusListener
+                    title={
+                      <Typography color="inherit">
+                        Click here to Add/Remove stocks from your favorites
+                      </Typography>
+                    }
+                  >
+                    <Star className={classes.cardTitle}>
+                      <TickerStar
+                        stocks={this.state.stocks}
+                        id={stock.company}
+                      />
+                    </Star>
+                  </Tooltip>
+                  <p className={classes.cardCategory}>
+                    Price: ${`${this.decimalToFixed(stock.values[close])}`}
+                  </p>
+                  {/* <p style={{color: 'white' ,background: Math.sign(this.changePoints(stock.values[close], stock.values[open])) < 0 ? "#CE0000" : "#00CC00", width:'35%'}} >Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
+                   */}
+                  <p className={classes.cardCategory}>
+                    Volume: {`${this.shortenVolume(stock.values[volume])}`}
+                  </p>
+                  <p
+                    className={classes.cardTitle}
+                    style={{
+                      fontSize: "small",
+                      borderRadius: "3px",
+                      position: "relative",
+                      top: "9px",
+                      color: "white",
+                      background:
+                        Math.sign(
+                          this.changePercent(
+                            stock.values[close],
+                            stock.values[open]
+                          )
+                        ) < 0
+                          ? "#ff2900"
+                          : "#21ab42",
+                      width: "22%"
+                    }}
+                  >
+                    Change %:{" "}
+                    {`${this.changePercent(
+                      stock.values[close],
+                      stock.values[open]
+                    )}`}
+                  </p>
+
+                  <br />
+                </Card>
+              </GridItem>
+            </GridContainer>
           </Zoom>
         </Link>
       );
