@@ -6,6 +6,7 @@ export const suggestions = [
   { label: "ADBE" },
   { label: "ADT" },
   { label: "AAP" },
+  { label: "AAPL" },
   { label: "AES" },
   { label: "AET" },
   { label: "AFL" },
