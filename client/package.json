@@ -57,5 +57,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "eslint-config-prettier": "^4.1.0",
+    "pettier": "^1.1.0"
+  }
 }
