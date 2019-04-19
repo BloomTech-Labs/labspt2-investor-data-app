@@ -8,17 +8,14 @@ import { getSettings, updateSettings } from '../../actions/settingsActions.js';
 
 // Material UI Components
 import { withStyles } from '@material-ui/core/styles';
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Typography from "@material-ui/core/Typography";
 
 // WithStyles
 import styles from './styles';
 
 class OptEmailsTextsForm extends React.Component {
-    constructor(props){
-        super(props);
-    };
 
     componentDidMount(){
         const uid = firebase.auth().currentUser.uid;
@@ -36,31 +33,34 @@ class OptEmailsTextsForm extends React.Component {
         const { classes } = this.props;
 
         return(
-            <div>
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={this.props.settings.receiveEmails}
-                            onChange={this.handleSwitch('receiveEmails')}
-                            value='receiveEmails'
-                            color='primary'
-                        />
-                    }
-                    label='Emails?'
-                    className={classes.optSwitch}
-                />
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={this.props.settings.receiveTexts}
-                            onChange={this.handleSwitch('receiveTexts')}
-                            value='receiveTexts'
-                            color='primary'
-                        />
-                    }
-                    label='Texts?'
-                    className={classes.optSwitch}
-                />
+            <div className={classes.emailTextContainer}>
+                <Typography variant='h6'>Email and text preferences</Typography>
+                <div>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={this.props.settings.receiveEmails}
+                                onChange={this.handleSwitch('receiveEmails')}
+                                value='receiveEmails'
+                                color='secondary'
+                            />
+                        }
+                        label='Emails?'
+                        className={classes.optSwitch}
+                    />
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={this.props.settings.receiveTexts}
+                                onChange={this.handleSwitch('receiveTexts')}
+                                value='receiveTexts'
+                                color='secondary'
+                            />
+                        }
+                        label='Texts?'
+                        className={classes.optSwitch}
+                    />
+                </div>
             </div>
         );
     };
