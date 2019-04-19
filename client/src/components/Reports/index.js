@@ -149,9 +149,15 @@ class Reports extends Component {
     event,
     { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
   ) => {
-    getData(suggestionValue).then(data => {
-      this.setState({ data, ticker: suggestionValue });
-    });
+    getData(suggestionValue)
+      .then(data => {
+        this.setState({ data, ticker: suggestionValue });
+      })
+      .catch(err => {
+        alert("The stock you selected is not available at this time.");
+
+        this.setState({ data: [], ticker: "" });
+      });
   };
 
   // TODO: Figure out how to make the first tab be selected by default
