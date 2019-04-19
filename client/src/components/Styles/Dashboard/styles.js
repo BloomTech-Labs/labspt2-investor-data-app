@@ -9,6 +9,7 @@ const styles = theme => ({
     // backgroundColor: '#846f96',
     // height: '100vh'
   },
+
   grid: {
     width: 1200,
     flexWrap: "wrap-reverse",
@@ -40,6 +41,7 @@ const styles = theme => ({
       width: "100%"
     }
   },
+
   block: {
     padding: 14,
     marginTop: "50px",

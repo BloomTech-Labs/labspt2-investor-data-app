@@ -62,11 +62,6 @@
     box-shadow: 0 6px 6px -6px #0e1119;
 }
 
-<<<<<<< HEAD
-.table {
-    width: 800%;
-}
-=======
 /* .tickerContainer td:hover {
     background-color: #fff842;
     color: #403e10;
@@ -79,7 +74,6 @@
     transition-property: all;
     transition-timing-function: line;
 } */
->>>>>>> 3167ba7ab085f09404694b48345e47da530961d1
 
 .container td {
     font-size: 1rem

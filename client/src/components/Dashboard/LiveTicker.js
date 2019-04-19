@@ -18,7 +18,7 @@ class LiveTicker extends React.Component {
     super();
     this.state = {
       timeStamp: {},
-      companies: ["DJI", "NDAQ", "AAPL", "AMZN"], // stock company symbols
+      companies: ["DJI", "NDAQ", "SPX", "AAPL", "AMZN"], // stock company symbols
       stocks: [],
       checked: false
     };

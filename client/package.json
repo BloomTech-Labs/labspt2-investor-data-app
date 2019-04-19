@@ -30,6 +30,7 @@
     "react-autosuggest": "^9.4.3",
     "react-dom": "^16.8.4",
     "react-firebaseui": "^3.1.2",
+    "react-number-format": "^4.0.7",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",
