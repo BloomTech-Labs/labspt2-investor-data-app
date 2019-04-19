@@ -39,7 +39,9 @@ class Signin extends Component {
 
   render () {
     const {classes} = this.props;
-    const {from} = this.props.location.state || {from: {pathname: '/'}};
+    const {from} = this.props.location.state || {from: {pathname: '/dashboard'}};
+   
+    
 
     if (this.props.redirect === true) {
       return <Redirect to={from} />;
