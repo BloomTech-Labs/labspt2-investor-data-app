@@ -1,11 +1,7 @@
 import React from "react";
 import axios from "axios";
 import TickerStar from "./TickerStar";
-import {
-  Loading,
-  StockSymbol,
-  Star
-} from "../Styles/Dashboard/LiveTickerStyles";
+import { Loading, Star } from "../Styles/Dashboard/LiveTickerStyles";
 import GridContainer from "../Styles/Dashboard/GridContainer.jsx";
 import GridItem from "../Styles/Dashboard/GridItem.jsx";
 import Card from "../Styles/Dashboard/Card";
@@ -18,7 +14,7 @@ class LiveTicker extends React.Component {
     super();
     this.state = {
       timeStamp: {},
-      companies: ["DJI", "NDAQ", "SPX", "AAPL", "AMZN"], // stock company symbols
+      companies: ["DJI", "NDAQ", "AAPL", "AMZN"], // stock company symbols
       stocks: [],
       checked: false
     };
@@ -159,7 +155,12 @@ class LiveTicker extends React.Component {
                       </Typography>
                     }
                   >
-                    <p className={classes.cardCategory}>{stock.company}</p>
+                    <h2
+                      style={{ position: "relative", top: "-8px" }}
+                      className={classes.cardCategory}
+                    >
+                      {stock.company}
+                    </h2>
                   </Tooltip>
                   <Tooltip
                     disableFocusListener
@@ -176,23 +177,47 @@ class LiveTicker extends React.Component {
                       />
                     </Star>
                   </Tooltip>
-                  <p className={classes.cardCategory}>
+                  <p
+                    className={classes.cardTitle}
+                    style={{ position: "relative", top: "12px", right: "-8px" }}
+                  >
                     Price: ${`${this.decimalToFixed(stock.values[close])}`}
                   </p>
-                  {/* <p style={{color: 'white' ,background: Math.sign(this.changePoints(stock.values[close], stock.values[open])) < 0 ? "#CE0000" : "#00CC00", width:'35%'}} >Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
-                   */}
-                  <p className={classes.cardCategory}>
+                  <p
+                    className={classes.cardTitle}
+                    style={{
+                      color:
+                        Math.sign(
+                          this.changePoints(
+                            stock.values[close],
+                            stock.values[open]
+                          )
+                        ) < 0
+                          ? "#ff2900"
+                          : "#21ab42"
+                    }}
+                  >
+                    Change:{" "}
+                    {`${this.changePoints(
+                      stock.values[close],
+                      stock.values[open]
+                    )}`}
+                  </p>
+
+                  <p
+                    className={classes.cardTitle}
+                    style={{
+                      position: "relative",
+                      top: "12px",
+                      right: "-8px"
+                    }}
+                  >
                     Volume: {`${this.shortenVolume(stock.values[volume])}`}
                   </p>
                   <p
                     className={classes.cardTitle}
                     style={{
-                      fontSize: "small",
-                      borderRadius: "3px",
-                      position: "relative",
-                      top: "9px",
-                      color: "white",
-                      background:
+                      color:
                         Math.sign(
                           this.changePercent(
                             stock.values[close],
@@ -200,8 +225,7 @@ class LiveTicker extends React.Component {
                           )
                         ) < 0
                           ? "#ff2900"
-                          : "#21ab42",
-                      width: "22%"
+                          : "#21ab42"
                     }}
                   >
                     Change %:{" "}

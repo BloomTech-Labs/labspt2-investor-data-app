@@ -22,6 +22,7 @@ function Card({ ...props }) {
   } = props;
   const cardClasses = classNames({
     [classes.card]: true,
+    [classes.cardCategory]: true,
     [classes.cardPlain]: plain,
     [classes.cardProfile]: profile,
     [classes.cardChart]: chart,

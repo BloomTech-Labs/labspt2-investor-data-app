@@ -43,11 +43,12 @@ const styles = theme => ({
   },
 
   block: {
-    padding: 14,
+    padding: 25,
     marginTop: "50px",
     position: "relative",
     top: -72,
     right: 55,
+    fontSize: ".8rem",
 
     [theme.breakpoints.down("sm")]: {
       top: -72,
@@ -55,7 +56,7 @@ const styles = theme => ({
     },
     [theme.breakpoints.down("md")]: {
       top: -62,
-      right: 15
+      right: -18
     }
   },
   bigAvatar: {
