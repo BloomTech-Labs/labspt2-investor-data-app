@@ -22,7 +22,7 @@ export const Star = styled.div`
   //   display: flex;
   //   flex-wrap: wrap;
   //   align-items: center;
-  font-size: 0.945rem;
+  font-size: 1rem;
   color: #daa520;
 `;
 
