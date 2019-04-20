@@ -55,8 +55,8 @@ const styles = theme => ({
       right: 24
     },
     [theme.breakpoints.down("md")]: {
-      top: -62,
-      right: -18
+      top: -43,
+      right: -21
     }
   },
   bigAvatar: {
