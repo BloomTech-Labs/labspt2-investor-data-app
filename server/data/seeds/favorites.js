@@ -7,9 +7,7 @@ exports.seed = function(knex, Promise) {
       return knex('favorites').insert([
         {id: 1, symbol: 'MSFT'},
         {id: 2, symbol: 'AAPL'},
-        {id: 3, symbol: 'ACE'},
-        {id: 4, symbol: 'CCCC'},
-        {id: 5, symbol: 'DDDD'},
+        {id: 3, symbol: 'ACE'}     
       ]);
     });
 };
