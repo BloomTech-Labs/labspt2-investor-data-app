@@ -20,11 +20,11 @@ class YourFavorites extends React.Component{
     componentDidMount(){
         this.props.getSettings(this.state.uid)
     
-            this.fetchUserStocks()
+            this.fetchUserStocks(this.props.settings.id)
     }
 
-    fetchUserStocks = () => {
-        axios.get(`http://www.localhost:5000/api/favorites/${this.props.settings.id}`) // <----user favorites
+    fetchUserStocks = (id) => {
+        axios.get(`http://www.localhost:5000/api/favorites/${id}`) // <----user favorites
             .then( response => {
                 this.setState({
                    stocks: response.data
