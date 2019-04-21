@@ -29,7 +29,7 @@ class KeyIndicators extends React.Component {
     return (
       <div>
         <CharContainer>
-          <h4>Key Indicators</h4>
+          <h4>Glossary of Financial Terms</h4>
           <div>
             {this.state.chars.map((char, index) => {
               //returns characters to create directory
