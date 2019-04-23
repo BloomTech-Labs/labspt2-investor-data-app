@@ -3,8 +3,10 @@
   "[javascript]": {
     "editor.formatOnSave": false
   },
-  "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": false,
   "eslint.alwaysShowStatus": true,
-  "prettier.disableLanguages": ["js"],
+  "prettier.disableLanguages": [
+    "js"
+  ],
   "files.autoSave": "onFocusChange"
 }
