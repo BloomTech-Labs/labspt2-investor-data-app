@@ -13,15 +13,10 @@ class YourFavorites extends React.Component{
             timeStamp: {},
             companies: [], // stock company symbols
             stocks: [],
-            uid: firebase.auth().currentUser.uid,
         }
     }
       
-    componentDidMount(){
-        this.props.getSettings(this.state.uid)
     
-            this.fetchUserStocks(this.props.settings.id)
-    }
 
     fetchUserStocks = (id) => {
         axios.get(`http://www.localhost:5000/api/favorites/${id}`) // <----user favorites
@@ -45,11 +40,9 @@ class YourFavorites extends React.Component{
     }
 
     render(){
-
         if(!this.state.companies.length){
              return "You currently have no favorites"
         }
-
            return (
                <div>
                    <Form> 
@@ -66,17 +59,4 @@ class YourFavorites extends React.Component{
        }
     }
 
-    const mapStateToProps = state => {
-        return {
-            fetchingSettings: state.SettingsReducer.fetchingSettings,
-            error: state.SettingsReducer.error,
-            settings: state.SettingsReducer.settings
-        }
-    };
-    
-    const mapDispatchToProps = dispatch => ({
-        getSettings: (uid) => dispatch(getSettings(uid)),
-        updateSettings:  (uid, updatedPhone) => dispatch(updateSettings(uid, updatedPhone))
-    });
-    
-    export default (connect(mapStateToProps, mapDispatchToProps)(YourFavorites));
+export default YourFavorites

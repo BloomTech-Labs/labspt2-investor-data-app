@@ -1,11 +1,11 @@
 
 exports.up = function (knex, Promise) {
     return Promise.all([
-        knex.schema.createTable('favorite', (favorites) => {
+        knex.schema.createTable('favorites', (favorites) => {
         favorites.increments();
         favorites.string('symbol', 128).notNullable();
         favorites
-          .integer('user_id')
+          .integer('users_id')
           .unique()
           .unsigned()
           .references('users.id')
