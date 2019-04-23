@@ -25,37 +25,40 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing.unit * 3,
-    borderBottom: "2px solid #4C046B",
+    borderTop: "5px solid #4C046B",
     textAlign: "left",
-    width: "60%",
+    width: "55%",
     height: "100%",
-    // position: 'relative',
+    position: "relative",
+    right: "-50px",
 
     color: theme.palette.text.primary,
     // height: '40vh',
     // backgroundColor: '#f4f2ff'
     [theme.breakpoints.down("sm")]: {
-      width: "60%"
+      width: "100%",
+      right: "-10px"
     },
     [theme.breakpoints.down("xs")]: {
-      width: "100%"
+      width: "100%",
+      right: "unset"
     }
   },
 
   block: {
-    padding: 14,
+    padding: 25,
     marginTop: "50px",
     position: "relative",
     top: -72,
     right: 55,
+    fontSize: ".8rem",
 
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       top: -72,
-      right: 24
+      right: 8
     },
     [theme.breakpoints.down("md")]: {
-      top: -62,
-      right: 15
+      top: -43
     }
   },
   bigAvatar: {
