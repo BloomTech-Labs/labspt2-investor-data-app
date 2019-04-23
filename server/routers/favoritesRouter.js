@@ -98,7 +98,7 @@ router.put('/:uid', (req, res) => {
 })
 
 /********* Create New Favorite *************/
-router.post('/', (req, res, next) => {
+router.post('/', (req, res) => {
     const favorite = req.body;
     if (favorite.symbol &&  favorite.uid) {
         favorites.insert(favorite)
