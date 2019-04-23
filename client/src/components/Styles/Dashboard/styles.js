@@ -101,7 +101,6 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       right: -680
     },
-
     [theme.breakpoints.down("sm")]: {
       right: -25
     }
