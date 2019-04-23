@@ -5,7 +5,8 @@ const style = {
   grid: {
     // margin: "10px !important",
     width: "unset",
-    display: "inline-flex"
+    display: "inline-flex",
+    justifyContent: "space-around"
   }
 };
 
