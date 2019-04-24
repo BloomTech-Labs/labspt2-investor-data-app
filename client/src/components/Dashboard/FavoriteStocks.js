@@ -127,7 +127,7 @@ class FavoriteStocks extends React.Component{
                             <p>{stock.company}</p> 
                         </StockSymbol> 
                         <Star>
-                            <FavoriteTickerstar id={stock.company} /> 
+                            <FavoriteTickerstar company={stock.company} /> 
                         </Star> 
                     </Row> 
                     <br />

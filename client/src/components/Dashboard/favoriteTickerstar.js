@@ -10,7 +10,7 @@ class FavoriteTickerstar extends React.Component{
             star: 'fa fa-star',
             stocks: [],
             uid: firebase.auth().currentUser.uid,
-            id: this.props.id
+            company: this.props.company
         }
     }
 
@@ -32,7 +32,7 @@ class FavoriteTickerstar extends React.Component{
                 selected: false,
                 star: 'far fa-star',
             })  
-            axios.delete(`https://pickemm.herokuapp.com/api/favorites/${this.state.id}`)
+            axios.delete(`https://pickemm.herokuapp.com/api/favorites/${this.state.company}`)
                 .then( response => {
                     this.setState({
                         stocks: response.data
