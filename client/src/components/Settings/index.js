@@ -13,6 +13,7 @@ import styles from './styles';
 import EmailForm from './EmailForm';
 import PhoneForm from './PhoneForm';
 import OptEmailsTextsForm from './OptEmailsTextsForm';
+import ReAuthForm from './ReAuthForm.js';
 
 class Settings extends React.Component {
 
@@ -39,6 +40,12 @@ class Settings extends React.Component {
                 >
                     Settings
                 </Typography>
+                {/* Form to link another account to application */}
+                <ReAuthForm />
+                <Divider 
+                    variant="middle" 
+                    className={classes.divider}
+                />
                 {/* Form to update email address */}
                 <EmailForm 
                     className={classes.container}
