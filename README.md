@@ -81,3 +81,7 @@ The front-end is deployed via Netlify. For the build settings the base directory
 ### Back-end Deployment
 
 TODO: How to set up back-end deployement
+
+# API
+
+TODO: Add sections for different routes
