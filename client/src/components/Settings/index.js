@@ -15,9 +15,6 @@ import PhoneForm from './PhoneForm';
 import OptEmailsTextsForm from './OptEmailsTextsForm';
 
 class Settings extends React.Component {
-    constructor(){
-        super();
-    };
 
     handleChange = name => event => {
         this.setState({ [name]: event.target.value });

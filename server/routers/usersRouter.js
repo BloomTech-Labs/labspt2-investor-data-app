@@ -55,11 +55,11 @@ router.get('/', (req, res) => {
 });
 
 /****** Add a User ******/
-// UNCOMMENT TO PROTECT THE ROUTE!
+// UN-COMMENT TO PROTECT THE ROUTE!
 // router.post('/', protect, (req, res) => {
 router.post('/', (req, res) => {
     const user = req.body
-    // check if user in database has the same email as user loging in. Go ahead and log the user in
+    // check if user in database has the same email as user logging in. Go ahead and log the user in
     users
         .checkEmail(user.email)
         .then(addUser => {

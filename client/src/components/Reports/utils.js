@@ -21,6 +21,6 @@ export function getData(TICKER) {
     `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${TICKER}&outputsize=full&apikey=TFUONSVQ3ZDFXFPG&datatype=csv`
   )
     .then(response => response.text())
-    .then(data => csvParse(data, parseData(parseDate)).reverse());
+    .then(data => csvParse(data, parseData(parseDate)).reverse())
   return promise;
 }
