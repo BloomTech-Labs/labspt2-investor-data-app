@@ -51,15 +51,25 @@ class PhoneForm extends React.Component {
 
         const { classes } = this.props;
 
+        var phoneDisplay;
+
+        if (this.props.fetchingSettings) {
+            phoneDisplay = <p className={classes.currentValue}>{this.props.settings.phoneNumber}</p>;
+        } else if (this.props.settings.phoneNumber) {
+            phoneDisplay = <p className={classes.currentValue}>{this.props.settings.phoneNumber}</p>
+        } else {
+            phoneDisplay = <p className={classes.currentValue}>To register a phone number, type yours in the box below.</p>
+        }
+
         return(
             <div className={classes.phoneFormContainer}>
                     <div className={classes.currentPhoneContainer}>
                         {/* Current phone number header */}
                         <Typography variant='h6'>Phone number</Typography>
                         {/* Error in loading current phone number */}
-                        {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null }
-                        {/* Current phone number */}
-                        <p className={classes.currentValue}>{this.props.settings.phoneNumber}</p>
+                        {this.props.error !== '' ? <p className={classes.currentValue}>{this.props.error}</p> : null}
+                        {/* Display current phone number; if no number available, display instructions on how to register phone number */}
+                        { phoneDisplay }
                     </div>
                 {/* New phone number form */}
                 <form
