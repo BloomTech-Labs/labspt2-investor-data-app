@@ -63,3 +63,21 @@ These reside in the `/server/.env` file, which is not checked into git.
 | Variable | Description |
 | :------- | :---------- |
 | `XXXXX`  | .....       |
+
+## Heroku Variables
+
+Our Heroku backend lives at https://backwoods-tracker.herokuapp.com.
+
+Make sure you define the `JWT_SECRET`, `NODE_ENV` variables in the Heroku dashboard.
+
+## Deployment
+
+The app front-end is deployed on Netlify and the back-end is deployed on Heroku.
+
+### Front-end Deployment
+
+The front-end is deployed via Netlify. For the build settings the base directory is `client`, build command is `yarn build`, publish directory is `client/build`
+
+### Back-end Deployment
+
+TODO: How to set up back-end deployement
