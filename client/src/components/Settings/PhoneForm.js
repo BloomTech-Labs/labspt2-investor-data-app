@@ -53,10 +53,13 @@ class PhoneForm extends React.Component {
 
         var phoneDisplay;
 
+        // Display current phone number stored while loading
         if (this.props.fetchingSettings) {
             phoneDisplay = <p className={classes.currentValue}>{this.props.settings.phoneNumber}</p>;
+        // If phone number is registered, display phone number
         } else if (this.props.settings.phoneNumber) {
             phoneDisplay = <p className={classes.currentValue}>{this.props.settings.phoneNumber}</p>
+        // If phone number is not registered, display registration instructions
         } else {
             phoneDisplay = <p className={classes.currentValue}>To register a phone number, type yours in the box below.</p>
         }
