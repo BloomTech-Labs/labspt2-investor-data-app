@@ -1,7 +1,7 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import PropTypes from "prop-types";
-import { fire }  from "../Auth/firebaseConfig"
+import { fire } from "../Auth/firebaseConfig";
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -11,11 +11,9 @@ import {
   IconButton,
   MenuItem,
   Menu,
-  Link,
-  FormHelperText
+  Link
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-
 
 import * as ROUTES from "../../constants/routes";
 
@@ -25,12 +23,12 @@ const styles = {
   },
   grow: {
     flexGrow: 2,
-    fontFamily: 'Arkhip-Regular',
+    fontFamily: "Arkhip-Regular",
     fontSize: 25,
     letterSpacing: 3.5,
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignSelf: 'center'
+    display: "flex",
+    flexWrap: "wrap",
+    alignSelf: "center"
   },
   menuButton: {
     marginLeft: -12,
@@ -40,9 +38,8 @@ const styles = {
 
 class Navigation extends React.Component {
   state = {
-    anchorEl: null, 
-    redirect: false,
-    
+    anchorEl: null,
+    redirect: false
   };
 
   handleMenu = event => {
@@ -52,15 +49,12 @@ class Navigation extends React.Component {
   handleMenuClose = () => {
     this.setState({ anchorEl: null });
   };
-  
-  signOut = () => {
-    fire.signOut()
-  }
 
-  
+  signOut = () => {
+    fire.signOut();
+  };
 
   render() {
-  
     const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
@@ -93,29 +87,49 @@ class Navigation extends React.Component {
               open={open}
               onClose={this.handleMenuClose}
             >
-              <Link component={RouterLink} to={ROUTES.LANDING} style={{textDecoration: "none"}}>
-              <MenuItem onClick={this.handleMenuClose}>Home</MenuItem></Link>
-              <Link component={RouterLink} to={ROUTES.BILLING} style={{textDecoration: "none"}}>
-              <MenuItem onClick={this.handleMenuClose}>Billing</MenuItem></Link>
-              {this.props.authenticated 
-              ?
-              (
+              <Link
+                component={RouterLink}
+                to={ROUTES.LANDING}
+                style={{ textDecoration: "none" }}
+              >
+                <MenuItem onClick={this.handleMenuClose}>Home</MenuItem>
+              </Link>
+              <Link
+                component={RouterLink}
+                to={ROUTES.BILLING}
+                style={{ textDecoration: "none" }}
+              >
+                <MenuItem onClick={this.handleMenuClose}>Billing</MenuItem>
+              </Link>
+              {this.props.authenticated ? (
                 <div>
-                  <Link component={RouterLink} to={ROUTES.DASHBOARD} style={{textDecoration: "none"}}>
-                  <MenuItem onClick={this.handleMenuClose}>Dashboard</MenuItem></Link>
-                  <Link component={RouterLink} to={ROUTES.REPORTS} style={{textDecoration: "none"}}>
-                  <MenuItem onClick={this.handleMenuClose}>Reports</MenuItem></Link>
-                  <Link component={RouterLink} to={ROUTES.SETTINGS} style={{textDecoration: "none"}}>
-                  <MenuItem onClick={this.handleMenuClose}>Settings</MenuItem></Link>
+                  <Link
+                    component={RouterLink}
+                    to={ROUTES.DASHBOARD}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <MenuItem onClick={this.handleMenuClose}>
+                      Dashboard
+                    </MenuItem>
+                  </Link>
+                  <Link
+                    component={RouterLink}
+                    to={ROUTES.REPORTS}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <MenuItem onClick={this.handleMenuClose}>Reports</MenuItem>
+                  </Link>
+                  <Link
+                    component={RouterLink}
+                    to={ROUTES.SETTINGS}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <MenuItem onClick={this.handleMenuClose}>Settings</MenuItem>
+                  </Link>
                   <MenuItem onClick={this.signOut}>Sign Out</MenuItem>
-
                 </div>
-              )
-              :
-              null
-            }
+              ) : null}
             </Menu>
-        
           </Toolbar>
         </AppBar>
       </div>

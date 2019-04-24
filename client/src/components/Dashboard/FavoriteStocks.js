@@ -15,6 +15,7 @@ class FavoriteStocks extends React.Component{
         }
     }
       
+
     componentDidMount(){
         this.fetchFavorites()
     }

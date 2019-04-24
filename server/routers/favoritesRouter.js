@@ -18,9 +18,9 @@ router.get('/', async (req, res) => {
 
 
 /********* Get Single Favorite *************/
-router.get('/:users_id', async (req, res) => {
-    const {users_id} = req.params
-  await favorites.get(users_id)
+router.get('/:uid', async (req, res) => {
+    const { uid } = req.params
+  await favorites.get(uid)
         .then(favorite => {
             if (favorite) {
                 res.json(favorite);
@@ -49,7 +49,7 @@ router.delete('/:symbol', (req, res) => {
                 } else {
                     res
                         .status(404)
-                        .json({ message: "The favorite with the specified ID does not exist." })
+                        .json({ message: "The favorite with the specified UID does not exist." })
                 }
             })
             .catch(err => {
@@ -61,17 +61,17 @@ router.delete('/:symbol', (req, res) => {
 });
 
 /********* Update Favorite *************/
-router.put('/:id', (req, res) => {
-    const { id } = req.body
+router.put('/:uid', (req, res) => {
+    const { uid } = req.params
     const newFavorite = req.body
-    if (!newFavorite.symbol || !newFavorite.target || !newFavorite.users_id) {
+    if (!newFavorite.symbol || !newFavorite.uid) {
         res
             .status(400)
-            .json({ message: "Please provide symbol, target and users_id for the favorite." });
+            .json({ message: "Please provide symbol and uid for the favorite." });
     } else {
        
         if (newFavorite) {
-            favorites.update(id, newFavorite)
+            favorites.update(uid, newFavorite)
                 .then(favorite => {  
                         if (favorite) {
                             res
@@ -80,7 +80,7 @@ router.put('/:id', (req, res) => {
                         } else {
                             res
                                 .status(404)
-                                .json({ message: "The favorite with the specified ID does not exist." })
+                                .json({ message: "The favorite with the specified UID does not exist." })
                         }    
                 })
                 .catch(err => {
@@ -91,7 +91,7 @@ router.put('/:id', (req, res) => {
         } else {
             res
                 .status(404)
-                .json({ message: "The favorite with the specified ID does not exist." })
+                .json({ message: "The favorite with the specified UID does not exist." })
         }
     }
 })
@@ -99,7 +99,7 @@ router.put('/:id', (req, res) => {
 /********* Create New Favorite *************/
 router.post('/', (req, res) => {
     const favorite = req.body;
-    if (favorite.symbol && favorite.uid) {
+    if (favorite.symbol &&  favorite.uid) {
         favorites.insert(favorite)
             .then(favorite => {
                 res.status(201)
@@ -113,7 +113,7 @@ router.post('/', (req, res) => {
     } else {
         res
             .status(400)
-            .json({ message: "missing symbol, target and/or users_id." })
+            .json({ message: "missing symbol and/or uid." })
     }
 });
 

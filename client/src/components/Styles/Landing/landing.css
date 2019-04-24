@@ -153,7 +153,8 @@ select::-ms-expand {
     width: 100%;
     opacity: 0.79;
     z-index: 1;
-    background-color: rgb(146, 28, 36);
+    background-color: rgb(127, 2, 165);
+    ;
 }
 
 .hero__overlay--gradient {
@@ -216,7 +217,7 @@ select::-ms-expand {
 .hero__text {
     opacity: 0.85;
     line-height: 1.7;
-    text-align: left;
+    text-align: center;
     font-size: 1.1em;
 }
 

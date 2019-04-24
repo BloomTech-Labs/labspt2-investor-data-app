@@ -2,8 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import { Input, Form, SearchIcon } from '../Styles/Dashboard/YourFavorites'
 import FavoriteStocks from './FavoriteStocks'
-import { connect } from 'react-redux';
-import { getSettings, updateSettings } from '../../actions/settingsActions.js';
 import firebase from 'firebase'
 
 class YourFavorites extends React.Component{
@@ -16,10 +14,13 @@ class YourFavorites extends React.Component{
         }
     }
       
-    
+    componentDidMount(){
+        let uid = firebase.auth().currentUser.uid
+        this.fetchUserStocks(uid)
+    }
 
-    fetchUserStocks = (id) => {
-        axios.get(`http://www.localhost:5000/api/favorites/${id}`) // <----user favorites
+    fetchUserStocks = (uid) => {
+        axios.get(`https://pickemm.herokuapp.com/api/favorites/?uid=${uid}`) // <----user favorites
             .then( response => {
                 this.setState({
                    stocks: response.data
@@ -32,7 +33,7 @@ class YourFavorites extends React.Component{
     stockHandler = () => {
         let stock = []
         {this.state.stocks.map(item => {
-           return stock.push(item.symbol)
+           return stock.push(item.symbol) 
         })}
         this.setState({
             companies: Array.from(new Set(stock))

@@ -13,6 +13,8 @@ import {
   Popper
 } from "@material-ui/core";
 import styles from "../Styles/Reports/styles";
+import { LoadingContainer } from "../Styles/Reports/Reports";
+import { ImpulseSpinner } from "react-spinners-kit";
 
 import deburr from "lodash/deburr";
 import Autosuggest from "react-autosuggest";
@@ -105,18 +107,24 @@ const getSuggestionValue = suggestion => {
 
 class Reports extends Component {
   state = {
-    tab: 0,
+    value: 0,
     data: [],
-    ticker: "AAPL",
+    ticker: "",
     single: "",
     popper: "",
     suggestions: []
   };
 
   componentDidMount() {
-    getData(this.state.ticker).then(data => {
-      this.setState({ data });
-    });
+    if (this.props.location.state) {
+      getData(this.props.location.state.ticker).then(data => {
+        this.setState({ data, ticker: this.props.location.state.ticker });
+      });
+    } else {
+      getData("AAPL").then(data => {
+        this.setState({ data, ticker: "AAPL" });
+      });
+    }
   }
 
   handleSuggestionsFetchRequested = ({ value }) => {
@@ -141,9 +149,15 @@ class Reports extends Component {
     event,
     { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
   ) => {
-    getData(suggestionValue).then(data => {
-      this.setState({ data, ticker: suggestionValue });
-    });
+    getData(suggestionValue)
+      .then(data => {
+        this.setState({ data, ticker: suggestionValue });
+      })
+      .catch(err => {
+        alert("The stock you selected is not available at this time.");
+
+        this.setState({ data: [], ticker: "" });
+      });
   };
 
   // TODO: Figure out how to make the first tab be selected by default
@@ -233,7 +247,19 @@ class Reports extends Component {
               <Grid item xs={12}>
                 <div className={classes.topBar}>
                   <div className={classes.block}>
-                    <Typography variant="h2">{this.state.ticker}</Typography>
+                    <Typography variant="h2">
+                      {this.state.ticker ? (
+                        this.state.ticker
+                      ) : (
+                        <LoadingContainer>
+                          <ImpulseSpinner
+                            size={35}
+                            frontColor="#EFEFEF"
+                            backColor="#301548"
+                          />
+                        </LoadingContainer>
+                      )}
+                    </Typography>
                   </div>
                   <div>
                     <Autosuggest
@@ -278,7 +304,10 @@ class Reports extends Component {
                 <div className={classes.block}>
                   <div className={classes.stockInfo}>
                     <Typography variant="h6">
-                      Price: ${data.length ? data[data.length - 1].close : ""}
+                      Price: $
+                      {data.length
+                        ? this.decimalToFixed(data[data.length - 1].close)
+                        : ""}
                     </Typography>
                     <Typography variant="h6" style={{ marginLeft: "50px" }}>
                       Change:{" "}
@@ -312,7 +341,7 @@ class Reports extends Component {
               <Grid item xs={12} md={12}>
                 <Paper
                   className={classes.paper}
-                  style={{ position: "relative"}}
+                  style={{ position: "relative" }}
                 >
                   <AppBar position="static">
                     <Tabs

@@ -4,6 +4,7 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
+import Divider from '@material-ui/core/Divider';
 
 // WithStyles
 import styles from './styles';
@@ -14,9 +15,6 @@ import PhoneForm from './PhoneForm';
 import OptEmailsTextsForm from './OptEmailsTextsForm';
 
 class Settings extends React.Component {
-    constructor(){
-        super();
-    };
 
     handleChange = name => event => {
         this.setState({ [name]: event.target.value });
@@ -35,20 +33,27 @@ class Settings extends React.Component {
                 <Typography
                     component="h1"
                     variant="h2"
-                    align="center"
                     color="textPrimary"
+                    className={classes.header}
                     gutterBottom
                 >
                     Settings
                 </Typography>
                 {/* Form to update email address */}
                 <EmailForm 
-                    className={classes.container}   
-                /> 
-                {/* Form to update phone number */}
-                <PhoneForm 
                     className={classes.container}
-                /> 
+                    gutterBottom   
+                />
+                <Divider 
+                    variant="middle" 
+                    className={classes.divider}
+                />
+                {/* Form to update phone number */}
+                <PhoneForm /> 
+                <Divider 
+                    variant="middle" 
+                    className={classes.divider}
+                />
                 {/* Form to opt in/out for texts and emails */}
                 <OptEmailsTextsForm
                     className={classes.container}

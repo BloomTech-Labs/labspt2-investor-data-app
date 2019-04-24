@@ -16,16 +16,15 @@ class FavoriteTickerstar extends React.Component{
 
 
     componentDidMount(){
-        axios.get(`http://www.localhost:5000/api/favorites/?uid=${this.state.uid}`) // <----user favorites
+        axios.get(`https://pickemm.herokuapp.com/api/favorites/${this.state.uid}`) // <----user favorites
         .then( response => {
             this.setState({
                stocks: response.data
             })  
         })
-        .catch( err => {console.log( 'there was an error')}) 
+        .catch( err => {console.log( 'There was an error')}) 
     }
     
-
     selectHandler = (event) => {
         event.preventDefault(); 
         if(this.state.selected === true){
@@ -40,7 +39,7 @@ class FavoriteTickerstar extends React.Component{
                     })
                     window.location.reload()
                 })
-                .catch( err => { console.log( "we've encountered an error")})
+                .catch( err => { console.log( "We've encountered an error")})
           } else {
                 this.setState({
                     selected: true,
@@ -50,7 +49,6 @@ class FavoriteTickerstar extends React.Component{
     }
 
     render(){
-        console.log(this.props.id)
         return(
             <div>
                 <i onClick={this.selectHandler} className={this.state.star}></i>
