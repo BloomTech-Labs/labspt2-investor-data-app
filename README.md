@@ -55,3 +55,11 @@ From the root directory:
 `cd server && yarn dev`: Runs the backend server
 
 > **Note:** Make sure you delete `node_modules` directories when dependencies change between merges.
+
+# Environment Variables
+
+These reside in the `/server/.env` file, which is not checked into git.
+
+| Variable | Description |
+| :------- | :---------- |
+| `XXXXX`  | .....       |
