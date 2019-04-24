@@ -15,8 +15,6 @@ import { Link } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
 import Checkout from "../Stripe/checkout";
-import purple from "@material-ui/core/colors/purple";
-import grey from "@material-ui/core/colors/grey";
 
 const styles = theme => ({
   "@global": {
