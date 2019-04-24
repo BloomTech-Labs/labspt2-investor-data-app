@@ -40,8 +40,8 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`
   },
   cardHeader: {
-    backgroundColor: purple[900],
-    color: grey[100]
+    backgroundColor: "#7407A7",
+    color: "white"
   },
   cardPricing: {
     display: "flex",
@@ -55,10 +55,11 @@ const styles = theme => ({
     }
   },
   title: {
-    color: grey[100]
+    backgroundColor: "secondary",
+    color: "white"
   },
   subheader: {
-    color: grey[100]
+    color: "white"
   }
 });
 
