@@ -111,6 +111,30 @@ Users are required to sign in to use the app.
 2. Click `Save`
 3. Choose to receive notifications via text or email
 
+# Tech Stack
+
+## Backend Dependencies
+
+### [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+
+Bcrypt is an adaptive hash function which adjusts the cost of hashing, which means that in the future as computers become more powerful, simply increasing the salt rounds will suffice at keeping Main Course secure due to the amount of processing time that would be required to generate all possible password combinations.
+
+### [cors](https://github.com/expressjs/cors)
+
+Used to configure API security. This was used to allow for secure communication between the front-end and back-end servers.
+
+### [dotenv](https://github.com/motdotla/dotenv)
+
+Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. Storing configuration in the environment separate from code is based on The Twelve-Factor App methodology.
+
+### [Express](http://expressjs.com/)
+
+A prebuilt NodeJS framework that makes creating server side applications simple, fast, and flexible. NodeJS is powered by Google's V8 Engine which means it's powerful and can handle a large number of requests without lapsing in dependability.
+
+### [JSON Web Tokens](https://www.npmjs.com/package/jsonwebtoken)
+
+JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties. JsonWebToken is the implementation for node.js.
+
 # Contributing
 
 Currently we're only accepting PRs from members of our team. Feel free to check back later!
