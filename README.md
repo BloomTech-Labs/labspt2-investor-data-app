@@ -135,6 +135,48 @@ A prebuilt NodeJS framework that makes creating server side applications simple,
 
 JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties. JsonWebToken is the implementation for node.js.
 
+## Frontend Dependencies
+
+### [React 16 / ReactDOM](https://reactjs.org/)
+
+React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.
+
+### [React Redux](https://github.com/reduxjs/react-redux)
+
+Official React bindings for Redux. Performant and flexible.
+
+### [React Router](https://www.npmjs.com/package/react-router-dom)
+
+DOM bindings for React Router. Declarative routing for React.
+
+### [Redux](https://redux.js.org/)
+
+A state management tool making it possible to store the entire state of the application in a single store. This means a unidirectional data flow, and as the application scales we have predictable state updates which subsequently make things easier to test and introduce new features. Redux also has solid documentation and an active community, meaning that as new devs become introduced to the project it's likely that any problems they face would have already been encountered by someone else, thus making solutions easy to find.
+
+### [Redux Thunk](https://github.com/reduxjs/redux-thunk)
+
+A middleware that allows you to write action creators that return a function instead of an action. The thunk can be used to delay the dispatch of an action, or to dispatch only if a certain condition is met. This functionality makes it easier to scale and implement features given diverse needs in a growing project.
+
+### [axios](https://www.npmjs.com/package/react-axios)
+
+A lightweight, promise-based HTTP client with an intuitive API that makes interfacing with a REST API simple.
+
+### [Stripe](https://stripe.com/docs/)
+
+A powerful, simple, and seamless payment commerce solution.
+
+### [react-stockcharts](https://github.com/rrag/react-stockcharts)
+
+Highly customizable stock charts built with React and D3.
+
+### [Material-UI](https://material-ui.com/)
+
+React components that implement Google's Material Design.
+
+### [Styled Components](https://www.styled-components.com/docs/)
+
+Has a thriving community and offers the ability to directly style multiple components within a file. The syntax used is familiar to JavaScript and improves code cleanliness and makes it easy to get up and going for those without a lot of css experience. Styled components are also very efficient, improving load time for users.
+
 # Contributing
 
 Currently we're only accepting PRs from members of our team. Feel free to check back later!
