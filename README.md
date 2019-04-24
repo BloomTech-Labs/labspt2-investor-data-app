@@ -85,3 +85,36 @@ TODO: How to set up back-end deployement
 # API
 
 TODO: Add sections for different routes
+
+# App Usage & User Story
+
+## User Access
+
+Users are required to sign in to use the app.
+
+## Favorite a stock
+
+## Load reports
+
+## Search for a stock
+
+## Pay for Subscription
+
+1. Go to `Billing` section
+2. Fill out payment form
+3. Select a plan
+4. Click `Buy Now`
+
+## Settings
+
+1. Update your phone number
+2. Click `Save`
+3. Choose to receive notifications via text or email
+
+# Contributing
+
+Currently we're only accepting PRs from members of our team. Feel free to check back later!
+
+# Issues
+
+If you would like to report an issue, bug, or improvement, please [file an issue](https://github.com/Lambda-School-Labs/labspt2-investor-data-app/issues/new)
