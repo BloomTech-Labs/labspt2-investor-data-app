@@ -3,7 +3,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // Redux imports
 import { connect } from "react-redux";
 import { getAcct } from "../../actions/reportsActions";
-
+import { fire } from "../Auth/firebaseConfig";
 import {
   CssBaseline,
   Paper,
@@ -110,19 +110,21 @@ const getSuggestionValue = suggestion => {
 };
 
 class Reports extends Component {
-  state = {
-    value: 0,
-    data: [],
-    ticker: "",
-    single: "",
-    popper: "",
-    suggestions: [],
-    accountType: null
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0,
+      data: [],
+      ticker: "",
+      single: "",
+      popper: "",
+      suggestions: [],
+      accountType: null
+    };
+  }
   componentDidMount() {
-    const acc;
-    console.log(this.props.getAcct);
+    const uid = fire.currentUser.uid;
+    this.props.getAcct(uid);
 
     if (this.props.location.state) {
       getData(this.props.location.state.ticker).then(data => {

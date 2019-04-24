@@ -8,14 +8,13 @@ export const ERROR = "ERROR";
 
 // Action creator to get current account type
 
-export const getAcct = acct => {
+export const getAcct = uid => {
   return dispatch => {
     // Dispatch to reducer that current account type are being obtained from API
     dispatch({ type: FETCHING });
     axios
-      .get(`https://pickemm.herokuapp.com/api/billing/${acct}`)
+      .get(`http://localhost:5000/api/billing/${uid}`)
       .then(response => {
-        console.log("TCL: response", response);
         // Dispatch to reducer that account type have been successfully obtained, pass API response as payload
         dispatch({
           type: SUCCESS,
