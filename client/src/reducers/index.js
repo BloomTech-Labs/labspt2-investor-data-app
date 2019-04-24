@@ -1,7 +1,9 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import SettingsReducer from './settingsReducers.js';
+import SettingsReducer from "./settingsReducers.js";
+import ReportsReducer from "./reportsReducers";
 
 export default combineReducers({
-    SettingsReducer
+  SettingsReducer,
+  ReportsReducer
 });

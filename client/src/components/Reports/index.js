@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
+// Redux imports
+import { connect } from "react-redux";
+import { getAcct } from "../../actions/reportsActions";
+
 import {
   CssBaseline,
   Paper,
@@ -14,7 +18,7 @@ import {
 } from "@material-ui/core";
 import styles from "../Styles/Reports/styles";
 import { LoadingContainer } from "../Styles/Reports/Reports";
-import { ImpulseSpinner } from "react-spinners-kit";
+import { ImpulseSpinner, FireworkSpinner } from "react-spinners-kit";
 
 import deburr from "lodash/deburr";
 import Autosuggest from "react-autosuggest";
@@ -112,10 +116,14 @@ class Reports extends Component {
     ticker: "",
     single: "",
     popper: "",
-    suggestions: []
+    suggestions: [],
+    accountType: null
   };
 
   componentDidMount() {
+    const acc;
+    console.log(this.props.getAcct);
+
     if (this.props.location.state) {
       getData(this.props.location.state.ticker).then(data => {
         this.setState({ data, ticker: this.props.location.state.ticker });
@@ -217,6 +225,9 @@ class Reports extends Component {
     }
     return str + suffix;
   };
+
+  //User Access to different report tabs
+  userAccess = () => {};
 
   render() {
     const { classes } = this.props;
@@ -394,4 +405,21 @@ class Reports extends Component {
   }
 }
 
-export default withStyles(styles)(Reports);
+const mapStateToProps = state => {
+  return {
+    fetchBilling: state.ReportsReducer.fetchingBilling,
+    error: state.ReportsReducer.error,
+    billing: state.ReportsReducer.billing
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  getAcct: acct => dispatch(getAcct(acct))
+});
+
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Reports)
+);
