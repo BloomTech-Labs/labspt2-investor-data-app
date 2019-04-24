@@ -76,6 +76,8 @@ The app front-end is deployed on Netlify and the back-end is deployed on Heroku.
 
 ### Front-end Deployment
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3c5e4a27-9835-460d-a3a4-f7d3fa47a6f6/deploy-status)](https://app.netlify.com/sites/pickem/deploys)
+
 The front-end is deployed via Netlify. For the build settings the base directory is `client`, build command is `yarn build`, publish directory is `client/build`
 
 ### Back-end Deployment
@@ -84,7 +86,31 @@ TODO: How to set up back-end deployement
 
 # API
 
-TODO: Add sections for different routes
+TODO: Fill out API tables. \*The endpoints need to be updated."
+
+## Users Routes
+
+| Method | Endpoint | Request | Response |
+| ------ | -------- | ------- | -------- |
+| GET    | /users   |         |          |
+
+## Favorites Routes
+
+| Method | Endpoint   | Request | Response |
+| ------ | ---------- | ------- | -------- |
+| GET    | /favorites |         |          |
+
+## Billing Routes
+
+| Method | Endpoint | Request | Response |
+| ------ | -------- | ------- | -------- |
+| GET    | /billing |         |          |
+
+## Stripe Routes
+
+| Method | Endpoint | Request | Response |
+| ------ | -------- | ------- | -------- |
+| GET    | /stripe  |         |          |
 
 # App Usage & User Story
 
@@ -94,22 +120,29 @@ Users are required to sign in to use the app.
 
 ## Favorite a stock
 
-## Load reports
+1. Navigate to the Dashboard.
+2. Click on the gold star on one of the stock cards shown at the top of the page.
+3. Marvel at it showing in the Favorites section below.
 
 ## Search for a stock
 
+1. Navigate to _Reports_. By default AAPL will load.
+2. Click in the search box and begin typing the symbol of the company you're looking for.
+3. Either press enter or click on the stock symbol you were looking for.
+4. Wait as data is retrieved and the charts load.
+
 ## Pay for Subscription
 
-1. Go to `Billing` section
-2. Fill out payment form
-3. Select a plan
-4. Click `Buy Now`
+1. Navigate to _Billing_.
+2. Click _Pay With Card_.
+3. Fill out payment form.
+4. Click _Pay_.
 
 ## Settings
 
-1. Update your phone number
-2. Click `Save`
-3. Choose to receive notifications via text or email
+1. Update your phone number.
+2. Click `Save`.
+3. Choose to receive notifications via text or email.
 
 # Tech Stack
 
@@ -135,6 +168,10 @@ A prebuilt NodeJS framework that makes creating server side applications simple,
 
 JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties. JsonWebToken is the implementation for node.js.
 
+### [faker.js](https://github.com/marak/Faker.js/)
+
+Generates massive amounts of fake data in the browser and node.js.
+
 ## Frontend Dependencies
 
 ### [React 16 / ReactDOM](https://reactjs.org/)
@@ -157,6 +194,10 @@ A state management tool making it possible to store the entire state of the appl
 
 A middleware that allows you to write action creators that return a function instead of an action. The thunk can be used to delay the dispatch of an action, or to dispatch only if a certain condition is met. This functionality makes it easier to scale and implement features given diverse needs in a growing project.
 
+### [Firebase](https://firebase.google.com/)
+
+Provides an end-to-end identity solution, supporting email and password accounts, phone auth, and Google, Twitter, Facebook, and GitHub login, and more.
+
 ### [axios](https://www.npmjs.com/package/react-axios)
 
 A lightweight, promise-based HTTP client with an intuitive API that makes interfacing with a REST API simple.
@@ -168,6 +209,10 @@ A powerful, simple, and seamless payment commerce solution.
 ### [react-stockcharts](https://github.com/rrag/react-stockcharts)
 
 Highly customizable stock charts built with React and D3.
+
+### [react-autosuggest](https://github.com/moroshko/react-autosuggest)
+
+WAI-ARIA compliant autosuggest component built in React.
 
 ### [Material-UI](https://material-ui.com/)
 
