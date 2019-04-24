@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 import Checkout from "../Stripe/checkout";
 import purple from "@material-ui/core/colors/purple";
-// import {fire} from '../Auth/firebaseConfig';
+import grey from "@material-ui/core/colors/purple";
 
 const styles = theme => ({
   "@global": {
@@ -40,7 +40,8 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`
   },
   cardHeader: {
-    backgroundColor: purple[900]
+    backgroundColor: purple[900],
+    color: grey[100]
   },
   cardPricing: {
     display: "flex",
