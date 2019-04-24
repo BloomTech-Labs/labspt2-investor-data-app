@@ -20,7 +20,7 @@ class YourFavorites extends React.Component{
     }
 
     fetchUserStocks = (uid) => {
-        axios.get(`https://pickemm.herokuapp.com/api/favorites/?uid=${uid}`) // <----user favorites
+        axios.get(`https://pickemm.herokuapp.com/api/favorites/${uid}`) // <----user favorites
             .then( response => {
                 this.setState({
                    stocks: response.data
