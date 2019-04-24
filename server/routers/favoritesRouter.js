@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 /********* Get Single Favorite *************/
 router.get('/:uid', async (req, res) => {
     const { uid } = req.params
-  await favorites.get(uid)
+  await favorites.getByUid(uid)
         .then(favorite => {
             if (favorite) {
                 res.json(favorite);
@@ -69,7 +69,7 @@ router.put('/:uid', (req, res) => {
         .update(uid, changes)
         .then(count => {
             if (count) {
-                favorites.get(uid)
+                favorites.getByUid(uid)
                     .then(user => {
                         // If user's favorites have been updated, return the updated user favorites.
                         res
