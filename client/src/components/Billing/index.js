@@ -53,6 +53,9 @@ const styles = theme => ({
     [theme.breakpoints.up("sm")]: {
       paddingBottom: theme.spacing.unit * 2
     }
+  },
+  title: {
+    color: grey[100]
   }
 });
 
@@ -141,6 +144,10 @@ class Pricing extends Component {
               >
                 <Card>
                   <CardHeader
+                    classes={{
+                      title: classes.title,
+                      subheader: classes.subheader
+                    }}
                     title={tier.title}
                     subheader={tier.subheader}
                     titleTypographyProps={{ align: "center" }}
