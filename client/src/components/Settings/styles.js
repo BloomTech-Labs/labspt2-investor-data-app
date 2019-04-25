@@ -8,9 +8,11 @@ const styles = theme => ({
         margin: '20px auto',
         border: '1px solid #DCDCDC',
         borderRadius: '15px',
+        backgroundColor: '#FFFFFF',
         [theme.breakpoints.down('xs')]: {
             border: '0',
-            width: '90%'
+            width: '90%',
+            backgroundColor: '#FAFAFA'
         },
     },
     container: {
