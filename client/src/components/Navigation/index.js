@@ -2,6 +2,10 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { fire } from "../Auth/firebaseConfig";
+//Add Redux for Signout
+import { connect } from "react-redux";
+import { logout } from "../../actions/reportsActions";
+
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -141,4 +145,7 @@ Navigation.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Navigation);
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout())
+});
+export default withStyles(styles)(connect(mapDispatchToProps)(Navigation));

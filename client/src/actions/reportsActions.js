@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const FETCHING = "FETCHING";
 export const SUCCESS = "SUCCESS";
+export const LOGOUT = "LOGOUT";
 export const ERROR = "ERROR";
 
 // Action creator to get current account type
@@ -28,5 +29,11 @@ export const getAcct = uid => {
           error: `The user's account type could not be obtained at this time.`
         });
       });
+  };
+};
+
+export const logout = () => {
+  return dispatch => {
+    dispatch({ type: LOGOUT });
   };
 };

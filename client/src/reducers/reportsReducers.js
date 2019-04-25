@@ -1,4 +1,4 @@
-import { FETCHING, SUCCESS, ERROR } from "../actions/reportsActions";
+import { FETCHING, SUCCESS, LOGOUT, ERROR } from "../actions/reportsActions";
 
 const initialState = {
   fetchingBilling: false,
@@ -22,6 +22,10 @@ const reducer = (state = initialState, action) => {
         fetchingBilling: false,
         error: "",
         billing: action.payload
+      };
+    case LOGOUT:
+      return {
+        initialState
       };
     // Signal to component that there was an error in fetching the billing
     case ERROR:
