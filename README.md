@@ -249,3 +249,7 @@ Currently we're only accepting PRs from members of our team.
 # Issues
 
 If you would like to report an issue, bug, or improvement, please [file an issue](https://github.com/Lambda-School-Labs/labspt2-investor-data-app/issues/new).
+
+# [License](LICENSE)
+
+MIT © [Pick Em](https://github.com/Lambda-School-Labs/labspt2-investor-data-app)
