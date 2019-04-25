@@ -86,31 +86,42 @@ TODO: How to set up back-end deployement
 
 # API
 
-TODO: Fill out API tables. \*The endpoints need to be updated."
+TODO: Fill our the `req` and `res` columns of the API tables.
 
 ## Users Routes
 
-| Method | Endpoint | Request | Response |
-| ------ | -------- | ------- | -------- |
-| GET    | /users   |         |          |
+| Method | Endpoint             | Request | Response |
+| ------ | -------------------- | ------- | -------- |
+| GET    | /api/users           |         |          |
+| POST   | /api/users           |         |          |
+| GET    | /api/users/:id/:acct |         |          |
+| GET    | /api/users/:uid      |         |          |
+| PUT    | /api/users/:uid      |         |          |
+| DELETE | /api/users/:uid      |         |          |
 
 ## Favorites Routes
 
-| Method | Endpoint   | Request | Response |
-| ------ | ---------- | ------- | -------- |
-| GET    | /favorites |         |          |
+| Method | Endpoint            | Request | Response |
+| ------ | ------------------- | ------- | -------- |
+| GET    | /api/favorites      |         |          |
+| GET    | /api/favorites/:uid |         |          |
+| DELETE | /api/favorites/:uid |         |          |
+| PUT    | /api/favorites/:uid |         |          |
+| POST   | /api/favorites/:uid |         |          |
 
 ## Billing Routes
 
-| Method | Endpoint | Request | Response |
-| ------ | -------- | ------- | -------- |
-| GET    | /billing |         |          |
+| Method | Endpoint         | Request | Response |
+| ------ | ---------------- | ------- | -------- |
+| GET    | /api/billing     |         |          |
+| GET    | /api/billing/:id |         |          |
+| POST   | /api/billing     |         |          |
 
 ## Stripe Routes
 
-| Method | Endpoint | Request | Response |
-| ------ | -------- | ------- | -------- |
-| GET    | /stripe  |         |          |
+| Method | Endpoint    | Request | Response |
+| ------ | ----------- | ------- | -------- |
+| POST   | /api/stripe |         |          |
 
 # App Usage & User Story
 
