@@ -33,7 +33,7 @@ Now just open [http://localhost:3000](http://localhost:3000) to visit the fronte
 
 # Resources
 
-- [App Wireframes](https://balsamiq.cloud/snv27r3/pjqchyn/r2278)
+- [Wireframes](https://balsamiq.cloud/snv27r3/pjqchyn/r2278)
 
 # Scripts
 
@@ -52,13 +52,16 @@ Now just open [http://localhost:3000](http://localhost:3000) to visit the fronte
 From the root directory:
 
 `cd client && yarn start`: Runs the frontend client
-`cd server && yarn dev`: Runs the backend server
+
+`cd server && yarn start`: Runs the backend server
 
 > **Note:** Make sure you delete `node_modules` directories when dependencies change between merges.
 
 # Environment Variables
 
-These reside in the `/server/.env` file, which is not checked into git.
+These reside in the `/server/.env` file, which is ignored by `git` for security reasons.
+
+TODO: Add all required environment variables.
 
 | Variable | Description |
 | :------- | :---------- |
@@ -66,9 +69,9 @@ These reside in the `/server/.env` file, which is not checked into git.
 
 ## Heroku Variables
 
-Our Heroku backend lives at https://backwoods-tracker.herokuapp.com.
+Our Heroku backend lives at [https://pickemm.herokuapp.com/](https://pickemm.herokuapp.com/).
 
-Make sure you define the `JWT_SECRET`, `NODE_ENV` variables in the Heroku dashboard.
+Make sure you define the `JWT_SECRET` and `NODE_ENV` variables in the Heroku dashboard.
 
 ## Deployment
 
@@ -152,16 +155,28 @@ Users are required to sign in to use the app.
 ## Settings
 
 1. Update your phone number.
-2. Click `Save`.
+2. Click _Save_.
 3. Choose to receive notifications via text or email.
 
 # Tech Stack
 
 ## Backend Dependencies
 
-### [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+### [Node.js](https://nodejs.org/en/)
 
-Bcrypt is an adaptive hash function which adjusts the cost of hashing, which means that in the future as computers become more powerful, simply increasing the salt rounds will suffice at keeping Main Course secure due to the amount of processing time that would be required to generate all possible password combinations.
+An open-source, cross-platform JS run-time environment that executes JS outside of the browser. Node.js is powered by Google's V8 Engine which means it's powerful and can handle a large number of requests without lapsing in dependability.
+
+### [Express](http://expressjs.com/)
+
+A prebuilt Node.js framework that makes creating server side applications simple, fast, and flexible.
+
+### [PostgreSQL](https://www.postgresql.org/)
+
+PostgreSQL is a powerful, open source object-relational database system that uses and extends the SQL language combined with many features that safely store and scale the most complicated data workloads.
+
+### [JSON Web Tokens](https://www.npmjs.com/package/jsonwebtoken)
+
+JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties. JsonWebToken is the implementation for node.js.
 
 ### [cors](https://github.com/expressjs/cors)
 
@@ -170,14 +185,6 @@ Used to configure API security. This was used to allow for secure communication 
 ### [dotenv](https://github.com/motdotla/dotenv)
 
 Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. Storing configuration in the environment separate from code is based on The Twelve-Factor App methodology.
-
-### [Express](http://expressjs.com/)
-
-A prebuilt NodeJS framework that makes creating server side applications simple, fast, and flexible. NodeJS is powered by Google's V8 Engine which means it's powerful and can handle a large number of requests without lapsing in dependability.
-
-### [JSON Web Tokens](https://www.npmjs.com/package/jsonwebtoken)
-
-JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties. JsonWebToken is the implementation for node.js.
 
 ### [faker.js](https://github.com/marak/Faker.js/)
 
@@ -189,13 +196,13 @@ Generates massive amounts of fake data in the browser and node.js.
 
 React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.
 
-### [React Redux](https://github.com/reduxjs/react-redux)
-
-Official React bindings for Redux. Performant and flexible.
-
 ### [React Router](https://www.npmjs.com/package/react-router-dom)
 
 DOM bindings for React Router. Declarative routing for React.
+
+### [React Redux](https://github.com/reduxjs/react-redux)
+
+Official React bindings for Redux. Performant and flexible.
 
 ### [Redux](https://redux.js.org/)
 
@@ -208,6 +215,8 @@ A middleware that allows you to write action creators that return a function ins
 ### [Firebase](https://firebase.google.com/)
 
 Provides an end-to-end identity solution, supporting email and password accounts, phone auth, and Google, Twitter, Facebook, and GitHub login, and more.
+
+Firebase Authentication integrates tightly with other Firebase services, and it leverages industry standards like OAuth 2.0 and OpenID Connect.
 
 ### [axios](https://www.npmjs.com/package/react-axios)
 
@@ -235,8 +244,8 @@ Has a thriving community and offers the ability to directly style multiple compo
 
 # Contributing
 
-Currently we're only accepting PRs from members of our team. Feel free to check back later!
+Currently we're only accepting PRs from members of our team.
 
 # Issues
 
-If you would like to report an issue, bug, or improvement, please [file an issue](https://github.com/Lambda-School-Labs/labspt2-investor-data-app/issues/new)
+If you would like to report an issue, bug, or improvement, please [file an issue](https://github.com/Lambda-School-Labs/labspt2-investor-data-app/issues/new).
