@@ -11,33 +11,43 @@ class YourFavorites extends React.Component{
             timeStamp: {},
             companies: [], // stock company symbols
             stocks: [],
+            uid: ""
         }
     }
       
     componentDidMount(){
         let uid = firebase.auth().currentUser.uid
+        this.setState({
+            uid: uid
+         })  
         this.fetchUserStocks(uid)
     }
 
     fetchUserStocks = (uid) => {
-        axios.get(`https://pickemm.herokuapp.com/api/favorites/${uid}`) // <----user favorites
+        axios.get(`https://pickemm.herokuapp.com/api/favorites`) // <----user favorites
             .then( response => {
-                this.setState({
-                   stocks: response.data
+               let stock = []
+               response.data.forEach((item, index) => {
+                   if (item.uid === uid) {
+                       stock.push(item.symbol)
+                   }
+               })      
+               this.setState({
+                   stocks: stock
                 })  
                 this.stockHandler()
             })
             .catch( err => {console.log( 'We"ve encountered an error')})
     }
 
-    stockHandler = () => {
+    stockHandler = () => {     
         let stock = []
         {this.state.stocks.map(item => {
-           return stock.push(item.symbol) 
+           return stock.push(item) 
         })}
         this.setState({
             companies: Array.from(new Set(stock))
-        }) 
+        })  
     }
 
     render(){
