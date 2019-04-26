@@ -124,7 +124,6 @@ class Reports extends Component {
   componentDidMount() {
     const uid = fire.currentUser.uid;
     this.props.getAcct(uid);
-    console.log("CDM Fetching", this.props.fetchBilling);
 
     if (this.props.location.state) {
       getData(this.props.location.state.ticker).then(data => {
@@ -231,7 +230,7 @@ class Reports extends Component {
   render() {
     const { classes } = this.props;
     const { value, data } = this.state;
-    console.log("Render Fetching", this.props.fetchBilling);
+
     const autosuggestProps = {
       renderInputComponent,
       suggestions: this.state.suggestions,
@@ -377,6 +376,17 @@ class Reports extends Component {
                             <Tab
                               key={2}
                               label="Parabolic Stop and Reverse (SAR)"
+                            />
+                          ]
+                        : this.props.billing.accountType === 2
+                        ? [
+                            <Tab
+                              key={0}
+                              label="Moving Average Convergence (MACD)"
+                            />,
+                            <Tab
+                              key={1}
+                              label="Relative Strength Index (RSI)"
                             />
                           ]
                         : null}
