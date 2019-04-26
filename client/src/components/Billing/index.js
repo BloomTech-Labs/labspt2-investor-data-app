@@ -119,7 +119,7 @@ class Pricing extends Component {
               color="textPrimary"
               gutterBottom
             >
-              Pricing
+              Billing
             </Typography>
             <Typography
               variant="h6"
