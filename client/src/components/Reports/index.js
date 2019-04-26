@@ -118,8 +118,7 @@ class Reports extends Component {
       ticker: "",
       single: "",
       popper: "",
-      suggestions: [],
-      accountType: null
+      suggestions: []
     };
   }
   componentDidMount() {
