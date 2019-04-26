@@ -2,10 +2,6 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { fire } from "../Auth/firebaseConfig";
-//Add Redux for Signout
-import { connect } from "react-redux";
-import { logout } from "../../actions/reportsActions";
-
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -18,7 +14,8 @@ import {
   Link
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-
+import { connect } from "react-redux";
+import { logout } from "../../actions/reportsActions";
 import * as ROUTES from "../../constants/routes";
 
 const styles = {
@@ -56,12 +53,14 @@ class Navigation extends React.Component {
 
   signOut = () => {
     fire.signOut();
+    this.props.logout();
   };
 
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -130,6 +129,7 @@ class Navigation extends React.Component {
                   >
                     <MenuItem onClick={this.handleMenuClose}>Settings</MenuItem>
                   </Link>
+
                   <MenuItem onClick={this.signOut}>Sign Out</MenuItem>
                 </div>
               ) : null}
@@ -140,12 +140,17 @@ class Navigation extends React.Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout())
+});
 
 Navigation.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout())
-});
-export default withStyles(styles)(connect(mapDispatchToProps)(Navigation));
+export default withStyles(styles)(
+  connect(
+    "",
+    mapDispatchToProps
+  )(Navigation)
+);

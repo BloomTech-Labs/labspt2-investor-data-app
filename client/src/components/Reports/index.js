@@ -47,7 +47,7 @@ const renderInputComponent = inputProps => {
 
   return (
     <TextField
-      fullWidth
+      fullWidth={true}
       InputProps={{
         inputRef: node => {
           ref(node);
@@ -365,13 +365,22 @@ class Reports extends Component {
                     >
                       <Tab label="Price" />
                       <Tab label="Moving Average (MA)" />
-                      {this.props.billing.accountType === 3 ? (
-                        <div>
-                          <Tab label="Moving Average Convergence (MACD)" />
-                          <Tab label="Relative Strength Index (RSI)" />
-                          <Tab label="Parabolic Stop and Reverse (SAR)" />
-                        </div>
-                      ) : null}
+                      {this.props.billing.accountType === 3
+                        ? [
+                            <Tab
+                              key={0}
+                              label="Moving Average Convergence (MACD)"
+                            />,
+                            <Tab
+                              key={1}
+                              label="Relative Strength Index (RSI)"
+                            />,
+                            <Tab
+                              key={2}
+                              label="Parabolic Stop and Reverse (SAR)"
+                            />
+                          ]
+                        : null}
                     </Tabs>
                   </AppBar>
                   {value === 0 && (

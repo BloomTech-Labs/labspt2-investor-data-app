@@ -24,9 +24,8 @@ const reducer = (state = initialState, action) => {
         billing: action.payload
       };
     case LOGOUT:
-      return {
-        initialState
-      };
+      return initialState;
+
     // Signal to component that there was an error in fetching the billing
     case ERROR:
       return { ...state, fetchingBilling: false, error: action.error };
