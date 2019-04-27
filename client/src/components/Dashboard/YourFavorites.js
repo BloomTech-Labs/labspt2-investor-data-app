@@ -55,13 +55,7 @@ class YourFavorites extends React.Component{
              return "You currently have no favorites"
         }
            return (
-               <div>
-                   <Form> 
-                       <SearchIcon><i className= 'fa fa-search' /></SearchIcon>
-                       <Input id='search-bar' 
-                              type="text" 
-                              placeholder="Search..."/>              
-                   </Form>          
+               <div>         
                    <div>
                        <FavoriteStocks companies={this.state.companies} /> 
                    </div> 
