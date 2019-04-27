@@ -41,7 +41,7 @@ router.get('/:uid', async (req, res) => {
 /************* Delete Favorite *************/
 router.delete('/:symbol', (req, res) => {
     const {symbol} = req.params
-    if (symbol) {
+    if (symbol){
         favorites.remove(symbol)
             .then(favorite => {
                 if (favorite) {
