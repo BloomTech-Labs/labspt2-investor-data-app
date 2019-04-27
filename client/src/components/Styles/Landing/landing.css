@@ -132,11 +132,7 @@ select::-ms-expand {
 .hero {
   position: relative;
   width: 100%;
-<<<<<<< HEAD
   background-image: url(../../Landing/images/wall_street_small.jpg);
-=======
-  background-image: url(../../Landing/images/wall_street4.jpg);
->>>>>>> 96b695fdf1d30b4914f22f917c290408b4d4f5a6
   -webkit-box-shadow: 0 4px 11px rgba(124, 146, 169, 0.5);
   box-shadow: 0 4px 11px rgba(124, 146, 169, 0.5);
   background-size: cover;
