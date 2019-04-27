@@ -2,7 +2,11 @@ const db = require('../dbConfig.js');
 
 module.exports = {
 
-    get: async function (uid) {
+    get: () => {
+        return db("favorites");
+      },
+      
+    getByUid: uid => {
         let query = db('favorites');
         if (uid) {
             query.where('uid', uid).first();
@@ -11,20 +15,20 @@ module.exports = {
         return db('favorites')
     },
 
-    insert: function (favorite) {
+    insert: favorite => {
         return db('favorites')
             .insert(favorite)
             .then(([uid]) => this.get(uid));
     },
 
-    update: function (uid, changes) {
+    update: (uid, changes) => {
         return db('favorites')
             .where('uid', uid)
             .update(changes)
             .then(count => (count > 0 ? this.get(uid) : null));
     },
 
-    remove: function (symbol) {
+    remove: symbol => {
         return db('favorites')
             .where('symbol', symbol)
             .del();
