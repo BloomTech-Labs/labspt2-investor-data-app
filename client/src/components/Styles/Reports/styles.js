@@ -48,6 +48,11 @@ const styles = theme => ({
       margin: 0,
       padding: 0,
       listStyleType: "none"
+    },
+    back: {
+      display: "flex",
+      alignItems: "center",
+      fontSize: "20px"
     }
   });
 
