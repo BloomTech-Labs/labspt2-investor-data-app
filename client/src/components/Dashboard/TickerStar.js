@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import firebase from 'firebase'
 
 
 class TickerStar extends React.Component{
@@ -9,6 +10,7 @@ class TickerStar extends React.Component{
             selected: false,
             star: 'far fa-star',
             stock: [],
+            uid: firebase.auth().currentUser.uid,
         }
     }
 
@@ -20,16 +22,15 @@ class TickerStar extends React.Component{
                 star: 'fa fa-star',
             })  
             const newSymbol = {
-                
                 symbol: this.props.id,
-                target: 1,
-                users_id: 10
+                uid: this.state.uid
             }
             axios.post('https://pickemm.herokuapp.com/api/favorites', newSymbol)
                 .then( response => {
                     this.setState({
-                        newSymbol: { symbol: '', target: null, users_id: null}
+                        newSymbol: { symbol: '', uid: ''}
                     })
+                    window.location.reload()
                 })
                 .catch( err => { console.log( "we've encountered an error")})
           } else {
@@ -41,10 +42,6 @@ class TickerStar extends React.Component{
     }
 
     render(){
-
-        //firebase.auth().onAuthStateChanged( user => {
-        //    if (user) { this.state.uid = user.uid }
-        //  });
         return(
             <div>
                 <i onClick={this.selectHandler} className={this.state.star}></i>
