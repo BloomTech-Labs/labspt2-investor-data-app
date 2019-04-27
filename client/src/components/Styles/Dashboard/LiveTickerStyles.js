@@ -10,7 +10,7 @@ export const Loading = styled.div`
 export const TickerContainer = styled.div`
   width: 100%;
   color: #000;
-  padding: 0px 0%;
+  margin: 20px;
 `;
 
 export const StockSymbol = styled.div`
