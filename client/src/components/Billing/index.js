@@ -15,7 +15,6 @@ import { Link } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
 import Checkout from "../Stripe/checkout";
-// import {fire} from '../Auth/firebaseConfig';
 
 const styles = theme => ({
   "@global": {
@@ -39,7 +38,8 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`
   },
   cardHeader: {
-    backgroundColor: theme.palette.grey[200]
+    backgroundColor: "#7407A7",
+    color: "white"
   },
   cardPricing: {
     display: "flex",
@@ -51,6 +51,13 @@ const styles = theme => ({
     [theme.breakpoints.up("sm")]: {
       paddingBottom: theme.spacing.unit * 2
     }
+  },
+  title: {
+    backgroundColor: "secondary",
+    color: "white"
+  },
+  subheader: {
+    color: "white"
   }
 });
 
@@ -112,7 +119,7 @@ class Pricing extends Component {
               color="textPrimary"
               gutterBottom
             >
-              Pricing
+              Billing
             </Typography>
             <Typography
               variant="h6"
@@ -139,6 +146,10 @@ class Pricing extends Component {
               >
                 <Card>
                   <CardHeader
+                    classes={{
+                      title: classes.title,
+                      subheader: classes.subheader
+                    }}
                     title={tier.title}
                     subheader={tier.subheader}
                     titleTypographyProps={{ align: "center" }}

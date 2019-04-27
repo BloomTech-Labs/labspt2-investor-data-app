@@ -60,6 +60,7 @@ class Checkout extends Component {
     return (
       <StripeCheckout
         name={this.props.name}
+        label="Subscribe with Stripe"
         customer={fire.currentUser}
         email={fire.currentUser.email}
         stripeplan={this.props.stripePlan}
