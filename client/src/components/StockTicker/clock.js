@@ -21,8 +21,7 @@ export default class LiveClock extends React.Component {
 
       return (
         <Clock>
-          <h3>Pickem</h3> 
-          <h2>Daily</h2>
+          <h2>Pick Em</h2> 
           <h4>
             {time.toLocaleTimeString()}
           </h4>
