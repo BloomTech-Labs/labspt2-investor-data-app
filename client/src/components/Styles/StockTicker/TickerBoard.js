@@ -20,6 +20,6 @@ export const PageLoading = styled.div `
 export const Clock = styled.div `
   display: flex;
   flex-wrap: wrap; 
-  justify-content: space-evenly; 
+  justify-content: space-around; 
   align-items: baseline;  
 `
