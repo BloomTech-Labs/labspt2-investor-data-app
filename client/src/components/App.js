@@ -61,7 +61,6 @@ class App extends Component {
           userUID: user.uid
         });
         // If the user is the Authenticated use pass their information to the database
-
         this.addCurrentUser(user);
       } else {
         this.setState({
@@ -76,7 +75,6 @@ class App extends Component {
   };
   //To sign out an get no error with firebase dropping the widget
   removeAuthListener: any;
-
   // Add current user method will grab the information from state create new user in our database
   addCurrentUser = () => {
     function newUser(firstName, lastName, email, uid) {

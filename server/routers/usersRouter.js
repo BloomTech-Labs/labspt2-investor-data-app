@@ -4,42 +4,50 @@ const users = require("../data/helpers/usersModel");
 const jwt = require('jsonwebtoken');
 const secret = 'shhhisthisasecret';
 const billing = require('../data/helpers/billingModel')
+const {firebase, isAuthenticated} = require('../data/auth/firebaseMiddleware')
+
 module.exports = router => {
     router.get("/:uid", userById);
     router.put("/:uid", update);
     router.get("/:id/:acct", userByAcct )
 }
 
-/************************************ USERS SECTION ***********************************/
-function protect(req, res, next) {
-    const token = req.headers.authorization;
+// /************************************ USERS SECTION ***********************************/
 
-    jwt.verify(token, secret, (err, decodedToken) => {
-        if (err) {
-            res
-                .status(401)
-                .json({ message: 'Invalid token' });
-        } else {
-            next();
-        };
-    });
-};
 
-//************************************************** */
-function generateToken(user) {
-    const payload = {
-        user: user.id
-    };
-    const options = {
-        expiresIn: '1h'
-    };
-    return jwt.sign(payload, secret, options);
-};
+// function protect(req, res, next) {
+//     const token = req.headers.authorization;
+
+//     jwt.verify(token, secret, (err, decodedToken) => {
+//         if (err) {
+//             res
+//                 .status(401)
+//                 .json({ message: 'Invalid token' });
+//         } else {
+//             next();
+//         };
+//     });
+// };
+
+// //************************************************** */
+// function generateToken(user) {
+//     const payload = {
+//         user: user.id
+//     };
+//     const options = {
+//         expiresIn: '1h'
+//     };
+//     return jwt.sign(payload, secret, options);
+// };
+
+
 
 /********* Get Users *************/
 // UNCOMMENT TO PROTECT THE ROUTE!
 // router.get('/', protect, (req, res) => {
-router.get('/', (req, res) => {
+router.get('/', isAuthenticated,(req, res) => {
+    
+   console.log(res.locals.user)
     users
         .get()
         .then(user => {
@@ -57,7 +65,7 @@ router.get('/', (req, res) => {
 /****** Add a User ******/
 // UN-COMMENT TO PROTECT THE ROUTE!
 // router.post('/', protect, (req, res) => {
-router.post('/', (req, res) => {
+router.post('/', isAuthenticated, (req, res) => {
     const user = req.body
     // check if user in database has the same email as user logging in. Go ahead and log the user in
     users
@@ -85,10 +93,9 @@ router.post('/', (req, res) => {
 });
 
 // Get the user associated with billing account
-router.get('/:id/:acct', async (req, res) => {
+router.get('/:id/:acct',isAuthenticated, async (req, res) => {
     const {acct} = req.params;
     const {id} = req.params
-   
     await users.getById(id).then(id => {
         if(id){
             billing.checkAcctType(acct).then(type =>{
