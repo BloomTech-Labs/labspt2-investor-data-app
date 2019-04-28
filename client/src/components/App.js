@@ -93,7 +93,7 @@ class App extends Component {
     axios
       .post(endpoint, creds)
       .then(res => {
-        console.log("User logged in successfuly");
+        console.log("User logged in successfully");
       })
       .catch(err => console.log("Error in getting user"));
   };
