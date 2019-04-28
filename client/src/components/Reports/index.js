@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 // Redux imports
 import { connect } from "react-redux";
@@ -33,6 +34,8 @@ import PriceChart from "./Charts/PriceChart";
 import RSIChart from "./Charts/RSIChart";
 import SARChart from "./Charts/SARChart";
 import { suggestions } from "./suggestions";
+import * as ROUTES from "../../constants/routes";
+import { ArrowBackIos } from '@material-ui/icons';
 
 const TabContainer = props => {
   return (
@@ -253,6 +256,11 @@ class Reports extends Component {
               container
               className={classes.grid}
             >
+              <Grid item xs={12}>
+                <Link to={ROUTES.DASHBOARD} style={{ textDecoration: "none", alignItems:"center" }}>
+                  <Typography variant="display1" className={classes.back}><ArrowBackIos />Dashboard</Typography>
+                </Link>
+              </Grid>
               <Grid item xs={12}>
                 <div className={classes.topBar}>
                   <div className={classes.block}>
