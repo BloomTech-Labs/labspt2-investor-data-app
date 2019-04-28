@@ -16,7 +16,14 @@ const styles = theme => ({
     flexWrap: "wrap-reverse",
     justifyContent: "flex-start",
     alignItems: "flex-end",
-    margin: `0 ${theme.spacing.unit * 2}px`
+    // margin: `0 ${theme.spacing.unit * 2}px`,
+    [theme.breakpoints.down("sm")]: {
+      width: "calc(100% - 75px)"
+    },
+
+    [theme.breakpoints.down("md")]: {
+      width: "calc(100% - 50px)"
+    }
   },
   paper: {
     flexGrow: 1,
