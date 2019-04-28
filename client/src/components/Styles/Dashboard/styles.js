@@ -1,11 +1,12 @@
 const styles = theme => ({
   root: {
     // padding: theme.spacing.unit * 3,
-
+    flexGrow: -1,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 30
+
     // backgroundColor: '#846f96',
     // height: '100vh'
   },
@@ -13,36 +14,16 @@ const styles = theme => ({
   grid: {
     width: 1200,
     flexWrap: "wrap-reverse",
-    justifyContent: "flex-end",
-    // margin: `0 ${theme.spacing.unit * 2}px`,
-    [theme.breakpoints.down("sm")]: {
-      width: "calc(100% - 75px)"
-    },
-
-    [theme.breakpoints.down("md")]: {
-      width: "calc(100% - 50px)"
-    }
+    justifyContent: "flex-start",
+    alignItems: "flex-end",
+    margin: `0 ${theme.spacing.unit * 2}px`
   },
   paper: {
-    padding: theme.spacing.unit * 3,
+    flexGrow: 1,
+    padding: theme.spacing.unit * 2,
+    textAlign: "center",
     borderTop: "5px solid #4C046B",
-    textAlign: "left",
-    width: "55%",
-    height: "100%",
-    position: "relative",
-    right: "-50px",
-
-    color: theme.palette.text.primary,
-    // height: '40vh',
-    // backgroundColor: '#f4f2ff'
-    [theme.breakpoints.down("sm")]: {
-      width: "100%",
-      right: "-10px"
-    },
-    [theme.breakpoints.down("xs")]: {
-      width: "100%",
-      right: "unset"
-    }
+    color: theme.palette.text.primary
   },
 
   block: {
@@ -74,9 +55,6 @@ const styles = theme => ({
     }
   },
   liveticker: {
-    position: "relative",
-    top: -222,
-    width: "33%",
     right: -769,
     [theme.breakpoints.down("md")]: {
       right: -580

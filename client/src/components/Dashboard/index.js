@@ -43,23 +43,26 @@ class Dashboard extends Component {
                 container
                 className={classes.grid}
               >
-                <Grid item xs={12} md={12}>
-                  <div className={classes.liveticker}>
-                      <KeyIndicators />
-                  </div>
-                </Grid>
-
-                <Grid item xs={12} md={12}>
+                <Grid item sm>
                   <Paper className={classes.paper}>
-                      <YourFavorites />
+                    <YourFavorites />
+                  </Paper>
+                </Grid>
+                <Grid item sm>
+                  <Paper className={classes.paper}>
+                    <KeyIndicators />
                   </Paper>
                 </Grid>
                 <Grid item xs={12}>
                   <div className={classes.block}>
-                    <Typography variant="h5" gutterBottom style={{paddingLeft:"20px"}}>
+                    <Typography
+                      variant="h5"
+                      gutterBottom
+                      style={{ paddingLeft: "20px" }}
+                    >
                       Dashboard
                     </Typography>
-                      <LiveTicker />
+                    <LiveTicker />
                   </div>
                 </Grid>
               </Grid>
