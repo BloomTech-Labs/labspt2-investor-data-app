@@ -11,7 +11,7 @@ module.exports = router => {
 }
 
 /************************************ USERS SECTION ***********************************/
-function protect(req, res, next) {
+/* function protect(req, res, next) {
     const token = req.headers.authorization;
 
     jwt.verify(token, secret, (err, decodedToken) => {
@@ -23,10 +23,10 @@ function protect(req, res, next) {
             next();
         };
     });
-};
+}; */
 
 //************************************************** */
-function generateToken(user) {
+/* function generateToken(user) {
     const payload = {
         user: user.id
     };
@@ -34,7 +34,7 @@ function generateToken(user) {
         expiresIn: '1h'
     };
     return jwt.sign(payload, secret, options);
-};
+}; */
 
 /********* Get Users *************/
 // UNCOMMENT TO PROTECT THE ROUTE!
@@ -64,8 +64,8 @@ router.post('/', (req, res) => {
         .checkEmail(user.email)
         .then(addUser => {
         if (addUser.length) {
-         //    const token = generateToken(user)
-         //    res.status(201).json({ id: user.id, token });
+           //  const token = generateToken(user)
+           //  res.status(201).json({ id: user.id, token });
             res.status(200).json({message: "Logged In Successfully"})
         } else {
             users.insert(user)

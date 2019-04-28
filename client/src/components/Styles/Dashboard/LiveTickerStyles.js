@@ -10,6 +10,7 @@ export const Loading = styled.div`
 export const TickerContainer = styled.div`
   width: 100%;
   color: #000;
+  padding-right: 20px;
   margin: 20px;
 `;
 

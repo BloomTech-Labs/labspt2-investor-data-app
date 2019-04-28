@@ -5,7 +5,7 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 30
+    marginTop: 20
     // backgroundColor: '#846f96',
     // height: '100vh'
   },
@@ -14,7 +14,7 @@ const styles = theme => ({
     width: 1200,
     flexWrap: "wrap-reverse",
     justifyContent: "flex-end",
-    // margin: `0 ${theme.spacing.unit * 2}px`,
+    //margin: `0 ${theme.spacing.unit * 2}px`,
     [theme.breakpoints.down("sm")]: {
       width: "calc(100% - 75px)"
     },
@@ -27,7 +27,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
     borderTop: "5px solid #4C046B",
     textAlign: "left",
-    width: "55%",
+    width: "35%",
     height: "100%",
     position: "relative",
     right: "-50px",
@@ -51,7 +51,7 @@ const styles = theme => ({
     position: "relative",
     top: -72,
     right: 55,
-    fontSize: ".8rem",
+    fontSize: "1rem",
 
     [theme.breakpoints.down("xs")]: {
       top: -72,
@@ -75,7 +75,7 @@ const styles = theme => ({
   },
   liveticker: {
     position: "relative",
-    top: -222,
+    top: -122,
     width: "33%",
     right: -769,
     [theme.breakpoints.down("md")]: {

@@ -56,7 +56,7 @@ class Dashboard extends Component {
                 </Grid>
                 <Grid item xs={12}>
                   <div className={classes.block}>
-                    <Typography variant="h5" gutterBottom style={{paddingLeft:"20px"}}>
+                    <Typography variant="h5" gutterBottom>
                       Dashboard
                     </Typography>
                       <LiveTicker />

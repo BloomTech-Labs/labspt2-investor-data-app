@@ -9,23 +9,21 @@ border: 1px solid #aaa;
 border-radius: 15px;
 box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
 outline: none; 
-`
+`;
 
 export const Form = styled.form`
-position: relative;
-color: #aaa;
-font-size: 16px;
-width: 100%; 
-display: flex; 
-justify-content: center; 
-padding-bottom: 20px; 
-
-`
+  position: relative;
+  color: #aaa;
+  font-size: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+`;
 
 export const SearchIcon = styled.span`
-position: relative;
-top: 6px;
-left: 28px;
-
-`
+  position: relative;
+  top: 6px;
+  left: 28px;
+`;
 
