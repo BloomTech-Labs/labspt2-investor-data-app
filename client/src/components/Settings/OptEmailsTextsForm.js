@@ -36,6 +36,7 @@ class OptEmailsTextsForm extends React.Component {
             <div className={classes.emailTextContainer}>
                 <Typography variant='h6'>Email and text preferences</Typography>
                 <div>
+                    {/* Switch for email preferences */}
                     <FormControlLabel
                         control={
                             <Switch
@@ -48,6 +49,7 @@ class OptEmailsTextsForm extends React.Component {
                         label='Emails?'
                         className={classes.optSwitch}
                     />
+                    {/* Switch for text preferences */}
                     <FormControlLabel
                         control={
                             <Switch
