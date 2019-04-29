@@ -28,7 +28,7 @@ const styles = theme => ({
   paper: {
     flexGrow: 1,
     padding: theme.spacing.unit * 2,
-    textAlign: "center",
+    textAlign: "left",
     borderTop: "5px solid #4C046B",
     color: theme.palette.text.primary
   },

@@ -4,7 +4,8 @@ import { Input, Form, SearchIcon } from "../Styles/Dashboard/YourFavorites";
 import { Typography } from "@material-ui/core";
 import FavoriteStocks from "./FavoriteStocks";
 import firebase from "firebase";
-
+const URL = "https://pickemm.herokuapp.com/api";
+// const URL = "http://localhost:5000/api";
 class YourFavorites extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +27,7 @@ class YourFavorites extends React.Component {
 
   fetchUserStocks = uid => {
     axios
-      .get(`https://pickemm.herokuapp.com/api/favorites`) // <----user favorites
+      .get(`${URL}/favorites`) // <----user favorites
       .then(response => {
         let stock = [];
         response.data.forEach((item, index) => {
@@ -72,7 +73,8 @@ class YourFavorites extends React.Component {
           }}
         >
           My Favorite Stocks
-        </Typography>{""}
+        </Typography>
+        {""}
         <Form>
           <SearchIcon>
             <i className="fa fa-search" />
