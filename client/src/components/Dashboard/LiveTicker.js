@@ -153,7 +153,7 @@ class LiveTicker extends React.Component {
                     disableFocusListener
                     title={
                       <Typography color="inherit">
-                        Click on this card to view the Stock Indicator Reports
+                        View the Stock Indicator Reports
                       </Typography>
                     }
                   >
@@ -168,7 +168,7 @@ class LiveTicker extends React.Component {
                     disableFocusListener
                     title={
                       <Typography color="inherit">
-                        Click here to Add/Remove stocks from your favorites
+                        Add/Remove stocks from your favorites
                       </Typography>
                     }
                   >

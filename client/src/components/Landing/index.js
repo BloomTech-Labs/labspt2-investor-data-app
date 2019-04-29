@@ -8,7 +8,7 @@ import "../Styles/Landing/landing.css";
 
 import undraw_investing from "./images/undraw_investing.svg";
 import undraw_finance from "./images/undraw_finance.svg";
-import undraw_financial_data from "./images/undraw_financial_data.svg";
+import undraw_savings from "./images/undraw_savings.svg";
 
 const Landing = () => {
   return (
@@ -48,7 +48,7 @@ const Landing = () => {
           <div className="steps__inner">
             <div className="step">
               <div className="step__media">
-                <img alt="" src={undraw_investing} className="step__image" />
+                <img alt="" src={undraw_savings} className="step__image" />
               </div>
               <h4>Inexperienced Investors</h4>
               <p className="step__text">
@@ -70,7 +70,7 @@ const Landing = () => {
               <div className="step__media">
                 <img
                   alt=""
-                  src={undraw_financial_data}
+                  src={undraw_investing}
                   className="step__image"
                 />
               </div>
