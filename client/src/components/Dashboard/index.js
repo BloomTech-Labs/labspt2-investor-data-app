@@ -45,30 +45,21 @@ class Dashboard extends Component {
               >
                 <Grid item xs={12} md={12}>
                   <div className={classes.liveticker}>
-                    <Typography variant="h5" gutterBottom>
                       <KeyIndicators />
-                    </Typography>
                   </div>
                 </Grid>
 
                 <Grid item xs={12} md={12}>
                   <Paper className={classes.paper}>
-                    <Typography variant="h5" gutterBottom>
                       <YourFavorites />
-                    </Typography>
                   </Paper>
                 </Grid>
                 <Grid item xs={12}>
                   <div className={classes.block}>
-                    <p />
-                    <Typography variant="h5" gutterBottom>
+                    <Typography variant="h5" gutterBottom style={{paddingLeft:"20px"}}>
                       Dashboard
                     </Typography>
-
-                    <p />
-                    <Typography variant="h6" gutterBottom>
                       <LiveTicker />
-                    </Typography>
                   </div>
                 </Grid>
               </Grid>
