@@ -14,7 +14,7 @@ import {
 import { Link } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
-import Checkout from "../Stripe/checkout";
+import Checkout2 from "../Stripe/checkout2";
 
 const styles = theme => ({
   "@global": {
@@ -99,9 +99,9 @@ const tiers = [
   }
 ];
 class Pricing extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  //  constructor(props) {
+  //    super(props);
+  //  }
 
   render() {
     const { classes } = this.props;
@@ -179,9 +179,7 @@ class Pricing extends Component {
                     <center>
                       <br />
                       {this.props.authenticated ? (
-                        <Checkout
-                          name={tier.title}
-                          amount={tier.price}
+                        <Checkout2
                           accountType={tier.accountType}
                           stripePlan={tier.stripePlan}
                         />
