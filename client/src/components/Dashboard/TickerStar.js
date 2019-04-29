@@ -2,8 +2,8 @@ import React from "react";
 import axios from "axios";
 import firebase from "firebase";
 
-// const URL = "https://pickemm.herokuapp.com/api"
-const URL = "http://localhost:5000/api";
+const URL = "https://pickemm.herokuapp.com/api";
+// const URL = "http://localhost:5000/api";
 class TickerStar extends React.Component {
   constructor(props) {
     super(props);
