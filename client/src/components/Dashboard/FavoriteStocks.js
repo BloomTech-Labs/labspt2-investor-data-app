@@ -1,27 +1,28 @@
 import React from 'react'
 import axios from 'axios'
-import TickerStar from './TickerStar'
+import FavoriteTickerstar from './favoriteTickerstar'
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles' 
+
 
 class FavoriteStocks extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             timeStamp: {},
-            companies: [this.props.companies], // stock company symbols
+            companies: this.props.companies, // stock company symbols
             stocks: [],
-            items: []
+            items: [],
         }
     }
       
+
     componentDidMount(){
         this.fetchFavorites()
     }
-      
 
     fetchFavorites = () => {
         let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
-            axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=ZV7Y9QKGXRHCY0A4`));
+            axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`));
         this.fetchStocks(promises)
     }
       
@@ -58,7 +59,6 @@ class FavoriteStocks extends React.Component{
             });
     }
       
-    
     changePercent = (close, start) => {  // function for calculating the change of a stocks gain/loss by %
         let deduct = close - start
         let divide = deduct / start 
@@ -120,7 +120,6 @@ class FavoriteStocks extends React.Component{
         const volume = '5. volume'
     
         this.state.stocks.forEach( (stock, index) => {  // Loops through array of stock values and creates a table
-            console.log(stock)
             rows.push(
                 <TickerContainer key={index}>
                     <Row>
@@ -128,7 +127,7 @@ class FavoriteStocks extends React.Component{
                             <p>{stock.company}</p> 
                         </StockSymbol> 
                         <Star>
-                            <TickerStar id={stock.company} /> 
+                            <FavoriteTickerstar company={stock.company} /> 
                         </Star> 
                     </Row> 
                     <br />

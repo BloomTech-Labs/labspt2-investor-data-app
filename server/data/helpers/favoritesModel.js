@@ -28,9 +28,9 @@ module.exports = {
             .then(count => (count > 0 ? this.get(uid) : null));
     },
 
-    remove: uid => {
+    remove: symbol => {
         return db('favorites')
-            .where('uid', uid)
+            .where('symbol', symbol)
             .del();
     }
 
