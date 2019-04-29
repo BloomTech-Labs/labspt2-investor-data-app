@@ -32,5 +32,10 @@ class Checkout2 extends Component {
      });
    });
     }
+render() {
+  return (
+    <button id="checkout-button">Subscribe</button>
+  );
+}
 }
 export default Checkout2;
