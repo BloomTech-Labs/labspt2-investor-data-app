@@ -47,7 +47,7 @@ class Checkout extends Component {
         .then(successPayment => {
           if (successPayment) {
             const bill = this.state;
-            const endpoint = "https://pickemm.herokuapp.com/api/billing";
+            const endpoint = "http:/localhost:5000/api/billing";
             axios.post(endpoint, bill).then(successPayment);
           }
         })
