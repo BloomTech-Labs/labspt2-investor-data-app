@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import FavoriteTickerstar from './favoriteTickerstar'
+import Scanner from './Scanner'
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles' 
 
 
@@ -48,11 +49,14 @@ class FavoriteStocks extends React.Component{
                         values: current
                     })
                 });
-      
+                console.log("stocks:", stocks)
+                console.log("timestamp:", timeStamp)
                 this.setState({
                     stocks,
                     timeStamp
                 });
+                console.log("state:", this.state)
+
             })
             .catch(error => {
                 console.error('There was an error with the network requests', error)
@@ -140,6 +144,7 @@ class FavoriteStocks extends React.Component{
                         <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
                     </Row> 
                     <br />
+                    <Scanner companies={this.state.companies}/>
                     <hr/> 
                 </TickerContainer>
             )
