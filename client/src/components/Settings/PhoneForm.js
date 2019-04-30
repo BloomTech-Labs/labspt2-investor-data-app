@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 
 // WithStyles
-import styles from './styles';
+import styles from '../Styles/Settings/styles';
 
 // NumberFormat for text input
 import NumberFormat from 'react-number-format';

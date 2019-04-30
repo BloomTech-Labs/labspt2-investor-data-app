@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from '@material-ui/core/Divider';
 
 // WithStyles
-import styles from './styles';
+import styles from '../Styles/Settings/styles';
 
 // Settings Page Components
 import EmailForm from './EmailForm';
