@@ -180,6 +180,7 @@ class Pricing extends Component {
                       <br />
                       {this.props.authenticated ? (
                         <Checkout2
+                          amount={tier.price}
                           accountType={tier.accountType}
                           stripePlan={tier.stripePlan}
                         />
