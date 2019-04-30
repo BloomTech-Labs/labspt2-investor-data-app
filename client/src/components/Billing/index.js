@@ -14,7 +14,9 @@ import {
 import { Link } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
-import Checkout2 from "../Stripe/checkout2";
+import CheckoutForm from "../Stripe/checkoutform";
+import { Elements, StripeProvider } from "react-stripe-elements";
+import STRIPE_PUBLISHABLE from "../../constants/stripe";
 
 const styles = theme => ({
   "@global": {
@@ -179,11 +181,17 @@ class Pricing extends Component {
                     <center>
                       <br />
                       {this.props.authenticated ? (
-                        <Checkout2
-                          amount={tier.price}
-                          accountType={tier.accountType}
-                          stripePlan={tier.stripePlan}
-                        />
+                        <StripeProvider apiKey={STRIPE_PUBLISHABLE}>
+                          <div>
+                            <Elements>
+                              <CheckoutForm .
+                                amount={tier.price}
+                                accountType={tier.accountType}
+                                stripePlan={tier.stripePlan}
+                              />
+                            </Elements>
+                          </div>
+                        </StripeProvider>
                       ) : (
                         <Button
                           component={Link}
