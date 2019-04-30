@@ -94,9 +94,9 @@ const styles = theme => ({
   },
   welcome: {
     position: "relative",
-    right: -1190,
+    right: -1114,
     [theme.breakpoints.down("md")]: {
-      right: -680
+      right: -770
     },
     [theme.breakpoints.down("sm")]: {
       right: -680

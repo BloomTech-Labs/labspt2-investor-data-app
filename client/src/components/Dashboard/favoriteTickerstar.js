@@ -16,7 +16,7 @@ class FavoriteTickerstar extends React.Component{
 
 
     componentDidMount(){
-        axios.get(`https://pickemm.herokuapp.com/api/favorites`) // <----user favorites
+        axios.get(`https://pickemm.herokuapp.com/api/favorites/${this.state.uid}`) // <----user favorites
         .then( response => {
             this.setState({
                stocks: response.data
@@ -32,7 +32,7 @@ class FavoriteTickerstar extends React.Component{
                 selected: false,
                 star: 'far fa-star',
             })  
-            axios.delete(`https://pickemm.herokuapp.com/api/favorites/${this.state.company}`)
+            axios.delete(`https://pickemm.herokuapp.com/api/favorites/${this.props.company}`)
                 .then( response => {
                     this.setState({
                         stocks: response.data

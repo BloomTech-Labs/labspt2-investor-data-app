@@ -17,10 +17,10 @@ router.get('/', async (req, res) => {
 });
 
 /********* Get Single Bill *************/
-router.get('/:id', async (req, res) => {
-  const {id} = req.params;
+router.get('/:uid', async (req, res) => {
+  const {uid} = req.params;
   await billing
-    .get (id)
+    .getAcct(uid)
     .then (bills => {
       if (bills) {
         res.json (bills);
