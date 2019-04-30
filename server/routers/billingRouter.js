@@ -1,44 +1,44 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const billing = require('../data/helpers/billingModel');
-
+const billing = require("../data/helpers/billingModel");
+const {
+  firebase,
+  isAuthenticated
+} = require("../data/auth/firebaseMiddleware");
 /************************************ BILLING SECTION ***********************************/
 
 /********* Get Billing *************/
-router.get('/', async (req, res) => {
+router.get("/", isAuthenticated, async (req, res) => {
   await billing
-    .get ()
-    .then (bills => {
-      res.json (bills);
+    .get()
+    .then(bills => {
+      res.json(bills);
     })
     .catch(err => {
-      res.status(500).json({error: 'The billing could not be retrieved.'});
+      res.status(500).json({ error: "The billing could not be retrieved." });
     });
 });
 
 /********* Get Single Bill *************/
-router.get('/:uid', async (req, res) => {
-  const {uid} = req.params;
+router.get("/:uid", isAuthenticated, async (req, res) => {
+  const { uid } = req.params;
   await billing
     .getAcct(uid)
-    .then (bills => {
+    .then(bills => {
       if (bills) {
-        res.json (bills);
+        res.json(bills);
       } else {
         res
           .status(404)
-          .json({message: 'The bill with the specified ID does not exist.'});
+          .json({ message: "The bill with the specified ID does not exist." });
       }
     })
-    .catch (err => {
+    .catch(err => {
       res
         .status(500)
-        .json({error: 'The bill information could not be retrieved.'});
+        .json({ error: "The bill information could not be retrieved." });
     });
 });
-
-
-
 
 // /************* Delete Bill *************/
 // router.delete('/:id', (req, res) => {
@@ -99,7 +99,7 @@ router.get('/:uid', async (req, res) => {
 // });
 
 /********* Create New Bill *************/
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
   const bills = req.body;
 
   billing
@@ -108,7 +108,7 @@ router.post('/', (req, res) => {
       res.status(201).json(bills);
     })
     .catch(err => {
-      res.status(500).json({message: 'failed to insert bill in db'});
+      res.status(500).json({ message: "failed to insert bill in db" });
     });
 });
 
