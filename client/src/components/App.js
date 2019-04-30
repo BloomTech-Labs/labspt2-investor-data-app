@@ -96,9 +96,9 @@ class App extends Component {
     axios
       .post(endpoint, creds)
       .then(res => {
-        console.log(res);
+        console.log("User logged in successfuly");
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log("Error in getting user"));
   };
   componentWillUnmount = () => {
     this.removeAuthListener();

@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
+// Redux imports
+import { connect } from "react-redux";
+import { getAcct } from "../../actions/reportsActions";
+import { fire } from "../Auth/firebaseConfig";
 import {
   CssBaseline,
   Paper,
@@ -15,7 +19,7 @@ import {
 } from "@material-ui/core";
 import styles from "../Styles/Reports/styles";
 import { LoadingContainer } from "../Styles/Reports/Reports";
-import { ImpulseSpinner } from "react-spinners-kit";
+import { ImpulseSpinner, FireworkSpinner } from "react-spinners-kit";
 
 import deburr from "lodash/deburr";
 import Autosuggest from "react-autosuggest";
@@ -46,7 +50,7 @@ const renderInputComponent = inputProps => {
 
   return (
     <TextField
-      fullWidth
+      fullWidth={true}
       InputProps={{
         inputRef: node => {
           ref(node);
@@ -109,16 +113,21 @@ const getSuggestionValue = suggestion => {
 };
 
 class Reports extends Component {
-  state = {
-    value: 0,
-    data: [],
-    ticker: "",
-    single: "",
-    popper: "",
-    suggestions: []
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0,
+      data: [],
+      ticker: "",
+      single: "",
+      popper: "",
+      suggestions: []
+    };
+  }
   componentDidMount() {
+    const uid = fire.currentUser.uid;
+    this.props.getAcct(uid);
+
     if (this.props.location.state) {
       getData(this.props.location.state.ticker).then(data => {
         this.setState({ data, ticker: this.props.location.state.ticker });
@@ -362,9 +371,33 @@ class Reports extends Component {
                     >
                       <Tab label="Price" />
                       <Tab label="Moving Average (MA)" />
-                      <Tab label="Moving Average Convergence (MACD)" />
-                      <Tab label="Relative Strength Index (RSI)" />
-                      <Tab label="Parabolic Stop and Reverse (SAR)" />
+                      {this.props.billing.accountType === 3
+                        ? [
+                            <Tab
+                              key={0}
+                              label="Moving Average Convergence (MACD)"
+                            />,
+                            <Tab
+                              key={1}
+                              label="Relative Strength Index (RSI)"
+                            />,
+                            <Tab
+                              key={2}
+                              label="Parabolic Stop and Reverse (SAR)"
+                            />
+                          ]
+                        : this.props.billing.accountType === 2
+                        ? [
+                            <Tab
+                              key={0}
+                              label="Moving Average Convergence (MACD)"
+                            />,
+                            <Tab
+                              key={1}
+                              label="Relative Strength Index (RSI)"
+                            />
+                          ]
+                        : null}
                     </Tabs>
                   </AppBar>
                   {value === 0 && (
@@ -402,4 +435,21 @@ class Reports extends Component {
   }
 }
 
-export default withStyles(styles)(Reports);
+const mapStateToProps = state => {
+  return {
+    fetchBilling: state.ReportsReducer.fetchingBilling,
+    error: state.ReportsReducer.error,
+    billing: state.ReportsReducer.billing
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  getAcct: acct => dispatch(getAcct(acct))
+});
+
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Reports)
+);
