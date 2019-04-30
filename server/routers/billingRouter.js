@@ -100,10 +100,10 @@ router.get('/:uid', async (req, res) => {
 
 /********* Create New Bill *************/
 router.post('/', (req, res) => {
-  const bills = req.body;
+  const { usersId, accountType } = req.body
 
   billing
-    .insert(bills)
+    .insert({ usersId, accountType })
     .then(bills => {
       res.status(201).json(bills);
     })

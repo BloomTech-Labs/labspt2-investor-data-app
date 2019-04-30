@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import STRIPE_PUBLISHABLE from "../../constants/stripe";
 import { fire } from "../Auth/firebaseConfig";
 
@@ -31,19 +32,26 @@ class Checkout2 extends Component {
   };
 
   onPayButtonClick(e) {
-    this.state.stripe
-      .redirectToCheckout({
-        items: [{ plan: this.props.stripePlan, quantity: 1 }],
-        customerEmail: fire.currentUser.email,
-        successUrl: "http://localhost:3000/thankyou",
-        cancelUrl: "https://getpickem.co/canceled"
+    const bill = this.state;
+    console.log(bill);
+    const endpoint = "http://localhost:5000/api/billing";
+    axios
+      .post(endpoint, bill)
+      .then(() => {
+        console.log("testing axios and stripe");
+        this.state.stripe
+          .redirectToCheckout({
+            items: [{ plan: this.props.stripePlan, quantity: 1 }],
+            customerEmail: fire.currentUser.email,
+            successUrl: "http://localhost:3000/thankyou",
+            cancelUrl: "https://getpickem.co/canceled"
+          })
+          .then(function(result) {
+            // Display result.error.message to your customer
+            this.setState({ error: result.error.message });
+          });
       })
-      .then(function(result) {
-        // Display result.error.message to your customer
-        this.setState({
-          error: result.error.message
-        });
-      });
+      .catch(err => console.log("error ", err));
   }
   render() {
     return (

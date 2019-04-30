@@ -21,7 +21,7 @@ router.post ('/', (req, res) => {
         message: "Success",
       }) 
     } 
-    stripe.subscriptions.create ({
+   stripe.subscriptions.create ({
    customer: customer.id,
    plan: req.body.plan
   }); 
