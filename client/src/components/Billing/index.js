@@ -184,7 +184,7 @@ class Pricing extends Component {
                         <StripeProvider apiKey={STRIPE_PUBLISHABLE}>
                           <div>
                             <Elements>
-                              <CheckoutForm .
+                              <CheckoutForm
                                 amount={tier.price}
                                 accountType={tier.accountType}
                                 stripePlan={tier.stripePlan}
