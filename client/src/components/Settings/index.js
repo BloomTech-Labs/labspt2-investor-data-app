@@ -28,7 +28,9 @@ class Settings extends React.Component {
         const { classes } = this.props;
 
         return(
-            <div className={classes.parent}>
+            <div 
+                className={classes.parent}
+            >
                 <CssBaseline />
                 <Typography
                     component="h1"
