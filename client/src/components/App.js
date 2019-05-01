@@ -56,7 +56,6 @@ class App extends Component {
         user
           .getIdToken()
           .then(idToken => {
-            console.log("hello I am eddy");
             axios.defaults.headers.common["Authorization"] = idToken;
           })
           .catch(err => console.log("error ", err));
