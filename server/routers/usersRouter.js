@@ -11,7 +11,7 @@ module.exports = router => {
 }
 
 /************************************ USERS SECTION ***********************************/
-/* function protect(req, res, next) {
+ function protect(req, res, next) {
     const token = req.headers.authorization;
 
     jwt.verify(token, secret, (err, decodedToken) => {
@@ -23,10 +23,10 @@ module.exports = router => {
             next();
         };
     });
-}; */
+}; 
 
 //************************************************** */
-/* function generateToken(user) {
+ function generateToken(user) {
     const payload = {
         user: user.id
     };
@@ -34,7 +34,7 @@ module.exports = router => {
         expiresIn: '1h'
     };
     return jwt.sign(payload, secret, options);
-}; */
+}; 
 
 /********* Get Users *************/
 // UNCOMMENT TO PROTECT THE ROUTE!
