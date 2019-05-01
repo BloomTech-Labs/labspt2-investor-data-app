@@ -7,7 +7,7 @@ import {
   Definitions,
   Term
 } from "../Styles/Dashboard/KeyIndicators";
-
+import { Typography } from "@material-ui/core";
 class KeyIndicators extends React.Component {
   constructor() {
     super();
@@ -29,7 +29,9 @@ class KeyIndicators extends React.Component {
     return (
       <div>
         <CharContainer>
-          <h4>Glossary of Financial Terms</h4>
+          <Typography variant="h6" gutterBottom>
+            Glossary of Financial Terms
+          </Typography>
           <div>
             {this.state.chars.map((char, index) => {
               //returns characters to create directory

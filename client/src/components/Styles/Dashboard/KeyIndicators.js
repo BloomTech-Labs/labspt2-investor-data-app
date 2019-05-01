@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const CharContainer = styled.div`
   margin: 0px auto 15px auto;
@@ -8,7 +8,7 @@ export const CharContainer = styled.div`
 export const Character = styled.button`
   border: none;
   color: black;
-  font-size: .8rem; 
+  font-size: 0.8rem;
   width: 1%;
 `;
 

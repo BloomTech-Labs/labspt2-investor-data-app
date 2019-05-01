@@ -1,23 +1,17 @@
-const db = require('../dbConfig.js');
+const db = require("../dbConfig.js");
 
 module.exports = {
-
     get: () => {
         return db("favorites");
-      },
-      
-    getByUid: uid => {
+    },
+
+   getByUid: uid => {
         let query = db('favorites');
         if (uid) {
             query.where('uid', uid).first();
             return query;
         }
         return db('favorites')
-    },
-
-    insert: favorite => {
-        return db('favorites').insert(favorite)
-           // .then(([uid]) => this.get(uid));
     },
 
     update: (uid, changes) => {
@@ -31,7 +25,10 @@ module.exports = {
         return db('favorites')
             .where('symbol', symbol)
             .del();
+    },
+
+    insert: favorite => {
+        return db("favorites").insert(favorite);
+        // .then(([uid]) => this.get(uid));  This was causing issues for saving a favorite
     }
-
 };
-

@@ -9,7 +9,8 @@ import {
   Paper,
   TextField,
   MenuItem,
-  Popper
+  Popper,
+  Zoom
 } from "@material-ui/core";
 import { fire } from "../Auth/firebaseConfig";
 import LiveTicker from "./LiveTicker";
@@ -102,6 +103,7 @@ class Dashboard extends Component {
     popper: "",
     suggestions: [],
     uid: firebase.auth().currentUser.uid,
+    checked: false
   };
 
   handleSuggestionsFetchRequested = ({ value }) => {
@@ -141,6 +143,7 @@ class Dashboard extends Component {
   }
 
   render() {
+    const { checked } = this.state;
     const { classes } = this.props;
 
     const autosuggestProps = {
@@ -179,15 +182,16 @@ class Dashboard extends Component {
                 container
                 className={classes.grid}
               >
-                <Grid item xs={12} md={12}>
-                  <div className={classes.liveticker}>
-                    <KeyIndicators />
-                  </div>
-                </Grid>
-
-                <Grid item xs={12} md={12}>
+                <Grid item sm={4}>
                   <Paper className={classes.paper}>
-                    <YourFavorites />
+                    <Zoom in={checked}>
+                      <YourFavorites />
+                    </Zoom>
+                  </Paper>
+                </Grid>
+                <Grid item sm>
+                  <Paper className={classes.paper}>
+                    <KeyIndicators />
                   </Paper>
                 </Grid>
                 <Grid item xs={12}>
@@ -234,6 +238,13 @@ class Dashboard extends Component {
                         )}
                       />
                     </div>
+                    <Typography
+                      variant="h5"
+                      gutterBottom
+                      style={{ paddingLeft: "20px" }}
+                    >
+                      Dashboard
+                    </Typography>
                     <LiveTicker />
                   </div>
                 </Grid>

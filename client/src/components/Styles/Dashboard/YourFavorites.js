@@ -14,7 +14,7 @@ outline: none;
 export const Form = styled.form`
   position: relative;
   color: #aaa;
-  font-size: 1rem;
+  font-size: 14px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -26,4 +26,3 @@ export const SearchIcon = styled.span`
   top: 6px;
   left: 28px;
 `;
-
