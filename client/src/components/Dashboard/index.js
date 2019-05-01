@@ -92,6 +92,7 @@ const getSuggestionValue = suggestion => {
   return suggestion.label;
 };
 
+
 class Dashboard extends Component {
   state = {
     value: 0,
