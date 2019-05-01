@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import FavoriteTickerstar from './favoriteTickerstar'
-import Scanner from './Scanner'
+//import Scanner from './Scanner'
 import { Loading, Row, TickerContainer, StockSymbol, Star } from '../Styles/Dashboard/LiveTickerStyles' 
 
 
@@ -144,7 +144,7 @@ class FavoriteStocks extends React.Component{
                         <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
                     </Row> 
                     <br />
-                    <Scanner companies={this.state.companies}/>
+                  {/*   <Scanner companies={this.state.companies}/> */}
                     <hr/> 
                 </TickerContainer>
             )

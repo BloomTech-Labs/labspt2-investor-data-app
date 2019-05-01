@@ -16,9 +16,8 @@ module.exports = {
     },
 
     insert: favorite => {
-        return db('favorites')
-            .insert(favorite)
-            .then(([uid]) => this.get(uid));
+        return db('favorites').insert(favorite)
+           // .then(([uid]) => this.get(uid));
     },
 
     update: (uid, changes) => {
