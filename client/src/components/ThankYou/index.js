@@ -11,11 +11,12 @@ class ThankYou extends Component {
     return (
       <div>
         <div>
-          <h1>Thank You </h1>
-          <h3>Would you like to go to?</h3>
+          <h2>Thank you!</h2>
+          <p>Where would you like to go to?</p>
         </div>
         <Link to={ROUTES.SETTINGS}>
           <button>Settings</button>
+          <div />
         </Link>
         <Link to={ROUTES.DASHBOARD}>
           <button>Dashboard</button>
