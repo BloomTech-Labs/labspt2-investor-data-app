@@ -122,77 +122,35 @@ class FavoriteStocks extends React.Component {
     return str + suffix;
   };
 
-    shortenVolume = (num) => {  // Crunches the length of the volume into a smaller number while inserting a decimal point and character representing the amount
-        let str,
-            suffix = '';
-        
-        let decimalPlaces = 2 || 0;
+  shortenVolume = (num) => {  // Crunches the length of the volume into a smaller number while inserting a decimal point and character representing the amount
+    let str,
+      suffix = '';
 
-        num = +num;
-        
-        let factor = Math.pow(10, decimalPlaces);
-        
-        if (num < 1000) {
-            str = num;
-        } else if (num < 1000000) {
-            str = Math.floor(num / (1000 / factor)) / factor;
-            suffix = 'K';
-        } else if (num < 1000000000) {
-            str = Math.floor(num / (1000000 / factor)) / factor;
-            suffix = 'M';
-        } else if (num < 1000000000000) {
-            str = Math.floor(num / (1000000000 / factor)) / factor;
-            suffix = 'B';
-        } 
-            return str + suffix;
-        }
-    
+    let decimalPlaces = 2 || 0;
 
-    render() {
-       if(!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
-        return <Loading>Loading Stocks...</Loading>
-       } 
-    
-        let rows = [];
-        
-        const open = '1. open'
-        const close = '4. close'
-        const volume = '5. volume'
-    
-        this.state.stocks.forEach( (stock, index) => {  // Loops through array of stock values and creates a table
-            rows.push(
-                <TickerContainer key={index}>
-                    <Row>
-                        <StockSymbol>        
-                            <p>{stock.company}</p> 
-                        </StockSymbol> 
-                        <Star>
-                            <FavoriteTickerstar company={stock.company} /> 
-                        </Star> 
-                    </Row> 
-                    <br />
-                    <Row>
-                        <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
-                        <p>Change: {`${this.changePoints(stock.values[close], stock.values[open])}`}</p>
-                    </Row> 
-                    <Row> 
-                        <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p> 
-                        <p>Change %: {`${this.changePercent(stock.values[close], stock.values[open])}`}</p>
-                    </Row> 
-                    <br />
-                  {/*   <Scanner companies={this.state.companies}/> */}
-                    <hr/> 
-                </TickerContainer>
-            )
-        });
-    
-        return (
-            <div>         
-                <div>
-                    { rows }  
-                </div> 
-            </div> 
-        )
+    num = +num;
+
+    let factor = Math.pow(10, decimalPlaces);
+
+    if (num < 1000) {
+      str = num;
+    } else if (num < 1000000) {
+      str = Math.floor(num / (1000 / factor)) / factor;
+      suffix = 'K';
+    } else if (num < 1000000000) {
+      str = Math.floor(num / (1000000 / factor)) / factor;
+      suffix = 'M';
+    } else if (num < 1000000000000) {
+      str = Math.floor(num / (1000000000 / factor)) / factor;
+      suffix = 'B';
+    }
+    return str + suffix;
+  }
+
+
+  render() {
+    if (!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
+      return <Loading>Loading Stocks...</Loading>
     }
 
     let rows = [];

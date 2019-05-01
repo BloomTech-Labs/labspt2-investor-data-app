@@ -131,16 +131,16 @@ class Dashboard extends Component {
     const newSymbol = {
       symbol: suggestionValue,
       uid: this.state.uid
-    }
+    };
     axios.post('https://pickemm.herokuapp.com/api/favorites', newSymbol)
       .then(response => {
         this.setState({
           newSymbol: { symbol: '', uid: '' }
-        })
-        window.location.reload()
+        });
+        window.location.reload();
       })
       .catch(err => { console.log("we've encountered an error") })
-  }
+  };
 
   render() {
     const { checked } = this.state;
@@ -196,7 +196,11 @@ class Dashboard extends Component {
                 </Grid>
                 <Grid item xs={12}>
                   <div className={classes.block}>
-                    <Typography variant="h5" gutterBottom>
+                    <Typography
+                      variant="h5"
+                      gutterBottom
+                      style={{ paddingLeft: "20px" }}
+                    >
                       Dashboard
                     </Typography>
                     <div>
@@ -204,7 +208,7 @@ class Dashboard extends Component {
                         {...autosuggestProps}
                         inputProps={{
                           classes,
-                          placeholder: "Search for Stocks...",
+                          placeholder: "Add Stocks to Favorites...",
                           value: this.state.popper,
                           onChange: this.handleChange("popper"),
                           inputRef: node => {
@@ -216,7 +220,12 @@ class Dashboard extends Component {
                         }}
                         theme={{
                           suggestionsList: classes.suggestionsList,
-                          suggestion: classes.suggestion
+                          suggestion: classes.suggestion,
+                          input: {
+                            marginLeft: 20,
+                            width: 180,
+                            height: 30
+                          }
                         }}
                         renderSuggestionsContainer={options => (
                           <Popper
@@ -238,13 +247,6 @@ class Dashboard extends Component {
                         )}
                       />
                     </div>
-                    <Typography
-                      variant="h5"
-                      gutterBottom
-                      style={{ paddingLeft: "20px" }}
-                    >
-                      Dashboard
-                    </Typography>
                     <LiveTicker />
                   </div>
                 </Grid>
