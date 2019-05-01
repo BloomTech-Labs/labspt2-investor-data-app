@@ -27,12 +27,10 @@ server.use(bodyParser.urlencoded({extended: false}));
 server.use(bodyParser.json());
 
 
-
 //Server response get '/'
 server.get('/', async (req, res) => {
     await res.status(200).json({ response: 'PICKEM Investor-Data App Successfully Launched' })
 })
-
 
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`\n** server up on port ${port} **\n`));

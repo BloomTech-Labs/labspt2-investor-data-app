@@ -8,6 +8,7 @@ import {
   StockSymbol,
   Star
 } from "../Styles/Dashboard/LiveTickerStyles";
+import { Tooltip, Typography } from "@material-ui/core";
 
 class FavoriteStocks extends React.Component {
   constructor(props) {
@@ -167,9 +168,18 @@ class FavoriteStocks extends React.Component {
             <StockSymbol>
               <p>{stock.company}</p>
             </StockSymbol>
-            <Star>
-              <FavoriteTickerstar company={stock.company} />
-            </Star>
+            <Tooltip
+              disableFocusListener
+              title={
+                <Typography color="inherit">
+                  Remove stock from your favorites
+                      </Typography>
+              }
+            >
+              <Star>
+                <FavoriteTickerstar company={stock.company} />
+              </Star>
+            </Tooltip>
           </Row>
           <br />
           <Row>
