@@ -6,7 +6,8 @@ import {
   CssBaseline,
   Typography,
   Grid,
-  Paper
+  Paper,
+  Zoom
 } from "@material-ui/core";
 import { fire } from "../Auth/firebaseConfig";
 import LiveTicker from "./LiveTicker";
@@ -15,7 +16,11 @@ import KeyIndicators from "./KeyIndicators";
 import styles from "../Styles/Dashboard/styles";
 import GridContainer from "../Styles/Dashboard/GridContainer.jsx";
 class Dashboard extends Component {
+  state = {
+    checked: false
+  };
   render() {
+    const { checked } = this.state;
     const { classes } = this.props;
     return (
       <React.Fragment>
@@ -43,23 +48,28 @@ class Dashboard extends Component {
                 container
                 className={classes.grid}
               >
-                <Grid item xs={12} md={12}>
-                  <div className={classes.liveticker}>
-                      <KeyIndicators />
-                  </div>
-                </Grid>
-
-                <Grid item xs={12} md={12}>
+                <Grid item sm={4}>
                   <Paper className={classes.paper}>
+                    <Zoom in={checked}>
                       <YourFavorites />
+                    </Zoom>
+                  </Paper>
+                </Grid>
+                <Grid item sm>
+                  <Paper className={classes.paper}>
+                    <KeyIndicators />
                   </Paper>
                 </Grid>
                 <Grid item xs={12}>
                   <div className={classes.block}>
-                    <Typography variant="h5" gutterBottom style={{paddingLeft:"20px"}}>
+                    <Typography
+                      variant="h5"
+                      gutterBottom
+                      style={{ paddingLeft: "20px" }}
+                    >
                       Dashboard
                     </Typography>
-                      <LiveTicker />
+                    <LiveTicker />
                   </div>
                 </Grid>
               </Grid>
