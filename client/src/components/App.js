@@ -14,14 +14,9 @@ import Signin from "./Auth/Signin";
 import { fire } from "./Auth/firebaseConfig";
 import axios from "axios";
 
-<<<<<<< HEAD
 //URL Endpoints
 // const URL = "http://localhost:5000/api";
 const URL = "https://pickemm.herokuapp.com/api";
-=======
-const URL = "https://pickemm.herokuapp.com/api";
-// const URL = "http://localhost:5000/api";
->>>>>>> f4134fb16769b241f2e0df717e4f8c58fd680dce
 
 const AuthenticatedRoute = ({
   component: Component,
