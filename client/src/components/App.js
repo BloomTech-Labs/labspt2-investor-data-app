@@ -53,8 +53,15 @@ class App extends Component {
     this.removeAuthListener = fire.onAuthStateChanged(user => {
       if (user) {
         // Last # of occurrence of Space
-        let space = user.displayName.lastIndexOf(" ");
+        user
+          .getIdToken()
+          .then(idToken => {
+            console.log("hello I am eddy");
+            axios.defaults.headers.common["Authorization"] = idToken;
+          })
+          .catch(err => console.log("error ", err));
 
+        let space = user.displayName.lastIndexOf(" ");
         this.setState({
           currentUser: user,
           authenticated: true,

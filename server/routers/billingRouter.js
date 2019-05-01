@@ -1,14 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const billing = require("../data/helpers/billingModel");
-const {
-  firebase,
-  isAuthenticated
-} = require("../data/auth/firebaseMiddleware");
 /************************************ BILLING SECTION ***********************************/
 
 /********* Get Billing *************/
-router.get("/", isAuthenticated, async (req, res) => {
+router.get("/", async (req, res) => {
   await billing
     .get()
     .then(bills => {
@@ -20,7 +16,7 @@ router.get("/", isAuthenticated, async (req, res) => {
 });
 
 /********* Get Single Bill *************/
-router.get("/:uid", isAuthenticated, async (req, res) => {
+router.get("/:uid", async (req, res) => {
   const { uid } = req.params;
   await billing
     .getAcct(uid)

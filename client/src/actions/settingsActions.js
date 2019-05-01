@@ -6,6 +6,10 @@ export const FETCHING = "FETCHING";
 export const SUCCESS = "SUCCESS";
 export const ERROR = "ERROR";
 
+//URL Endpoints
+// const URL = "http://localhost:5000/api";
+const URL = "https://pickemm.herokuapp.com/api";
+
 // Action creator to get current settings
 
 export const getSettings = uid => {
@@ -13,7 +17,7 @@ export const getSettings = uid => {
     // Dispatch to reducer that current settings are being obtained from API
     dispatch({ type: FETCHING });
     axios
-      .get(`http://localhost:5000/api/users/${uid}`)
+      .get(`${URL}/users/${uid}`)
       .then(response => {
         // Dispatch to reducer that settings have been successfully obtained, pass API response as payload
         dispatch({
@@ -39,7 +43,7 @@ export const updateSettings = (uid, updatedSettings) => {
     dispatch({ type: FETCHING });
     axios
       // Update email on file in database
-      .put(`http://localhost:5000/api/users/${uid}`, updatedSettings)
+      .put(`${URL}/users/${uid}`, updatedSettings)
       .then(response => {
         // Dispatch to reducer that settings have been successfully updated and obtained, pass API response as payload
         dispatch({
