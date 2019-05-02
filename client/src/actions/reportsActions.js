@@ -8,8 +8,8 @@ export const LOGOUT = "LOGOUT";
 export const ERROR = "ERROR";
 // making a small change
 //URL Endpoints
-// const URL = "http://localhost:5000/api";
-const URL = "https://pickemm.herokuapp.com/api";
+const URL = "http://localhost:5000/api";
+// const URL = "https://pickemm.herokuapp.com/api";
 
 // Action creator to get current account type
 

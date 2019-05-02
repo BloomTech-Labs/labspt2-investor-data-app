@@ -11,6 +11,20 @@ module.exports = router => {
   router.get("/:id/:acct", userByAcct);
 };
 
+async function verifyToken(req, res, next) {
+  const idToken = req.headers.authorization;
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    if (decodedToken) {
+      req.body.uid = decodedToken.uid;
+      return next();
+    } else {
+      return res.status(401).send("You are not authorized!");
+    }
+  } catch (e) {
+    return res.status(401).send("You are no authorized!");
+  }
+}
 // /************************************ USERS SECTION ***********************************/
 
 // function protect(req, res, next) {
@@ -42,7 +56,6 @@ module.exports = router => {
 // UNCOMMENT TO PROTECT THE ROUTE!
 // router.get('/', protect, (req, res) => {
 router.get("/", (req, res) => {
-  console.log("This is res for Firebase auth:", req.body.uid);
   users
     .get()
     .then(user => {

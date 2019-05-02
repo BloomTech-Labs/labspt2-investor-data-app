@@ -15,8 +15,8 @@ import { fire } from "./Auth/firebaseConfig";
 import axios from "axios";
 
 //URL Endpoints
-// const URL = "http://localhost:5000/api";
-const URL = "https://pickemm.herokuapp.com/api";
+const URL = "http://localhost:5000/";
+// const URL = "https://pickemm.herokuapp.com/";
 
 const AuthenticatedRoute = ({
   component: Component,
@@ -53,12 +53,6 @@ class App extends Component {
     this.removeAuthListener = fire.onAuthStateChanged(user => {
       if (user) {
         // Last # of occurrence of Space
-        user
-          .getIdToken()
-          .then(idToken => {
-            axios.defaults.headers.common["Authorization"] = idToken;
-          })
-          .catch(err => console.log("error ", err));
 
         let space = user.displayName.lastIndexOf(" ");
         this.setState({
@@ -81,6 +75,13 @@ class App extends Component {
           userUID: null
         });
       }
+      return user
+        .getIdToken()
+        .then(idToken => {
+          console.log(idToken);
+          axios.defaults.headers.common["Authorization"] = idToken;
+        })
+        .catch(err => console.log("error ", err));
     });
   };
   //To sign out an get no error with firebase dropping the widget
@@ -99,7 +100,7 @@ class App extends Component {
       this.state.currentEmail,
       this.state.userUID
     );
-    const endpoint = `${URL}/users`;
+    const endpoint = `${URL}api/users`;
     axios
       .post(endpoint, creds)
       .then(res => {
