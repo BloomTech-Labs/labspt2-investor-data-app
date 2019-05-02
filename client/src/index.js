@@ -14,6 +14,9 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 // Create Material UI theme
 const theme = createMuiTheme({
+    typography: {
+        useNextVariants: true,
+    },
     palette: {
         primary: {
             // light: will be calculated from palette.primary.main,
@@ -21,7 +24,7 @@ const theme = createMuiTheme({
             // contrastText: will be calculated to contrast with palette.primary.main
         },
         secondary: {
-            light:'#E1E1E1',
+            light: '#E1E1E1',
             main: '#7407a7',
             // dark: will be calculated from palette.secondary.main,
             contrastText: '#FFFF',
@@ -37,13 +40,13 @@ const initialState = {};
 // Create Redux store
 /* const store = createStore(rootReducer, middleware); */
 const store = createStore(
-    rootReducer, 
-    initialState, 
-   compose(
+    rootReducer,
+    initialState,
+    compose(
         applyMiddleware(...middleware)
         // *******Commented out to address deployment error*******
         //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()                 
-   )
+    )
 );
 
 ReactDOM.render(
@@ -54,5 +57,5 @@ ReactDOM.render(
             </Router>
         </Provider>
     </MuiThemeProvider>,
-document.getElementById('root'));
+    document.getElementById('root'));
 
