@@ -5,6 +5,10 @@ import STRIPE_PUBLISHABLE from "../../constants/stripe";
 import PAYMENT_SERVER_URL from "../../constants/server";
 import { fire } from "../Auth/firebaseConfig";
 
+//URL Endpoints
+// const URL = "http://localhost:5000/api";
+const URL = "https://pickemm.herokuapp.com/api";
+
 const CURRENCY = "USD";
 
 const fromUSDToCent = amount => amount * 100;
@@ -47,7 +51,7 @@ class Checkout extends Component {
         .then(successPayment => {
           if (successPayment) {
             const bill = this.state;
-            const endpoint = "https://pickemm.herokuapp.com/api/billing";
+            const endpoint = `${URL}/billing`;
             axios.post(endpoint, bill).then(successPayment);
           }
         })
