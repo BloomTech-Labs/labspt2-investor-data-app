@@ -28,8 +28,7 @@ const Landing = () => {
                   research stocks and make better investment decisions. Our easy
                   to use app provides both beginner and sophisticated investors
                   with an automated system that analyzes key financial
-                  indicators. Pick Em will allow the customer to determine
-                  whether a buy signal is warranted.
+                  indicators.
                 </p>
                 <Link to={ROUTES.SIGNIN} className="button button__accent">
                   Get Started
