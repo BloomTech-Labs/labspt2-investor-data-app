@@ -39,7 +39,7 @@ const styles = theme => ({
     position: "relative",
     top: -72,
     right: 55,
-    fontSize: "1rem",
+    fontSize: ".8rem",
 
     [theme.breakpoints.down("xs")]: {
       top: -72,

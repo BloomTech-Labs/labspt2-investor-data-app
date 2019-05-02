@@ -122,6 +122,11 @@ class Dashboard extends Component {
       [name]: newValue
     });
   };
+  onKeyDown = e => {
+    if (e.key === "Enter") {
+      this.handleChange();
+    }
+  };
 
   onSuggestionSelected = (
     event,
@@ -141,20 +146,13 @@ class Dashboard extends Component {
       .catch(err => { console.log("we've encountered an error") })
   };
 
-  onKeyDown = e => {
-    console.log("on keydown", e.key);
-    if (e.key === "Enter") {
-      this.handleChange();
-    }
-  };
-
   render() {
     const { checked } = this.state;
     const { classes } = this.props;
 
     const autosuggestProps = {
-      onKeyDown: this.onKeyDown,
       renderInputComponent,
+      onKeyPress: this.onKeyDown,
       suggestions: this.state.suggestions,
       onSuggestionsFetchRequested: this.handleSuggestionsFetchRequested,
       onSuggestionsClearRequested: this.handleSuggestionsClearRequested,
