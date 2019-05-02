@@ -141,11 +141,19 @@ class Dashboard extends Component {
       .catch(err => { console.log("we've encountered an error") })
   };
 
+  onKeyDown = e => {
+    console.log("on keydown", e.key);
+    if (e.key === "Enter") {
+      this.handleChange();
+    }
+  };
+
   render() {
     const { checked } = this.state;
     const { classes } = this.props;
 
     const autosuggestProps = {
+      onKeyDown: this.onKeyDown,
       renderInputComponent,
       suggestions: this.state.suggestions,
       onSuggestionsFetchRequested: this.handleSuggestionsFetchRequested,
