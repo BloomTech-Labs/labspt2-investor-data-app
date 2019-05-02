@@ -6,8 +6,8 @@ import PAYMENT_SERVER_URL from "../../constants/server";
 import { fire } from "../Auth/firebaseConfig";
 
 //URL Endpoints
-const URL = "http://localhost:5000/api";
-// const URL = "https://pickemm.herokuapp.com/";
+// const URL = "http://localhost:5000/api";
+const URL = "https://pickemm.herokuapp.com/api";
 
 const CURRENCY = "USD";
 

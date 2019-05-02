@@ -15,8 +15,8 @@ import { fire } from "./Auth/firebaseConfig";
 import axios from "axios";
 
 //URL Endpoints
-const URL = "http://localhost:5000/";
-// const URL = "https://pickemm.herokuapp.com/";
+// const URL = "http://localhost:5000/api";
+const URL = "https://pickemm.herokuapp.com/api";
 
 const AuthenticatedRoute = ({
   component: Component,
@@ -100,7 +100,7 @@ class App extends Component {
       this.state.currentEmail,
       this.state.userUID
     );
-    const endpoint = `${URL}api/users`;
+    const endpoint = `${URL}/users`;
     axios
       .post(endpoint, creds)
       .then(res => {
