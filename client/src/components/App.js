@@ -15,8 +15,8 @@ import { fire } from "./Auth/firebaseConfig";
 import axios from "axios";
 
 //URL Endpoints
-// const URL = "http://localhost:5000/api";
-const URL = "https://pickemm.herokuapp.com/api";
+// const URL = "http://localhost:5000/";
+const URL = "https://pickemm.herokuapp.com/";
 
 const AuthenticatedRoute = ({
   component: Component,
@@ -51,37 +51,37 @@ class App extends Component {
 
   componentDidMount = () => {
     this.removeAuthListener = fire.onAuthStateChanged(user => {
-      return user
-        .getIdToken()
-        .then(idToken => {
-          axios.defaults.headers.common["Authorization"] = idToken;
+      if (user) {
+        // Last # of occurrence of Space
+        fire.currentUser
+          .getIdToken()
+          .then(idToken => {
+            axios.defaults.headers.common["Authorization"] = idToken;
+          })
+          .catch(err => console.log("error ", err));
 
-          if (user) {
-            // Last # of occurrence of Space
+        let space = user.displayName.lastIndexOf(" ");
+        this.setState({
+          currentUser: user,
+          authenticated: true,
+          redirect: true,
+          currentEmail: user.email,
+          firstName: user.displayName.substring(0, space),
+          lastName: user.displayName.substring(space + 1),
+          userUID: user.uid
+        });
+        this.addCurrentUser(user);
 
-            let space = user.displayName.lastIndexOf(" ");
-            this.setState({
-              currentUser: user,
-              authenticated: true,
-              redirect: true,
-              currentEmail: user.email,
-              firstName: user.displayName.substring(0, space),
-              lastName: user.displayName.substring(space + 1),
-              userUID: user.uid
-            });
-            // If the user is the Authenticated use pass their information to the database
-            this.addCurrentUser(user);
-          } else {
-            this.setState({
-              currentUser: null,
-              authenticated: false,
-              redirect: false,
-              currentEmail: null,
-              userUID: null
-            });
-          }
-        })
-        .catch(err => console.log("error ", err));
+        // If the user is the Authenticated use pass their information to the database
+      } else {
+        this.setState({
+          currentUser: null,
+          authenticated: false,
+          redirect: false,
+          currentEmail: null,
+          userUID: null
+        });
+      }
     });
   };
   //To sign out an get no error with firebase dropping the widget
@@ -100,7 +100,7 @@ class App extends Component {
       this.state.currentEmail,
       this.state.userUID
     );
-    const endpoint = `${URL}/users`;
+    const endpoint = `${URL}api/users`;
     axios
       .post(endpoint, creds)
       .then(res => {
