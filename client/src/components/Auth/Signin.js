@@ -1,28 +1,26 @@
-import React, {Component} from 'react';
-import firebase from 'firebase';
-import {fire} from './firebaseConfig'; // This is being used to provide apiKey to Authentication do not remove
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import {Redirect} from 'react-router-dom';
-import styles from '../Styles/Signin/styles';
+import React, { Component } from "react";
+import firebase from "firebase";
+import { fire } from "./firebaseConfig"; // This is being used to provide apiKey to Authentication do not remove
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { Redirect } from "react-router-dom";
+import styles from "../Styles/Signin/styles";
 import {
   withStyles,
   CssBaseline,
   Paper,
   Typography,
-  Avatar,
-} from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+  Avatar
+} from "@material-ui/core";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 class Signin extends Component {
-
   isIOS = () => {
     // IF this is IOS redirect if its web use popup
-    if('standalone' in window.navigator && !window.navigator.standalone){
-      return 'redirect'
+    if ("standalone" in window.navigator && !window.navigator.standalone) {
+      return "redirect";
+    } else {
+      return "popup";
     }
-    else {
-      return 'popup'
-    }
-  }
+  };
 
   uiConfig = {
     signInFlow: this.isIOS(),
@@ -30,18 +28,18 @@ class Signin extends Component {
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.FacebookAuthProvider.PROVIDER_ID,
       firebase.auth.GithubAuthProvider.PROVIDER_ID,
-      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
     callbacks: {
-      signInSuccessWithAuthResult: () => false,
-    },
+      signInSuccessWithAuthResult: () => false
+    }
   };
 
-  render () {
-    const {classes} = this.props;
-    const {from} = this.props.location.state || {from: {pathname: '/dashboard'}};
-   
-    
+  render() {
+    const { classes } = this.props;
+    const { from } = this.props.location.state || {
+      from: { pathname: "/dashboard" }
+    };
 
     if (this.props.redirect === true) {
       return <Redirect to={from} />;
@@ -68,4 +66,4 @@ class Signin extends Component {
   }
 }
 
-export default withStyles (styles) (Signin);
+export default withStyles(styles)(Signin);

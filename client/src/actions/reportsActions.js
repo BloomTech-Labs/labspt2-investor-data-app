@@ -6,6 +6,10 @@ export const FETCHING = "FETCHING";
 export const SUCCESS = "SUCCESS";
 export const LOGOUT = "LOGOUT";
 export const ERROR = "ERROR";
+// making a small change
+//URL Endpoints
+// const URL = "http://localhost:5000/api";
+const URL = "https://pickemm.herokuapp.com/api";
 
 // Action creator to get current account type
 
@@ -14,7 +18,7 @@ export const getAcct = uid => {
     // Dispatch to reducer that current account type are being obtained from API
     dispatch({ type: FETCHING });
     axios
-      .get(`https://pickemm.herokuapp.com/api/billing/${uid}`)
+      .get(`${URL}/billing/${uid}`)
       .then(response => {
         // Dispatch to reducer that account type have been successfully obtained, pass API response as payload
         dispatch({
