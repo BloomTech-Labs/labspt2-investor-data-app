@@ -8,7 +8,11 @@ import ThankYou from "../ThankYou/index";
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { complete: false };
+    this.state = {
+      complete: false,
+      accountType: null,
+      usersId: fire.currentUser.uid
+    };
     this.submit = this.submit.bind(this);
   }
   componentDidMount() {
