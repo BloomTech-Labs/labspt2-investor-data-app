@@ -51,34 +51,35 @@ class App extends Component {
 
   componentDidMount = () => {
     this.removeAuthListener = fire.onAuthStateChanged(user => {
-      if (user) {
-        // Last # of occurrence of Space
-
-        let space = user.displayName.lastIndexOf(" ");
-        this.setState({
-          currentUser: user,
-          authenticated: true,
-          redirect: true,
-          currentEmail: user.email,
-          firstName: user.displayName.substring(0, space),
-          lastName: user.displayName.substring(space + 1),
-          userUID: user.uid
-        });
-        // If the user is the Authenticated use pass their information to the database
-        this.addCurrentUser(user);
-      } else {
-        this.setState({
-          currentUser: null,
-          authenticated: false,
-          redirect: false,
-          currentEmail: null,
-          userUID: null
-        });
-      }
       return user
         .getIdToken()
         .then(idToken => {
           axios.defaults.headers.common["Authorization"] = idToken;
+
+          if (user) {
+            // Last # of occurrence of Space
+
+            let space = user.displayName.lastIndexOf(" ");
+            this.setState({
+              currentUser: user,
+              authenticated: true,
+              redirect: true,
+              currentEmail: user.email,
+              firstName: user.displayName.substring(0, space),
+              lastName: user.displayName.substring(space + 1),
+              userUID: user.uid
+            });
+            // If the user is the Authenticated use pass their information to the database
+            this.addCurrentUser(user);
+          } else {
+            this.setState({
+              currentUser: null,
+              authenticated: false,
+              redirect: false,
+              currentEmail: null,
+              userUID: null
+            });
+          }
         })
         .catch(err => console.log("error ", err));
     });
