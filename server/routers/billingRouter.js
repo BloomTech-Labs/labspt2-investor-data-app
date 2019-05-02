@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const billing = require("../data/helpers/billingModel");
-
 /************************************ BILLING SECTION ***********************************/
 
 /********* Get Billing *************/
@@ -37,29 +36,27 @@ router.get("/:uid", async (req, res) => {
     });
 });
 
-/************* Delete Bill *************/
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
+// /************* Delete Bill *************/
+// router.delete('/:id', (req, res) => {
+//   const {id} = req.params;
 
-  if (id) {
-    billing
-      .remove(id)
-      .then(bills => {
-        if (bills) {
-          res.json({ message: "The bill was successfully deleted" });
-        } else {
-          res
-            .status(404)
-            .json({
-              message: "The bill with the specified ID does not exist."
-            });
-        }
-      })
-      .catch(err => {
-        res.status(500).json({ error: "The bill could not be removed." });
-      });
-  }
-});
+//   if (id) {
+//     billing
+//       .remove(id)
+//       .then(bills => {
+//         if (bills) {
+//           res.json({message: 'The bill was successfully deleted'});
+//         } else {
+//           res.status(404).json({
+//             message: 'The bill with the specified ID does not exist.',
+//           });
+//         }
+//       })
+//       .catch(err => {
+//         res.status(500).json({error: 'The bill could not be removed.'});
+//       });
+//   }
+// });
 
 /********* Update Billing *************/
 // router.put ('/:id', (req, res) => {

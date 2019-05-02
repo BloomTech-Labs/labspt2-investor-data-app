@@ -15,8 +15,9 @@ import { fire } from "./Auth/firebaseConfig";
 import axios from "axios";
 import ThankYou from "../components/ThankYou";
 
-const URL = "https://pickemm.herokuapp.com/api";
+//URL Endpoints
 // const URL = "http://localhost:5000/api";
+const URL = "https://pickemm.herokuapp.com/api";
 
 const AuthenticatedRoute = ({
   component: Component,
@@ -53,8 +54,8 @@ class App extends Component {
     this.removeAuthListener = fire.onAuthStateChanged(user => {
       if (user) {
         // Last # of occurrence of Space
-        let space = user.displayName.lastIndexOf(" ");
 
+        let space = user.displayName.lastIndexOf(" ");
         this.setState({
           currentUser: user,
           authenticated: true,
@@ -65,7 +66,6 @@ class App extends Component {
           userUID: user.uid
         });
         // If the user is the Authenticated use pass their information to the database
-
         this.addCurrentUser(user);
       } else {
         this.setState({
@@ -76,11 +76,17 @@ class App extends Component {
           userUID: null
         });
       }
+      return user
+        .getIdToken()
+        .then(idToken => {
+          console.log(idToken);
+          axios.defaults.headers.common["Authorization"] = idToken;
+        })
+        .catch(err => console.log("error ", err));
     });
   };
   //To sign out an get no error with firebase dropping the widget
   removeAuthListener: any;
-
   // Add current user method will grab the information from state create new user in our database
   addCurrentUser = () => {
     function newUser(firstName, lastName, email, uid) {
@@ -99,7 +105,7 @@ class App extends Component {
     axios
       .post(endpoint, creds)
       .then(res => {
-        console.log("User logged in successfuly");
+        console.log("User logged in successfully");
       })
       .catch(err => console.log("Error in getting user"));
   };

@@ -99,22 +99,14 @@ router.put('/:uid', (req, res) => {
 /********* Create New Favorite *************/
 router.post('/', (req, res) => {
     const favorite = req.body;
-    if (favorite.symbol &&  favorite.uid) {
-        favorites.insert(favorite)
-            .then(favorite => {
-                res.status(201)
-                    .json(favorite)
-            })
-            .catch(err => {
-                res
-                    .status(500)
-                    .json({ message: "failed to insert favorite in db" })
-            });
-    } else {
-        res
-            .status(400)
-            .json({ message: "missing symbol and/or uid." })
-    }
+    favorites
+    .insert(favorite)
+    .then(favorite => {
+      res.status(201).json(favorite);
+    })
+    .catch(err => {
+      res.status(500).json({message: 'failed to insert favorite in db'});
+    });
 });
 
 
