@@ -4,11 +4,17 @@ import axios from "axios";
 import { fire } from "../Auth/firebaseConfig";
 import PAYMENT_SERVER_URL from "../../constants/server";
 import ThankYou from "../ThankYou/index";
+import { Redirect } from "react-router";
+import * as ROUTES from "../../constants/routes";
 
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { complete: false };
+    this.state = {
+      complete: false,
+      accountType: null,
+      usersId: fire.currentUser.uid
+    };
     this.submit = this.submit.bind(this);
   }
   componentDidMount() {
@@ -35,14 +41,15 @@ class CheckoutForm extends Component {
     this.setState({ complete: true });
     const bill = this.state;
     console.log(bill);
-    const endpoint = "https://pickemm.herokuapp.com/api/billing";
+    const endpoint = "http://localhost:5000/api/billing";
     axios.post(endpoint, bill);
   }
 
   render() {
-    return this.state.complete ? (
-      <ThankYou />
-    ) : (
+    if (this.state.complete === true) {
+      return <Redirect to={ROUTES.THANKYOU} />;
+    }
+    return (
       <div className="checkout">
         <p>Would you like to complete the purchase?</p>
         <CardElement />
