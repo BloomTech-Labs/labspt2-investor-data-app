@@ -223,7 +223,8 @@ class Dashboard extends Component {
                           input: {
                             marginLeft: 20,
                             width: 180,
-                            height: 30
+                            height: 30,
+                            paddingBottom: 20
                           }
                         }}
                         renderSuggestionsContainer={options => (
