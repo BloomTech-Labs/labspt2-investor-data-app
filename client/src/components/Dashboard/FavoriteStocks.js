@@ -20,6 +20,13 @@ class FavoriteStocks extends React.Component{
     componentDidMount(){
         this.fetchFavorites()
     }
+    componentWillUnmount(){
+        this.setState({
+            companies: this.props.companies,
+            stocks: []
+        })
+        this.fetchFavorites(); 
+    }
 
     fetchFavorites = () => {
         let promises = this.state.companies.map(company =>   // map that sends array of companies through axios to invoke external API
@@ -116,19 +123,13 @@ class FavoriteStocks extends React.Component{
     }
 
     searchHandler = (e) => {
-        const searchFilter = this.state.stocks.filter(item => {
-            return item.company.includes(e.target.value.toUpperCase())
+        const searchFilter = e.filter(item => {
+            return item.company.includes(this.state.search.toUpperCase())
         })
         if(this.state.search.indexOf(this.state.stocks.company)){
             this.setState({
                  stocks:searchFilter
             })
-        }else{
-            this.setState({
-                companies: this.props.companies,
-                stocks: []
-            })
-            this.fetchFavorites();
         }
     }
 
@@ -188,7 +189,7 @@ class FavoriteStocks extends React.Component{
                            onKeyUp={this.searchHandler} 
                            type="text" 
                            placeholder="Search..."/>  
-                     <ReturnButton onClick={this.returnHandler}>Reset</ReturnButton>                                         
+                     <ReturnButton onClick={this.returnHandler(rows)}>Reset</ReturnButton>                                         
                 </Form> 
                 <div>
                     { rows }  
