@@ -13,6 +13,7 @@ import "./App.css";
 import Signin from "./Auth/Signin";
 import { fire } from "./Auth/firebaseConfig";
 import axios from "axios";
+import ThankYou from "../components/ThankYou";
 
 //URL Endpoints
 // const URL = "http://localhost:5000/";
@@ -142,6 +143,7 @@ class App extends Component {
             path={ROUTES.REPORTS}
             component={Reports}
           />
+          <Route exact path={ROUTES.THANKYOU} component={ThankYou} />
           <Route
             exact
             path={ROUTES.SIGNIN}
