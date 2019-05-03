@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 
 // WithStyles
-import styles from './styles';
+import styles from '../Styles/Settings/styles';
 
 class EmailForm extends React.Component {
     constructor(props){
