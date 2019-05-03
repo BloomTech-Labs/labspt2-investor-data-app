@@ -9,6 +9,8 @@ import {
   Star
 } from "../Styles/Dashboard/LiveTickerStyles";
 import { Tooltip, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import * as ROUTES from "../../constants/routes";
 
 class FavoriteStocks extends React.Component {
   constructor(props) {
@@ -163,6 +165,14 @@ class FavoriteStocks extends React.Component {
     this.state.stocks.forEach((stock, index) => {
       // Loops through array of stock values and creates a table
       rows.push(
+        <Link
+        to={{
+          pathname: ROUTES.REPORTS,
+          state: { ticker: stock.company }
+        }}
+        key={index}
+        style={{ textDecoration: "none" }}
+      >
         <TickerContainer key={index}>
           <Row>
             <StockSymbol>
@@ -218,6 +228,7 @@ class FavoriteStocks extends React.Component {
           <br />
           <hr />
         </TickerContainer>
+        </Link>
       );
     });
 
