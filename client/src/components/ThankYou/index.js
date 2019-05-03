@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import * as ROUTES from "../../constants/routes";
 import { Link } from "react-router-dom";
+import styles from "./styles";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
 class ThankYou extends Component {
   constructor(props) {
@@ -8,21 +11,32 @@ class ThankYou extends Component {
     this.state = {};
   }
   render() {
+    const { classes } = this.props;
     return (
-      <div>
-        <div>
-          <h2>Thank you!</h2>
-          <p>Where would you like to go to?</p>
-        </div>
+      <div className={classes.parent}>
+        <h2>Thank you!</h2>
+        <p>Where would you like to go to?</p>
         <Link to={ROUTES.SETTINGS}>
-          <button>Settings</button>
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.button}
+          >
+            Settings
+          </Button>
           <div />
         </Link>
         <Link to={ROUTES.DASHBOARD}>
-          <button>Dashboard</button>
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.button}
+          >
+            Dashboard
+          </Button>
         </Link>
       </div>
     );
   }
 }
-export default ThankYou;
+export default withStyles(styles)(ThankYou);

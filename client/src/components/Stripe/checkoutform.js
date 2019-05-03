@@ -4,6 +4,8 @@ import axios from "axios";
 import { fire } from "../Auth/firebaseConfig";
 import PAYMENT_SERVER_URL from "../../constants/server";
 import ThankYou from "../ThankYou/index";
+import { Redirect } from "react-router";
+import * as ROUTES from "../../constants/routes";
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -44,9 +46,10 @@ class CheckoutForm extends Component {
   }
 
   render() {
-    return this.state.complete ? (
-      <ThankYou />
-    ) : (
+    if (this.state.complete === true) {
+      return <Redirect to={ROUTES.THANKYOU} />;
+    }
+    return (
       <div className="checkout">
         <p>Would you like to complete the purchase?</p>
         <CardElement />
