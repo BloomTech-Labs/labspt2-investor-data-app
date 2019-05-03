@@ -12,6 +12,7 @@ return db('billing')
  },
 
   insert: function(bills) {
+    console.log("billing", bills);
     return db('billing').insert(bills);
   },
 
