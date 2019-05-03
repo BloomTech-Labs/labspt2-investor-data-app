@@ -30,13 +30,11 @@ server.use("/", verifyToken);
 
 async function verifyToken(req, res, next) {
   const idToken = req.headers.authorization;
-  console.log(idToken);
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-    console.log(decodedToken);
+
     if (decodedToken) {
       req.body.uid = decodedToken.uid;
-
       return next();
     } else {
       return res.status(401).send("You are not authorized!");
