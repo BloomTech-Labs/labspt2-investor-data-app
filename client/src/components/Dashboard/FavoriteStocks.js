@@ -8,6 +8,7 @@ import {
   StockSymbol,
   Star
 } from "../Styles/Dashboard/LiveTickerStyles";
+import { Tooltip, Typography } from "@material-ui/core";
 
 class FavoriteStocks extends React.Component {
   constructor(props) {
@@ -122,10 +123,35 @@ class FavoriteStocks extends React.Component {
     return str + suffix;
   };
 
+  shortenVolume = (num) => {  // Crunches the length of the volume into a smaller number while inserting a decimal point and character representing the amount
+    let str,
+      suffix = '';
+
+    let decimalPlaces = 2 || 0;
+
+    num = +num;
+
+    let factor = Math.pow(10, decimalPlaces);
+
+    if (num < 1000) {
+      str = num;
+    } else if (num < 1000000) {
+      str = Math.floor(num / (1000 / factor)) / factor;
+      suffix = 'K';
+    } else if (num < 1000000000) {
+      str = Math.floor(num / (1000000 / factor)) / factor;
+      suffix = 'M';
+    } else if (num < 1000000000000) {
+      str = Math.floor(num / (1000000000 / factor)) / factor;
+      suffix = 'B';
+    }
+    return str + suffix;
+  }
+
+
   render() {
-    if (!this.state.stocks.length) {
-      // returns loading sign while data is being retrieved from API
-      return <Loading>Loading Stocks...</Loading>;
+    if (!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
+      return <Loading>Loading Stocks...</Loading>
     }
 
     let rows = [];
@@ -142,9 +168,18 @@ class FavoriteStocks extends React.Component {
             <StockSymbol>
               <p>{stock.company}</p>
             </StockSymbol>
-            <Star>
-              <FavoriteTickerstar company={stock.company} />
-            </Star>
+            <Tooltip
+              disableFocusListener
+              title={
+                <Typography color="inherit">
+                  Remove stock from your favorites
+                      </Typography>
+              }
+            >
+              <Star>
+                <FavoriteTickerstar company={stock.company} />
+              </Star>
+            </Tooltip>
           </Row>
           <br />
           <Row>
