@@ -37,7 +37,7 @@ class OptEmailsTextsForm extends React.Component {
           <FormControlLabel
             control={
               <Switch
-                // checked={this.props.settings.receiveEmails}
+                checked={this.props.settings.receiveEmails}
                 onChange={this.handleSwitch("receiveEmails")}
                 value="receiveEmails"
                 color="secondary"
@@ -50,7 +50,7 @@ class OptEmailsTextsForm extends React.Component {
           <FormControlLabel
             control={
               <Switch
-                // checked={this.props.settings.receiveTexts}
+                checked={this.props.settings.receiveTexts}
                 onChange={this.handleSwitch("receiveTexts")}
                 value="receiveTexts"
                 color="secondary"

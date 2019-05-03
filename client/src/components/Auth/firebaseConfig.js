@@ -1,16 +1,14 @@
-
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import firebase from "firebase/app";
+import "firebase/auth";
 const config = {
-    apiKey: "AIzaSyCUwftk4QC8QgZP7dPfM4V76U6wMkwiAa4",
-    authDomain: "pickem-597ad.firebaseapp.com",
-    databaseURL: "https://pickem-597ad.firebaseio.com",
-    projectId: "pickem-597ad",
-    storageBucket: "pickem-597ad.appspot.com",
-    messagingSenderId: "452859929022"
-  };
-  
-  const fireApp = firebase.initializeApp(config)
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_DOMAIN,
+  databaseURL: process.env.FIREBASE_DATABASE,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE,
+  messagingSenderId: process.env.FIREBASE_MESSAGE
+};
 
+const fireApp = firebase.initializeApp(config);
 
-  export const fire = fireApp.auth()
+export const fire = fireApp.auth();
