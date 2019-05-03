@@ -164,8 +164,6 @@ searchHandler = (e) => {
          this.setState({
              stocks:searchFilter
          })
-    }else{
-         return "this item does not exists" 
     }
 }
 
