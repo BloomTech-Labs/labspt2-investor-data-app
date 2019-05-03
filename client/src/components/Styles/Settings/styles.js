@@ -7,13 +7,14 @@ const styles = theme => ({
         width: '55%',
         padding: '30px',
         margin: '20px auto',
-        border: '1px solid #DCDCDC',
         borderRadius: '15px',
         backgroundColor: '#FFFFFF',
+        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)',
         [theme.breakpoints.down('xs')]: {
             border: '0',
             width: '90%',
-            backgroundColor: '#FAFAFA'
+            backgroundColor: '#FAFAFA',
+            boxShadow: '0 0 0, 0 0 0'
         },
     },
     // Settings header

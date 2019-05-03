@@ -12,7 +12,7 @@ import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 
 // WithStyles
-import styles from "./styles";
+import styles from '../Styles/Settings/styles';
 
 class OptEmailsTextsForm extends React.Component {
   componentDidMount() {
