@@ -9,7 +9,9 @@ router.post ('/', (req, res) => {
   },
   
   function(err, customer
+    
     ) {
+      console.log("customer", customer);
     if (err) {
       res.send({
         success: false,
