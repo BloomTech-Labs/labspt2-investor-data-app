@@ -41,7 +41,7 @@ class CheckoutForm extends Component {
     this.setState({ complete: true });
     const bill = this.state;
     console.log(bill);
-    const endpoint = "http://localhost:5000/api/billing";
+    const endpoint = "https://pickemm.herokuapp.com/api/billing";
     axios.post(endpoint, bill);
   }
 
