@@ -8,13 +8,12 @@ export const Loading = styled.div`
   color: #000;
 `;
 export const TickerContainer = styled.div`
-  width: 100%;
   color: #000;
   margin: 20px;
 `;
 
 export const StockSymbol = styled.div`
-  text-decoration: underline;
+  font-weight: bold;
   font-size: 1rem;
 `;
 
@@ -29,7 +28,7 @@ export const Star = styled.div`
 export const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  font-size: 1rem;
+  justify-content: space-around;
+  font-size: 16px;
   width: 100%;
 `;
