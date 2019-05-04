@@ -1,10 +1,10 @@
 # Database Setup Enviroment File
-DB_ENV= "production"
+DB_ENV= "development"
 DATABASE_URL="postgres://fdzcjtkrxdgnqc:b96d68fefdfc9b5c834c867a0e5eb39d50f850127eebcf0fc367a81a0c720b5a@ec2-50-19-208-11.compute-1.amazonaws.com:5432/d1dm0flkjvtcmf"
 
 
 #Firebase API Key
-REACT_APP_API_KEY= "AIzaSyCUwftk4QC8QgZP7dPfM4V76U6wMkwiAa4",
+REACT_APP_API_KEY= "AIzaSyCUwftk4QC8QgZP7dPfM4V76U6wMkwiAa4"
 REACT_APP_DOMAIN= "pickem-597ad.firebaseapp.com"
 REACT_APP_DATABASE="https://pickem-597ad.firebaseio.com"
 REACT_APP_PROJECT_ID="pickem-597ad"
