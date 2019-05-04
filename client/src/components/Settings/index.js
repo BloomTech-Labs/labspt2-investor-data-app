@@ -12,8 +12,8 @@ import styles from './styles';
 // Settings Page Components
 import EmailForm from './EmailForm';
 import PhoneForm from './PhoneForm';
-import OptEmailsTextsForm from './OptEmailsTextsForm';
 import OptEmailsSwitch from './OptEmailsSwitch';
+import OptTextsSwitch from './OptTextsSwitch';
 
 class Settings extends React.Component {
 
@@ -55,11 +55,16 @@ class Settings extends React.Component {
                     variant="middle" 
                     className={classes.divider}
                 />
-                {/* Form to opt in/out for texts and emails */}
-                <OptEmailsTextsForm
+                {/* Form to opt in/out for emails */}
+                <OptEmailsSwitch
                     className={classes.container}
                 />
-                <OptEmailsSwitch
+                <Divider 
+                    variant="middle" 
+                    className={classes.divider}
+                />
+                {/* Form to opt in/out for texts */}
+                <OptTextsSwitch
                     className={classes.container}
                 />
             </div>

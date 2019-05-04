@@ -18,7 +18,7 @@ class OptTextsSwitch extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            receiveEmails: this.props.settings.receiveTexts
+            receiveTexts: this.props.settings.receiveTexts
         };
     };
 
