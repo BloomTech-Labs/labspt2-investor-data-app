@@ -19,6 +19,7 @@
     "d3-format": "^1.3.2",
     "d3-scale": "^2.2.2",
     "d3-time-format": "^2.1.3",
+    "dotenv": "^8.0.0",
     "firebase": "^5.9.0",
     "less": "^3.9.0",
     "lodash": "^4.17.11",
