@@ -13,6 +13,7 @@ import styles from './styles';
 import EmailForm from './EmailForm';
 import PhoneForm from './PhoneForm';
 import OptEmailsTextsForm from './OptEmailsTextsForm';
+import OptEmailsSwitch from './OptEmailsSwitch';
 
 class Settings extends React.Component {
 
@@ -56,6 +57,9 @@ class Settings extends React.Component {
                 />
                 {/* Form to opt in/out for texts and emails */}
                 <OptEmailsTextsForm
+                    className={classes.container}
+                />
+                <OptEmailsSwitch
                     className={classes.container}
                 />
             </div>
