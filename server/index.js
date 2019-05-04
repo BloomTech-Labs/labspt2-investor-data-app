@@ -67,10 +67,7 @@ Scanner = () => {
   // let companies = [];  
   const axios = require('axios')
   const Nexmo = require('nexmo');
-  const nexmo = new Nexmo({
-    apiKey: '92c4425a',
-    apiSecret: '4P8i5tJ5EXygp6p4'
-  })
+ 
   const YOUR_VIRTUAL_NUMBER = '18572560178'
   const from = '18572560178'
   let to = '';
