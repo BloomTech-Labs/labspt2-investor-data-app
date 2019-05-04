@@ -13,7 +13,7 @@ class YourFavorites extends React.Component {
       companies: [], // stock company symbols
       stocks: [],
       uid: "",
-      search: ''
+      search: ""
     };
   }
 
@@ -57,10 +57,10 @@ class YourFavorites extends React.Component {
     });
   };
 
-    render(){
-        if(!this.state.companies.length){
-             return "You currently have no favorites"
-        }
+  render() {
+    if (!this.state.companies.length) {
+      return "You currently have no favorites";
+    }
     return (
       <div>
         <Typography

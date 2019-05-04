@@ -20,7 +20,7 @@ server.use(express.json());
 server.use(parser);
 server.use(logger("tiny"));
 server.use(helmet());
-server.use("/api/billing", billingRouter);
+server.use("/api/billing", verifyToken, billingRouter);
 server.use("/api/favorites", verifyToken, favoritesRouter);
 server.use("/api/users", verifyToken, usersRouter);
 server.use("/api/stripe", stripeRouter);
