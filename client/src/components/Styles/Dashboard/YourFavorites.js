@@ -26,3 +26,10 @@ export const SearchIcon = styled.span`
   top: 6px;
   left: 28px;
 `;
+
+export const ReturnButton = styled.button`
+    border: none; 
+    color: black; 
+    font-size: 18px;
+    transform: translate(0px, -7px);  
+`;

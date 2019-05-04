@@ -21,9 +21,9 @@ server.use(express.json());
 server.use(parser);
 server.use(logger("tiny"));
 server.use(helmet());
-server.use("/api/billing", billingRouter);
-server.use("/api/favorites", favoritesRouter);
-server.use("/api/users", usersRouter);
+server.use("/api/billing", verifyToken, billingRouter);
+server.use("/api/favorites", verifyToken, favoritesRouter);
+server.use("/api/users", verifyToken, usersRouter);
 server.use("/api/stripe", stripeRouter);
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
@@ -33,13 +33,11 @@ server.use(bodyParser.json());
 
 /* async function verifyToken(req, res, next) {
   const idToken = req.headers.authorization;
-  console.log(idToken);
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-    console.log(decodedToken);
+
     if (decodedToken) {
       req.body.uid = decodedToken.uid;
-
       return next();
     } else {
       return res.status(401).send("You are not authorized!");

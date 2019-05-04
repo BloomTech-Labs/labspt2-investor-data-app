@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import FavoriteTickerstar from "./favoriteTickerstar";
+import { Input, Form, SearchIcon, ReturnButton } from '../Styles/Dashboard/YourFavorites'
 import {
   Loading,
   Row,
@@ -9,6 +10,8 @@ import {
   Star
 } from "../Styles/Dashboard/LiveTickerStyles";
 import { Tooltip, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import * as ROUTES from "../../constants/routes";
 
 class FavoriteStocks extends React.Component {
   constructor(props) {
@@ -123,9 +126,10 @@ class FavoriteStocks extends React.Component {
     return str + suffix;
   };
 
-  shortenVolume = (num) => {  // Crunches the length of the volume into a smaller number while inserting a decimal point and character representing the amount
+  shortenVolume = num => {
+    // Crunches the length of the volume into a smaller number while inserting a decimal point and character representing the amount
     let str,
-      suffix = '';
+      suffix = "";
 
     let decimalPlaces = 2 || 0;
 
@@ -137,21 +141,50 @@ class FavoriteStocks extends React.Component {
       str = num;
     } else if (num < 1000000) {
       str = Math.floor(num / (1000 / factor)) / factor;
-      suffix = 'K';
+      suffix = "K";
     } else if (num < 1000000000) {
       str = Math.floor(num / (1000000 / factor)) / factor;
-      suffix = 'M';
+      suffix = "M";
     } else if (num < 1000000000000) {
       str = Math.floor(num / (1000000000 / factor)) / factor;
-      suffix = 'B';
+      suffix = "B";
     }
     return str + suffix;
   }
 
+  setSearchState = (e) => {
+    e.preventDefault(); 
+    this.setState({
+        search: e.target.value
+    })
+}
+
+searchHandler = (e) => {
+    const searchFilter = this.state.stocks.filter(item => {
+      return item.company.includes(e.target.value.toUpperCase())
+     })
+     if(e.target.value.indexOf(searchFilter)){
+         this.setState({
+             stocks:searchFilter
+         })
+    }
+}
+
+returnHandler = () => {
+    this.setState({
+        companies: this.props.companies,
+        stocks: [],
+        search: ''
+    })
+    this.fetchFavorites();
+}
+
+
 
   render() {
-    if (!this.state.stocks.length) {  // returns loading sign while data is being retrieved from API
-      return <Loading>Loading Stocks...</Loading>
+    if (!this.state.stocks.length) {
+      // returns loading sign while data is being retrieved from API
+      return <Loading>Loading Stocks...</Loading>;
     }
 
     let rows = [];
@@ -163,66 +196,92 @@ class FavoriteStocks extends React.Component {
     this.state.stocks.forEach((stock, index) => {
       // Loops through array of stock values and creates a table
       rows.push(
-        <TickerContainer key={index}>
-          <Row>
-            <StockSymbol>
-              <p>{stock.company}</p>
-            </StockSymbol>
-            <Tooltip
-              disableFocusListener
-              title={
-                <Typography color="inherit">
-                  Remove stock from your favorites
-                      </Typography>
-              }
-            >
-              <Star>
-                <FavoriteTickerstar company={stock.company} />
-              </Star>
-            </Tooltip>
-          </Row>
-          <br />
-          <Row>
-            <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
-            <p
-              style={{
-                color:
-                  Math.sign(
-                    this.changePoints(stock.values[close], stock.values[open])
-                  ) < 0
-                    ? "#ff2900"
-                    : "#21ab42"
-              }}
-            >
-              Change:{" "}
-              {`${this.changePoints(stock.values[close], stock.values[open])}`}
-            </p>
-          </Row>
-          <Row>
-            <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p>
-            <p
-              style={{
-                marginLeft: "30px",
-                color:
-                  Math.sign(
-                    this.changePercent(stock.values[close], stock.values[open])
-                  ) < 0
-                    ? "#ff2900"
-                    : "#21ab42"
-              }}
-            >
-              Change %:
-              {`${this.changePercent(stock.values[close], stock.values[open])}`}
-            </p>
-          </Row>
-          <br />
-          <hr />
-        </TickerContainer>
+        <Link
+          to={{
+            pathname: ROUTES.REPORTS,
+            state: { ticker: stock.company }
+          }}
+          key={index}
+          style={{ textDecoration: "none" }}
+        >
+          <TickerContainer key={index}>
+            <Row>
+              <StockSymbol>
+                <p>{stock.company}</p>
+              </StockSymbol>
+              <Tooltip
+                disableFocusListener
+                title={
+                  <Typography color="inherit">
+                    Remove stock from your favorites
+                  </Typography>
+                }
+              >
+                <Star>
+                  <FavoriteTickerstar company={stock.company} />
+                </Star>
+              </Tooltip>
+            </Row>
+            <br />
+            <Row>
+              <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
+              <p
+                style={{
+                  color:
+                    Math.sign(
+                      this.changePoints(stock.values[close], stock.values[open])
+                    ) < 0
+                      ? "#ff2900"
+                      : "#21ab42"
+                }}
+              >
+                Change:{" "}
+                {`${this.changePoints(
+                  stock.values[close],
+                  stock.values[open]
+                )}`}
+              </p>
+            </Row>
+            <Row>
+              <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p>
+              <p
+                style={{
+                  marginLeft: "30px",
+                  color:
+                    Math.sign(
+                      this.changePercent(
+                        stock.values[close],
+                        stock.values[open]
+                      )
+                    ) < 0
+                      ? "#ff2900"
+                      : "#21ab42"
+                }}
+              >
+                Change %:
+                {`${this.changePercent(
+                  stock.values[close],
+                  stock.values[open]
+                )}`}
+              </p>
+            </Row>
+            <br />
+            <hr />
+          </TickerContainer>
+        </Link>
       );
     });
 
     return (
       <div>
+        <Form> 
+          <SearchIcon><i className= 'fa fa-search' /></SearchIcon>
+          <Input 
+                 onKeyUp={this.searchHandler} 
+                 type="text" 
+                 placeholder="Search..."/>  
+           <ReturnButton onClick={this.returnHandler}>Reset</ReturnButton>                                         
+        </Form> 
         <div>{rows}</div>
       </div>
     );

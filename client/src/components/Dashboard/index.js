@@ -26,8 +26,11 @@ import { suggestions } from "../Reports/suggestions";
 import axios from "axios";
 import firebase from "firebase";
 
+const URL = "https://pickemm.herokuapp.com/api";
+// const URL = "http://localhost:5000/api";
+
 const renderInputComponent = inputProps => {
-  const { classes, inputRef = () => { }, ref, ...other } = inputProps;
+  const { classes, inputRef = () => {}, ref, ...other } = inputProps;
 
   return (
     <TextField
@@ -59,10 +62,10 @@ const renderSuggestion = (suggestion, { query, isHighlighted }) => {
               {part.text}
             </span>
           ) : (
-              <strong key={String(index)} style={{ fontWeight: 300 }}>
-                {part.text}
-              </strong>
-            )
+            <strong key={String(index)} style={{ fontWeight: 300 }}>
+              {part.text}
+            </strong>
+          )
         )}
       </div>
     </MenuItem>
@@ -77,16 +80,16 @@ const getSuggestions = value => {
   return inputLength === 0
     ? []
     : suggestions.filter(suggestion => {
-      const keep =
-        count < 5 &&
-        suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
+        const keep =
+          count < 5 &&
+          suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
 
-      if (keep) {
-        count += 1;
-      }
+        if (keep) {
+          count += 1;
+        }
 
-      return keep;
-    });
+        return keep;
+      });
 };
 
 const getSuggestionValue = suggestion => {
@@ -136,14 +139,17 @@ class Dashboard extends Component {
       symbol: suggestionValue,
       uid: this.state.uid
     };
-    axios.post('https://pickemm.herokuapp.com/api/favorites', newSymbol)
+    axios
+      .post(`${URL}/favorites`, newSymbol)
       .then(response => {
         this.setState({
-          newSymbol: { symbol: '', uid: '' }
+          newSymbol: { symbol: "", uid: "" }
         });
         window.location.reload();
       })
-      .catch(err => { console.log("we've encountered an error") })
+      .catch(err => {
+        console.log("we've encountered an error");
+      });
   };
 
   render() {
