@@ -53,6 +53,7 @@ class OptTextsSwitch extends React.Component {
                             />
                         }
                         label='Receive updates by text.'
+                        labelPlacement='start'
                         className={classes.optSwitch}
                     />
                 </div>

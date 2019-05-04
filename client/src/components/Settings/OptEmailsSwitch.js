@@ -53,6 +53,7 @@ class OptEmailsSwitch extends React.Component {
                             />
                         }
                         label='Receive updates by email.'
+                        labelPlacement='start'
                         className={classes.optSwitch}
                     />
                 </div>
