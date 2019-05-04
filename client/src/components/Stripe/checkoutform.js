@@ -7,6 +7,9 @@ import ThankYou from "../ThankYou/index";
 import { Redirect } from "react-router";
 import * as ROUTES from "../../constants/routes";
 
+const URL = "https://pickemm.herokuapp.com/api";
+// const URL = "http://localhost:5000/api";
+
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
@@ -40,8 +43,8 @@ class CheckoutForm extends Component {
     if (response.ok) console.log("Purchase Complete!");
     this.setState({ complete: true });
     const bill = this.state;
-    console.log(bill);
-    const endpoint = "https://pickemm.herokuapp.com/api/billing";
+
+    const endpoint = `${URL}/billing`;
     axios.post(endpoint, bill);
   }
 
