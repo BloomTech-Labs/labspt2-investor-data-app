@@ -57,7 +57,6 @@ class App extends Component {
         return fire.currentUser
           .getIdToken()
           .then(idToken => {
-            axios.defaults.headers.common["Authorization"] = idToken;
             let space = user.displayName.lastIndexOf(" ");
             this.setState({
               currentUser: user,
@@ -69,6 +68,7 @@ class App extends Component {
               userUID: user.uid
             });
             this.addCurrentUser(user);
+            axios.defaults.headers.common["Authorization"] = idToken;
           })
           .catch(err => console.log("error ", err));
 
