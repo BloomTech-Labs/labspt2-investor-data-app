@@ -8,6 +8,9 @@ import {
   StockSymbol,
   Star
 } from "../Styles/Dashboard/LiveTickerStyles";
+import { Tooltip, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import * as ROUTES from "../../constants/routes";
 
 class FavoriteStocks extends React.Component {
   constructor(props) {
@@ -122,6 +125,32 @@ class FavoriteStocks extends React.Component {
     return str + suffix;
   };
 
+  shortenVolume = num => {
+    // Crunches the length of the volume into a smaller number while inserting a decimal point and character representing the amount
+    let str,
+      suffix = "";
+
+    let decimalPlaces = 2 || 0;
+
+    num = +num;
+
+    let factor = Math.pow(10, decimalPlaces);
+
+    if (num < 1000) {
+      str = num;
+    } else if (num < 1000000) {
+      str = Math.floor(num / (1000 / factor)) / factor;
+      suffix = "K";
+    } else if (num < 1000000000) {
+      str = Math.floor(num / (1000000 / factor)) / factor;
+      suffix = "M";
+    } else if (num < 1000000000000) {
+      str = Math.floor(num / (1000000000 / factor)) / factor;
+      suffix = "B";
+    }
+    return str + suffix;
+  };
+
   render() {
     if (!this.state.stocks.length) {
       // returns loading sign while data is being retrieved from API
@@ -137,52 +166,79 @@ class FavoriteStocks extends React.Component {
     this.state.stocks.forEach((stock, index) => {
       // Loops through array of stock values and creates a table
       rows.push(
-        <TickerContainer key={index}>
-          <Row>
-            <StockSymbol>
-              <p>{stock.company}</p>
-            </StockSymbol>
-            <Star>
-              <FavoriteTickerstar company={stock.company} />
-            </Star>
-          </Row>
-          <br />
-          <Row>
-            <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
-            <p
-              style={{
-                color:
-                  Math.sign(
-                    this.changePoints(stock.values[close], stock.values[open])
-                  ) < 0
-                    ? "#ff2900"
-                    : "#21ab42"
-              }}
-            >
-              Change:{" "}
-              {`${this.changePoints(stock.values[close], stock.values[open])}`}
-            </p>
-          </Row>
-          <Row>
-            <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p>
-            <p
-              style={{
-                marginLeft: "30px",
-                color:
-                  Math.sign(
-                    this.changePercent(stock.values[close], stock.values[open])
-                  ) < 0
-                    ? "#ff2900"
-                    : "#21ab42"
-              }}
-            >
-              Change %:
-              {`${this.changePercent(stock.values[close], stock.values[open])}`}
-            </p>
-          </Row>
-          <br />
-          <hr />
-        </TickerContainer>
+        <Link
+          to={{
+            pathname: ROUTES.REPORTS,
+            state: { ticker: stock.company }
+          }}
+          key={index}
+          style={{ textDecoration: "none" }}
+        >
+          <TickerContainer key={index}>
+            <Row>
+              <StockSymbol>
+                <p>{stock.company}</p>
+              </StockSymbol>
+              <Tooltip
+                disableFocusListener
+                title={
+                  <Typography color="inherit">
+                    Remove stock from your favorites
+                  </Typography>
+                }
+              >
+                <Star>
+                  <FavoriteTickerstar company={stock.company} />
+                </Star>
+              </Tooltip>
+            </Row>
+            <br />
+            <Row>
+              <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
+              <p
+                style={{
+                  color:
+                    Math.sign(
+                      this.changePoints(stock.values[close], stock.values[open])
+                    ) < 0
+                      ? "#ff2900"
+                      : "#21ab42"
+                }}
+              >
+                Change:{" "}
+                {`${this.changePoints(
+                  stock.values[close],
+                  stock.values[open]
+                )}`}
+              </p>
+            </Row>
+            <Row>
+              <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p>
+              <p
+                style={{
+                  marginLeft: "30px",
+                  color:
+                    Math.sign(
+                      this.changePercent(
+                        stock.values[close],
+                        stock.values[open]
+                      )
+                    ) < 0
+                      ? "#ff2900"
+                      : "#21ab42"
+                }}
+              >
+                Change %:
+                {`${this.changePercent(
+                  stock.values[close],
+                  stock.values[open]
+                )}`}
+              </p>
+            </Row>
+            <br />
+            <hr />
+          </TickerContainer>
+        </Link>
       );
     });
 
