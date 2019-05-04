@@ -16,8 +16,8 @@ import axios from "axios";
 import ThankYou from "../components/ThankYou";
 
 //URL Endpoints
-// const URL = "http://localhost:5000/";
-const URL = "https://pickemm.herokuapp.com/";
+const URL = "http://localhost:5000/";
+// const URL = "https://pickemm.herokuapp.com/";
 
 const AuthenticatedRoute = ({
   component: Component,
@@ -67,8 +67,8 @@ class App extends Component {
               lastName: user.displayName.substring(space + 1),
               userUID: user.uid
             });
-            this.addCurrentUser(user);
             axios.defaults.headers.common["Authorization"] = idToken;
+            this.addCurrentUser(user);
           })
           .catch(err => console.log("error ", err));
 
