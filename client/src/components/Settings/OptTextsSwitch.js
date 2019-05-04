@@ -14,11 +14,11 @@ import Typography from "@material-ui/core/Typography";
 // WithStyles
 import styles from './styles';
 
-class OptEmailsSwitch extends React.Component {
+class OptTextsSwitch extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            receiveEmails: this.props.settings.receiveEmails
+            receiveEmails: this.props.settings.receiveTexts
         };
     };
 
@@ -40,19 +40,19 @@ class OptEmailsSwitch extends React.Component {
 
         return(
             <div className={classes.emailTextContainer}>
-                <Typography variant='h6'>Email preference</Typography>
+                <Typography variant='h6'>Text preference</Typography>
                 <div>
-                    {/* Switch for email preferences */}
+                    {/* Switch for text preferences */}
                     <FormControlLabel
                         control={
                             <Switch
-                                checked={this.props.settings.receiveEmails}
-                                onChange={this.handleSwitch('receiveEmails')}
-                                value='receiveEmails'
+                                checked={this.props.settings.receiveTexts}
+                                onChange={this.handleSwitch('receiveTexts')}
+                                value='receiveTexts'
                                 color='secondary'
                             />
                         }
-                        label='Receive updates by email.'
+                        label='Receive updates by text.'
                         className={classes.optSwitch}
                     />
                 </div>
@@ -74,4 +74,4 @@ const mapDispatchToProps = dispatch => ({
     updateSettings:  (uid, updatedCommPreference) => dispatch(updateSettings(uid, updatedCommPreference))
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(OptEmailsSwitch));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(OptTextsSwitch));
