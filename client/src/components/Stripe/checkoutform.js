@@ -43,7 +43,7 @@ class CheckoutForm extends Component {
     if (response.ok) console.log("Purchase Complete!");
     this.setState({ complete: true });
     const bill = this.state;
-    console.log(bill);
+
     const endpoint = `${URL}/billing`;
     axios.post(endpoint, bill);
   }
