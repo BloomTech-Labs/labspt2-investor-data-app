@@ -2,17 +2,17 @@ import React from 'react';
 import firebase from 'firebase';
 
 // Redux imports
-import { connect } from 'react-redux';
-import { getSettings, updateSettings } from '../../actions/settingsActions.js';
+import { connect } from "react-redux";
+import { getSettings, updateSettings } from "../../actions/settingsActions.js";
 
 // Material UI Components
-import { withStyles } from '@material-ui/core/styles';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import { withStyles } from "@material-ui/core/styles";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 
 // WithStyles
-import styles from './styles';
+import styles from '../Styles/Settings/styles';
 
 class OptEmailsSwitch extends React.Component {
     constructor(props){
@@ -34,9 +34,8 @@ class OptEmailsSwitch extends React.Component {
         });
     };
 
-    render(){
-        
-        const { classes } = this.props;
+  render() {
+    const { classes } = this.props;
 
         return(
             <div className={classes.emailTextContainer}>
@@ -63,16 +62,17 @@ class OptEmailsSwitch extends React.Component {
 };
 
 const mapStateToProps = state => {
-    return {
-        fetchingSettings: state.SettingsReducer.fetchingSettings,
-        error: state.SettingsReducer.error,
-        settings: state.SettingsReducer.settings
-    }
+  return {
+    fetchingSettings: state.SettingsReducer.fetchingSettings,
+    error: state.SettingsReducer.error,
+    settings: state.SettingsReducer.settings
+  };
 };
 
 const mapDispatchToProps = dispatch => ({
-    getSettings: (uid) => dispatch(getSettings(uid)),
-    updateSettings:  (uid, updatedCommPreference) => dispatch(updateSettings(uid, updatedCommPreference))
+  getSettings: uid => dispatch(getSettings(uid)),
+  updateSettings: (uid, updatedCommPreference) =>
+    dispatch(updateSettings(uid, updatedCommPreference))
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(OptEmailsSwitch));

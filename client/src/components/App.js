@@ -13,6 +13,11 @@ import "./App.css";
 import Signin from "./Auth/Signin";
 import { fire } from "./Auth/firebaseConfig";
 import axios from "axios";
+import ThankYou from "../components/ThankYou";
+
+//URL Endpoints
+// const URL = "http://localhost:5000/";
+const URL = "https://pickemm.herokuapp.com/";
 
 const AuthenticatedRoute = ({
   component: Component,
@@ -49,20 +54,25 @@ class App extends Component {
     this.removeAuthListener = fire.onAuthStateChanged(user => {
       if (user) {
         // Last # of occurrence of Space
-        let space = user.displayName.lastIndexOf(" ");
+        return fire.currentUser
+          .getIdToken()
+          .then(idToken => {
+            axios.defaults.headers.common["Authorization"] = idToken;
+            let space = user.displayName.lastIndexOf(" ");
+            this.setState({
+              currentUser: user,
+              authenticated: true,
+              redirect: true,
+              currentEmail: user.email,
+              firstName: user.displayName.substring(0, space),
+              lastName: user.displayName.substring(space + 1),
+              userUID: user.uid
+            });
+            this.addCurrentUser(user);
+          })
+          .catch(err => console.log("error ", err));
 
-        this.setState({
-          currentUser: user,
-          authenticated: true,
-          redirect: true,
-          currentEmail: user.email,
-          firstName: user.displayName.substring(0, space),
-          lastName: user.displayName.substring(space + 1),
-          userUID: user.uid
-        });
         // If the user is the Authenticated use pass their information to the database
-
-        this.addCurrentUser(user);
       } else {
         this.setState({
           currentUser: null,
@@ -76,7 +86,6 @@ class App extends Component {
   };
   //To sign out an get no error with firebase dropping the widget
   removeAuthListener: any;
-
   // Add current user method will grab the information from state create new user in our database
   addCurrentUser = () => {
     function newUser(firstName, lastName, email, uid) {
@@ -91,13 +100,13 @@ class App extends Component {
       this.state.currentEmail,
       this.state.userUID
     );
-    const endpoint = "https://pickemm.herokuapp.com/api/users";
+    const endpoint = `${URL}api/users`;
     axios
       .post(endpoint, creds)
       .then(res => {
-        console.log(res);
+        console.log("User logged in successfully");
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log("Error in getting user"));
   };
   componentWillUnmount = () => {
     this.removeAuthListener();
@@ -134,6 +143,7 @@ class App extends Component {
             path={ROUTES.REPORTS}
             component={Reports}
           />
+          <Route exact path={ROUTES.THANKYOU} component={ThankYou} />
           <Route
             exact
             path={ROUTES.SIGNIN}

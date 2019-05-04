@@ -24,12 +24,11 @@ const Landing = () => {
                   Automated system for analyzing key financial indicators
                 </h1>
                 <p className="hero__text">
-                  Pick Em is a investor application that makes it easier to
+                  Pick Em is an investor application that makes it easier to
                   research stocks and make better investment decisions. Our easy
                   to use app provides both beginner and sophisticated investors
                   with an automated system that analyzes key financial
-                  indicators. Pick Em will allow the customer to determine
-                  whether a buy signal is warranted.
+                  indicators.
                 </p>
                 <Link to={ROUTES.SIGNIN} className="button button__accent">
                   Get Started
@@ -42,7 +41,7 @@ const Landing = () => {
 
       <div className="steps landing__section">
         <div className="container">
-          <h2>Who uses our Pick Em?</h2>
+          <h2>Who uses Pick Em?</h2>
         </div>
         <div className="container">
           <div className="steps__inner">

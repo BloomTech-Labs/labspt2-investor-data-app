@@ -5,22 +5,14 @@ module.exports = {
     return db('billing');
   },
 
-  get: function(id) {
-    let query = db('billing');
-    if (id) {
-      query.where('billing.id', id).first();
-      return query;
-    }
-    return db('billing');
-  },
-
-  checkAcctType: function(acct) {
-    let query = db('billing');
-      query.where('usersId', acct)
-      return query
-  },
+ getAcct : (uid) => {
+return db('billing')
+      .where('usersId', uid)
+      .first()
+ },
 
   insert: function(bills) {
+    console.log("billing", bills);
     return db('billing').insert(bills);
   },
 
