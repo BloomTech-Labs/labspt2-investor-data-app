@@ -72,7 +72,7 @@ const tiers = [
     accountType: 1,
     price: "5",
     stripePlan: "plan_ErV25voxUOIHIx",
-    description: ["1 indicator included", "Help documentation", "Email support"]
+    description: ["2 indicator included", "Help documentation", "Email support"]
   },
   {
     title: "Investor",
