@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import { Input, Form, SearchIcon } from "../Styles/Dashboard/YourFavorites";
 import { Typography } from "@material-ui/core";
 import FavoriteStocks from "./FavoriteStocks";
 import firebase from "firebase";
@@ -13,7 +12,8 @@ class YourFavorites extends React.Component {
       timeStamp: {},
       companies: [], // stock company symbols
       stocks: [],
-      uid: ""
+      uid: "",
+      search: ''
     };
   }
 
@@ -57,10 +57,10 @@ class YourFavorites extends React.Component {
     });
   };
 
-  render() {
-    if (!this.state.companies.length) {
-      return "You currently have no favorites";
-    }
+    render(){
+        if(!this.state.companies.length){
+             return "You currently have no favorites"
+        }
     return (
       <div>
         <Typography
@@ -75,12 +75,6 @@ class YourFavorites extends React.Component {
           My Favorite Stocks
         </Typography>
         {""}
-        <Form>
-          <SearchIcon>
-            <i className="fa fa-search" />
-          </SearchIcon>
-          <Input id="search-bar" type="text" placeholder="Search..." />
-        </Form>
         <div>
           <FavoriteStocks companies={this.state.companies} />
         </div>

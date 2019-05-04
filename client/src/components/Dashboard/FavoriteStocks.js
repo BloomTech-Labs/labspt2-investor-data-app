@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import FavoriteTickerstar from "./favoriteTickerstar";
+import { Input, Form, SearchIcon, ReturnButton } from '../Styles/Dashboard/YourFavorites'
 import {
   Loading,
   Row,
@@ -149,7 +150,36 @@ class FavoriteStocks extends React.Component {
       suffix = "B";
     }
     return str + suffix;
-  };
+  }
+
+  setSearchState = (e) => {
+    e.preventDefault(); 
+    this.setState({
+        search: e.target.value
+    })
+}
+
+searchHandler = (e) => {
+    const searchFilter = this.state.stocks.filter(item => {
+      return item.company.includes(e.target.value.toUpperCase())
+     })
+     if(e.target.value.indexOf(searchFilter)){
+         this.setState({
+             stocks:searchFilter
+         })
+    }
+}
+
+returnHandler = () => {
+    this.setState({
+        companies: this.props.companies,
+        stocks: [],
+        search: ''
+    })
+    this.fetchFavorites();
+}
+
+
 
   render() {
     if (!this.state.stocks.length) {
@@ -244,6 +274,14 @@ class FavoriteStocks extends React.Component {
 
     return (
       <div>
+        <Form> 
+          <SearchIcon><i className= 'fa fa-search' /></SearchIcon>
+          <Input 
+                 onKeyUp={this.searchHandler} 
+                 type="text" 
+                 placeholder="Search..."/>  
+           <ReturnButton onClick={this.returnHandler}>Reset</ReturnButton>                                         
+        </Form> 
         <div>{rows}</div>
       </div>
     );
