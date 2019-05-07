@@ -57,8 +57,8 @@ class App extends Component {
         return fire.currentUser
           .getIdToken()
           .then(idToken => {
-            axios.defaults.headers.common["Authorization"] = idToken;
             let space = user.displayName.lastIndexOf(" ");
+            axios.defaults.headers.common["Authorization"] = idToken;
             this.setState({
               currentUser: user,
               authenticated: true,
