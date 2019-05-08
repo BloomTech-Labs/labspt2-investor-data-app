@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { Switch, Route, Redirect } from "react-router-dom";
-
 import Navigation from "../components/Navigation";
 import Landing from "../components/Landing";
 import Dashboard from "../components/Dashboard";

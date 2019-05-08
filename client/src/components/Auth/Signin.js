@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
 import { fire } from "./firebaseConfig"; // This is being used to provide apiKey to Authentication do not remove
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { Redirect } from "react-router-dom";

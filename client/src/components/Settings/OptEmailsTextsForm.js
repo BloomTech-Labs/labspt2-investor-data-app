@@ -1,5 +1,5 @@
 import React from "react";
-import firebase from "firebase";
+import { fire } from "../Auth/firebaseConfig";
 
 // Redux imports
 import { connect } from "react-redux";
@@ -12,23 +12,31 @@ import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 
 // WithStyles
-import styles from '../Styles/Settings/styles';
+import styles from "../Styles/Settings/styles";
 
 class OptEmailsTextsForm extends React.Component {
+  _isMounted = false;
+
   componentDidMount() {
-    const uid = firebase.auth().currentUser.uid;
-    this.props.getSettings(uid);
+    this._isMounted = true;
+    if (this._isMounted) {
+      const uid = fire.currentUser.uid;
+      this.props.getSettings(uid);
+      console.log("render in CDM on Emails");
+    }
   }
 
   handleSwitch = name => event => {
-    const uid = firebase.auth().currentUser.uid;
+    const uid = fire.currentUser.uid;
     const switchState = { [name]: event.target.checked };
     this.props.updateSettings(uid, switchState);
   };
-
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
   render() {
     const { classes } = this.props;
-
+    console.log("Render in Emails");
     return (
       <div className={classes.emailTextContainer}>
         <Typography variant="h6">Email and text preferences</Typography>
