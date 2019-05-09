@@ -15,3 +15,10 @@ PRIVATE_KEY= "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwg
 PROJECT_ID="pickem-597ad"
 TOKEN_URI="https://oauth2.googleapis.com/token"
 TYPE="service_account"
+
+
+# Nexmo api keys 
+NEXMO_API_KEY="92c4425a"
+NEXMO_API_SECRET="4P8i5tJ5EXygp6p4"
+
+
