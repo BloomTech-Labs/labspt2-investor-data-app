@@ -15,15 +15,9 @@ import Typography from "@material-ui/core/Typography";
 import styles from "../Styles/Settings/styles";
 
 class OptEmailsTextsForm extends React.Component {
-  _isMounted = false;
-
   componentDidMount() {
-    this._isMounted = true;
-    if (this._isMounted) {
-      const uid = fire.currentUser.uid;
-      this.props.getSettings(uid);
-      console.log("render in CDM on Emails");
-    }
+    const uid = fire.currentUser.uid;
+    this.props.getSettings(uid);
   }
 
   handleSwitch = name => event => {
@@ -31,12 +25,10 @@ class OptEmailsTextsForm extends React.Component {
     const switchState = { [name]: event.target.checked };
     this.props.updateSettings(uid, switchState);
   };
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
+
   render() {
     const { classes } = this.props;
-    console.log("Render in Emails");
+
     return (
       <div className={classes.emailTextContainer}>
         <Typography variant="h6">Email and text preferences</Typography>
