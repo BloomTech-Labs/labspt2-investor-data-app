@@ -35,7 +35,7 @@ import RSIChart from "./Charts/RSIChart";
 import SARChart from "./Charts/SARChart";
 import { suggestions } from "./suggestions";
 import * as ROUTES from "../../constants/routes";
-import { ArrowBackIos } from '@material-ui/icons';
+import { ArrowBackIos } from "@material-ui/icons";
 
 const TabContainer = props => {
   return (
@@ -113,6 +113,7 @@ const getSuggestionValue = suggestion => {
 };
 
 class Reports extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -125,8 +126,11 @@ class Reports extends Component {
     };
   }
   componentDidMount() {
-    const uid = fire.currentUser.uid;
-    this.props.getAcct(uid);
+    this._isMounted = true;
+    if (this._isMounted) {
+      const uid = fire.currentUser.uid;
+      this.props.getAcct(uid);
+    }
 
     if (this.props.location.state) {
       getData(this.props.location.state.ticker).then(data => {
@@ -137,6 +141,9 @@ class Reports extends Component {
         this.setState({ data, ticker: "AAPL" });
       });
     }
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   handleSuggestionsFetchRequested = ({ value }) => {
@@ -257,8 +264,14 @@ class Reports extends Component {
               className={classes.grid}
             >
               <Grid item xs={12}>
-                <Link to={ROUTES.DASHBOARD} style={{ textDecoration: "none", alignItems:"center" }}>
-                  <Typography variant="display1" className={classes.back}><ArrowBackIos />Dashboard</Typography>
+                <Link
+                  to={ROUTES.DASHBOARD}
+                  style={{ textDecoration: "none", alignItems: "center" }}
+                >
+                  <Typography variant="display1" className={classes.back}>
+                    <ArrowBackIos />
+                    Dashboard
+                  </Typography>
                 </Link>
               </Grid>
               <Grid item xs={12}>

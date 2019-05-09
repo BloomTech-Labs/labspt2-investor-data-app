@@ -1,5 +1,5 @@
 import React from "react";
-import firebase from "firebase";
+import { fire } from "../Auth/firebaseConfig";
 
 // Redux imports
 import { connect } from "react-redux";
@@ -12,16 +12,16 @@ import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 
 // WithStyles
-import styles from '../Styles/Settings/styles';
+import styles from "../Styles/Settings/styles";
 
 class OptEmailsTextsForm extends React.Component {
   componentDidMount() {
-    const uid = firebase.auth().currentUser.uid;
+    const uid = fire.currentUser.uid;
     this.props.getSettings(uid);
   }
 
   handleSwitch = name => event => {
-    const uid = firebase.auth().currentUser.uid;
+    const uid = fire.currentUser.uid;
     const switchState = { [name]: event.target.checked };
     this.props.updateSettings(uid, switchState);
   };

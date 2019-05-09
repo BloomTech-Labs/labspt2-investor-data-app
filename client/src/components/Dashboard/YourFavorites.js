@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Typography } from "@material-ui/core";
 import FavoriteStocks from "./FavoriteStocks";
-import firebase from "firebase";
+import { fire } from "../Auth/firebaseConfig";
 const URL = "https://pickemm.herokuapp.com/api";
 // const URL = "http://localhost:5000/api";
 class YourFavorites extends React.Component {
@@ -18,7 +18,7 @@ class YourFavorites extends React.Component {
   }
 
   componentDidMount() {
-    let uid = firebase.auth().currentUser.uid;
+    let uid = fire.currentUser.uid;
     this.setState({
       uid: uid
     });
