@@ -35,8 +35,8 @@ const axios = require('axios');
 const Nexmo = require('nexmo');
 //const NEXMO_API_SECRET = process.env.NEXMO_API_SECRET       // Could not get this to work
 //const NEXMO_API_KEY = process.env.NEXMO_API_KEY             // Could not get these to work
-//const NEXMO_API_KEY = 
-//const NEXMO_API_SECRET = 
+
+/
 const myPhone = "16199641367";                                //*********    For testing, enter in your phone number here !!! *********
 
 const nexmo = new Nexmo({
