@@ -14,7 +14,7 @@ const usersRouter = require("./routers/usersRouter");
 const stripeRouter = require("./routers/stripeRouter");
 const bodyParser = require("body-parser");
 const cron = require("node-cron");
-//const admin = require("./data/auth/firebaseMiddleware");
+const admin = require("./data/auth/firebaseMiddleware");
 //const nexmo = require("./data/nexmoConfig");
 const Nexmo = require("nexmo");
 server.use(cors());
@@ -22,13 +22,16 @@ server.use(express.json());
 server.use(parser);
 server.use(logger("tiny"));
 server.use(helmet());
-server.use("/api/billing", billingRouter);
-server.use("/api/favorites", favoritesRouter);
-server.use("/api/users", usersRouter);
+//server.use("/api/billing", billingRouter);
+//server.use("/api/favorites", favoritesRouter);
+//server.use("/api/users", usersRouter);
+server.use("/api/billing", verifyToken, billingRouter);
+server.use("/api/favorites", verifyToken, favoritesRouter);
+server.use("/api/users", verifyToken, usersRouter);
 server.use("/api/stripe", stripeRouter);
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
-//server.use("/", verifyToken);
+server.use("/", verifyToken);
 let running = false;
 const axios = require("axios");
 
@@ -37,15 +40,13 @@ const myPhone = "16199641367"; //*********    For testing, ENTER YOUR PHONE NUMB
 //const NEXMO_API_SECRET = process.env.NEXMO_API_SECRET       // Could not get this to work
 //const NEXMO_API_KEY = process.env.NEXMO_API_KEY             // Could not get these to work
 
-//const NEXMO_API_SECRET =      // PUT THE SECRET HERE!!!!!!!!
-//const NEXMO_API_KEY =           // PUT THE KEY HERE!!!!
 
 const nexmo = new Nexmo({
   apiKey: NEXMO_API_KEY,
   apiSecret: NEXMO_API_SECRET
 });
 
-/* async function verifyToken(req, res, next) {
+ async function verifyToken(req, res, next) {
   const idToken = req.headers.authorization;
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
@@ -59,17 +60,25 @@ const nexmo = new Nexmo({
   } catch (e) {
     return res.status(401).send("You are not authorized!");
   }
-} */
+} 
 
- // Runs it every minute ** for testing purposes **
-cron.schedule("* * * * *", () => {
+
+cron.schedule("* * * * *", () => {         // Runs it every minute ** for testing purposes **
 //cron.schedule("0 18 * * *", () => {     // Run it everyday at 6pm USE THIS FOR DEPLOYMENT !!!!
+
   if (!running) {
     // check if app is running already
-    console.log(`sending message`);
-    running = true; // Set flag to true
+    console.log(`scanner started`);
+    running = true;
     Scanner();
   }
+});
+
+// Sets running to false 5 mins after the other cron is started
+cron.schedule("5 18 * * *", () => {    // Run it everyday at 6:05 pm USE THIS FOR DEPLOYMENT !!!!
+  //cron.schedule("0 18 * * *", () => {     
+  console.log(`running is false`);
+  running = false;
 });
 
 // Not used
@@ -91,9 +100,7 @@ cron.schedule("* * * * *", () => {
 
 // BEGIN SCANNER FUNCTION
 Scanner = () => {
-  //let running = false;
-  // const axios = require('axios');
-  // const Nexmo = require('nexmo');
+
   const YOUR_VIRTUAL_NUMBER = "18572560178";
   const from = "18572560178";
   let userNumber = "";
@@ -105,9 +112,6 @@ Scanner = () => {
     axios
       .get(`${URL}/billing`) // Get User Data
       .then(response => {
-        //  response.data.forEach(customer => {
-        //   customers.push(response.data.usersId)
-        //  })
         for (let i = 0; i < response.data.length; i++) {  // ***************** USE FOR DEPLOYMENT ************
           // for (let i = 0; i < 2; i++) {
           // Step through the user data
@@ -128,7 +132,7 @@ Scanner = () => {
         // for (let i = 0; i < response.data.length; i++) {  // ***************** USE FOR DEPLOYMENT ************
         for (let i = 0; i < customers.length; i++) {
           // Step through the user data
-          for (let j = 0; j < 4; j++) {
+          for (let j = 0; j < response.data.length; j++) {
             // Check if user is a match to billing usersId
             if (response.data[j].uid === customers[i]) {
               // Check if receiveTexts is enabled
@@ -183,32 +187,38 @@ Scanner = () => {
     axios
       .all(promises)
       .then(results => {
+
         results.forEach(result => {
+         // let symbol = result.config.url
+         // Pulling the company symbol out of the url
+          let symbol = result.config.url.slice(55, 62)
+          let newSymbol = symbol.substr(0, symbol.indexOf("&"))
+
+          console.log("symbol:", newSymbol);
+          //https://www.alphavantage.co/query?function=MACD&symbol=A
           let data = result.data["Technical Analysis: MACD"]; // Accesses correct object within API
           let timeStamps = Object.keys(data);
           x = false;
           y = false;
-          
+
           // Subtract current Signal from current MACD Determine if it is a positive or negative value
           if (data[timeStamps[0]].MACD - data[timeStamps[0]].MACD_Signal > 0) {
             x = true;
           }
-         
+
           // Subtract yesterday's Signal from yesterday's MACD  Determine if it is a positive or negative value
-          if (data[timeStamps[1]].MACD - data[timeStamps[1]].MACD_Signal > 0) {     // CHANGE THE 1'S TO 20'S FOR TESTING TO GIVE IT A LARGER RANGE
+          if (data[timeStamps[3]].MACD - data[timeStamps[3]].MACD_Signal > 0) {     // CHANGE THE 1'S TO 20'S FOR TESTING TO GIVE IT A LARGER RANGE
             //if (data[timeStamps[20]].MACD - data[timeStamps[20]].MACD_Signal > 0) { 
             y = true;
           }
-          
+
           // If the 2 values aren't equal then the lines crossed, If they are both true or both false the lines did not cross
-          if (!x === y) {                          
-            x = false;                              
+          if (!x === y) {
+            x = false;
             y = false;
             console.log("the lines have crossed");
             // Construct user text message
-             // Need to get the current company here and put it in SMS Message
-            let message = `The MACD Signal lines have crossed.`;
-            // let message = `The MACD Signal lines for ${company} have crossed.`    // Construct user text message - Need company here.
+            let message = `The MACD Signal lines for ${newSymbol} have crossed.`   
             console.log("message:", message);
             console.log("phoneNumber:", userNumber);
             console.log("******************************************");
@@ -237,7 +247,7 @@ Scanner = () => {
   };
   getCustomers();
   console.log("Scan complete");
-  // running = false;
+ 
 };
 // END OF SCANNER FUNCTION
 
