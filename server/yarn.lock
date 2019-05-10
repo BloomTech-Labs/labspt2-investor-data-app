@@ -4150,6 +4150,11 @@ neo-async@^2.6.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
   integrity sha512-MFh0d/Wa7vkKO3Y3LlacqAEeHK0mckVqzDieUKTT+KGxi+zIpeVsFxymkIiRpbpDziHc290Xr9A1O4Om7otoRA==
 
+nexmo-node@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/nexmo-node/-/nexmo-node-1.0.1.tgz#5c8a5be983009c307213ba7260bd50d5dd1332e0"
+  integrity sha512-b2yv2+HSZDM2zvbrkLjCWWhOp/L9V61ZAxiCVetEIBwQ4kzkof/7IEGLiQ7M32almxgVMvQegpZfGlVB59w01A==
+
 nexmo@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/nexmo/-/nexmo-2.4.1.tgz#a980a04f06b9d8d1333084c0d15576b1c1f1ca36"
