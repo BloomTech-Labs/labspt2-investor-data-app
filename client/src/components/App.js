@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { Switch, Route, Redirect } from "react-router-dom";
-
 import Navigation from "../components/Navigation";
 import Landing from "../components/Landing";
 import Dashboard from "../components/Dashboard";
@@ -57,8 +56,8 @@ class App extends Component {
         return fire.currentUser
           .getIdToken()
           .then(idToken => {
-            axios.defaults.headers.common["Authorization"] = idToken;
             let space = user.displayName.lastIndexOf(" ");
+            axios.defaults.headers.common["Authorization"] = idToken;
             this.setState({
               currentUser: user,
               authenticated: true,

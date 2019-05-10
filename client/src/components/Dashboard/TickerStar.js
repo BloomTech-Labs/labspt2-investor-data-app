@@ -1,9 +1,9 @@
 import React from "react";
 import axios from "axios";
-import firebase from "firebase";
+import { fire } from "../Auth/firebaseConfig";
 
-// const URL = "https://pickemm.herokuapp.com/api";
-const URL = "http://localhost:5000/api";
+// const URL = "http://localhost:5000/api";
+const URL = "https://pickemm.herokuapp.com/api";
 class TickerStar extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +11,7 @@ class TickerStar extends React.Component {
       selected: false,
       star: "far fa-star",
       stock: [],
-      uid: firebase.auth().currentUser.uid
+      uid: fire.currentUser.uid
     };
   }
 

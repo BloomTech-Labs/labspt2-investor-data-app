@@ -81,8 +81,7 @@ router.post("/", (req, res) => {
       users
         .insert(user)
         .then(user => {
-          const token = generateToken(user);
-          res.status(201).json({ id: user.id, token });
+          res.status(201).json({ id: user.id });
         })
         .catch(err => {
           res.status(500).send(err);

@@ -50,14 +50,16 @@ const nexmo = new Nexmo({
   const idToken = req.headers.authorization;
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-
+    // console.log("Verifytoken", decodedToken);
     if (decodedToken) {
       req.body.uid = decodedToken.uid;
       return next();
     } else {
+      // console.log("Else", e);
       return res.status(401).send("You are not authorized!");
     }
   } catch (e) {
+    // console.log("Catch", e);
     return res.status(401).send("You are not authorized!");
   }
 } 
