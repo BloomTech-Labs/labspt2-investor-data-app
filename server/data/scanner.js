@@ -1,4 +1,5 @@
 const axios = require("axios");
+const nexmo = require("./nexmoConfig");
 const myPhone = "16199641367"; //*********    For testing, ENTER YOUR PHONE NUMBER HERE !!! *********
 
 
@@ -7,7 +8,7 @@ scanner = () => {
     const YOUR_VIRTUAL_NUMBER = "18572560178";
     const from = "18572560178";
     let userNumber = "";
-    const URL = "http://localhost:5000/api"; // ********** CHANGE FOR DEPLOYMENT *************
+    const URL = "http://localhost:5000/api/sms"; // ********** CHANGE FOR DEPLOYMENT *************
     // const URL = "https://pickemm.herokuapp.com/api";
   
     getCustomers = () => {
@@ -24,7 +25,7 @@ scanner = () => {
           getUsers(customers);
         })
         .catch(err => {
-          console.log("There was an error");
+          console.log("There was an error accessing billing table", err);
         });
     };
   
@@ -54,7 +55,7 @@ scanner = () => {
           }
         })
         .catch(err => {
-          console.log("There was an error");
+          console.log("There was an error accessing the users table", err);
         });
     };
   
@@ -108,7 +109,7 @@ scanner = () => {
             }
   
             // Subtract yesterday's Signal from yesterday's MACD  Determine if it is a positive or negative value
-            if (data[timeStamps[1]].MACD - data[timeStamps[1]].MACD_Signal > 0) {     // CHANGE THE 1'S TO 20'S FOR TESTING TO GIVE IT A LARGER RANGE
+            if (data[timeStamps[4]].MACD - data[timeStamps[4]].MACD_Signal > 0) {     // CHANGE THE 1'S TO 20'S FOR TESTING TO GIVE IT A LARGER RANGE
               //if (data[timeStamps[20]].MACD - data[timeStamps[20]].MACD_Signal > 0) { 
               y = true;
             }
