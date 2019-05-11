@@ -1,6 +1,6 @@
 const axios = require("axios");
 const nexmo = require("./nexmoConfig");
-const myPhone = "16199641367"; //*********    For testing, ENTER YOUR PHONE NUMBER HERE !!! *********
+const myPhone = ""; //*********    For testing, ENTER YOUR PHONE NUMBER HERE !!! *********
 
 
 scanner = () => {
