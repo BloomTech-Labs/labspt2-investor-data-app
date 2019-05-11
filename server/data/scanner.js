@@ -127,7 +127,7 @@ scanner = () => {
               // Run the Nexmo api
               nexmo.message.sendSms(
                 YOUR_VIRTUAL_NUMBER,
-                myPhone,                       //*********** CHANGE TO USER PHONE NUMBER FOR DEPLOYMENT *********
+                userNumber,                       //*********** CHANGE TO USER PHONE NUMBER FOR DEPLOYMENT *********
                 message,
                 (err, responseData) => {
                   if (err) {
