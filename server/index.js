@@ -183,7 +183,7 @@ Scanner = () => {
           }
 
           // Subtract yesterday's Signal from yesterday's MACD  Determine if it is a positive or negative value
-          if (data[timeStamps[3]].MACD - data[timeStamps[3]].MACD_Signal > 0) {     // CHANGE THE 1'S TO 20'S FOR TESTING TO GIVE IT A LARGER RANGE
+          if (data[timeStamps[1]].MACD - data[timeStamps[1]].MACD_Signal > 0) {     // CHANGE THE 1'S TO 20'S FOR TESTING TO GIVE IT A LARGER RANGE
             //if (data[timeStamps[20]].MACD - data[timeStamps[20]].MACD_Signal > 0) { 
             y = true;
           }
