@@ -14,52 +14,42 @@ const usersRouter = require("./routers/usersRouter");
 const stripeRouter = require("./routers/stripeRouter");
 const bodyParser = require("body-parser");
 const cron = require("node-cron");
-const admin = require("./data/auth/firebaseMiddleware");
-//const nexmo = require("./data/nexmoConfig");
-const Nexmo = require("nexmo");
+//const admin = require("./data/auth/firebaseMiddleware");
+const nexmo = require("./data/nexmoConfig");
+
 server.use(cors());
 server.use(express.json());
 server.use(parser);
 server.use(logger("tiny"));
 server.use(helmet());
-//server.use("/api/billing", billingRouter);
-//server.use("/api/favorites", favoritesRouter);
-//server.use("/api/users", usersRouter);
-server.use("/api/billing", verifyToken, billingRouter);
-server.use("/api/favorites", verifyToken, favoritesRouter);
-server.use("/api/users", verifyToken, usersRouter);
+server.use("/api/billing", billingRouter);
+server.use("/api/favorites", favoritesRouter);
+server.use("/api/users", usersRouter);
+//server.use("/api/billing", verifyToken, billingRouter);
+//server.use("/api/favorites", verifyToken, favoritesRouter);
+//server.use("/api/users", verifyToken, usersRouter);
 server.use("/api/stripe", stripeRouter);
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
-server.use("/", verifyToken);
+//server.use("/", verifyToken);
 let running = false;
 const axios = require("axios");
-
 const myPhone = "16199641367"; //*********    For testing, ENTER YOUR PHONE NUMBER HERE !!! *********
 
-//const NEXMO_API_SECRET = process.env.NEXMO_API_SECRET       // Could not get this to work
-//const NEXMO_API_KEY = process.env.NEXMO_API_KEY             // Could not get these to work
 
 
-const nexmo = new Nexmo({
-  apiKey: NEXMO_API_KEY,
-  apiSecret: NEXMO_API_SECRET
-});
-
- async function verifyToken(req, res, next) {
+async function verifyToken(req, res, next) {
   const idToken = req.headers.authorization;
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-    // console.log("Verifytoken", decodedToken);
+
     if (decodedToken) {
       req.body.uid = decodedToken.uid;
       return next();
     } else {
-      // console.log("Else", e);
       return res.status(401).send("You are not authorized!");
     }
   } catch (e) {
-    // console.log("Catch", e);
     return res.status(401).send("You are not authorized!");
   }
 } 
@@ -83,22 +73,6 @@ cron.schedule("5 18 * * *", () => {    // Run it everyday at 6:05 pm USE THIS FO
   running = false;
 });
 
-// Not used
-/* server.post("/send", (req, res) => {
-  // Send SMS
-  nexmo.message.sendSms(
-    config.number,
-    req.body.toNumber,
-    req.body.message,
-    { type: "unicode" },
-    (err, responseData) => {
-      if (responseData) {
-        console.log(responseData);
-      }
-    }
-  );
-});
- */
 
 // BEGIN SCANNER FUNCTION
 Scanner = () => {
