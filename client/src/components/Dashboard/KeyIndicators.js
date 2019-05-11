@@ -48,7 +48,7 @@ class KeyIndicators extends React.Component {
             })}
             <hr />
             <Typography variant="h6" gutterBottom>
-            New Feature: Automatic Stock Scanner will scan your favorites and send you a text message when the MACD Signal Lines cross. To activate this feature go to the settings page and enable Text's under the Email and Text Preferences. You will also need to add a phone number.
+            New Feature: Automatic Stock Scanner will scan your favorites and send you a text message when the MACD Signal Lines cross. This is typically a time to BUY/SELL stocks. To activate this feature go to the settings page and enable Text's under the Email and Text Preferences. You will also need to add a phone number.
           </Typography>
           </div>
         </CharContainer>

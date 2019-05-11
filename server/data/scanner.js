@@ -1,6 +1,5 @@
 const axios = require("axios");
 const nexmo = require("./nexmoConfig");
-const myPhone = ""; //*********    For testing, ENTER YOUR PHONE NUMBER HERE !!! *********
 
 
 scanner = () => {
@@ -9,7 +8,7 @@ scanner = () => {
     const from = "18572560178";
     let userNumber = "";
     const URL = "http://localhost:5000/api/sms"; // ********** CHANGE FOR DEPLOYMENT *************
-    // const URL = "https://pickemm.herokuapp.com/api";
+    // const URL = "https://pickemm.herokuapp.com/api/sms";
   
     getCustomers = () => {
       const customers = [];
@@ -17,7 +16,6 @@ scanner = () => {
         .get(`${URL}/billing`) // Get User Data
         .then(response => {
           for (let i = 0; i < response.data.length; i++) {  // ***************** USE FOR DEPLOYMENT ************
-            // for (let i = 0; i < 2; i++) {
             // Step through the user data
             customers.push(response.data[i].usersId);
           }
@@ -60,7 +58,7 @@ scanner = () => {
     };
   
     getFavorites = uid => {
-      // Get all the favorites for each this user
+      // Get all the favorites for each user
       let companies = [];
       axios
         .get(`${URL}/favorites`) // User favorites
@@ -93,7 +91,6 @@ scanner = () => {
         .then(results => {
   
           results.forEach(result => {
-           // let symbol = result.config.url
            // Pulling the company symbol out of the url
             let symbol = result.config.url.slice(55, 62)
             let newSymbol = symbol.substr(0, symbol.indexOf("&"))
@@ -109,7 +106,8 @@ scanner = () => {
             }
   
             // Subtract yesterday's Signal from yesterday's MACD  Determine if it is a positive or negative value
-            if (data[timeStamps[4]].MACD - data[timeStamps[4]].MACD_Signal > 0) {     // CHANGE THE 1'S TO 20'S FOR TESTING TO GIVE IT A LARGER RANGE
+             // CHANGE THE 1'S TO 20'S FOR TESTING TO GIVE IT A LARGER RANGE or uncomment the next line
+            if (data[timeStamps[1]].MACD - data[timeStamps[1]].MACD_Signal > 0) {    
               //if (data[timeStamps[20]].MACD - data[timeStamps[20]].MACD_Signal > 0) { 
               y = true;
             }

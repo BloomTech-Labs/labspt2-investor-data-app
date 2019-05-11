@@ -55,8 +55,7 @@ async function verifyToken(req, res, next) {
 
 
 cron.schedule("* * * * *", () => {         // Runs it every minute ** for testing purposes **
-//cron.schedule("0 18 * * *", () => {     // Run it everyday at 6pm USE THIS FOR DEPLOYMENT !!!!
-
+//cron.schedule("0 8 * * *", () => {     // Run it everyday at 8am USE THIS FOR DEPLOYMENT !!!!
   if (!running) {
     // check if app is running already
     console.log(`scanner started`);
@@ -66,7 +65,8 @@ cron.schedule("* * * * *", () => {         // Runs it every minute ** for testin
 });
 
 // Sets running to false 5 mins after the other cron is started
-cron.schedule("5 18 * * *", () => {    // Run it everyday at 6:05 pm USE THIS FOR DEPLOYMENT !!!!
+// This prevents two copies running at the same time
+cron.schedule("5 8 * * *", () => {    // Run it everyday at 6:05 pm USE THIS FOR DEPLOYMENT !!!!
   //cron.schedule("0 18 * * *", () => {     
   console.log(`running is false`);
   running = false;
