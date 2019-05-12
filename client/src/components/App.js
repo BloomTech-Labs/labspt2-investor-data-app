@@ -43,12 +43,15 @@ const AuthenticatedRoute = ({
   );
 };
 class App extends Component {
+  _isMounted = false;
   notify = () => {
     toast(
-     <div>
-        <h3 style={{textAlign:"center"}}>NEW FEATURE </h3>
-         Automatic Stock Scanner will scan your favorites and send you a text message when the MACD Signal Lines cross.
-         To activate this feature go to the settings page add your phone number. Then enable Text's under the Email and Text Preferences."
+      <div>
+        <h3 style={{ textAlign: "center" }}>NEW FEATURE </h3>
+        Automatic Stock Scanner will scan your favorites and send you a text
+        message when the MACD Signal Lines cross. To activate this feature go to
+        the settings page add your phone number. Then enable Text's under the
+        Email and Text Preferences."
       </div>,
       {
         className: css({
@@ -70,10 +73,11 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    this.removeAuthListener = fire.onAuthStateChanged(user => {
+    this._isMounted = true;
+    this.removeAuthListener = fire.onAuthStateChanged(async user => {
       if (user) {
         // Last # of occurrence of Space
-        return fire.currentUser
+        return await fire.currentUser
           .getIdToken()
           .then(idToken => {
             let space = user.displayName.lastIndexOf(" ");
@@ -129,6 +133,7 @@ class App extends Component {
       .catch(err => console.log("Error in getting user"));
   };
   componentWillUnmount = () => {
+    this._isMounted = false;
     this.removeAuthListener();
   };
   render() {
