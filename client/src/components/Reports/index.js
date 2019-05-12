@@ -19,7 +19,7 @@ import {
 } from "@material-ui/core";
 import styles from "../Styles/Reports/styles";
 import { LoadingContainer } from "../Styles/Reports/Reports";
-import { ImpulseSpinner, FireworkSpinner } from "react-spinners-kit";
+import { ImpulseSpinner } from "react-spinners-kit";
 
 import deburr from "lodash/deburr";
 import Autosuggest from "react-autosuggest";
