@@ -13,20 +13,17 @@ const billingRouter = require("./routers/billingRouter");
 const usersRouter = require("./routers/usersRouter");
 const stripeRouter = require("./routers/stripeRouter");
 const smsRouter = require("./routers/smsRouter");
-
 const bodyParser = require("body-parser");
 const cron = require("node-cron");
 const admin = require("./data/auth/firebaseMiddleware");
 const nexmo = require("./data/nexmoConfig");
 const scanner = require("./data/scanner")
+
 server.use(cors());
 server.use(express.json());
 server.use(parser);
 server.use(logger("tiny"));
 server.use(helmet());
-//server.use("/api/billing", billingRouter);
-//server.use("/api/favorites", favoritesRouter);
-//server.use("/api/users", usersRouter);
 server.use("/api/billing", verifyToken, billingRouter);
 server.use("/api/favorites", verifyToken, favoritesRouter);
 server.use("/api/users", verifyToken, usersRouter);
