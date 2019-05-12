@@ -113,7 +113,6 @@ const getSuggestionValue = suggestion => {
 };
 
 class Reports extends Component {
-  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -126,7 +125,6 @@ class Reports extends Component {
     };
   }
   componentDidMount() {
-    this._isMounted = true;
     if (this.props.location.state) {
       getData(this.props.location.state.ticker).then(data => {
         this.setState({ data, ticker: this.props.location.state.ticker });
@@ -231,9 +229,6 @@ class Reports extends Component {
     }
     return str + suffix;
   };
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
 
   render() {
     const { classes } = this.props;
@@ -266,7 +261,7 @@ class Reports extends Component {
                   to={ROUTES.DASHBOARD}
                   style={{ textDecoration: "none", alignItems: "center" }}
                 >
-                  <Typography variant="display1" className={classes.back}>
+                  <Typography variant="h4" className={classes.back}>
                     <ArrowBackIos />
                     Dashboard
                   </Typography>

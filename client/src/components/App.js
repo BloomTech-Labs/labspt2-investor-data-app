@@ -43,7 +43,6 @@ const AuthenticatedRoute = ({
   );
 };
 class App extends Component {
-  _isMounted = false;
   notify = () => {
     toast(
       <div>
@@ -73,11 +72,10 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    this._isMounted = true;
-    this.removeAuthListener = fire.onAuthStateChanged(async user => {
+    this.removeAuthListener = fire.onAuthStateChanged(user => {
       if (user) {
         // Last # of occurrence of Space
-        return await fire.currentUser
+        return fire.currentUser
           .getIdToken()
           .then(idToken => {
             let space = user.displayName.lastIndexOf(" ");
@@ -132,10 +130,10 @@ class App extends Component {
       })
       .catch(err => console.log("Error in getting user"));
   };
-  componentWillUnmount = () => {
-    this._isMounted = false;
-    this.removeAuthListener();
-  };
+  // componentWillUnmount = () => {
+  //   this._isMounted = false;
+  //   this.removeAuthListener();
+  // };
   render() {
     const { currentUser } = this.state;
     const { redirect } = this.state;
