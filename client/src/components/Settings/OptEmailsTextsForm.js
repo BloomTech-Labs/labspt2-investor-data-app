@@ -31,7 +31,16 @@ class OptEmailsTextsForm extends React.Component {
 
     return (
       <div className={classes.emailTextContainer}>
-        <Typography variant="h6">Email and text preferences</Typography>
+        <Tooltip
+          disableFocusListener
+          title={
+            <Typography color="inherit">
+              Use the text preferences to activate the Stock Scanner.
+            </Typography>
+          }
+        >
+          <Typography variant="h6">Email and text preferences</Typography>
+        </Tooltip>
         <div>
           {/* Switch for email preferences */}
           <FormControlLabel

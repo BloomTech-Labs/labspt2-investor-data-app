@@ -7,8 +7,8 @@ scanner = () => {
     const YOUR_VIRTUAL_NUMBER = "18572560178";
     //const from = "18572560178";
     let userNumber = "";
-    const URL = "http://localhost:5000/api/sms"; // ********** CHANGE FOR DEPLOYMENT *************
-    // const URL = "https://pickemm.herokuapp.com/api/sms";
+   // const URL = "http://localhost:5000/api/sms"; // ********** CHANGE FOR DEPLOYMENT *************
+     const URL = "https://pickemm.herokuapp.com/api/sms";
   
     getCustomers = () => {
       const customers = [];
@@ -44,8 +44,7 @@ scanner = () => {
                     "1" +
                     response.data[j].phoneNumber.slice(0, 3) +
                     response.data[j].phoneNumber.slice(4, 7) +
-                    response.data[j].phoneNumber.slice(-4); // Save the users phone number
-                  console.log("userNumber:", userNumber);
+                    response.data[j].phoneNumber.slice(-4); // Save the users phone number               
                   getFavorites(response.data[j].uid); // Send each user to the next subroutine
                 }
               }
@@ -70,7 +69,6 @@ scanner = () => {
               companies.push(response.data[i].symbol); // Add each symbol to companies array
             }
           }
-          console.log("companies:", companies);
           getStocks(companies); // Send the companies to next subroutine
         })
         .catch(err => {
@@ -94,7 +92,6 @@ scanner = () => {
            // Pulling the company symbol out of the url
             let symbol = result.config.url.slice(55, 62)
             let newSymbol = symbol.substr(0, symbol.indexOf("&"))
-            console.log("symbol:", newSymbol);
             let data = result.data["Technical Analysis: MACD"]; // Accesses correct object within API
             let timeStamps = Object.keys(data);
             x = false;
@@ -121,7 +118,7 @@ scanner = () => {
               let message = `The MACD Signal lines for ${newSymbol} have crossed.`   
               console.log("message:", message);
               console.log("phoneNumber:", userNumber);
-              console.log("******************************************");
+              console.log("*******************************");
               // Run the Nexmo api
               nexmo.message.sendSms(
                 YOUR_VIRTUAL_NUMBER,
