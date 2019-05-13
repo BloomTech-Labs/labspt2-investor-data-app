@@ -48,9 +48,9 @@ class App extends Component {
       <div>
         <h3 style={{ textAlign: "center" }}>NEW FEATURE </h3>
         Automatic Stock Scanner will scan your favorites and send you a text
-        message when the MACD Signal Lines cross. To activate this feature go to
-        the settings page add your phone number. Then enable Text's under the
-        Email and Text Preferences."
+        message when the MACD Signal Lines cross.To activate this feature, go
+        the Settings page and add your phone number. Then, enable Texts under
+        the Email and Text Preferences"
       </div>,
       {
         className: css({

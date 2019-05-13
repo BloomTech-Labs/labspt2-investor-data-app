@@ -41,7 +41,7 @@ class OptEmailsTextsForm extends React.Component {
                 onChange={this.handleSwitch("receiveEmails")}
                 onClick={() => {
                   toastManager.add(
-                    "Activate emails to receive information on your favorite stocks email.",
+                    "Activate email notifications to receive information on your favorite stocks.",
                     {
                       appearance: "info",
                       autoDismiss: true,
@@ -64,7 +64,7 @@ class OptEmailsTextsForm extends React.Component {
                 onChange={this.handleSwitch("receiveTexts")}
                 onClick={() => {
                   toastManager.add(
-                    "To activate the stocks scanner add your phone number and then enable texts alerts",
+                    "To activate the stocks scanner, add your phone number and then enable text alerts.",
                     {
                       appearance: "info",
                       autoDismiss: true,
