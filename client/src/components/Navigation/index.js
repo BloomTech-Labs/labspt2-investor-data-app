@@ -38,6 +38,7 @@ const styles = {
 };
 
 class Navigation extends React.Component {
+  _isMounted = false;
   state = {
     anchorEl: null,
     redirect: false

@@ -3,7 +3,7 @@ import { CardElement, injectStripe } from "react-stripe-elements";
 import axios from "axios";
 import { fire } from "../Auth/firebaseConfig";
 import PAYMENT_SERVER_URL from "../../constants/server";
-import ThankYou from "../ThankYou/index";
+// import ThankYou from "../ThankYou/index";
 import { Redirect } from "react-router";
 import * as ROUTES from "../../constants/routes";
 

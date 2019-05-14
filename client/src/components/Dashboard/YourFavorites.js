@@ -47,7 +47,7 @@ class YourFavorites extends React.Component {
 
   stockHandler = () => {
     let stock = [];
-    {
+    if (stock) {
       this.state.stocks.map(item => {
         return stock.push(item);
       });

@@ -13,7 +13,11 @@ import Signin from "./Auth/Signin";
 import { fire } from "./Auth/firebaseConfig";
 import axios from "axios";
 import ThankYou from "../components/ThankYou";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { css } from "glamor";
+//Calling Toastify without toast container
+toast.configure();
 //URL Endpoints
 // const URL = "http://localhost:5000/";
 const URL = "https://pickemm.herokuapp.com/";
@@ -39,6 +43,24 @@ const AuthenticatedRoute = ({
   );
 };
 class App extends Component {
+  notify = () => {
+    toast(
+      <div>
+        <h3 style={{ textAlign: "center" }}>NEW FEATURE </h3>
+        Automatic Stock Scanner will scan your favorites and send you a text
+        message when the MACD Signal Lines cross.To activate this feature, go
+        the Settings page and add your phone number. Then, enable Texts under
+        the Email and Text Preferences"
+      </div>,
+      {
+        className: css({
+          background: "#7407a7",
+          color: "white"
+        })
+      }
+    );
+  };
+
   state = {
     authenticated: false,
     currentUser: null,
@@ -57,6 +79,7 @@ class App extends Component {
           .getIdToken()
           .then(idToken => {
             let space = user.displayName.lastIndexOf(" ");
+            this.notify();
             axios.defaults.headers.common["Authorization"] = idToken;
             this.setState({
               currentUser: user,
@@ -107,9 +130,10 @@ class App extends Component {
       })
       .catch(err => console.log("Error in getting user"));
   };
-  componentWillUnmount = () => {
-    this.removeAuthListener();
-  };
+  // componentWillUnmount = () => {
+  //   this._isMounted = false;
+  //   this.removeAuthListener();
+  // };
   render() {
     const { currentUser } = this.state;
     const { redirect } = this.state;

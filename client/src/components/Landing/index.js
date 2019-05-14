@@ -26,7 +26,9 @@ const Landing = () => {
                 <p className="hero__text">
                   Pick Em is an investor application that makes it easier to
                   research stocks and make better investment decisions. Our easy
-                  to use app provides both beginner and sophisticated investors.
+                  to use app provides both beginner and sophisticated investors
+                  with an automated system that analyzes key financial
+                  indicators.
                 </p>
                 <Link to={ROUTES.SIGNIN} className="button button__accent">
                   Get Started
@@ -65,11 +67,7 @@ const Landing = () => {
             </div>
             <div className="step">
               <div className="step__media">
-                <img
-                  alt=""
-                  src={undraw_investing}
-                  className="step__image"
-                />
+                <img alt="" src={undraw_investing} className="step__image" />
               </div>
               <h4>Professional Investors</h4>
               <p className="step__text">

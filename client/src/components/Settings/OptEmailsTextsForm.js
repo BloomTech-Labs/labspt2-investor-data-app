@@ -4,7 +4,7 @@ import { fire } from "../Auth/firebaseConfig";
 // Redux imports
 import { connect } from "react-redux";
 import { getSettings, updateSettings } from "../../actions/settingsActions.js";
-
+import { withToastManager } from "react-toast-notifications";
 // Material UI Components
 import { withStyles } from "@material-ui/core/styles";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -28,7 +28,7 @@ class OptEmailsTextsForm extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    const { toastManager } = this.props;
     return (
       <div className={classes.emailTextContainer}>
         <Tooltip
@@ -46,8 +46,18 @@ class OptEmailsTextsForm extends React.Component {
           <FormControlLabel
             control={
               <Switch
-                checked={this.props.settings.receiveEmails}
+                checked={this.props.settings.receiveEmails ? true : false}
                 onChange={this.handleSwitch("receiveEmails")}
+                onClick={() => {
+                  toastManager.add(
+                    "Activate email notifications to receive information on your favorite stocks.",
+                    {
+                      appearance: "info",
+                      autoDismiss: true,
+                      pauseOnHover: true
+                    }
+                  );
+                }}
                 value="receiveEmails"
                 color="secondary"
               />
@@ -60,15 +70,26 @@ class OptEmailsTextsForm extends React.Component {
             disableFocusListener
             title={
               <Typography color="inherit">
-                Activate the Stock Scanner, also need to enter a valid phone number to receive texts.
+                Activate the Stock Scanner, also need to enter a valid phone
+                number to receive texts.
               </Typography>
             }
           >
             <FormControlLabel
               control={
                 <Switch
-                  checked={this.props.settings.receiveTexts}
+                  checked={this.props.settings.receiveTexts ? true : false}
                   onChange={this.handleSwitch("receiveTexts")}
+                  onClick={() => {
+                    toastManager.add(
+                      "To activate the stocks scanner add your phone number and then enable texts alerts",
+                      {
+                        appearance: "info",
+                        autoDismiss: true,
+                        pauseOnHover: true
+                      }
+                    );
+                  }}
                   value="receiveTexts"
                   color="secondary"
                 />
@@ -97,9 +118,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateSettings(uid, updatedCommPreference))
 });
 
-export default withStyles(styles)(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(OptEmailsTextsForm)
+export default withToastManager(
+  withStyles(styles)(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(OptEmailsTextsForm)
+  )
 );

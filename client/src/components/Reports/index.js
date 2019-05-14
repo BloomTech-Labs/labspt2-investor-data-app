@@ -19,7 +19,7 @@ import {
 } from "@material-ui/core";
 import styles from "../Styles/Reports/styles";
 import { LoadingContainer } from "../Styles/Reports/Reports";
-import { ImpulseSpinner, FireworkSpinner } from "react-spinners-kit";
+import { ImpulseSpinner } from "react-spinners-kit";
 
 import deburr from "lodash/deburr";
 import Autosuggest from "react-autosuggest";
@@ -113,7 +113,6 @@ const getSuggestionValue = suggestion => {
 };
 
 class Reports extends Component {
-  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -126,12 +125,6 @@ class Reports extends Component {
     };
   }
   componentDidMount() {
-    this._isMounted = true;
-    if (this._isMounted) {
-      const uid = fire.currentUser.uid;
-      this.props.getAcct(uid);
-    }
-
     if (this.props.location.state) {
       getData(this.props.location.state.ticker).then(data => {
         this.setState({ data, ticker: this.props.location.state.ticker });
@@ -141,9 +134,9 @@ class Reports extends Component {
         this.setState({ data, ticker: "AAPL" });
       });
     }
-  }
-  componentWillUnmount() {
-    this._isMounted = false;
+
+    const uid = fire.currentUser.uid;
+    this.props.getAcct(uid);
   }
 
   handleSuggestionsFetchRequested = ({ value }) => {
@@ -268,7 +261,7 @@ class Reports extends Component {
                   to={ROUTES.DASHBOARD}
                   style={{ textDecoration: "none", alignItems: "center" }}
                 >
-                  <Typography variant="display1" className={classes.back}>
+                  <Typography variant="h4" className={classes.back}>
                     <ArrowBackIos />
                     Dashboard
                   </Typography>

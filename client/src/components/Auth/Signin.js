@@ -3,6 +3,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import { fire } from "./firebaseConfig"; // This is being used to provide apiKey to Authentication do not remove
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+
 import { Redirect } from "react-router-dom";
 import styles from "../Styles/Signin/styles";
 import {
@@ -13,6 +14,7 @@ import {
   Avatar
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+
 class Signin extends Component {
   isIOS = () => {
     // IF this is IOS redirect if its web use popup
@@ -41,10 +43,10 @@ class Signin extends Component {
     const { from } = this.props.location.state || {
       from: { pathname: "/dashboard" }
     };
-
     if (this.props.redirect === true) {
       return <Redirect to={from} />;
     }
+
     return (
       <main className={classes.main}>
         <CssBaseline />

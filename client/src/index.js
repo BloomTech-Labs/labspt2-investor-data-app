@@ -9,7 +9,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import rootReducer from "./reducers/index";
-
+import { ToastProvider } from "react-toast-notifications";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 require("dotenv").config("/.env");
 
@@ -54,7 +54,9 @@ ReactDOM.render(
   <MuiThemeProvider theme={theme}>
     <Provider store={store}>
       <Router>
-        <App />
+        <ToastProvider>
+          <App />
+        </ToastProvider>
       </Router>
     </Provider>
   </MuiThemeProvider>,
