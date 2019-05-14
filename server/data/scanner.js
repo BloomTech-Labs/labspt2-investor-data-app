@@ -129,6 +129,8 @@ getStocks = companies => {
                 console.log(err);
               } else {
                 console.dir(responseData);
+                // need to add code to check the response in order to make the app slow down
+                // when the data speed exceeds acceptable values
               }
             }
           );
