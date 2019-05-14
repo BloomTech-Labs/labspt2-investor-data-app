@@ -9,7 +9,7 @@ import { getSettings, updateSettings } from "../../actions/settingsActions.js";
 import { withStyles } from "@material-ui/core/styles";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import Typography from "@material-ui/core/Typography";
+import { Typography, Tooltip } from "@material-ui/core";
 
 // WithStyles
 import styles from "../Styles/Settings/styles";
@@ -31,7 +31,16 @@ class OptEmailsTextsForm extends React.Component {
 
     return (
       <div className={classes.emailTextContainer}>
-        <Typography variant="h6">Email and text preferences</Typography>
+        <Tooltip
+          disableFocusListener
+          title={
+            <Typography color="inherit">
+              Use the text preferences to activate the Stock Scanner.
+            </Typography>
+          }
+        >
+          <Typography variant="h6">Email and text preferences</Typography>
+        </Tooltip>
         <div>
           {/* Switch for email preferences */}
           <FormControlLabel
@@ -47,18 +56,27 @@ class OptEmailsTextsForm extends React.Component {
             className={classes.optSwitch}
           />
           {/* Switch for text preferences */}
-          <FormControlLabel
-            control={
-              <Switch
-                checked={this.props.settings.receiveTexts}
-                onChange={this.handleSwitch("receiveTexts")}
-                value="receiveTexts"
-                color="secondary"
-              />
+          <Tooltip
+            disableFocusListener
+            title={
+              <Typography color="inherit">
+                Activate the Stock Scanner, also need to enter a valid phone number to receive texts.
+              </Typography>
             }
-            label="Texts?"
-            className={classes.optSwitch}
-          />
+          >
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={this.props.settings.receiveTexts}
+                  onChange={this.handleSwitch("receiveTexts")}
+                  value="receiveTexts"
+                  color="secondary"
+                />
+              }
+              label="Texts?"
+              className={classes.optSwitch}
+            />
+          </Tooltip>
         </div>
       </div>
     );
