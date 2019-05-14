@@ -51,8 +51,8 @@ async function verifyToken(req, res, next) {
 }
 
 
-//cron.schedule("* * * * *", () => {         // Runs it every minute ** for testing purposes **
-cron.schedule("0 8 * * *", () => {     // Run it everyday at 8am USE THIS FOR DEPLOYMENT !!!!
+cron.schedule("* * * * *", () => {         // Runs it every minute ** for testing purposes **
+//cron.schedule("0 8 * * *", () => {     // Run it everyday at 8am USE THIS FOR DEPLOYMENT !!!!
   // check if function is running already
   if (!running) {
     console.log(`scanner started`);

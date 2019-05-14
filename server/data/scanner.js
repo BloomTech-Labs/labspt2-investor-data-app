@@ -3,10 +3,10 @@ const nexmo = require("./nexmoConfig");
 
 
 scanner = () => {
-
+console.log("made it here")
   const YOUR_VIRTUAL_NUMBER = "18572560178";
   let userNumber = "";
-  //const URL = "http://localhost:5000/api/sms"; // ********** CHANGE FOR DEPLOYMENT *************
+ // const URL = "http://localhost:5000/api/sms"; // ********** CHANGE FOR DEPLOYMENT *************
   const URL = "https://pickemm.herokuapp.com/api/sms";
 
   getCustomers = () => {
@@ -16,9 +16,11 @@ scanner = () => {
       .then(response => {
         for (let i = 0; i < response.data.length; i++) {  // ***************** USE FOR DEPLOYMENT ************
           // Step through the user data
+         console.log("response.data:", response.data[i].usersId)
           customers.push(response.data[i].usersId);
         }
         // Send users to the next subroutine
+      
         getUsers(customers);
       })
       .catch(err => {
@@ -27,24 +29,34 @@ scanner = () => {
   };
 
   getUsers = customers => {
+    console.log("made it to getUsers2")
     axios
       .get(`${URL}/users`) // Get User Data
       .then(response => {
         // for (let i = 0; i < response.data.length; i++) {  // ***************** USE FOR DEPLOYMENT ************
         for (let i = 0; i < customers.length; i++) {
+          console.log("i:", i)
           // Step through the user data
           for (let j = 0; j < response.data.length; j++) {
+            console.log("j:", j)
             // Check if user is a match to billing usersId
+            console.log("response.data[j].uid:", response.data[j].uid)
+            console.log("customers[i]:", customers[i])
             if (response.data[j].uid === customers[i]) {
               // Check if receiveTexts is enabled
-              if (response.data[i].receiveTexts === 1) {
+              console.log("response.data[i].receiveTexts:", response.data[i].receiveTexts)
+              if (response.data[j].receiveTexts === true) {
                 // Format the users number
+                console.log("response.data[j].phoneNumber:", response.data[j].phoneNumber)
+                //+1 (606) 671-0901
                 userNumber =
-                  "1" +
-                  response.data[j].phoneNumber.slice(0, 3) +
+                "1" +  
+                response.data[j].phoneNumber.slice(1, 1) +
                   response.data[j].phoneNumber.slice(4, 7) +
+                  response.data[j].phoneNumber.slice(9, 12) +
                   response.data[j].phoneNumber.slice(-4); // Save the users phone number               
-                getFavorites(response.data[j].uid); // Send each user to the next subroutine
+               console.log("userNumber:", userNumber)
+                  getFavorites(response.data[j].uid); // Send each user to the next subroutine
               }
             }
           }
@@ -57,6 +69,7 @@ scanner = () => {
 
   getFavorites = uid => {
     // Get all the favorites for each user
+    console.log("made it to getfavorites")
     let companies = [];
     axios
       .get(`${URL}/favorites`) // User favorites
@@ -76,6 +89,7 @@ scanner = () => {
   };
 
   getStocks = companies => {
+    console.log("made it to getstocks")
     let promises = companies.map((company) =>
       axios.get(`https://www.alphavantage.co/query?function=MACD&symbol=${company}&interval=daily&series_type=open&apikey=TFUONSVQ3ZDFXFPG`));
 
