@@ -3,10 +3,9 @@ const nexmo = require("./nexmoConfig");
 
 
 scanner = () => {
-
   const YOUR_VIRTUAL_NUMBER = "18572560178";
   let userNumber = "";
-  //const URL = "http://localhost:5000/api/sms"; // ********** CHANGE FOR DEPLOYMENT *************
+ // const URL = "http://localhost:5000/api/sms"; // ********** CHANGE FOR DEPLOYMENT *************
   const URL = "https://pickemm.herokuapp.com/api/sms";
 
   getCustomers = () => {
@@ -15,10 +14,10 @@ scanner = () => {
       .get(`${URL}/billing`) // Get User Data
       .then(response => {
         for (let i = 0; i < response.data.length; i++) {  // ***************** USE FOR DEPLOYMENT ************
-          // Step through the user data
+          // Step through the user data  
           customers.push(response.data[i].usersId);
         }
-        // Send users to the next subroutine
+        // Send users to the next subroutine 
         getUsers(customers);
       })
       .catch(err => {
@@ -26,25 +25,27 @@ scanner = () => {
       });
   };
 
-  getUsers = customers => {
+  getUsers = customers => { 
     axios
       .get(`${URL}/users`) // Get User Data
       .then(response => {
         // for (let i = 0; i < response.data.length; i++) {  // ***************** USE FOR DEPLOYMENT ************
-        for (let i = 0; i < customers.length; i++) {
+        for (let i = 0; i < customers.length; i++) {        
           // Step through the user data
-          for (let j = 0; j < response.data.length; j++) {
-            // Check if user is a match to billing usersId
+          for (let j = 0; j < response.data.length; j++) {   
+            // Check if user is a match to billing usersId     
             if (response.data[j].uid === customers[i]) {
-              // Check if receiveTexts is enabled
-              if (response.data[i].receiveTexts === 1) {
-                // Format the users number
+              // Check if receiveTexts is enabled        
+              if (response.data[j].receiveTexts === true) {
+                // Format the users number        
                 userNumber =
-                  "1" +
-                  response.data[j].phoneNumber.slice(0, 3) +
+                "1" +  
+                response.data[j].phoneNumber.slice(1, 1) +
                   response.data[j].phoneNumber.slice(4, 7) +
+                  response.data[j].phoneNumber.slice(9, 12) +
                   response.data[j].phoneNumber.slice(-4); // Save the users phone number               
-                getFavorites(response.data[j].uid); // Send each user to the next subroutine
+               
+                  getFavorites(response.data[j].uid); // Send each user to the next subroutine
               }
             }
           }
@@ -56,7 +57,7 @@ scanner = () => {
   };
 
   getFavorites = uid => {
-    // Get all the favorites for each user
+    // Get all the favorites for each user 
     let companies = [];
     axios
       .get(`${URL}/favorites`) // User favorites
@@ -76,6 +77,7 @@ scanner = () => {
   };
 
   getStocks = companies => {
+  
     let promises = companies.map((company) =>
       axios.get(`https://www.alphavantage.co/query?function=MACD&symbol=${company}&interval=daily&series_type=open&apikey=TFUONSVQ3ZDFXFPG`));
 
