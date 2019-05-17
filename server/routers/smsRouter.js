@@ -4,8 +4,8 @@ const users = require("../data/helpers/usersModel");
 const billing = require("../data/helpers/billingModel");
 const favorites = require("../data/helpers/favoritesModel");
 
-router.get("/users", (req, res) => {
-    users
+router.get("/users", async (req, res) => {
+   await users
       .get()
       .then(user => {
         res.status(200).json(user);
@@ -15,8 +15,8 @@ router.get("/users", (req, res) => {
       });
   });
 
-  router.get("/billing", (req, res) => {
-    billing
+  router.get("/billing", async (req, res) => {
+    await billing
       .get()
       .then(bill => {
         res.status(200).json(bill);
@@ -26,8 +26,8 @@ router.get("/users", (req, res) => {
       });
   });
 
-  router.get("/favorites", (req, res) => {
-    favorites
+  router.get("/favorites", async (req, res) => {
+    await favorites
       .get()
       .then(favorite => {
         res.status(200).json(favorite);
