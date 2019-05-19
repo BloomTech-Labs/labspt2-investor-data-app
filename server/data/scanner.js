@@ -5,7 +5,7 @@ const nexmo = require("./nexmoConfig");
 scanner = () => {
   const YOUR_VIRTUAL_NUMBER = "18572560178";
   let userNumber = "";
- // const URL = "http://localhost:5000/api/sms"; // ********** CHANGE FOR DEPLOYMENT *************
+  //  const URL = "http://localhost:5000/api/sms"; // ********** CHANGE FOR DEPLOYMENT *************
   const URL = "https://pickemm.herokuapp.com/api/sms";
 
   getCustomers = () => {
@@ -13,10 +13,10 @@ scanner = () => {
     axios
       .get(`${URL}/billing`) // Get User Data
       .then(response => {
-        for (let i = 0; i < response.data.length; i++) {  // ***************** USE FOR DEPLOYMENT ************
+        response.data.forEach(result => {
           // Step through the user data  
-          customers.push(response.data[i].usersId);
-        }
+          customers.push(result.usersId);
+        })
         // Send users to the next subroutine 
         getUsers(customers);
       })
@@ -30,14 +30,14 @@ scanner = () => {
       .get(`${URL}/users`) // Get User Data
       .then(response => {
 
-        customers.forEach(result => {    
+        customers.forEach(result => {
           // Step through the user data
-          response.data.forEach(results => {     
+          response.data.forEach(results => {
             // Check if user is a match to billing usersId     
             if (results.uid === result) {
               // Check if receiveTexts is enabled        
-               if (results.receiveTexts === true) {   // ***************** USE FOR DEPLOYMENT ************
-             // if (results.receiveTexts === 1) {
+              if (results.receiveTexts === true) {   // ***************** USE FOR DEPLOYMENT ************
+                // if (results.receiveTexts === 1) {
                 // Format the users number        
                 userNumber =
                   "1" +
@@ -46,8 +46,7 @@ scanner = () => {
                   results.phoneNumber.slice(9, 12) +
                   results.phoneNumber.slice(-4); // Save the users phone number               
                 console.log("userNumber:", userNumber)
-      
-              
+
                 getFavorites(results.uid, userNumber); // Send each user to the next subroutine
               }
             }
@@ -71,9 +70,6 @@ scanner = () => {
             // Check for a match to the user uid
             companies.push(result.symbol); // Add each symbol to companies array
           }
-          console.log("Checking Number:", phoneNumber)
-          console.log("Checking Uid:", uid)
-          //console.log("Checking i:", i)
         })
         getStocks(companies, phoneNumber); // Send the companies to next subroutine
       })
@@ -97,8 +93,6 @@ scanner = () => {
 
         results.forEach(result => {
           // Pulling the company symbol out of the url
-
-          // function sms() {
           let symbol = result.config.url.slice(55, 62)
           let newSymbol = symbol.substr(0, symbol.indexOf("&"))
           let data = result.data["Technical Analysis: MACD"]; // Accesses correct object within API
@@ -120,15 +114,12 @@ scanner = () => {
 
           // If the 2 values aren't equal then the lines crossed, If they are both true or both false the lines did not cross
           if (!x === y) {
-            let test = Date.now() + 2000
-              let z = 0
-              console.log("Date:", test)
-              do {
-                z = z + 1;
-
-              }
-
-            while (Date.now() < test) 
+            let test = Date.now() + 5000
+            let z = 0
+            do {
+              z = z + 1;
+            }
+            while (Date.now() < test)
             x = false;
             y = false;
             console.log("the lines have crossed");
@@ -138,8 +129,6 @@ scanner = () => {
             console.log("phoneNumber:", phoneNumber);
             console.log("*******************************");
             // Run the Nexmo api
-            //   function sms() {
-
             nexmo.message.sendSms(
               YOUR_VIRTUAL_NUMBER,
               phoneNumber,
@@ -149,25 +138,13 @@ scanner = () => {
                   console.log(err);
                 } else {
                   console.dir(responseData);
-                  // Need to check the response text and see if we need to resend the text
-                  // If yes, the app needs to wait and then resend the text
                 }
               }
-            );//}
-
-
-
+            );
           } else {
             console.log("the lines have not crossed");
           }
-
-          //  }
-
-          //  setTimeout(sms, 1000); 
         });
-
-
-
       })
       .catch(error => {
         console.error("There was an error with the network requests", error);
