@@ -14,7 +14,6 @@ scanner = () => {
       .get(`${URL}/billing`) // Get User Data
       .then(response => {
         response.data.forEach(result => {
-          // Step through the user data  
           customers.push(result.usersId);
         })
         // Send users to the next subroutine 
@@ -29,16 +28,18 @@ scanner = () => {
     axios
       .get(`${URL}/users`) // Get User Data
       .then(response => {
-
         customers.forEach(result => {
           // Step through the user data
           response.data.forEach(results => {
             // Check if user is a match to billing usersId     
             if (results.uid === result) {
               // Check if receiveTexts is enabled        
+              // change this to run on local host, it's stored as 1's and 0's on our sqlite db.
               if (results.receiveTexts === true) {   // ***************** USE FOR DEPLOYMENT ************
-                // if (results.receiveTexts === 1) {
-                // Format the users number        
+                // if (results.receiveTexts === 1) { // Use this to check on local host
+                // *************************************************************************************
+                // if you run this on local host make sure your phone number is formatted: +n (nnn) nnn-nnnn
+                // the phone number is formatted incorrectly on our sqlite db.        
                 userNumber =
                   "1" +
                   results.phoneNumber.slice(1, 1) +
@@ -46,7 +47,6 @@ scanner = () => {
                   results.phoneNumber.slice(9, 12) +
                   results.phoneNumber.slice(-4); // Save the users phone number               
                 console.log("userNumber:", userNumber)
-
                 getFavorites(results.uid, userNumber); // Send each user to the next subroutine
               }
             }
@@ -114,12 +114,15 @@ scanner = () => {
 
           // If the 2 values aren't equal then the lines crossed, If they are both true or both false the lines did not cross
           if (!x === y) {
+            // this is the only way I could get the timing to work
+            // refactor this at some point to increase reliability
             let test = Date.now() + 5000
             let z = 0
             do {
               z = z + 1;
             }
             while (Date.now() < test)
+            // end of timing loop
             x = false;
             y = false;
             console.log("the lines have crossed");
