@@ -5,7 +5,7 @@ const nexmo = require("./nexmoConfig");
 scanner = () => {
   const YOUR_VIRTUAL_NUMBER = "18572560178";
   let userNumber = "";
- // const URL = "http://localhost:5000/api/sms"; // ********** CHANGE FOR DEPLOYMENT *************
+  //  const URL = "http://localhost:5000/api/sms"; // ********** CHANGE FOR DEPLOYMENT *************
   const URL = "https://pickemm.herokuapp.com/api/sms";
 
   getCustomers = () => {
@@ -13,10 +13,9 @@ scanner = () => {
     axios
       .get(`${URL}/billing`) // Get User Data
       .then(response => {
-        for (let i = 0; i < response.data.length; i++) {  // ***************** USE FOR DEPLOYMENT ************
-          // Step through the user data  
-          customers.push(response.data[i].usersId);
-        }
+        response.data.forEach(result => {
+          customers.push(result.usersId);
+        })
         // Send users to the next subroutine 
         getUsers(customers);
       })
@@ -25,59 +24,62 @@ scanner = () => {
       });
   };
 
-  getUsers = customers => { 
+  getUsers = customers => {
     axios
       .get(`${URL}/users`) // Get User Data
       .then(response => {
-        // for (let i = 0; i < response.data.length; i++) {  // ***************** USE FOR DEPLOYMENT ************
-        for (let i = 0; i < customers.length; i++) {        
+        customers.forEach(result => {
           // Step through the user data
-          for (let j = 0; j < response.data.length; j++) {   
+          response.data.forEach(results => {
             // Check if user is a match to billing usersId     
-            if (response.data[j].uid === customers[i]) {
+            if (results.uid === result) {
               // Check if receiveTexts is enabled        
-              if (response.data[j].receiveTexts === true) {
-                // Format the users number        
+              // change this to run on local host, it's stored as 1's and 0's on our sqlite db.
+              if (results.receiveTexts === true) {   // ***************** USE FOR DEPLOYMENT ************
+                // if (results.receiveTexts === 1) { // Use this to check on local host
+                // *************************************************************************************
+                // if you run this on local host make sure your phone number is formatted: +n (nnn) nnn-nnnn
+                // the phone number is formatted incorrectly on our sqlite db.        
                 userNumber =
-                "1" +  
-                response.data[j].phoneNumber.slice(1, 1) +
-                  response.data[j].phoneNumber.slice(4, 7) +
-                  response.data[j].phoneNumber.slice(9, 12) +
-                  response.data[j].phoneNumber.slice(-4); // Save the users phone number               
-               
-                  getFavorites(response.data[j].uid); // Send each user to the next subroutine
+                  "1" +
+                  results.phoneNumber.slice(1, 1) +
+                  results.phoneNumber.slice(4, 7) +
+                  results.phoneNumber.slice(9, 12) +
+                  results.phoneNumber.slice(-4); // Save the users phone number               
+                console.log("userNumber:", userNumber)
+                getFavorites(results.uid, userNumber); // Send each user to the next subroutine
               }
             }
-          }
-        }
+          })
+        })
       })
       .catch(err => {
         console.log("There was an error accessing the users table", err);
       });
   };
 
-  getFavorites = uid => {
+  getFavorites = (uid, phoneNumber) => {
     // Get all the favorites for each user 
     let companies = [];
     axios
       .get(`${URL}/favorites`) // User favorites
       .then(response => {
-        for (let i = 0; i < response.data.length; i++) {
+        response.data.forEach(result => {
           // Step through the favorites data
-          if (response.data[i].uid === uid) {
+          if (result.uid === uid) {
             // Check for a match to the user uid
-            companies.push(response.data[i].symbol); // Add each symbol to companies array
+            companies.push(result.symbol); // Add each symbol to companies array
           }
-        }
-        getStocks(companies); // Send the companies to next subroutine
+        })
+        getStocks(companies, phoneNumber); // Send the companies to next subroutine
       })
       .catch(err => {
         console.log("There was an error");
       });
   };
 
-  getStocks = companies => {
-  
+  getStocks = (companies, phoneNumber) => {
+
     let promises = companies.map((company) =>
       axios.get(`https://www.alphavantage.co/query?function=MACD&symbol=${company}&interval=daily&series_type=open&apikey=TFUONSVQ3ZDFXFPG`));
 
@@ -112,18 +114,27 @@ scanner = () => {
 
           // If the 2 values aren't equal then the lines crossed, If they are both true or both false the lines did not cross
           if (!x === y) {
+            // this is the only way I could get the timing to work
+            // refactor this at some point to increase reliability
+            let test = Date.now() + 5000
+            let z = 0
+            do {
+              z = z + 1;
+            }
+            while (Date.now() < test)
+            // end of timing loop
             x = false;
             y = false;
             console.log("the lines have crossed");
             // Construct user text message
             let message = `The MACD Signal lines for ${newSymbol} have crossed.`
             console.log("message:", message);
-            console.log("phoneNumber:", userNumber);
+            console.log("phoneNumber:", phoneNumber);
             console.log("*******************************");
             // Run the Nexmo api
             nexmo.message.sendSms(
               YOUR_VIRTUAL_NUMBER,
-              userNumber,            
+              phoneNumber,
               message,
               (err, responseData) => {
                 if (err) {
