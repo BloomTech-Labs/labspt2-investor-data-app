@@ -9,7 +9,9 @@ import {
   StockSymbol,
   Star
 } from "../Styles/Stocks/LiveTickerStyles";
+import { CardBlock } from "../Styles/Stocks/InvestmentStocks";
 import { Tooltip, Typography } from "@material-ui/core";
+import Button from "../Styles/Stocks/Button.jsx";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 
@@ -50,6 +52,10 @@ class InvestmentStocks extends React.Component {
     // Receives array of companies and returns values of the stock symbols from the api
     let stocks = [];
     let timeStamp;
+    let newInvestment = 0;
+    let investmentAccum = 0;
+    let currentStockValue = 0;
+
     axios
       .all(promises)
       .then(results => {
@@ -64,26 +70,36 @@ class InvestmentStocks extends React.Component {
           let timeStamps = Object.keys(data);
           let current = data[timeStamps[0]];
           timeStamp = timeStamps[0];
+          
           this.props.investments.forEach((item, index) => {
             if (item.symbol === result.data["Meta Data"]["2. Symbol"]) {
-              let newInvestment = item.sharesPurch * item.sharesPrice;
-
+              newInvestment = item.sharesPurch * item.sharesPrice;
+              investmentAccum = investmentAccum + newInvestment;
+              //currentStockValue = item.sharesPurch * 
               stocks.push({
                 company: result.data["Meta Data"]["2. Symbol"], // Collects stock symbol
-                values: current
+                values: current,
+                balance: item.balance,
+                sharesPurch: item.sharesPurch,
+                sharesPrice: item.sharesPrice,
+                investment: newInvestment
               });
-        }
-      })
+            }
+          });
         });
-
+       
+        /*  this.setState({
+          balance: item.balance,
+          sharesPurch: item.sharesPurch,
+          sharesPrice: item.sharesPrice,
+          investment: newInvestment
+        }); */
         this.setState({
           stocks,
           timeStamp,
-          balance: item.balance,
-              sharesPurch: item.sharesPurch,
-              sharesPrice: item.sharesPrice,
-              investment: newInvestment
+          balance: 20000 - investmentAccum
         });
+        console.log("balance: ", this.state.balance)
       })
       .catch(error => {
         console.error("There was an error with the network requests", error);
@@ -281,20 +297,29 @@ returnHandler = () => {
                 )}`}
               </p>
             </Row>
-            <Row>
-              <p>Shares Purch: {this.state.sharesPurch}</p>
-              <p
-                style={{
-                  marginLeft: "10px"
-                }}
-              >
-                Share Price: {this.state.sharesPrice}
-              </p>
-            </Row>
-            <Row>
-              <p>Investment: {this.state.investment}</p>
-              <p> </p>
-            </Row>
+            <CardBlock>
+              <Row>
+                <p style={{ marginLeft: "0px" }}>Shares Purch: {stock.sharesPurch}</p>
+                <p
+                  style={{
+                    marginLeft: "10px"
+                  }}
+                >
+                  Share Price: {stock.sharesPrice}
+                </p>
+              </Row>
+              <Row>
+                <p style={{ marginLeft: "0px" }}>Total Investment: {stock.investment}</p>
+               
+                  <p>Difference%: {`${this.changePercent(
+                    stock.values[close],
+                    stock.sharesPrice
+                  )}`}</p>
+                  <p>Current Stock Value:  {stock.values[close] * stock.sharesPurch} </p>
+               <p> <Button color="success" size="sm" onClick={e => e.preventDefault()}>BUY</Button>
+                <Button color="danger" size="sm" onClick={e => e.preventDefault()}>SELL</Button> </p>
+              </Row>
+            </CardBlock>
             <br />
             <hr />
           </TickerContainer>
