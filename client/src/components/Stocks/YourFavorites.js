@@ -1,17 +1,24 @@
 import React from "react";
 import axios from "axios";
 import { Typography } from "@material-ui/core";
-import FavoriteStocks from "./FavoriteStocks";
+import InvestmentStocks from "./InvestmentStocks";
 import { fire } from "../Auth/firebaseConfig";
 //const URL = "https://pickemm.herokuapp.com/api";
 const URL = "http://localhost:5000/api";
-class YourFavorites extends React.Component {
+class Investments extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       timeStamp: {},
       companies: [], // stock company symbols
+      investments: [],
       stocks: [],
+      balance: 0,
+      symbol: "",
+      sharesPrice: 0,
+      sharesPurch: 0,
+      datePurch: "",
+      investment: 0,
       uid: "",
       search: ""
     };
@@ -27,12 +34,12 @@ class YourFavorites extends React.Component {
 
   fetchUserStocks = uid => {
     axios
-      .get(`${URL}/favorites`) // <----user favorites
+      .get(`${URL}/stocks`) // <----user Investments
       .then(response => {
         let stock = [];
         response.data.forEach((item, index) => {
           if (item.uid === uid) {
-            stock.push(item.symbol);
+            stock.push(item);
           }
         });
         this.setState({
@@ -49,17 +56,26 @@ class YourFavorites extends React.Component {
     let stock = [];
     if (stock) {
       this.state.stocks.map(item => {
-        return stock.push(item);
+        return stock.push(item.symbol);
       });
     }
     this.setState({
       companies: Array.from(new Set(stock))
     });
+    let investment = [];
+    if (investment) {
+      this.state.stocks.map(item => {
+        return investment.push(item);
+      });
+    }
+    this.setState({
+      investments: investment
+    });
   };
 
   render() {
     if (!this.state.companies.length) {
-      return "You currently have no favorites";
+      return "You currently have no Investments";
     }
     return (
       <div>
@@ -72,15 +88,18 @@ class YourFavorites extends React.Component {
             justifyContent: "center"
           }}
         >
-          My Favorite Stocks
+          My Investment Stocks
         </Typography>
         {""}
         <div>
-          <FavoriteStocks companies={this.state.companies} />
+          <InvestmentStocks
+            companies={this.state.companies}
+            investments={this.state.investments}
+          />
         </div>
       </div>
     );
   }
 }
 
-export default YourFavorites;
+export default Investments;

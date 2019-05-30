@@ -13,11 +13,12 @@ import {
   Zoom
 } from "@material-ui/core";
 import { fire } from "../Auth/firebaseConfig";
-import LiveTicker from "./LiveTicker";
-import YourFavorites from "./YourFavorites";
-import KeyIndicators from "./KeyIndicators";
-import styles from "../Styles/Dashboard/styles";
-import GridContainer from "../Styles/Dashboard/GridContainer.jsx";
+//import LiveTicker from "../Dashboard/LiveTicker";
+import Investments from "./Investments";
+//import KeyIndicators from "../Dashboard/KeyIndicators";
+import BalanceInfo from "./BalanceInfo";
+import styles from "../Styles/Stocks/styles";
+import GridContainer from "../Styles/Stocks/GridContainer.jsx";
 import deburr from "lodash/deburr";
 import Autosuggest from "react-autosuggest";
 import match from "autosuggest-highlight/match";
@@ -95,7 +96,7 @@ const getSuggestionValue = suggestion => {
   return suggestion.label;
 };
 
-class Dashboard extends Component {
+class Stocks extends Component {
   state = {
     value: 0,
     data: [],
@@ -139,7 +140,7 @@ class Dashboard extends Component {
       uid: this.state.uid
     };
     axios
-      .post(`${URL}/favorites`, newSymbol)
+      .post(`${URL}/stocks`, newSymbol)
       .then(response => {
         this.setState({
           newSymbol: { symbol: "", uid: "" }
@@ -195,13 +196,8 @@ class Dashboard extends Component {
                 <Grid item sm={4}>
                   <Paper className={classes.paper}>
                     <Zoom in={checked}>
-                      <YourFavorites />
+                      <Investments />
                     </Zoom>
-                  </Paper>
-                </Grid>
-                <Grid item sm>
-                  <Paper className={classes.paper}>
-                    <KeyIndicators />
                   </Paper>
                 </Grid>
                 <Grid item xs={12}>
@@ -211,14 +207,14 @@ class Dashboard extends Component {
                       gutterBottom
                       style={{ paddingLeft: "20px" }}
                     >
-                      Dashboard
+                      Stocks
                     </Typography>
                     <div>
                       <Autosuggest
                         {...autosuggestProps}
                         inputProps={{
                           classes,
-                          placeholder: "Add Stocks to Favorites...",
+                          placeholder: "Get Stock info...",
                           value: this.state.popper,
                           onChange: this.handleChange("popper"),
                           inputRef: node => {
@@ -258,7 +254,7 @@ class Dashboard extends Component {
                         )}
                       />
                     </div>
-                    <LiveTicker />
+                    <BalanceInfo />
                   </div>
                 </Grid>
               </Grid>
@@ -270,8 +266,8 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.propTypes = {
+Stocks.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Dashboard);
+export default withStyles(styles)(Stocks);

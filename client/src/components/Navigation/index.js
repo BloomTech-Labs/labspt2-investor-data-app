@@ -125,6 +125,13 @@ class Navigation extends React.Component {
                   </Link>
                   <Link
                     component={RouterLink}
+                    to={ROUTES.STOCKS}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <MenuItem onClick={this.handleMenuClose}>Stocks</MenuItem>
+                  </Link>
+                  <Link
+                    component={RouterLink}
                     to={ROUTES.SETTINGS}
                     style={{ textDecoration: "none" }}
                   >

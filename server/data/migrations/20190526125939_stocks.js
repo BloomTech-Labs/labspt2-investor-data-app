@@ -4,8 +4,8 @@ exports.up = function (knex, Promise) {
         knex.schema.createTable('stocks', (stocks) => {
             stocks.increments();
             stocks.string('symbol', 128).notNullable();
-            stocks.decimal('balance').scale();
-            stocks.decimal('sharesPrice').scale();
+            stocks.decimal('balance');
+            stocks.decimal('sharesPrice');
             stocks.integer('sharesPurch').unsigned();
             stocks
                 .string('uid')

@@ -6,6 +6,7 @@ import Landing from "../components/Landing";
 import Dashboard from "../components/Dashboard";
 import Settings from "../components/Settings";
 import Billing from "../components/Billing";
+import Stocks from "../components/Stocks";
 import Reports from "../components/Reports";
 import * as ROUTES from "../constants/routes";
 import "./App.css";
@@ -19,8 +20,8 @@ import { css } from "glamor";
 //Calling Toastify without toast container
 toast.configure();
 //URL Endpoints
-// const URL = "http://localhost:5000/";
-const URL = "https://pickemm.herokuapp.com/";
+const URL = "http://localhost:5000/";
+//const URL = "https://pickemm.herokuapp.com/";
 
 const AuthenticatedRoute = ({
   component: Component,
@@ -165,6 +166,11 @@ class App extends Component {
             authenticated={this.state.authenticated}
             path={ROUTES.REPORTS}
             component={Reports}
+          />
+          <AuthenticatedRoute
+            authenticated={this.state.authenticated}
+            path={ROUTES.STOCKS}
+            component={Stocks}
           />
           <Route exact path={ROUTES.THANKYOU} component={ThankYou} />
           <Route
