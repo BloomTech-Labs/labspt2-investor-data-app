@@ -7,15 +7,23 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Tooltip from "@material-ui/core/Tooltip";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Icon from "@material-ui/core/Icon";
+import Face from "@material-ui/icons/Face";
+import Email from "@material-ui/icons/Email";
 import Popover from "@material-ui/core/Popover";
 // @material-ui/icons
 import Close from "@material-ui/icons/Close";
 // core components
 import Button from "../Styles/Stocks/jsx/Button.jsx";
-
+import CustomInput from "../Styles/Stocks/jsx/CustomInput.jsx";
 import modalStyle from "../Styles/Stocks/jsx/modalStyle.jsx";
 import popoverStyles from "../Styles/Stocks/jsx/popoverStyles.jsx";
+import Check from "@material-ui/icons/Check";
 import tooltipsStyle from "../Styles/Stocks/jsx/tooltipsStyle.jsx";
+import javascriptStyles from "../Styles/Stocks/jsx/javascriptStyles.jsx";
 
 const style = theme => ({
   ...modalStyle(theme),
@@ -100,42 +108,95 @@ class BuyModal extends React.Component {
             id="classic-modal-slide-description"
             className={classes.modalBody}
           >
-            <h4>Popover in a modal</h4>
+            <h4>{this.props.company}</h4>
+            <h5>My Balance: {this.props.balance}</h5>
             <p>
-              This
-              <Button
-                color="secondary"
-                buttonRef={node => {
-                  this.anchorElLeft = node;
-                }}
-                onClick={() => this.handleClickButton("openLeft")}
-              >
-                Button
-              </Button>
-              <Popover
-                classes={{
-                  paper: classes.popover
-                }}
-                open={this.state.openLeft}
-                anchorEl={this.anchorElLeft}
-                anchorReference={"anchorEl"}
-                onClose={() => this.handleClosePopover("openLeft")}
-                anchorOrigin={{
-                  vertical: "center",
-                  horizontal: "left"
-                }}
-                transformOrigin={{
-                  vertical: "center",
-                  horizontal: "right"
-                }}
-              >
-                <h3 className={classes.popoverHeader}>Popover on left</h3>
-                <div className={classes.popoverBody}>
-                  Here will be some very useful information about his popover.
-                  Here will be some very useful information about his popover.
-                </div>
-              </Popover>
-              triggers a popover on click.
+              <p>Stock Shares Price: {this.props.sharesPrice}</p>
+                  <p>Current Investment: {this.props.investment}</p>
+                  <p>Stocks to Buy
+                  <form className={classes.form}>
+                    <CustomInput
+                      formControlProps={{
+                        fullWidth: true,
+                        className: classes.customFormControlClasses
+                      }}
+                      inputProps={{
+                        startAdornment: (
+                          <InputAdornment
+                            position="start"
+                            className={classes.inputAdornment}
+                          >
+                            <Face className={classes.inputAdornmentIcon} />
+                          </InputAdornment>
+                        ),
+                        placeholder: "First Name..."
+                      }}
+                    />
+                    <CustomInput
+                      formControlProps={{
+                        fullWidth: true,
+                        className: classes.customFormControlClasses
+                      }}
+                      inputProps={{
+                        startAdornment: (
+                          <InputAdornment
+                            position="start"
+                            className={classes.inputAdornment}
+                          >
+                            <Email className={classes.inputAdornmentIcon} />
+                          </InputAdornment>
+                        ),
+                        placeholder: "Email..."
+                      }}
+                    />
+                    <CustomInput
+                      formControlProps={{
+                        fullWidth: true,
+                        className: classes.customFormControlClasses
+                      }}
+                      inputProps={{
+                        startAdornment: (
+                          <InputAdornment
+                            position="start"
+                            className={classes.inputAdornment}
+                          >
+                            <Icon className={classes.inputAdornmentIcon}>lock_outline</Icon>
+                          </InputAdornment>
+                        ),
+                        placeholder: "Password..."
+                      }}
+                    />
+                    <FormControlLabel
+                      classes={{
+                        label: classes.label
+                      }}
+                      control={
+                        <Checkbox
+                          tabIndex={-1}
+                          onClick={() => this.handleToggle(1)}
+                          checkedIcon={
+                            <Check className={classes.checkedIcon} />
+                          }
+                          icon={<Check className={classes.uncheckedIcon} />}
+                          classes={{
+                            checked: classes.checked,
+                            root: classes.checkRoot
+                          }}
+                        />
+                      }
+                      label={
+                        <span>
+                          I agree to the{" "}
+                          <a href="#pablo">terms and conditions</a>.
+                        </span>
+                      }
+                    />
+                    <div className={classes.textCenter}>
+                      <Button round color="primary">
+                        Get started
+                      </Button>
+                    </div>
+                  </form> _____________ shares.</p>
             </p>
             <hr />
             <h4>Tooltips in a modal</h4>

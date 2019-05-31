@@ -320,7 +320,7 @@ returnHandler = () => {
                   <p>Current Inv Value: ${`${this.decimalToFixed(stock.values[close] * stock.sharesPurch)}`} </p>
                   </Row>
               <Row>
-                <BuyModal stocks={this.state.stocks}/> 
+                <BuyModal value={stock.values[close]} company={stock.company} balance={this.state.balance} stocks={this.state.stocks} sharesPurch={stock.sharesPurch} sharesPrice={stock.sharesPrice} investment={stock.investment}/> 
                 <SellModal stocks={this.state.stocks}/>        
               </Row>
             </CardBlock>
