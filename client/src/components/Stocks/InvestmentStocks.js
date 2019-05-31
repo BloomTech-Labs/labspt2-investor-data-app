@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import FavoriteTickerstar from "./favoriteTickerstar";
+import BuyModal from "./BuyModal";
+import SellModal from "./SellModal";
 import { Input, Form, SearchIcon, ReturnButton } from '../Styles/Stocks/YourFavorites'
 import {
   Loading,
@@ -54,7 +56,7 @@ class InvestmentStocks extends React.Component {
     let timeStamp;
     let newInvestment = 0;
     let investmentAccum = 0;
-    let currentStockValue = 0;
+    
 
     axios
       .all(promises)
@@ -228,14 +230,14 @@ returnHandler = () => {
     this.state.stocks.forEach((stock, index) => {
       // Loops through array of stock values and creates a table
       rows.push(
-        <Link
+       /*  <Link
           to={{
             pathname: ROUTES.REPORTS,
             state: { ticker: stock.company }
           }}
           key={index}
           style={{ textDecoration: "none" }}
-        >
+        > */
           <TickerContainer key={index}>
             <Row>
               <StockSymbol>
@@ -305,38 +307,41 @@ returnHandler = () => {
                     marginLeft: "10px"
                   }}
                 >
-                  Share Price: {stock.sharesPrice}
+                  Share Price: ${`${this.decimalToFixed(stock.sharesPrice)}`}
                 </p>
               </Row>
               <Row>
-                <p style={{ marginLeft: "0px" }}>Total Investment: {stock.investment}</p>
+                <p style={{ marginLeft: "0px" }}>Total Investment: ${`${this.decimalToFixed(stock.investment)}`}</p>
                
-                  <p>Difference%: {`${this.changePercent(
+                  <p>Diff%: {`${this.changePercent(
                     stock.values[close],
                     stock.sharesPrice
                   )}`}</p>
-                  <p>Current Stock Value:  {stock.values[close] * stock.sharesPurch} </p>
-               <p> <Button color="success" size="sm" onClick={e => e.preventDefault()}>BUY</Button>
-                <Button color="danger" size="sm" onClick={e => e.preventDefault()}>SELL</Button> </p>
+                  <p>Current Inv Value: ${`${this.decimalToFixed(stock.values[close] * stock.sharesPurch)}`} </p>
+                  </Row>
+              <Row>
+                <BuyModal stocks={this.state.stocks}/> 
+                <SellModal stocks={this.state.stocks}/>        
               </Row>
             </CardBlock>
             <br />
             <hr />
           </TickerContainer>
-        </Link>
+        /* </Link> */
       );
     });
 
     return (
       <div>
-        <Form> 
+        <p style={{ textAlign: "center" }}>My Account Balance: ${`${this.decimalToFixed(this.state.balance)}`}</p>
+     {/*    <Form> 
           <SearchIcon><i className= 'fa fa-search' /></SearchIcon>
           <Input 
                  onKeyUp={this.searchHandler} 
                  type="text" 
                  placeholder="Search..."/>  
            <ReturnButton onClick={this.returnHandler}>Reset</ReturnButton>                                         
-        </Form> 
+        </Form>  */}
         <div>{rows}</div>
       </div>
     );
