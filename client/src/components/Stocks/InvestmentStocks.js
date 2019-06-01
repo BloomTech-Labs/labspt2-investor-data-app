@@ -208,7 +208,17 @@ class InvestmentStocks extends React.Component {
               {`${this.decimalToFixed(this.changePoints(stock.values[close],
                   stock.sharesPrice))}`}
             </p>
-            <p>
+            <p
+              style={{
+                color:
+                  Math.sign(
+                    this.changePercent(stock.values[close],
+                      stock.sharesPrice)
+                  ) < 0
+                    ? "#ff2900"
+                    : "#21ab42"
+              }}
+            >
                 
                 {`${this.changePercent(
                   stock.values[close],
@@ -230,9 +240,9 @@ class InvestmentStocks extends React.Component {
               style={{
                 marginLeft: "0px",
                 color:
-                  Math.sign(
+                  
                     this.changePoints(stock.values[close] * stock.sharesPurch, stock.investment)
-                  ) < 0
+                   < 0
                     ? "#ff2900"
                     : "#21ab42"
               }}
@@ -243,9 +253,9 @@ class InvestmentStocks extends React.Component {
               style={{
                 marginLeft: "0px",
                 color:
-                  Math.sign(
+                 
                     this.changePercent(stock.values[close] * stock.sharesPurch, stock.investment)
-                  ) < 0
+                   < 0
                     ? "#ff2900"
                     : "#21ab42"
               }}
@@ -257,7 +267,7 @@ class InvestmentStocks extends React.Component {
           <Row>
             <ButtonContainer>
               <BuyModal
-                value={stock.values[close]}
+                values={stock.values[close]}
                 company={stock.company}
                 balance={this.state.balance}
                 stocks={this.state.stocks}

@@ -40,9 +40,36 @@ class BuyModal extends React.Component {
     super(props);
     this.state = {
       openLeft: false,
-      liveDemo: false
+      liveDemo: false,
+      sharesNumber: 0,
+      cost: 0
     };
   }
+
+  changeHandler = e => {
+    let newCost = e.target.value * this.props.price;
+   // this.setState(() => ({ [name]: target.value, cost: newCost }));
+
+    this.setState({ [e.target.name]: e.target.value, cost: newCost });
+    console.log("e.target.value: ", e.target.value);
+  };
+
+  handleChange = event => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    console.log("value:", value);
+    console.log("name:", name);
+    console.log("target:", target);
+    /*  this.setState({
+       [name]: value
+     
+     }); */
+    //let newCost = e.target.value * this.props.price;
+   // this.setState(() => ({ [name]: target.value, cost: newCost }));
+
+   // console.log("shares number:", this.state.sharesNumber);
+  };
 
   //handleChange = name => event => {
   //  setValues({ ...values, [name]: event.target.value });
@@ -52,7 +79,7 @@ class BuyModal extends React.Component {
     // truncates the numbers following the decimal to two digits
     input = parseFloat(input).toFixed(2);
     return input;
-  }
+  };
 
   handleClosePopover(state) {
     this.setState({
@@ -129,20 +156,35 @@ class BuyModal extends React.Component {
               {`${this.decimalToFixed(this.props.price)}`}
             </p>
             <p>Current Shares Owned: {this.props.sharesPurch}</p>
+            <p>Original Share Cost:  $
+              {`${this.decimalToFixed(this.props.sharesPrice)}`}</p>
             <p>
               Current Investment: $
               {`${this.decimalToFixed(this.props.investment)}`}
             </p>
+            <p>Current Total Value:  $
+              {`${this.decimalToFixed(this.props.values)}`} </p>
             Stocks to Buy
             <form className={classes.form}>
+             <input type="text" name="sharesNumber" onChange={this.changeHandler}
+               value={this.props.value} className="shares" />
               <CustomInput
+               type="text"
+               onChange={this.changeHandler}
+               value={this.props.value}
+               name="sharesNumber"
                 formControlProps={{
                   fullWidth: false,
+                  
                   className: classes.customFormControlClasses
                 }}
                 inputProps={{
                   startAdornment: (
                     <InputAdornment
+                    type="text"
+                      onChange={this.changeHandler}
+                      name="sharesNumber"
+                      value={this.props.value}
                       position="start"
                       className={classes.inputAdornment}
                     >
