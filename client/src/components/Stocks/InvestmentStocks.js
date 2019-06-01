@@ -1,21 +1,21 @@
 import React from "react";
 import axios from "axios";
-import FavoriteTickerstar from "./favoriteTickerstar";
+//import FavoriteTickerstar from "./favoriteTickerstar";
 import BuyModal from "./BuyModal";
 import SellModal from "./SellModal";
-import { Input, Form, SearchIcon, ReturnButton } from '../Styles/Stocks/YourFavorites'
+//import { Input, Form, SearchIcon, ReturnButton } from '../Styles/Stocks/YourFavorites'
 import {
   Loading,
   Row,
   TickerContainer,
-  StockSymbol,
-  Star
+  StockSymbol
 } from "../Styles/Stocks/LiveTickerStyles";
-import { CardBlock } from "../Styles/Stocks/InvestmentStocks";
-import { Tooltip, Typography } from "@material-ui/core";
-import Button from "../Styles/Stocks/Button.jsx";
-import { Link } from "react-router-dom";
-import * as ROUTES from "../../constants/routes";
+import { CardBlock, ColBlock, ButtonContainer } from "../Styles/Stocks/InvestmentStocks";
+//import { Tooltip, Typography } from "@material-ui/core";
+import Primary from "../Styles/Stocks/jsx/Primary.jsx";
+//import Button from "../Styles/Stocks/Button.jsx";
+//import { Link } from "react-router-dom";
+//import * as ROUTES from "../../constants/routes";
 
 class InvestmentStocks extends React.Component {
   constructor(props) {
@@ -56,7 +56,6 @@ class InvestmentStocks extends React.Component {
     let timeStamp;
     let newInvestment = 0;
     let investmentAccum = 0;
-    
 
     axios
       .all(promises)
@@ -72,7 +71,7 @@ class InvestmentStocks extends React.Component {
           let timeStamps = Object.keys(data);
           let current = data[timeStamps[0]];
           timeStamp = timeStamps[0];
-          
+
           this.props.investments.forEach((item, index) => {
             if (item.symbol === result.data["Meta Data"]["2. Symbol"]) {
               newInvestment = item.sharesPurch * item.sharesPrice;
@@ -89,7 +88,7 @@ class InvestmentStocks extends React.Component {
             }
           });
         });
-       
+
         /*  this.setState({
           balance: item.balance,
           sharesPurch: item.sharesPurch,
@@ -160,61 +159,6 @@ class InvestmentStocks extends React.Component {
     return str + suffix;
   };
 
-  shortenVolume = num => {
-    // Crunches the length of the volume into a smaller number while inserting a decimal point and character representing the amount
-    let str,
-      suffix = "";
-
-    let decimalPlaces = 2 || 0;
-
-    num = +num;
-
-    let factor = Math.pow(10, decimalPlaces);
-
-    if (num < 1000) {
-      str = num;
-    } else if (num < 1000000) {
-      str = Math.floor(num / (1000 / factor)) / factor;
-      suffix = "K";
-    } else if (num < 1000000000) {
-      str = Math.floor(num / (1000000 / factor)) / factor;
-      suffix = "M";
-    } else if (num < 1000000000000) {
-      str = Math.floor(num / (1000000000 / factor)) / factor;
-      suffix = "B";
-    }
-    return str + suffix;
-  }
-
-  setSearchState = (e) => {
-    e.preventDefault(); 
-    this.setState({
-        search: e.target.value
-    })
-}
-
-searchHandler = (e) => {
-    const searchFilter = this.state.stocks.filter(item => {
-      return item.company.includes(e.target.value.toUpperCase())
-     })
-     if(e.target.value.indexOf(searchFilter)){
-         this.setState({
-             stocks:searchFilter
-         })
-    }
-}
-
-returnHandler = () => {
-    this.setState({
-        companies: this.props.companies,
-        stocks: [],
-        search: ''
-    })
-    this.fetchFavorites();
-}
-
-
-
   render() {
     if (!this.state.stocks.length) {
       // returns loading sign while data is being retrieved from API
@@ -230,118 +174,111 @@ returnHandler = () => {
     this.state.stocks.forEach((stock, index) => {
       // Loops through array of stock values and creates a table
       rows.push(
-       /*  <Link
-          to={{
-            pathname: ROUTES.REPORTS,
-            state: { ticker: stock.company }
-          }}
-          key={index}
-          style={{ textDecoration: "none" }}
-        > */
-          <TickerContainer key={index}>
-            <Row>
-              <StockSymbol>
-                <p>{stock.company}</p>
-              </StockSymbol>
-              <Tooltip
-                disableFocusListener
-                title={
-                  <Typography color="inherit">
-                    Remove stock from your favorites
-                  </Typography>
-                }
-              >
-                <Star>
-                  <FavoriteTickerstar company={stock.company} />
-                </Star>
-              </Tooltip>
-            </Row>
-            <br />
-            <Row>
-              <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
-              <p
-                style={{
-                  color:
-                    Math.sign(
-                      this.changePoints(stock.values[close], stock.values[open])
-                    ) < 0
-                      ? "#ff2900"
-                      : "#21ab42"
-                }}
-              >
-                Change:{" "}
-                {`${this.changePoints(
-                  stock.values[close],
-                  stock.values[open]
-                )}`}
-              </p>
-            </Row>
-            <Row>
-              <p>Volume: {`${this.shortenVolume(stock.values[volume])}`}</p>
-              <p
-                style={{
-                  marginLeft: "30px",
-                  color:
-                    Math.sign(
-                      this.changePercent(
-                        stock.values[close],
-                        stock.values[open]
-                      )
-                    ) < 0
-                      ? "#ff2900"
-                      : "#21ab42"
-                }}
-              >
-                Change %:
-                {`${this.changePercent(
-                  stock.values[close],
-                  stock.values[open]
-                )}`}
-              </p>
-            </Row>
-            <CardBlock>
-              <Row>
-                <p style={{ marginLeft: "0px" }}>Shares Purch: {stock.sharesPurch}</p>
-                <p
+        <TickerContainer key={index}>
+          <Row>
+            <StockSymbol>
+              <p>{stock.company}</p>
+            </StockSymbol>
+          </Row>
+          <Row>
+          <h5><p style={{ marginLeft: "0px" }}> Current Shares: {stock.sharesPurch}</p></h5>
+          </Row>
+          <Row>
+            <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
+            <p
                   style={{
                     marginLeft: "10px"
                   }}
                 >
-                  Share Price: ${`${this.decimalToFixed(stock.sharesPrice)}`}
+                  Cost: ${`${this.decimalToFixed(stock.sharesPrice)}`}
                 </p>
-              </Row>
-              <Row>
-                <p style={{ marginLeft: "0px" }}>Total Investment: ${`${this.decimalToFixed(stock.investment)}`}</p>
-               
-                  <p>Diff%: {`${this.changePercent(
-                    stock.values[close],
-                    stock.sharesPrice
-                  )}`}</p>
-                  <p>Current Inv Value: ${`${this.decimalToFixed(stock.values[close] * stock.sharesPurch)}`} </p>
-                  </Row>
-              <Row>
-                <BuyModal value={stock.values[close]} company={stock.company} balance={this.state.balance} stocks={this.state.stocks} sharesPurch={stock.sharesPurch} sharesPrice={stock.sharesPrice} investment={stock.investment}/> 
-                <SellModal stocks={this.state.stocks}/>        
-              </Row>
-            </CardBlock>
-            <br />
-            <hr />
-          </TickerContainer>
-        /* </Link> */
+            
+            <p
+              style={{
+                color:
+                  Math.sign(
+                    this.changePoints(stock.values[close],
+                      stock.sharesPrice)
+                  ) < 0
+                    ? "#ff2900"
+                    : "#21ab42"
+              }}
+            >
+              $
+              {`${this.decimalToFixed(this.changePoints(stock.values[close],
+                  stock.sharesPrice))}`}
+            </p>
+            <p>
+                
+                {`${this.changePercent(
+                  stock.values[close],
+                  stock.sharesPrice
+                )}`}%
+              </p>
+          </Row>
+          <Row>
+          <p>
+                Value: $
+                {`${this.decimalToFixed(
+                  stock.values[close] * stock.sharesPurch
+                )}`}
+              </p>
+              <p style={{ marginLeft: "0px" }}>
+                  Cost: ${`${this.decimalToFixed(stock.investment)}`}
+                </p>
+                <p
+              style={{
+                marginLeft: "0px",
+                color:
+                  Math.sign(
+                    this.changePoints(stock.values[close] * stock.sharesPurch, stock.investment)
+                  ) < 0
+                    ? "#ff2900"
+                    : "#21ab42"
+              }}
+            > $
+              {`${this.decimalToFixed(this.changePoints(stock.values[close] * stock.sharesPurch, stock.investment))}`}
+                  </p>
+            <p
+              style={{
+                marginLeft: "0px",
+                color:
+                  Math.sign(
+                    this.changePercent(stock.values[close] * stock.sharesPurch, stock.investment)
+                  ) < 0
+                    ? "#ff2900"
+                    : "#21ab42"
+              }}
+            >
+              
+              {`${this.changePercent(stock.values[close] * stock.sharesPurch, stock.investment)}`}%
+            </p>
+          </Row>
+          <Row>
+            <ButtonContainer>
+              <BuyModal
+                value={stock.values[close]}
+                company={stock.company}
+                balance={this.state.balance}
+                stocks={this.state.stocks}
+                sharesPurch={stock.sharesPurch}
+                sharesPrice={stock.sharesPrice}
+                investment={stock.investment}
+                price={stock.values[close]}
+              />
+              <SellModal stocks={this.state.stocks} />
+            </ButtonContainer>
+          </Row>
+          <hr />
+        </TickerContainer>
       );
     });
 
     return (
       <div>
-        <p style={{ textAlign: "center" }}>My Account Balance: ${`${this.decimalToFixed(this.state.balance)}`}</p>
-     {/*    <Form> 
-          <SearchIcon><i className= 'fa fa-search' /></SearchIcon>
-          <Input 
-                 onKeyUp={this.searchHandler} 
-                 type="text" 
-                 placeholder="Search..."/>  
-           <ReturnButton onClick={this.returnHandler}>Reset</ReturnButton>                                         
-        </Form>  */}
+       <h6> <p style={{ textAlign: "center" }}>
+          Available Funds: ${`${this.decimalToFixed(this.state.balance)}`}
+        </p></h6>
         <div>{rows}</div>
       </div>
     );

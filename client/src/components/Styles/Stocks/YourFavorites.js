@@ -14,7 +14,7 @@ outline: none;
 export const Form = styled.form`
   position: relative;
   color: #aaa;
-  font-size: 14px;
+  font-size: 12px;
   width: 100%;
   display: flex;
   justify-content: center;

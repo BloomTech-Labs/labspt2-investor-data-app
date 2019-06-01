@@ -80,7 +80,7 @@ class Investments extends React.Component {
     return (
       <div>
         <Typography
-          variant="h6"
+          variant="h5"
           gutterBottom
           style={{
             display: "flex",

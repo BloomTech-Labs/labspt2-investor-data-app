@@ -29,6 +29,6 @@ export const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  font-size: 16px;
+  font-size: 12px;
   width: 100%;
 `;
