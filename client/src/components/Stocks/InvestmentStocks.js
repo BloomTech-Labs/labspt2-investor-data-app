@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-//import FavoriteTickerstar from "./favoriteTickerstar";
 import BuyModal from "./BuyModal";
 import SellModal from "./SellModal";
 //import { Input, Form, SearchIcon, ReturnButton } from '../Styles/Stocks/YourFavorites'
@@ -22,12 +21,15 @@ class InvestmentStocks extends React.Component {
     super(props);
     this.state = {
       timeStamp: {},
-      companies: this.props.companies, // stock company symbols
-      investments: this.props.investments,
+      companies: this.props.companies, // i know this isnt proper code
+      investments: this.props.investments, // and neither is this
       stocks: [],
       items: [],
+      sharePurch: 0,
+      shareCost: 0,
       sharesPurch: 0,
-      sharesPrice: 0,
+      sharesCost: 0,
+      sharePrice: 0,
       balance: 0,
       investment: 0,
       datePurch: "",
@@ -54,9 +56,9 @@ class InvestmentStocks extends React.Component {
     // Receives array of companies and returns values of the stock symbols from the api
     let stocks = [];
     let timeStamp;
-    let newInvestment = 0;
+    let sharesCost = 0;
     let investmentAccum = 0;
-
+    let sharesPurch = 0;
     axios
       .all(promises)
       .then(results => {
@@ -71,19 +73,20 @@ class InvestmentStocks extends React.Component {
           let timeStamps = Object.keys(data);
           let current = data[timeStamps[0]];
           timeStamp = timeStamps[0];
-
+          // loop through the investments data to populate each card
           this.props.investments.forEach((item, index) => {
+            // match the data to the symbol data
             if (item.symbol === result.data["Meta Data"]["2. Symbol"]) {
-              newInvestment = item.sharesPurch * item.sharesPrice;
-              investmentAccum = investmentAccum + newInvestment;
-              //currentStockValue = item.sharesPurch * 
+              // investmetAccum is just a rolling accumulator for money spent on stocks
+              //investmentAccum = investmentAccum + sharesCost;
+              sharesPurch = sharesPurch + item.sharePurch;
               stocks.push({
                 company: result.data["Meta Data"]["2. Symbol"], // Collects stock symbol
                 values: current,
-                balance: item.balance,
-                sharesPurch: item.sharesPurch,
-                sharesPrice: item.sharesPrice,
-                investment: newInvestment
+                sharesCost: item.sharesCost,
+                sharePurch: item.sharePurch,
+                shareCost: item.shareCost,
+                sharesPurch: sharesPurch
               });
             }
           });
@@ -181,7 +184,7 @@ class InvestmentStocks extends React.Component {
             </StockSymbol>
           </Row>
           <Row>
-          <h5><p style={{ marginLeft: "0px" }}> Current Shares: {stock.sharesPurch}</p></h5>
+          <h5><p style={{ marginLeft: "0px" }}> Current Shares: {stock.sharePurch}</p></h5>
           </Row>
           <Row>
             <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
@@ -190,7 +193,7 @@ class InvestmentStocks extends React.Component {
                     marginLeft: "10px"
                   }}
                 >
-                  Cost: ${`${this.decimalToFixed(stock.sharesPrice)}`}
+                  Cost: ${`${this.decimalToFixed(stock.shareCost)}`}
                 </p>
             
             <p
@@ -198,7 +201,7 @@ class InvestmentStocks extends React.Component {
                 color:
                   Math.sign(
                     this.changePoints(stock.values[close],
-                      stock.sharesPrice)
+                      stock.shareCost)
                   ) < 0
                     ? "#ff2900"
                     : "#21ab42"
@@ -206,14 +209,14 @@ class InvestmentStocks extends React.Component {
             >
               $
               {`${this.decimalToFixed(this.changePoints(stock.values[close],
-                  stock.sharesPrice))}`}
+                  stock.shareCost))}`}
             </p>
             <p
               style={{
                 color:
                   Math.sign(
                     this.changePercent(stock.values[close],
-                      stock.sharesPrice)
+                      stock.shareCost)
                   ) < 0
                     ? "#ff2900"
                     : "#21ab42"
@@ -222,7 +225,7 @@ class InvestmentStocks extends React.Component {
                 
                 {`${this.changePercent(
                   stock.values[close],
-                  stock.sharesPrice
+                  stock.shareCost
                 )}`}%
               </p>
           </Row>
@@ -230,51 +233,52 @@ class InvestmentStocks extends React.Component {
           <p>
                 Value: $
                 {`${this.decimalToFixed(
-                  stock.values[close] * stock.sharesPurch
+                  stock.values[close] * stock.sharePurch
                 )}`}
               </p>
               <p style={{ marginLeft: "0px" }}>
-                  Cost: ${`${this.decimalToFixed(stock.investment)}`}
+                  Cost: ${`${this.decimalToFixed(stock.shareCost)}`}
                 </p>
                 <p
               style={{
                 marginLeft: "0px",
                 color:
                   
-                    this.changePoints(stock.values[close] * stock.sharesPurch, stock.investment)
+                    this.changePoints(stock.values[close] * stock.sharePurch, stock.sharesCost)
                    < 0
                     ? "#ff2900"
                     : "#21ab42"
               }}
             > $
-              {`${this.decimalToFixed(this.changePoints(stock.values[close] * stock.sharesPurch, stock.investment))}`}
+              {`${this.decimalToFixed(this.changePoints(stock.values[close] * stock.sharePurch, stock.sharesCost))}`}
                   </p>
             <p
               style={{
                 marginLeft: "0px",
                 color:
                  
-                    this.changePercent(stock.values[close] * stock.sharesPurch, stock.investment)
+                    this.changePercent(stock.values[close] * stock.sharePurch, stock.sharesCost)
                    < 0
                     ? "#ff2900"
                     : "#21ab42"
               }}
             >
               
-              {`${this.changePercent(stock.values[close] * stock.sharesPurch, stock.investment)}`}%
+              {`${this.changePercent(stock.values[close] * stock.sharePurch, stock.sharesCost)}`}%
             </p>
           </Row>
           <Row>
             <ButtonContainer>
               <BuyModal
-                values={stock.values[close]}
+                values={stock.values[close] * stock.sharePurch}
                 company={stock.company}
-                balance={this.state.balance}
+                sharesCost={this.state.sharesCost}
                 stocks={this.state.stocks}
                 sharesPurch={stock.sharesPurch}
-                sharesPrice={stock.sharesPrice}
-                investment={stock.investment}
-                price={stock.values[close]}
+                sharePurch={stock.sharePurch}
+                shareCost={stock.shareCost}
+                sharesCost={stock.sharesCost}
+                sharePrice={stock.values[close]}
               />
               <SellModal stocks={this.state.stocks} />
             </ButtonContainer>

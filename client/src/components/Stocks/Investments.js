@@ -9,18 +9,18 @@ class Investments extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeStamp: {},
+      //timeStamp: {},
       companies: [], // stock company symbols
       investments: [],
       stocks: [],
-      balance: 0,
-      symbol: "",
-      sharesPrice: 0,
-      sharesPurch: 0,
-      datePurch: "",
-      investment: 0,
+     // balance: 0,
+     // symbol: "",
+     // sharesPrice: 0,
+     // sharesPurch: 0,
+     // datePurch: "",
+     // investment: 0,
       uid: "",
-      search: ""
+    //  search: ""
     };
   }
 
@@ -32,9 +32,10 @@ class Investments extends React.Component {
     this.fetchUserStocks(uid);
   }
 
+  // get the user stock data
   fetchUserStocks = uid => {
     axios
-      .get(`${URL}/stocks`) // <----user Investments
+      .get(`${URL}/stocks`)
       .then(response => {
         let stock = [];
         response.data.forEach((item, index) => {
@@ -45,6 +46,7 @@ class Investments extends React.Component {
         this.setState({
           stocks: stock
         });
+        // call the stock handler function
         this.stockHandler();
       })
       .catch(err => {
@@ -52,8 +54,10 @@ class Investments extends React.Component {
       });
   };
 
+  // function that maps through the stock data so it can be displayed
   stockHandler = () => {
     let stock = [];
+    // the user data is put into two different arrays to save time
     if (stock) {
       this.state.stocks.map(item => {
         return stock.push(item.symbol);
@@ -62,6 +66,7 @@ class Investments extends React.Component {
     this.setState({
       companies: Array.from(new Set(stock))
     });
+    // if anyone wants to refactor this, be my guest. :)
     let investment = [];
     if (investment) {
       this.state.stocks.map(item => {

@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Slide from "@material-ui/core/Slide";
@@ -16,13 +17,19 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 // @material-ui/icons
 import Close from "@material-ui/icons/Close";
 // core components
+import Primary from "../Styles/Stocks/jsx/Primary.jsx";
 import Button from "../Styles/Stocks/jsx/Button.jsx";
 import CustomInput from "../Styles/Stocks/jsx/CustomInput.jsx";
 import modalStyle from "../Styles/Stocks/jsx/modalStyle.jsx";
 import popoverStyles from "../Styles/Stocks/jsx/popoverStyles.jsx";
 //import Check from "@material-ui/icons/Check";
+import NumberFormat from "react-number-format";
 import tooltipsStyle from "../Styles/Stocks/jsx/tooltipsStyle.jsx";
+import { fire } from "../Auth/firebaseConfig";
 //import javascriptStyles from "../Styles/Stocks/jsx/javascriptStyles.jsx";
+
+const URL = "http://localhost:5000/api";
+//const URL = "https://pickemm.herokuapp.com/api";
 
 const style = theme => ({
   ...modalStyle(theme),
@@ -42,38 +49,69 @@ class BuyModal extends React.Component {
       openLeft: false,
       liveDemo: false,
       sharesNumber: 0,
-      cost: 0
+      cost: 0,
+      maxShares: 0,
+      uid: ""
     };
+  }
+
+  componentDidMount() {
+    let uid = fire.currentUser.uid;
+    this.setState({
+      uid: uid
+    });
+    this.maxShares(this.props.balance, this.props.price);
   }
 
   changeHandler = e => {
     let newCost = e.target.value * this.props.price;
-   // this.setState(() => ({ [name]: target.value, cost: newCost }));
+    // this.setState(() => ({ [name]: target.value, cost: newCost }));
 
     this.setState({ [e.target.name]: e.target.value, cost: newCost });
     console.log("e.target.value: ", e.target.value);
   };
 
-  handleChange = event => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    console.log("value:", value);
-    console.log("name:", name);
-    console.log("target:", target);
-    /*  this.setState({
-       [name]: value
-     
-     }); */
-    //let newCost = e.target.value * this.props.price;
-   // this.setState(() => ({ [name]: target.value, cost: newCost }));
+  buyHandler = () => {
+    //check the data
+    let newSharesNumber = this.state.sharesNumber + this.props.sharesPurch;
+    let newSharesPrice = this.state.cost;
+    let newBalance = this.props.balance - newSharesPrice;
+    let newInvestment = this.props.investment + this.state.cost;
+    let uid = this.state.uid;
 
-   // console.log("shares number:", this.state.sharesNumber);
+    const newRec = {
+      symbol: this.state.symbol,
+      balance: newBalance,
+      sharesPrice: this.state.cost,
+      sharesPurch: newSharesNumber,
+      uid: this.state.uid
+    };
+    //get the uid  and do a update to the stocks table
+    axios
+      .put(`${URL}/stocks/${uid}`, newRec)
+      .then(response => {
+        console.log("response: ", response);
+      })
+      .catch(err => {
+        console.log('We"ve encountered an error');
+      });
   };
+  //save it to the database
 
-  //handleChange = name => event => {
-  //  setValues({ ...values, [name]: event.target.value });
-  //};
+  //update the rest of the values
+
+  maxShares = (balance, price) => {
+    //let newCost = this.props.values;
+    // calculate the most stocks you can buy
+    //   with the funds available using the
+    //   current stock price
+    let estimate = balance / price;
+    estimate.toLocaleString(undefined, {maximumFractionDigits:2})
+    //return estimate.toLocaleString(navigator.language, { minimumFractionDigits: 0 });
+    console.log("estimate: ", estimate);
+    this.setState({ maxShares: estimate });
+    //return estimate;
+  };
 
   decimalToFixed = input => {
     // truncates the numbers following the decimal to two digits
@@ -150,38 +188,78 @@ class BuyModal extends React.Component {
             className={classes.modalBody}
           >
             <h4>{this.props.company}</h4>
-            <h5>Available Funds: ${`${this.decimalToFixed(this.props.balance)}`}</h5>
+            <Primary>
+              <h5>
+                Available Funds: {" "}
+                <NumberFormat
+                  value={`${this.decimalToFixed(this.props.balance)}`}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                /> {" "}
+              </h5>
+            </Primary>
+             <Primary>
+              
+                <h5>
+                  Current Market Price: {" "}
+                  <NumberFormat
+                    value={`${this.decimalToFixed(this.props.price)}`}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+              </h5>
+            </Primary>
+            <Primary>
+              <h5>Current Shares Owned: {" "} {this.props.sharesPurch}</h5>
+            </Primary>
             <p>
-              Current Market Price: $
-              {`${this.decimalToFixed(this.props.price)}`}
+              Original Share Cost:  {" "}<NumberFormat
+                    value={`${this.decimalToFixed(this.props.sharesPrice)}`}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
             </p>
-            <p>Current Shares Owned: {this.props.sharesPurch}</p>
-            <p>Original Share Cost:  $
-              {`${this.decimalToFixed(this.props.sharesPrice)}`}</p>
             <p>
-              Current Investment: $
-              {`${this.decimalToFixed(this.props.investment)}`}
+              Current Investment: {" "}<NumberFormat
+                    value={`${this.decimalToFixed(this.props.investment)}`}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
             </p>
-            <p>Current Total Value:  $
-              {`${this.decimalToFixed(this.props.values)}`} </p>
-            Stocks to Buy
+            <p>
+              Current Total Value: {" "}<NumberFormat
+                    value={`${this.decimalToFixed(this.props.values)}`}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+            </p>
+            Nbr of Shares
             <form className={classes.form}>
-             <input type="text" name="sharesNumber" onChange={this.changeHandler}
-               value={this.props.value} className="shares" />
+              <input
+                type="text"
+                name="sharesNumber"
+                onChange={this.changeHandler}
+                value={this.props.value}
+                className="shares"
+              />
               <CustomInput
-               type="text"
-               onChange={this.changeHandler}
-               value={this.props.value}
-               name="sharesNumber"
+                type="text"
+                onChange={this.changeHandler}
+                value={this.props.value}
+                name="sharesNumber"
                 formControlProps={{
                   fullWidth: false,
-                  
                   className: classes.customFormControlClasses
                 }}
                 inputProps={{
                   startAdornment: (
                     <InputAdornment
-                    type="text"
+                      type="text"
                       onChange={this.changeHandler}
                       name="sharesNumber"
                       value={this.props.value}
@@ -194,11 +272,23 @@ class BuyModal extends React.Component {
                   placeholder: "Shares"
                 }}
               />
-              <p>
-                Market Price: x $
-                {`${this.decimalToFixed(this.props.price)}`}
+             <p>Max Shares: 
+                {`${this.decimalToFixed(this.state.maxShares)}`}
+               </p>
+             <p>
+                Market Price: x <NumberFormat
+                  value={`${this.decimalToFixed(this.props.price)}`}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
               </p>
-              <p>Est. Cost: ${`${this.decimalToFixed(this.state.cost)}`} </p>
+              <p>Est. Cost: {" "} <NumberFormat
+                  value={`${this.decimalToFixed(this.state.cost)}`}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                /> </p>
             </form>
             <hr />
           </DialogContent>
@@ -209,7 +299,7 @@ class BuyModal extends React.Component {
             >
               Cancel
             </Button>
-            <Button color="primary">Buy</Button>
+            <Button onClick={() => this.buyHandler()} color="primary">Buy</Button>
           </DialogActions>
         </Dialog>
       </div>
