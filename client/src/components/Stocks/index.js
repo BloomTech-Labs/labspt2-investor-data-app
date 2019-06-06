@@ -103,6 +103,7 @@ class Stocks extends Component {
     ticker: "",
     single: "",
     popper: "",
+    symbol: "",
     suggestions: [],
     uid: fire.currentUser.uid,
     checked: false
@@ -135,21 +136,26 @@ class Stocks extends Component {
     event,
     { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
   ) => {
-    const newSymbol = {
+    // when user selects a stock i need to save the symbol
+    // to state. the newbalance page will then use the symbol
+    // to open the stock up and populate the card with all the 
+    // stocks current data info.
+ /*    const newSymbol = {
       symbol: suggestionValue,
       uid: this.state.uid
     };
     axios
       .post(`${URL}/stocks`, newSymbol)
-      .then(response => {
+      .then(response => { */
         this.setState({
-          newSymbol: { symbol: "", uid: "" }
+          symbol: suggestionValue,
+          uid: this.state.uid
         });
-        window.location.reload();
-      })
+        //window.location.reload();
+  /*     })
       .catch(err => {
         console.log("we've encountered an error");
-      });
+      }); */
   };
 
   render() {
@@ -184,8 +190,9 @@ class Stocks extends Component {
                 className={classes.bigAvatar}
               />
             </Grid>
-
+           
             <Grid container justify="center">
+           
               <Grid
                 spacing={24}
                 alignItems="center"
@@ -193,6 +200,7 @@ class Stocks extends Component {
                 container
                 className={classes.grid}
               >
+               
                 <Grid item sm={4}>
                   <Paper className={classes.paper}>
                     <Zoom in={checked}>
@@ -200,6 +208,10 @@ class Stocks extends Component {
                     </Zoom>
                   </Paper>
                 </Grid>
+               
+               
+               
+               
                 <Grid item xs={12}>
                   <div className={classes.block}>
                     <Typography
@@ -254,7 +266,7 @@ class Stocks extends Component {
                         )}
                       />
                     </div>
-                    <BalanceInfo />
+                    <BalanceInfo symbol={this.state.symbol} uid={this.state.uid} /> 
                   </div>
                 </Grid>
               </Grid>

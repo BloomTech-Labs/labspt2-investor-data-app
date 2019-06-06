@@ -14,11 +14,11 @@ module.exports = {
         return db('stocks')
     },
 
-    update: (uid, changes) => {
+    update: (id, changes) => {
         return db('stocks')
-            .where('uid', uid)
+            .where('id', id)
             .update(changes)
-            .then(count => (count > 0 ? this.get(uid) : null));
+            .then(count => (count > 0 ? this.get(id) : null));
     },
 
     remove: symbol => {

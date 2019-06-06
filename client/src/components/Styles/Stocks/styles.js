@@ -13,6 +13,7 @@ const styles = theme => ({
 
   grid: {
     width: 1200,
+    //flexDirection: "column",
     flexWrap: "wrap-reverse",
     justifyContent: "flex-start",
     alignItems: "flex-end",
@@ -34,6 +35,22 @@ const styles = theme => ({
   },
 
   block: {
+    padding: 25,
+    marginTop: "50px",
+    position: "relative",
+    top: -72,
+    right: 55,
+    fontSize: ".8rem",
+
+    [theme.breakpoints.down("xs")]: {
+      top: -72,
+      right: 8
+    },
+    [theme.breakpoints.down("md")]: {
+      top: -43
+    }
+  },
+  card: {
     padding: 25,
     marginTop: "50px",
     position: "relative",

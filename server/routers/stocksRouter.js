@@ -61,11 +61,11 @@ router.delete('/:symbol', (req, res) => {
 });
 
 /********* Update stock *************/
-router.put('/:uid', (req, res) => {
-    const { uid } = req.params;
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
     const changes = req.body;
     stocks
-        .update(uid, changes)
+        .update(id, changes)
         .then(count => {
             if (count) {
                 stocks.getByUid(uid)
