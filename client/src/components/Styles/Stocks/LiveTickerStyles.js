@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Loading = styled.div`
-  font-size: 22px;
+  font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;

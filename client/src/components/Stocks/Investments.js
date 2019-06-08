@@ -13,7 +13,7 @@ class Investments extends React.Component {
       companies: [], // stock company symbols
       investments: [],
       stocks: [],
-     // balance: 0,
+      balance: 0,
      // symbol: "",
      // sharesPrice: 0,
      // sharesPurch: 0,
@@ -29,6 +29,7 @@ class Investments extends React.Component {
     this.setState({
       uid: uid
     });
+    this.fetchBalance(uid);
     this.fetchUserStocks(uid);
   }
 
@@ -48,6 +49,21 @@ class Investments extends React.Component {
         });
         // call the stock handler function
         this.stockHandler();
+      })
+      .catch(err => {
+        console.log('We"ve encountered an error');
+      });
+  };
+
+  fetchBalance = uid => {
+    axios
+      .get(`${URL}/users/${uid}`)
+      .then(response => {
+        let balance = response.data.balance;
+        this.setState({
+          balance: balance
+        });
+        console.log("balance: ", this.state.balance);
       })
       .catch(err => {
         console.log('We"ve encountered an error');
@@ -100,6 +116,7 @@ class Investments extends React.Component {
           <InvestmentStocks
             companies={this.state.companies}
             investments={this.state.investments}
+            balance={this.state.balance}
           />
         </div>
       </div>

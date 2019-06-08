@@ -13,6 +13,7 @@ exports.up = function(knex, Promise) {
       .unique();
     users.boolean("receiveEmails").defaultTo(false);
     users.boolean("receiveTexts").defaultTo(false);
+    users.integer('balance');
   });
 };
 

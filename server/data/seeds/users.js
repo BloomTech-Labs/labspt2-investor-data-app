@@ -9,7 +9,8 @@ const createFakeUser = () => ({
   uid: faker.internet.password(),
   receiveEmails: faker.random.boolean(),
   receiveTexts: faker.random.boolean(),
-  phoneNumber: faker.phone.phoneNumberFormat(0)
+  phoneNumber: faker.phone.phoneNumberFormat(0),
+  balance: faker.finance.amount()
 });
 
 // Deletes the existing users seeds, then runs the for loop that runs createFakeUser function to seed database with 500 dummy users

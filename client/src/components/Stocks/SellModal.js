@@ -1,26 +1,25 @@
 import React from "react";
-// @material-ui/core components
+import axios from "axios";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Slide from "@material-ui/core/Slide";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
-import Tooltip from "@material-ui/core/Tooltip";
-import Popover from "@material-ui/core/Popover";
-// @material-ui/icons
+import { Row, CardBlock } from "../Styles/Stocks/BuyModal";
 import Close from "@material-ui/icons/Close";
-// core components
+import Primary from "../Styles/Stocks/jsx/Primary.jsx";
 import Button from "../Styles/Stocks/jsx/Button.jsx";
-
 import modalStyle from "../Styles/Stocks/jsx/modalStyle.jsx";
-import popoverStyles from "../Styles/Stocks/jsx/popoverStyles.jsx";
-import tooltipsStyle from "../Styles/Stocks/jsx/tooltipsStyle.jsx";
+import NumberFormat from "react-number-format";
+import { fire } from "../Auth/firebaseConfig";
+
+
+const URL = "http://localhost:5000/api";
+//const URL = "https://pickemm.herokuapp.com/api";
 
 const style = theme => ({
-  ...modalStyle(theme),
-  ...popoverStyles,
-  ...tooltipsStyle
+  ...modalStyle(theme)
 });
 
 function Transition(props) {
@@ -33,29 +32,138 @@ class SellModal extends React.Component {
     super(props);
     this.state = {
       openLeft: false,
-      liveDemo: false
+      liveDemo: false,
+      sharesNumber: 0,
+      cost: 0,
+      maxShares: 0,
+      return: 0,
+      balance: this.props.balance,
+      id: "",
+      uid: ""
     };
   }
+
+  componentDidMount() {
+    let Uid = fire.currentUser.uid;
+    this.setState({
+      id: this.props.id,
+      uid: Uid
+    });
+    this.maxShares(this.props.sharePurch);
+  }
+
+  changeHandler = e => {
+    // calculate the new cost of the stocks
+    let newCost = e.target.value * this.props.sharePrice;
+    // calculate the return so subtract current price from purchase price
+    let newReturn =
+      (this.props.sharePrice * e.target.value) - (this.props.shareCost * e.target.value) / (this.props.shareCost * e.target.value);
+    // divide the result by the purchase price
+     
+    // get rid of these for production
+    console.log("target name: ", e.target.name);
+    console.log("target value: ", e.target.value);
+    console.log("newCost: ", newCost);
+    // this is going to be this.state.sharesNumber and this.state.cost
+    // these both update on screen values as the user types in a shares number
+    this.setState({
+      [e.target.name]: e.target.value,
+      cost: newCost,
+      return: newReturn
+    });
+  };
+
+  sellHandler = () => {
+    //check the data it cant be larger than max shares
+    if (this.state.sharesNumber > this.state.maxShares) {
+      alert("Shares cannot exceed the number you own...");
+    } else {
+      // subtract the number of shares from number shares already owned
+      let newSharesNumber =
+        this.props.sharePurch - Number(this.state.sharesNumber);
+      
+      // calculate the return on the stocks that were just sold
+      let newReturn = newSharesNumber * this.props.sharePrice;
+      // recalculate the value of shares still owned - if any
+      let newSharesCost = this.props.sharesCost - newReturn;
+      
+      // update any other db values
+      let uid = this.state.uid;
+      
+      // make a new record using the updated data
+      const newRec = {
+        symbol: this.props.company,
+        sharesCost: newSharesCost,
+        shareCost: this.props.shareCost,
+        sharePurch: newSharesNumber,
+        uid: this.state.uid
+      };
+      // update the users stock information: need to use the real id?
+      axios
+        .put(`${URL}/stocks/${this.state.id}`, newRec)
+        .then(response => {
+          console.log("response: ", response);
+          this.setState({
+            sharesCost: this.props.id,
+            sharePurch: newSharesNumber,
+            balance: newSharesCost
+          });
+        
+        
+        })
+        .catch(err => {
+          console.log('We"ve encountered an error');
+        });
+      window.location.reload();
+    }
+  };
+  // this is the number of shares already owned
+  maxShares = sharePurch => {
+    let estimate = sharePurch;
+    this.setState({ maxShares: Number(estimate) });
+  };
+
+  changePercent = (current, purchase) => {
+    // function for calculating the change of a stocks gain/loss by %
+    let deduct = current - purchase;
+    let divide = deduct / purchase;
+    let solution = divide * 100;
+    if (solution > 0) {
+      return "+" + solution.toFixed(2);
+    }
+    return solution.toFixed(2);
+  };
+
+  decimalToFixed = input => {
+    // truncates the numbers following the decimal to two digits
+    input = parseFloat(input).toFixed(2);
+    return input;
+  };
+
   handleClosePopover(state) {
     this.setState({
       [state]: false
     });
   }
+
   handleClickButton(state) {
     this.setState({
       [state]: true
     });
   }
+
   handleClickOpen(modal) {
     var x = [];
     x[modal] = true;
     this.setState(x);
   }
+
   handleClose(modal) {
     var x = [];
     x[modal] = false;
     this.setState(x);
   }
+
   render() {
     const { classes } = this.props;
     return (
@@ -79,103 +187,155 @@ class SellModal extends React.Component {
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
-          <DialogTitle
-            id="classic-modal-slide-title"
-            disableTypography
-            className={classes.modalHeader}
-          >
-            <Button
-              simple
-              className={classes.modalCloseButton}
-              key="close"
-              aria-label="Close"
-              onClick={() => this.handleClose("liveDemo")}
+          <CardBlock>
+            <DialogTitle
+              id="classic-modal-slide-title"
+              disableTypography
+              className={classes.modalHeader}
             >
-              {" "}
-              <Close className={classes.modalClose} />
-            </Button>
-            <h4 className={classes.modalTitle}>Sell Stock Shares</h4>
-          </DialogTitle>
-          <DialogContent
-            id="classic-modal-slide-description"
-            className={classes.modalBody}
-          >
-            <h4>Popover in a modal</h4>
-            <p>
-              This
               <Button
-                color="secondary"
-                buttonRef={node => {
-                  this.anchorElLeft = node;
-                }}
-                onClick={() => this.handleClickButton("openLeft")}
+                simple
+                className={classes.modalCloseButton}
+                key="close"
+                aria-label="Close"
+                onClick={() => this.handleClose("liveDemo")}
               >
-                Button
+                {" "}
+                <Close className={classes.modalClose} />
               </Button>
-              <Popover
-                classes={{
-                  paper: classes.popover
-                }}
-                open={this.state.openLeft}
-                anchorEl={this.anchorElLeft}
-                anchorReference={"anchorEl"}
-                onClose={() => this.handleClosePopover("openLeft")}
-                anchorOrigin={{
-                  vertical: "center",
-                  horizontal: "left"
-                }}
-                transformOrigin={{
-                  vertical: "center",
-                  horizontal: "right"
-                }}
-              >
-                <h3 className={classes.popoverHeader}>Popover on left</h3>
-                <div className={classes.popoverBody}>
-                  Here will be some very useful information about his popover.
-                  Here will be some very useful information about his popover.
-                </div>
-              </Popover>
-              triggers a popover on click.
-            </p>
-            <hr />
-            <h4>Tooltips in a modal</h4>
-            <p>
-              <Tooltip
-                id="ex-to-po-1"
-                title="Default tooltip"
-                placement="top"
-                classes={{ tooltip: classes.tooltip }}
-              >
-                <a href="#pablo" onClick={e => e.preventDefault()}>
-                  {" "}
-                  This link{" "}
-                </a>
-              </Tooltip>{" "}
-              and
-              <Tooltip
-                id="ex-to-po-2"
-                title="Default tooltip"
-                placement="top"
-                classes={{ tooltip: classes.tooltip }}
-              >
-                <a href="#pablo" onClick={e => e.preventDefault()}>
-                  {" "}
-                  that link{" "}
-                </a>
-              </Tooltip>
-              have tooltips on hover.
-            </p>
-          </DialogContent>
-          <DialogActions className={classes.modalFooter}>
-            <Button
-              onClick={() => this.handleClose("liveDemo")}
-              color="secondary"
+              <h4 className={classes.modalTitle}>Sell Shares</h4>
+            </DialogTitle>
+            <DialogContent
+              id="classic-modal-slide-description"
+              className={classes.modalBody}
             >
-              Close
-            </Button>
-            <Button color="primary">Save changes</Button>
-          </DialogActions>
+              <Row>
+                <h3>{this.props.company}</h3>
+              </Row>
+              <Row>
+                <Primary>
+                  Currently Available Funds:
+                  <NumberFormat
+                    value={`${this.decimalToFixed(this.state.balance)}`}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                </Primary>
+              </Row>
+              <Row>
+                <Primary>
+                  Current Market Price:
+                  <NumberFormat
+                    value={`${this.decimalToFixed(this.props.sharePrice)}`}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                </Primary>
+              </Row>
+              <Row>
+                <Primary>
+                  <p>
+                    Current Shares Owned: {"  "}
+                    {this.props.sharePurch}
+                  </p>
+                </Primary>
+              </Row>
+              <p>
+                Original Share Cost:{" "}
+                <NumberFormat
+                  value={`${this.decimalToFixed(this.props.shareCost)}`}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+              </p>
+              <p>
+                Current Investment:{" "}
+                <NumberFormat
+                  value={`${this.decimalToFixed(this.props.sharesCost)}`}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+              </p>
+              <p>
+                Current Total Value:{" "}
+                <NumberFormat
+                  value={`${this.decimalToFixed(this.props.values)}`}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+              </p>
+              Nbr of Shares
+              <form className={classes.form}>
+                <input
+                  type="text"
+                  name="sharesNumber"
+                  onChange={this.changeHandler}
+                  value={this.props.value}
+                  className="shares"
+                />
+                <p>
+                  Max Shares: {"  "}
+                  {`${this.state.maxShares}`}
+                </p>
+                <p>
+                  Est. Profit: 
+                  <NumberFormat
+                    value={`${this.decimalToFixed(this.props.sharePrice)}`}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                </p>
+                <p>
+                  Est. Value:{" "}
+                  <NumberFormat
+                    value={`${this.decimalToFixed(this.state.cost)}`}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                </p>
+                <p>
+                  Est. Return:{" "}
+                  <NumberFormat
+                    value={`${this.decimalToFixed(this.state.return)}`}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                </p>
+                <p
+              style={{
+                color:
+                  Math.sign(this.state.return) < 0
+                    ? "#ff2900"
+                    : "#21ab42"
+              }}
+            >
+              {`${this.state.return}`}%
+            </p>
+              </form>
+              <hr />
+            </DialogContent>
+            <DialogActions className={classes.modalFooter}>
+              <Button
+                onClick={() => this.handleClose("liveDemo")}
+                color="secondary"
+              >
+                Cancel
+              </Button>
+              <Button onClick={() => this.sellHandler()} color="primary">
+                Sell
+              </Button>
+            </DialogActions>
+          </CardBlock>
         </Dialog>
+       
       </div>
     );
   }

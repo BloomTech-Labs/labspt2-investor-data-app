@@ -287,7 +287,18 @@ class InvestmentStocks extends React.Component {
                 sharePrice={stock.values[close]}
                 balance={this.state.balance}
               />
-              <SellModal stocks={this.state.stocks} />
+              <SellModal
+                values={stock.values[close] * stock.sharePurch}
+                id={stock.id}
+                company={stock.company}
+                sharesCost={stock.sharesCost}
+                stocks={this.state.stocks}
+                sharesPurch={stock.sharesPurch}
+                sharePurch={stock.sharePurch}
+                shareCost={stock.shareCost}
+                sharePrice={stock.values[close]}
+                balance={this.state.balance}
+              />
             </ButtonContainer>
           </Row>
           <hr />

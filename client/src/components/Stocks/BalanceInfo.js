@@ -3,13 +3,13 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import { Loading, Star } from "../Styles/Dashboard/LiveTickerStyles";
+import { Loading } from "../Styles/Stocks/LiveTickerStyles";
 import GridContainer from "../Styles/Stocks/GridContainer.jsx";
 import GridItem from "../Styles/Stocks/GridItem.jsx";
 import Card from "../Styles/Stocks/Card";
 import styles from "../Styles/Stocks/styles";
-import { Link } from "react-router-dom";
-import * as ROUTES from "../../constants/routes";
+//import { Link } from "react-router-dom";
+//import * as ROUTES from "../../constants/routes";
 import { fire } from "../Auth/firebaseConfig";
 import Button from "../Styles/Stocks/Button.jsx";
 import { withStyles, Tooltip, Typography, Zoom } from "@material-ui/core";
@@ -41,7 +41,7 @@ class BalanceInfo extends React.Component {
       stocks: [],
       checked: false,
       balance: 0,
-      symbol: this.props.symbol,
+      symbol: "AAPL",
       sharesPrice: 0,
       sharesPurch: 0,
       datePurch: "",
@@ -51,60 +51,43 @@ class BalanceInfo extends React.Component {
   }
 
   componentDidMount() {
-  
-  
-   
+    if (localStorage.getItem("balanceInfo")) {
+      let symbol = localStorage.getItem("balanceInfo");
+      if (symbol !== "Null") {
+        localStorage.setItem("balanceInfo", "Null");
+        axios
+          .get(
+            `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`
+          )
+          .then(response => {
+            console.log("response: ", response);
+            this.fetchStocks(response.data);
+          })
+          .catch(err => {
+            console.log('We"ve encountered an error');
+          });
+      }
+    }
   }
-  stockToFetch = () => {
 
-    let promises = this.state.companies.map((
-      company // map that sends array of companies through axios to invoke external API
-    ) =>
-      axios.get(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`
-      )
-    );
-    this.fetchStocks(promises);
-
-  }
-
-
-
-
-
-  fetchStocks = promises => {
+  fetchStocks = results => {
     // Receives array of companies and returns values of the stock symbols from the api
     let stocks = [];
     let timeStamp;
-    axios
-      .all(promises)
-      .then(results => {
-        results.forEach(result => {
-          // loops through keys to access targeted values of stock(s)
+    let data = results["Time Series (Daily)"]; //Accesses correct object within API
+    let timeStamps = Object.keys(data);
+    let current = data[timeStamps[0]];
+    timeStamp = timeStamps[0];
 
-          if (result.data.Note) {
-            throw new Error();
-          }
+    stocks.push({
+      company: results["Meta Data"]["2. Symbol"], // Collects stock symbol
+      values: current
+    });
 
-          let data = result.data["Time Series (Daily)"]; //Accesses correct object within API
-          let timeStamps = Object.keys(data);
-          let current = data[timeStamps[0]];
-          timeStamp = timeStamps[0];
-
-          stocks.push({
-            company: result.data["Meta Data"]["2. Symbol"], // Collects stock symbol
-            values: current
-          });
-        });
-
-        this.setState({
-          stocks,
-          timeStamp
-        });
-      })
-      .catch(error => {
-        console.error("There was an error with the network requests", error);
-      });
+    this.setState({
+      stocks,
+      timeStamp
+    });
   };
 
   changePercent = (close, start) => {
@@ -139,9 +122,7 @@ class BalanceInfo extends React.Component {
       suffix = "";
 
     let decimalPlaces = 2 || 0;
-
     num = +num;
-
     let factor = Math.pow(10, decimalPlaces);
 
     if (num < 1000) {
@@ -162,127 +143,100 @@ class BalanceInfo extends React.Component {
   render() {
     if (!this.state.stocks.length) {
       // returns loading sign while data is being retrieved from API
-      return <Loading>Loading Stocks...</Loading>;
+      return <Loading>Select a Stock to load details...Reminder: this does not involve real money</Loading>;
     }
     const { classes } = this.props;
-    const { checked } = this.state;
-
-    let rows = [];
-
     const open = "1. open";
     const close = "4. close";
     const volume = "5. volume";
+    let rows = [];
 
     this.state.stocks.forEach((stock, index) => {
-      // Loops through array of stock values and creates a table
-
       rows.push(
-        <Link
-          to={{
-            pathname: ROUTES.REPORTS,
-            state: { ticker: stock.company }
-          }}
-          key={index}
-          style={{ textDecoration: "none" }}
-        >
-          <Zoom in={checked} key={index}>
-            <GridContainer key={index}>
-              <GridItem xs={12} sm={3} md={6}>
-                <Card>
-                  <Tooltip
-                    disableFocusListener
-                    title={
-                      <Typography color="inherit">
-                        View the Stock Indicator Reports
-                      </Typography>
-                    }
-                  >
-                    <h2
-                      style={{ position: "relative", top: "-8px" }}
-                      className={classes.cardCategory}
-                    >
-                      {stock.company}
-                    </h2>
-                  </Tooltip>
-                  <Tooltip
-                    disableFocusListener
-                    title={
-                      <Typography color="inherit">
-                        Add/Remove stocks from your favorites
-                      </Typography>
-                    }
-                  >
-                    <Star className={classes.cardTitle}>
-                      <TickerStar
-                        stocks={this.state.stocks}
-                        id={stock.company}
-                      />
-                    </Star>
-                  </Tooltip>
-                  <p
-                    className={classes.cardTitle}
-                    style={{ position: "relative", top: "12px", right: "-8px" }}
-                  >
-                    Price: ${`${this.decimalToFixed(stock.values[close])}`}
-                  </p>
-                  <p
-                    className={classes.cardTitle}
-                    style={{
-                      color:
-                        Math.sign(
-                          this.changePoints(
-                            stock.values[close],
-                            stock.values[open]
-                          )
-                        ) < 0
-                          ? "#ff2900"
-                          : "#21ab42"
-                    }}
-                  >
-                    Change:{" "}
-                    {`${this.changePoints(
-                      stock.values[close],
-                      stock.values[open]
-                    )}`}
-                  </p>
+        <GridContainer key={index}>
+          <GridItem xs={12} sm={3} md={6}>
+            <Card>
+              <Tooltip
+                disableFocusListener
+                title={
+                  <Typography color="inherit">
+                    View the Stock Indicator Reports
+                  </Typography>
+                }
+              >
+                <h2
+                  style={{ position: "relative", top: "-8px" }}
+                  className={classes.cardCategory}
+                >
+                  {stock.company}
+                </h2>
+              </Tooltip>
+              <p
+                className={classes.cardTitle}
+                style={{ position: "relative", top: "12px", right: "-8px" }}
+              >
+                Price: ${`${this.decimalToFixed(stock.values[close])}`}
+              </p>
+              <p
+                className={classes.cardTitle}
+                style={{
+                  color:
+                    Math.sign(
+                      this.changePoints(stock.values[close], stock.values[open])
+                    ) < 0
+                      ? "#ff2900"
+                      : "#21ab42"
+                }}
+              >
+                Change:{" "}
+                {`${this.changePoints(
+                  stock.values[close],
+                  stock.values[open]
+                )}`}
+              </p>
 
-                  <p
-                    className={classes.cardTitle}
-                    style={{
-                      position: "relative",
-                      top: "12px",
-                      right: "-8px"
-                    }}
-                  >
-                    Volume: {`${this.shortenVolume(stock.values[volume])}`}
-                  </p>
-                  <p
-                    className={classes.cardTitle}
-                    style={{
-                      color:
-                        Math.sign(
-                          this.changePercent(
-                            stock.values[close],
-                            stock.values[open]
-                          )
-                        ) < 0
-                          ? "#ff2900"
-                          : "#21ab42"
-                    }}
-                  >
-                    Change %:{" "}
-                    {`${this.changePercent(
-                      stock.values[close],
-                      stock.values[open]
-                    )}`}
-                  </p>
+              <p
+                className={classes.cardTitle}
+                style={{
+                  position: "relative",
+                  top: "12px",
+                  right: "-8px"
+                }}
+              >
+                Volume: {`${this.shortenVolume(stock.values[volume])}`}
+              </p>
+              <p
+                className={classes.cardTitle}
+                style={{
+                  color:
+                    Math.sign(
+                      this.changePercent(
+                        stock.values[close],
+                        stock.values[open]
+                      )
+                    ) < 0
+                      ? "#ff2900"
+                      : "#21ab42"
+                }}
+              >
+                Change %:{" "}
+                {`${this.changePercent(
+                  stock.values[close],
+                  stock.values[open]
+                )}`}
+              </p>
 
-                  <br />
-                </Card>
-              </GridItem>
-            </GridContainer>
-          </Zoom>
-        </Link>
+              <br />
+              <Button
+                color="success"
+                size="sm"
+                onClick={() => this.buyHandler()}
+              >
+                Buy
+              </Button>
+            </Card>
+          </GridItem>
+        </GridContainer>
       );
     });
 

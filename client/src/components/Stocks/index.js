@@ -147,11 +147,12 @@ class Stocks extends Component {
     axios
       .post(`${URL}/stocks`, newSymbol)
       .then(response => { */
+        localStorage.setItem('balanceInfo', suggestionValue);
         this.setState({
           symbol: suggestionValue,
           uid: this.state.uid
         });
-        //window.location.reload();
+        window.location.reload();
   /*     })
       .catch(err => {
         console.log("we've encountered an error");
@@ -200,7 +201,7 @@ class Stocks extends Component {
                 container
                 className={classes.grid}
               >
-               
+              
                 <Grid item sm={4}>
                   <Paper className={classes.paper}>
                     <Zoom in={checked}>
@@ -219,7 +220,7 @@ class Stocks extends Component {
                       gutterBottom
                       style={{ paddingLeft: "20px" }}
                     >
-                      Stocks
+                      Stocks: Buy/Sell
                     </Typography>
                     <div>
                       <Autosuggest
