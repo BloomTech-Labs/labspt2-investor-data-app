@@ -167,10 +167,7 @@ class InvestmentStocks extends React.Component {
     }
 
     let rows = [];
-
-    //const open = "1. open";
     const close = "4. close";
-    // const volume = "5. volume";
 
     this.state.stocks.forEach((stock, index) => {
       // Loops through array of stock values and creates a table
