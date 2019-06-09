@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+//import PropTypes from "prop-types";
+//import Grid from "@material-ui/core/Grid";
+//import Paper from "@material-ui/core/Paper";
 import { Loading } from "../Styles/Stocks/LiveTickerStyles";
 import GridContainer from "../Styles/Stocks/GridContainer.jsx";
 import GridItem from "../Styles/Stocks/GridItem.jsx";
@@ -10,27 +10,27 @@ import Card from "../Styles/Stocks/Card";
 import styles from "../Styles/Stocks/styles";
 //import { Link } from "react-router-dom";
 //import * as ROUTES from "../../constants/routes";
-import { fire } from "../Auth/firebaseConfig";
+//import { fire } from "../Auth/firebaseConfig";
 import Button from "../Styles/Stocks/Button.jsx";
-import { withStyles, Tooltip, Typography, Zoom } from "@material-ui/core";
+import { withStyles, Tooltip, Typography } from "@material-ui/core";
 //import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 //import Card from "../Styles/Stocks/Card.jsx";
-import CardBody from "../Styles/Stocks/CardBody.jsx";
-import {
+//import CardBody from "../Styles/Stocks/CardBody.jsx";
+/* import {
   cardTitle,
   cardLink,
   cardSubtitle
-} from "../Styles/Stocks/material-kit-pro-react.jsx";
+} from "../Styles/Stocks/material-kit-pro-react.jsx"; */
 
-const style = {
+/* const style = {
   cardTitle,
   cardLink,
   cardSubtitle
-};
+}; */
 
 //const URL = "https://pickemm.herokuapp.com/api";
-const URL = "http://localhost:5000/api";
+//const URL = "http://localhost:5000/api";
 
 class BalanceInfo extends React.Component {
   constructor(props) {

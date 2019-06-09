@@ -24,10 +24,10 @@ import Autosuggest from "react-autosuggest";
 import match from "autosuggest-highlight/match";
 import parse from "autosuggest-highlight/parse";
 import { suggestions } from "../Reports/suggestions";
-import axios from "axios";
+//import axios from "axios";
 
 //const URL = "https://pickemm.herokuapp.com/api";
-const URL = "http://localhost:5000/api";
+//const URL = "http://localhost:5000/api";
 
 const renderInputComponent = inputProps => {
   const { classes, inputRef = () => {}, ref, ...other } = inputProps;

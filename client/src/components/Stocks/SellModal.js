@@ -35,7 +35,9 @@ class SellModal extends React.Component {
       liveDemo: false,
       sharesNumber: 0,
       cost: 0,
+      tempCost: 0,
       maxShares: 0,
+      profit: 0,
       return: 0,
       balance: this.props.balance,
       id: "",
@@ -53,13 +55,17 @@ class SellModal extends React.Component {
   }
 
   changeHandler = e => {
-    // calculate the new cost of the stocks
-    let newCost = e.target.value * this.props.sharePrice;
-    // calculate the return so subtract current price from purchase price
-    let newReturn =
-      (this.props.sharePrice * e.target.value) - (this.props.shareCost * e.target.value) / (this.props.shareCost * e.target.value);
+    let n = e.target.value;
+    // calculate the new cost of the stocks so multiply the number of shares (n) by the current share price
+    let newCost = n * this.props.sharePrice;
+    // calculate the temp cost of by multiplying shares(n) by the original share cost
+    let tempCost = n * this.props.shareCost; 
+    // calculate the return so subtract purchase price from current price then divide by purchase price 
+    let newReturn = newCost - (this.props.shareCost * n) / this.props.shareCost * n;
+    //  (this.props.sharePrice * e.target.value) - (this.props.shareCost * e.target.value) / (this.props.shareCost * e.target.value);
     // divide the result by the purchase price
-     
+    //calculate the profit: new cost - original shares cost
+    let profit = newCost - tempCost;
     // get rid of these for production
     console.log("target name: ", e.target.name);
     console.log("target value: ", e.target.value);
@@ -69,7 +75,9 @@ class SellModal extends React.Component {
     this.setState({
       [e.target.name]: e.target.value,
       cost: newCost,
-      return: newReturn
+      return: newReturn,
+      profit: profit,
+      tempCost: tempCost
     });
   };
 
@@ -88,7 +96,7 @@ class SellModal extends React.Component {
       let newSharesCost = this.props.sharesCost - newReturn;
       
       // update any other db values
-      let uid = this.state.uid;
+      //let uid = this.state.uid;
       
       // make a new record using the updated data
       const newRec = {
@@ -125,6 +133,8 @@ class SellModal extends React.Component {
 
   changePercent = (current, purchase) => {
     // function for calculating the change of a stocks gain/loss by %
+    console.log("current: ", current)
+    console.log("purchase: ", purchase)
     let deduct = current - purchase;
     let divide = deduct / purchase;
     let solution = divide * 100;
@@ -214,7 +224,7 @@ class SellModal extends React.Component {
               </Row>
               <Row>
                 <Primary>
-                  Currently Available Funds:
+                  Currently Available Funds:{"  "}
                   <NumberFormat
                     value={`${this.decimalToFixed(this.state.balance)}`}
                     displayType={"text"}
@@ -225,7 +235,7 @@ class SellModal extends React.Component {
               </Row>
               <Row>
                 <Primary>
-                  Current Market Price:
+                  Current Market Price:{"  "}
                   <NumberFormat
                     value={`${this.decimalToFixed(this.props.sharePrice)}`}
                     displayType={"text"}
@@ -285,7 +295,7 @@ class SellModal extends React.Component {
                 <p>
                   Est. Profit: 
                   <NumberFormat
-                    value={`${this.decimalToFixed(this.props.sharePrice)}`}
+                    value={`${this.decimalToFixed(this.state.profit)}`}
                     displayType={"text"}
                     thousandSeparator={true}
                     prefix={"$"}
@@ -300,14 +310,9 @@ class SellModal extends React.Component {
                     prefix={"$"}
                   />
                 </p>
-                <p>
-                  Est. Return:{" "}
-                  <NumberFormat
-                    value={`${this.decimalToFixed(this.state.return)}`}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
+                <Row>
+                <p>Est. Return:{" "}
+                 
                 </p>
                 <p
               style={{
@@ -317,8 +322,8 @@ class SellModal extends React.Component {
                     : "#21ab42"
               }}
             >
-              {`${this.state.return}`}%
-            </p>
+              {`${this.changePercent(this.state.cost, this.state.tempCost)}`}%
+            </p></Row>
               </form>
               <hr />
             </DialogContent>
@@ -329,7 +334,7 @@ class SellModal extends React.Component {
               >
                 Cancel
               </Button>
-              <Button onClick={() => this.sellHandler()} color="primary">
+              <Button onClick={() => this.sellHandler()} color="danger">
                 Sell
               </Button>
             </DialogActions>

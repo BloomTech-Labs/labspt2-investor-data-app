@@ -72,8 +72,10 @@ class BuyModal extends React.Component {
       // add the new investment to the old investment total
       let newSharesCost = this.props.sharesCost + this.state.cost;
       // dont think i need this next line.
-      let newSharesPrice = this.props.sharePrice;
-      let uid = this.state.uid;
+      //let newSharesPrice = this.props.sharePrice;
+      //let uid = this.state.uid;
+      
+      let balance = this.props.balance - newSharesCost
       // make a new record using the updated data
       const newRec = {
         symbol: this.props.company,
@@ -96,11 +98,29 @@ class BuyModal extends React.Component {
         
         })
         .catch(err => {
-          console.log('We"ve encountered an error');
+          console.log('error writing to stocks table');
         });
-      window.location.reload();
+      this.balanceHandler(balance);
     }
   };
+
+  balanceHandler = balance => {
+    const newRec = {
+      uid: this.state.uid,
+      balance: balance
+    };
+
+    axios
+      .put(`${URL}/users/${this.state.uid}`, newRec)
+      .then(response => {
+        console.log("put response: ", response);
+      })
+      .catch(err => {
+        console.log("error writing to users table");
+      });
+    window.location.reload();
+  };
+
   // calculate the max number of stocks you can buy with available funds
   maxShares = (balance, price) => {
     // divide the balance by the price to get the estimated cost.
@@ -209,9 +229,9 @@ class BuyModal extends React.Component {
               </Row>
               <Row>
                 <Primary>
-                  Current Market Price:
+                  Current Market Price:{" "}
                   <NumberFormat
-                    value={`${this.decimalToFixed(this.props.sharePrice)}`}
+                    value={`  ${this.decimalToFixed(this.props.sharePrice)}`}
                     displayType={"text"}
                     thousandSeparator={true}
                     prefix={"$"}
@@ -221,7 +241,7 @@ class BuyModal extends React.Component {
               <Row>
                 <Primary>
                   <p>
-                    Current Shares Owned: {"  "}
+                    Current Shares Owned:{"  "}
                     {this.props.sharePurch}
                   </p>
                 </Primary>
@@ -229,7 +249,7 @@ class BuyModal extends React.Component {
               <p>
                 Original Share Cost:{" "}
                 <NumberFormat
-                  value={`${this.decimalToFixed(this.props.shareCost)}`}
+                  value={`  ${this.decimalToFixed(this.props.shareCost)}`}
                   displayType={"text"}
                   thousandSeparator={true}
                   prefix={"$"}
@@ -294,7 +314,7 @@ class BuyModal extends React.Component {
               >
                 Cancel
               </Button>
-              <Button onClick={() => this.buyHandler()} color="primary">
+              <Button onClick={() => this.buyHandler()} color="success">
                 Buy
               </Button>
             </DialogActions>

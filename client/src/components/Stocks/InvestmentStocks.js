@@ -2,17 +2,14 @@ import React from "react";
 import axios from "axios";
 import BuyModal from "./BuyModal";
 import SellModal from "./SellModal";
+import NumberFormat from "react-number-format";
 import {
   Loading,
   Row,
   TickerContainer,
   StockSymbol
 } from "../Styles/Stocks/LiveTickerStyles";
-import {
-  CardBlock,
-  ColBlock,
-  ButtonContainer
-} from "../Styles/Stocks/InvestmentStocks";
+import { ButtonContainer } from "../Styles/Stocks/InvestmentStocks";
 import Primary from "../Styles/Stocks/jsx/Primary.jsx";
 //import Button from "../Styles/Stocks/Button.jsx";
 //import { Link } from "react-router-dom";
@@ -32,7 +29,7 @@ class InvestmentStocks extends React.Component {
       sharesPurch: 0,
       sharesCost: 0,
       sharePrice: 0,
-      balance: 0,
+      balance: this.props.balance,
       investment: 0,
       datePurch: "",
       uid: ""
@@ -102,9 +99,9 @@ class InvestmentStocks extends React.Component {
         this.setState({
           stocks,
           timeStamp,
-          balance: 20000 - investmentAccum
+          balance: this.props.balance
         });
-        console.log("balance: ", this.state.balance);
+        console.log("state.balance2: ", this.state.balance);
       })
       .catch(error => {
         console.error("There was an error with the network requests", error);
@@ -310,7 +307,13 @@ class InvestmentStocks extends React.Component {
       <div>
         <h6>
           <p style={{ textAlign: "center" }}>
-            Available Funds: ${`${this.decimalToFixed(this.state.balance)}`}
+            Available Funds:
+            <NumberFormat
+              value={`${this.decimalToFixed(this.state.balance)}`}
+              displayType={"text"}
+              thousandSeparator={true}
+              prefix={"$"}
+            />
           </p>
         </h6>
         <div>{rows}</div>
