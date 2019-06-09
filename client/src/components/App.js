@@ -7,6 +7,7 @@ import Dashboard from "../components/Dashboard";
 import Settings from "../components/Settings";
 import Billing from "../components/Billing";
 import Stocks from "../components/Stocks";
+import Calculator from "../components/Calculator";
 import Reports from "../components/Reports";
 import * as ROUTES from "../constants/routes";
 import "./App.css";
@@ -171,6 +172,11 @@ class App extends Component {
             authenticated={this.state.authenticated}
             path={ROUTES.STOCKS}
             component={Stocks}
+          />
+          <AuthenticatedRoute
+            authenticated={this.state.authenticated}
+            path={ROUTES.CALCULATOR}
+            component={Calculator}
           />
           <Route exact path={ROUTES.THANKYOU} component={ThankYou} />
           <Route
