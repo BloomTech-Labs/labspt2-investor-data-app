@@ -16,79 +16,23 @@ const styles = theme => ({
       backgroundColor: '#FAFAFA',
       boxShadow: '0 0 0, 0 0 0'
     }
-  },
-  // Settings header
-  header: {
-    alignSelf: 'flex-start'
-  },
-  // Divider between Settings forms
-  divider: {
-    width: '100%'
-  },
-  // Parent email form container
-  emailContainer:{
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    //justifyContent: 'space-between',
-    width: '100%'
-  },
-  // Parent phone form container
-  phoneFormContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    marginBottom: theme.spacing.unit,   
-  },
-  // Current phone number container
-  currentPhoneContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  // Phone number input field container
-  phoneField: {
-    alignSelf: 'flex-end',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  // Parent email/text preference form container
-  emailTextContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%'
-  },
-  // Current value header
-  currentHeader: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  // Current value
-  currentValue: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  // Input field
-  textField: {
-    marginTop: 0,
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 100
-  },
-  // Button
-  button: {
-    margin: theme.spacing.unit,
-    width: 170,
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.primary.main
-  },
-  // Switches
-  optSwitch: {
-    margin: theme.spacing.unit,
   }
+  // Settings header
+ 
+  // Parent phone form container
+ 
+  // Current phone number container
+  
+  // Phone number input field container
+ 
+  // Parent email/text preference form container
+ 
+  // Current value header
+ 
+  // Button
+ 
+  // Switches
+
 });
 
 export default styles;

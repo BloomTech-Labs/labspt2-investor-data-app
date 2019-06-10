@@ -22,15 +22,13 @@ class Calculator extends React.Component {
         this.setState({ [name]: event.target.value });
     };
 
-    handleSwitch = name => event => {
-        this.setState({ [name]: event.target.checked });
-    };
-    
-    render(){
+
+
+    render() {
         const { classes } = this.props;
 
-        return(
-            <div 
+        return (
+            <div
                 className={classes.parent}
             >
                 <CssBaseline />
@@ -38,28 +36,28 @@ class Calculator extends React.Component {
                     component="h1"
                     variant="h2"
                     color="textPrimary"
-                    className={classes.header}
+                   // className={classes.header}
                     gutterBottom
                 >
                     Stock Calculator
                 </Typography>
                 {/* Form to update email address */}
-                 <InputForm 
-                    className={classes.container}
-                    gutterBottom   
+                <InputForm
+                    // className={classes.container}
+                    gutterBottom
                 />
-                <Divider 
-                    variant="middle" 
+              {/*   <Divider
+                    variant="middle"
                     className={classes.divider}
-                />
+                /> */}
                 {/* Form to update phone number */}
-               {/*  <Output />  */}
-                <Divider 
-                    variant="middle" 
+                {/*  <Output />  */}
+               {/*  <Divider
+                    variant="middle"
                     className={classes.divider}
-                />
+                /> */}
                 {/* Form to opt in/out for texts and emails */}
-               {/*  <OptEmailsTextsForm
+                {/*  <OptEmailsTextsForm
                     className={classes.container}
                 /> */}
             </div>
