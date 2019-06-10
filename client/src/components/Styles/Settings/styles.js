@@ -4,6 +4,7 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        borderTop: "12px solid purple",
         width: '55%',
         padding: '30px',
         margin: '20px auto',

@@ -94,7 +94,8 @@ class SellModal extends React.Component {
       let newReturn = newSharesNumber * this.props.sharePrice;
       // recalculate the value of shares still owned - if any
       let newSharesCost = this.props.sharesCost - newReturn;
-      
+      // calculate the new balance
+      let balance = this.props.balance + newReturn;
       // update any other db values
       //let uid = this.state.uid;
       
@@ -122,8 +123,29 @@ class SellModal extends React.Component {
         .catch(err => {
           console.log('We"ve encountered an error');
         });
-      window.location.reload();
+      this.balanceHandler(balance);
     }
+  };
+
+  balanceHandler = balance => {
+    const newRec = {
+      uid: this.state.uid,
+      balance: balance
+    };
+
+    axios
+      .put(`${URL}/users/${this.state.uid}`, newRec)
+      .then(response => {
+        console.log("put response: ", response);
+      })
+      .catch(err => {
+        console.log("error writing to users table");
+      });
+    if (this.state.sharePurch === 0) {
+      this.zeroStocks();
+    }
+    
+      window.location.reload();
   };
   // this is the number of shares already owned
   maxShares = sharePurch => {
@@ -131,6 +153,21 @@ class SellModal extends React.Component {
     this.setState({ maxShares: Number(estimate) });
   };
 
+  zeroStocks = () => {
+    // need to remove the stock from the list if the shares are equal to zero
+    axios
+        .delete(`${URL}/stocks/${this.state.id}`)
+        .then(response => {
+          console.log("response: ", response);
+          console.log("stock deleted");
+        
+        
+        })
+        .catch(err => {
+          console.log('We"ve encountered an error');
+        });
+  }
+ 
   changePercent = (current, purchase) => {
     // function for calculating the change of a stocks gain/loss by %
     console.log("current: ", current)

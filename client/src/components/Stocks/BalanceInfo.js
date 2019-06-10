@@ -232,7 +232,7 @@ class BalanceInfo extends React.Component {
                 size="sm"
                 onClick={() => this.buyHandler()}
               >
-                Buy
+                Add
               </Button>
             </Card>
           </GridItem>

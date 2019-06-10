@@ -46,20 +46,7 @@ class Calculator extends React.Component {
                     // className={classes.container}
                     gutterBottom
                 />
-              {/*   <Divider
-                    variant="middle"
-                    className={classes.divider}
-                /> */}
-                {/* Form to update phone number */}
-                {/*  <Output />  */}
-               {/*  <Divider
-                    variant="middle"
-                    className={classes.divider}
-                /> */}
-                {/* Form to opt in/out for texts and emails */}
-                {/*  <OptEmailsTextsForm
-                    className={classes.container}
-                /> */}
+          
             </div>
         )
     };

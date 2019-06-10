@@ -21,13 +21,13 @@ module.exports = {
             .then(count => (count > 0 ? this.get(id) : null));
     },
 
-    remove: symbol => {
-        return db('stocks')
-            .where('symbol', symbol)
-            .del();
-    },
-
-    insert: stock => {
+    remove: id => {
+        return db("stocks")
+          .where("id", id)
+          .del();
+      },
+    
+      insert: stock => {
         return db("stocks").insert(stock);
     }
 };
