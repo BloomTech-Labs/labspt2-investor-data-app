@@ -18,7 +18,7 @@ import Investments from "./Investments";
 //import KeyIndicators from "../Dashboard/KeyIndicators";
 import BalanceInfo from "./BalanceInfo";
 import styles from "../Styles/Stocks/styles";
-import GridContainer from "../Styles/Stocks/GridContainer.jsx";
+import GridContainer from "../Styles/Stocks/jsx/GridContainer.jsx";
 import deburr from "lodash/deburr";
 import Autosuggest from "react-autosuggest";
 import match from "autosuggest-highlight/match";

@@ -4,12 +4,12 @@ import BuyModal from "./BuyModal";
 import SellModal from "./SellModal";
 import NumberFormat from "react-number-format";
 import {
+  ButtonContainer,
   Loading,
   Row,
   TickerContainer,
   StockSymbol
-} from "../Styles/Stocks/LiveTickerStyles";
-import { ButtonContainer } from "../Styles/Stocks/InvestmentStocks";
+} from "../Styles/Stocks/InvestmentStocks";
 import Primary from "../Styles/Stocks/jsx/Primary.jsx";
 //import Button from "../Styles/Stocks/Button.jsx";
 //import { Link } from "react-router-dom";
@@ -55,15 +55,12 @@ class InvestmentStocks extends React.Component {
     // Receives array of companies and returns values of the stock symbols from the api
     let stocks = [];
     let timeStamp;
-    //let shareCost = 0;
     let investmentAccum = 0;
-    //let sharePurch = 0;
     axios
       .all(promises)
       .then(results => {
         results.forEach(result => {
           // loops through keys to access targeted values of stock(s)
-
           if (result.data.Note) {
             throw new Error();
           }
@@ -79,9 +76,7 @@ class InvestmentStocks extends React.Component {
               // investmetAccum is just a rolling accumulator for money spent on stocks
               investmentAccum = investmentAccum + item.sharesCost;
               // sharesCost is the investment i have already made.
-              //shareCost = item.shareCost;
               // sharePurch is the number of shares i already purchased
-              //sharePurch = item.sharePurch;
               // save the id because we need it later
               stocks.push({
                 company: result.data["Meta Data"]["2. Symbol"], // Collects stock symbol

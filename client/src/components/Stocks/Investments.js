@@ -9,18 +9,11 @@ class Investments extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //timeStamp: {},
       companies: [], // stock company symbols
       investments: [],
       stocks: [],
       balance: 0,
-     // symbol: "",
-     // sharesPrice: 0,
-     // sharesPurch: 0,
-     // datePurch: "",
-     // investment: 0,
-      uid: "",
-    //  search: ""
+      uid: ""
     };
   }
 

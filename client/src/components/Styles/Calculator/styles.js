@@ -31,25 +31,9 @@ const styles = theme => ({
       margin: "auto, auto",
       minWidth: "320px"
       //backgroundColor: '#FAFAFA',
-     // boxShadow: '0 0 0, 0 0 0'
-    } 
+      // boxShadow: '0 0 0, 0 0 0'
+    }
   }
-  // Settings header
- 
-  // Parent phone form container
- 
-  // Current phone number container
-  
-  // Phone number input field container
- 
-  // Parent email/text preference form container
- 
-  // Current value header
- 
-  // Button
- 
-  // Switches
-
 });
 
 export default styles;

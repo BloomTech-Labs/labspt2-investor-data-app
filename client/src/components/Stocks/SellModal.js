@@ -66,10 +66,6 @@ class SellModal extends React.Component {
     // divide the result by the purchase price
     //calculate the profit: new cost - original shares cost
     let profit = newCost - tempCost;
-    // get rid of these for production
-    console.log("target name: ", e.target.name);
-    console.log("target value: ", e.target.value);
-    console.log("newCost: ", newCost);
     // this is going to be this.state.sharesNumber and this.state.cost
     // these both update on screen values as the user types in a shares number
     this.setState({

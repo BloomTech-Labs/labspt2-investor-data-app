@@ -3,7 +3,7 @@ import {
   whiteColor,
   hexToRgb,
   purpleColor
-} from "./jsx/dashboard-cards.jsx";
+} from "./dashboard-cards.jsx";
 
 const cardStyle = {
   card: {

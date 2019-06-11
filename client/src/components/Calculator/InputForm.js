@@ -24,6 +24,7 @@ class InputForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      fields: {},
       numberShares: 0,
       newPurchasePrice: 0,
       newSellPrice: 0,
@@ -40,46 +41,94 @@ class InputForm extends React.Component {
   }
 
   changeHandler = event => {
-    console.log("change:", event.target.value);
-    this.setState({ [event.target.name]: event.target.value });
+    //console.log("change:", event.target.value);
+    //this.setState({ [event.target.name]: event.target.value });
+    let fields = this.state.fields;
+    fields[event.target.name] = event.target.value;
+    this.setState({
+      fields
+    });
   };
-  
+
   isNumeric = n => {
     return !isNaN(parseFloat(n)) && isFinite(n);
   };
 
   calculate = () => {
-    
-    //calculate the purchase price and buy commission
-    if (this.isNumeric(this.state.numberShares) === true) {
-      if (this.isNumeric(this.state.purchasePrice)) {
-        if (this.isNumeric(this.state.sellPrice)) {
-         // alert("Please enter a valid number...");
-    
-    
-    
-    let newPP = this.state.numberShares * this.state.purchasePrice;
-    let newBC = newPP * (this.state.buyCommission / 100);
-    newPP = newPP + newBC;
-    //calculate the sell price and sell commission
-    let newSP = this.state.numberShares * this.state.sellPrice;
-    let newSC = newSP * (this.state.sellCommission / 100);
-    newSP = newSP - newSC;
-    //calculate the profit/loss
-    let pl = newSP - newPP;
-    //calculate the return on investment
-    let roi = ((newSP - newPP) / newPP) * 100;
-    this.setState({
-      newPurchasePrice: newPP,
-      newSellPrice: newSP,
-      newSellCommission: newSC,
-      newBuyCommission: newBC,
-      pl: pl,
-      roi: roi
-    });
-  }
-}
+    let newBC = 0;
+    let newSC = 0;
+    let fields = this.state.fields;
+    if (this.validate()) {
+      //calculate the purchase price and buy commission
+      let newPP =
+        this.state.fields.numberShares * this.state.fields.purchasePrice;
+
+      // if the field is empty
+      if (!fields["buyCommission"]) {
+        newBC = 0;
+      } else {
+        newBC = newPP * (this.state.fields.buyCommission / 100);
+      }
+      newPP = newPP + newBC;
+      //calculate the sell price and sell commission
+      let newSP = this.state.fields.numberShares * this.state.fields.sellPrice;
+
+      // if the field is empty
+      if (!fields["sellCommission"]) {
+        newSC = 0;
+      } else {
+        newSC = newSP * (this.state.fields.sellCommission / 100);
+      }
+      newSP = newSP - newSC;
+
+      //calculate the profit/loss
+      let pl = newSP - newPP;
+      //calculate the return on investment
+      let roi = ((newSP - newPP) / newPP) * 100;
+      this.setState({
+        newPurchasePrice: newPP,
+        newSellPrice: newSP,
+        newSellCommission: newSC,
+        newBuyCommission: newBC,
+        pl: pl,
+        roi: roi
+      });
+    } else {
+      alert("check for valid numeric entries");
     }
+  };
+
+  validate = () => {
+    let formIsValid = true;
+    let fields = this.state.fields;
+    //let errors = {};
+
+    if (!fields["numberShares"]) {
+      if (this.isNumeric(this.state.fields.numberShares)) {
+        formIsValid = false;
+      }
+    }
+
+    if (!fields["purchasePrice"]) {
+      formIsValid = false;
+    }
+
+    if (!fields["sellPrice"]) {
+      formIsValid = false;
+    }
+
+    /*  if (!fields["buyCommission"]) {
+      formIsValid = false;
+    } */
+
+    /*  if (!fields["sellCommission"]) {
+      formIsValid = false;
+      } */
+
+    /* if (!fields["cgt"]) {
+      formIsValid = false;
+    } */
+    return formIsValid;
   };
 
   reset = () => {
@@ -92,7 +141,7 @@ class InputForm extends React.Component {
     input = parseFloat(input).toFixed(2);
     return input;
   };
-  
+
   render() {
     //const { classes } = this.props;
 
@@ -119,7 +168,8 @@ class InputForm extends React.Component {
                 type="text"
                 onChange={this.changeHandler}
                 name="numberShares"
-                value={this.props.value}
+                //value={this.props.value}
+                value={this.state.fields.numberShares}
                 className="input1"
               />
             </p>
@@ -128,7 +178,8 @@ class InputForm extends React.Component {
                 type="text"
                 onChange={this.changeHandler}
                 name="purchasePrice"
-                value={this.props.value}
+                //value={this.props.value}
+                value={this.state.fields.purchasePrice}
                 className="input1"
               />
             </p>
@@ -137,7 +188,8 @@ class InputForm extends React.Component {
                 type="text"
                 onChange={this.changeHandler}
                 name="sellPrice"
-                value={this.props.value}
+                value={this.state.fields.sellPrice}
+                //value={this.props.value}
                 className="input1"
               />
             </p>
@@ -146,7 +198,8 @@ class InputForm extends React.Component {
                 type="text"
                 onChange={this.changeHandler}
                 name="buyCommission"
-                value={this.props.value}
+                value={this.state.fields.buyCommission}
+                //value={this.props.value}
                 className="input1"
               />
             </p>
@@ -155,7 +208,8 @@ class InputForm extends React.Component {
                 type="text"
                 onChange={this.changeHandler}
                 name="sellCommission"
-                value={this.props.value}
+                value={this.state.fields.sellCommission}
+                //value={this.props.value}
                 className="input1"
               />
             </p>
@@ -164,7 +218,9 @@ class InputForm extends React.Component {
                 type="text"
                 onChange={this.changeHandler}
                 name="cgt"
-                value={this.props.value}
+                value={this.state.fields.cgt}
+                disabled="true"
+                //value={this.props.value}
                 className="input1"
               />
             </p>
@@ -190,16 +246,16 @@ class InputForm extends React.Component {
           </div>
           <div className="r">
             <div id="number-shares-out" className="input2">
-            {this.state.numberShares} 
+              {this.state.fields.numberShares}
             </div>
             <p> </p>
             <div id="net-buy-price" className="input2">
-            <NumberFormat
-                    value={`${this.decimalToFixed(this.state.newPurchasePrice)}`}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />  
+              <NumberFormat
+                value={`${this.decimalToFixed(this.state.newPurchasePrice)}`}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
             </div>
             <p> </p>
             <div id="buy-commission-out" className="input2">
