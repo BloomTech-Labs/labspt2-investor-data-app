@@ -9,13 +9,10 @@ import {
   Paper,
   TextField,
   MenuItem,
-  Popper,
-  Zoom
+  Popper
 } from "@material-ui/core";
 import { fire } from "../Auth/firebaseConfig";
-//import LiveTicker from "../Dashboard/LiveTicker";
 import Investments from "./Investments";
-//import KeyIndicators from "../Dashboard/KeyIndicators";
 import BalanceInfo from "./BalanceInfo";
 import styles from "../Styles/Stocks/styles";
 import GridContainer from "../Styles/Stocks/jsx/GridContainer.jsx";
@@ -24,10 +21,6 @@ import Autosuggest from "react-autosuggest";
 import match from "autosuggest-highlight/match";
 import parse from "autosuggest-highlight/parse";
 import { suggestions } from "../Reports/suggestions";
-//import axios from "axios";
-
-//const URL = "https://pickemm.herokuapp.com/api";
-//const URL = "http://localhost:5000/api";
 
 const renderInputComponent = inputProps => {
   const { classes, inputRef = () => {}, ref, ...other } = inputProps;
@@ -100,13 +93,11 @@ class Stocks extends Component {
   state = {
     value: 0,
     data: [],
-    ticker: "",
     single: "",
     popper: "",
     symbol: "",
     suggestions: [],
-    uid: fire.currentUser.uid,
-    checked: false
+    uid: fire.currentUser.uid
   };
 
   handleSuggestionsFetchRequested = ({ value }) => {
@@ -136,31 +127,17 @@ class Stocks extends Component {
     event,
     { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
   ) => {
-    // when user selects a stock i need to save the symbol
-    // to state. the newbalance page will then use the symbol
-    // to open the stock up and populate the card with all the 
-    // stocks current data info.
- /*    const newSymbol = {
-      symbol: suggestionValue,
-      uid: this.state.uid
-    };
-    axios
-      .post(`${URL}/stocks`, newSymbol)
-      .then(response => { */
+  
         localStorage.setItem('balanceInfo', suggestionValue);
         this.setState({
           symbol: suggestionValue,
           uid: this.state.uid
         });
         window.location.reload();
-  /*     })
-      .catch(err => {
-        console.log("we've encountered an error");
-      }); */
+ 
   };
 
   render() {
-    const { checked } = this.state;
     const { classes } = this.props;
 
     const autosuggestProps = {
@@ -179,7 +156,7 @@ class Stocks extends Component {
         <CssBaseline />
         <div className={classes.root}>
           <GridContainer>
-            <Grid container justify="space-between" alignItems="flex-end">
+            <Grid container justify="space-between" alignItems="flex-end"> 
               <Typography variant="h6" gutterBottom className={classes.welcome}>
                 Welcome, {""}
                 {fire.currentUser.displayName} {""} <br />
@@ -194,7 +171,7 @@ class Stocks extends Component {
            
             <Grid container justify="center">
            
-              <Grid
+               <Grid
                 spacing={24}
                 alignItems="center"
                 justify="center"
@@ -204,14 +181,11 @@ class Stocks extends Component {
               
                 <Grid item sm={4}>
                   <Paper className={classes.paper}>
-                    <Zoom in={checked}>
+                   
                       <Investments />
-                    </Zoom>
+                  
                   </Paper>
                 </Grid>
-               
-               
-               
                
                 <Grid item xs={12}>
                   <div className={classes.block}>

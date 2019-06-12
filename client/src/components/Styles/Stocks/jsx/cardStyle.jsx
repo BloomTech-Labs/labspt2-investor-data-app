@@ -12,9 +12,9 @@ const cardStyle = {
     borderRadius: "2px",
     color: "rgba(" + hexToRgb(blackColor) + ", 1)",
     background: "rgba(" + hexToRgb(whiteColor) + ", 1)",
-    minWidth: 245,
+    minWidth: 345,
     //maxWidth: 345,
-    height: 104,
+    height: 164,
     boxShadow: "0 1px 4px 0 rgba(" + hexToRgb(blackColor) + ", 0.14)",
     // position: "relative",
     display: "flex",
@@ -25,7 +25,8 @@ const cardStyle = {
     alignItems: "center",
     // minWidth: "0",
     wordWrap: "break-word",
-    fontSize: ".645rem",
+    //fontSize: ".645rem",
+    fontSize: "1rem",
     padding: "0 10px"
   },
   cardCategory: {

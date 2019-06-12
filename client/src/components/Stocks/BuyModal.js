@@ -14,7 +14,6 @@ import modalStyle from "../Styles/Stocks/jsx/modalStyle.jsx";
 import NumberFormat from "react-number-format";
 import { fire } from "../Auth/firebaseConfig";
 
-
 const URL = "http://localhost:5000/api";
 //const URL = "https://pickemm.herokuapp.com/api";
 
@@ -54,10 +53,6 @@ class BuyModal extends React.Component {
   changeHandler = e => {
     // calculate the new cost of the stocks
     let newCost = e.target.value * this.props.sharePrice;
-    console.log("target name: ", e.target.name);
-    console.log("target value: ", e.target.value);
-    console.log("newCost: ", newCost);
-    
     this.setState({ [e.target.name]: e.target.value, cost: newCost });
   };
 
@@ -71,11 +66,8 @@ class BuyModal extends React.Component {
         Number(this.state.sharesNumber) + this.props.sharePurch;
       // add the new investment to the old investment total
       let newSharesCost = this.props.sharesCost + this.state.cost;
-      // dont think i need this next line.
-      //let newSharesPrice = this.props.sharePrice;
-      //let uid = this.state.uid;
-      
-      let balance = this.props.balance - newSharesCost
+
+      let balance = this.props.balance - this.state.cost;
       // make a new record using the updated data
       const newRec = {
         symbol: this.props.company,
@@ -94,8 +86,6 @@ class BuyModal extends React.Component {
             sharePurch: newSharesNumber,
             balance: newSharesCost
           });
-        
-        
         })
         .catch(err => {
           console.log('error writing to stocks table');
@@ -130,10 +120,10 @@ class BuyModal extends React.Component {
     // make the next two lines into one line of code..
     let n = estimate.indexOf(".");
     estimate = estimate.slice(0, n);
-    
+
     //Number(estimate);
     //save max shares to state
-    
+
     this.setState({ maxShares: Number(estimate) });
     //return estimate;
   };
@@ -320,7 +310,6 @@ class BuyModal extends React.Component {
             </DialogActions>
           </CardBlock>
         </Dialog>
-       
       </div>
     );
   }

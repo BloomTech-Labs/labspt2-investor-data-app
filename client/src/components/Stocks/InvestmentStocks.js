@@ -11,9 +11,6 @@ import {
   StockSymbol
 } from "../Styles/Stocks/InvestmentStocks";
 import Primary from "../Styles/Stocks/jsx/Primary.jsx";
-//import Button from "../Styles/Stocks/Button.jsx";
-//import { Link } from "react-router-dom";
-//import * as ROUTES from "../../constants/routes";
 
 class InvestmentStocks extends React.Component {
   constructor(props) {

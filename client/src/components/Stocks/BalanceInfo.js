@@ -1,47 +1,25 @@
 import React from "react";
 import axios from "axios";
-//import PropTypes from "prop-types";
-//import Grid from "@material-ui/core/Grid";
-//import Paper from "@material-ui/core/Paper";
 import { Loading } from "../Styles/Stocks/InvestmentStocks";
 import GridContainer from "../Styles/Stocks/jsx/GridContainer.jsx";
 import GridItem from "../Styles/Stocks/jsx/GridItem.jsx";
 import Card from "../Styles/Stocks/jsx/Card";
 import styles from "../Styles/Stocks/styles";
-//import { Link } from "react-router-dom";
-//import * as ROUTES from "../../constants/routes";
-//import { fire } from "../Auth/firebaseConfig";
 import Button from "../Styles/Stocks/jsx/Button.jsx";
 import { withStyles, Tooltip, Typography } from "@material-ui/core";
-//import withStyles from "@material-ui/core/styles/withStyles";
-// core components
-//import Card from "../Styles/Stocks/Card.jsx";
-//import CardBody from "../Styles/Stocks/CardBody.jsx";
-/* import {
-  cardTitle,
-  cardLink,
-  cardSubtitle
-} from "../Styles/Stocks/material-kit-pro-react.jsx"; */
-
-/* const style = {
-  cardTitle,
-  cardLink,
-  cardSubtitle
-}; */
 
 //const URL = "https://pickemm.herokuapp.com/api";
-//const URL = "http://localhost:5000/api";
+const URL = "http://localhost:5000/api";
 
 class BalanceInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       timeStamp: {},
-      companies: ["DJI", "NDAQ", "AAPL", "AMZN"], // stock company symbols
       stocks: [],
       checked: false,
       balance: 0,
-      symbol: "AAPL",
+      symbol: "",
       sharesPrice: 0,
       sharesPurch: 0,
       datePurch: "",
@@ -55,16 +33,20 @@ class BalanceInfo extends React.Component {
       let symbol = localStorage.getItem("balanceInfo");
       if (symbol !== "Null") {
         localStorage.setItem("balanceInfo", "Null");
+        this.setState({
+          symbol: symbol
+        });
+       
         axios
           .get(
             `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`
           )
           .then(response => {
-            console.log("response: ", response);
+            //console.log("response: ", response);
             this.fetchStocks(response.data);
           })
           .catch(err => {
-            console.log('We"ve encountered an error');
+            console.log('We"ve encountered an error fetching stock data');
           });
       }
     }
@@ -88,6 +70,36 @@ class BalanceInfo extends React.Component {
       stocks,
       timeStamp
     });
+  };
+
+  buyHandler = () => {
+    // make a new record using the updated data
+    const newRec = {
+      symbol: this.state.symbol,
+      sharesCost: 0,
+      shareCost: 0,
+      sharePurch: 0,
+      uid: this.state.uid,
+      datePurch: ""
+    };
+    // update the users stock information: need to use the real id?
+    axios
+      .post(`${URL}/stocks`, newRec)
+      .then(response => {
+        console.log("response: ", response);
+      })
+      .catch(err => {
+        console.log('error writing to stocks table');
+      });
+
+    //window.location.reload();
+  };
+
+  cancelHandler = () => {
+    // clear out our storage area
+    localStorage.setItem("balanceInfo", "Null");
+    // um... reload
+    window.location.reload();
   };
 
   changePercent = (close, start) => {
@@ -154,7 +166,7 @@ class BalanceInfo extends React.Component {
     this.state.stocks.forEach((stock, index) => {
       rows.push(
         <GridContainer key={index}>
-          <GridItem xs={12} sm={3} md={6}>
+          <GridItem xs={12} sm={6} md={3}>
             <Card>
               <Tooltip
                 disableFocusListener
@@ -233,6 +245,13 @@ class BalanceInfo extends React.Component {
                 onClick={() => this.buyHandler()}
               >
                 Add
+              </Button>
+              <Button
+                color="danger"
+                size="sm"
+                onClick={() => this.cancelHandler()}
+              >
+                Cancel
               </Button>
             </Card>
           </GridItem>

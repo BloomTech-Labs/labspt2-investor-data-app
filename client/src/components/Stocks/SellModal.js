@@ -34,6 +34,7 @@ class SellModal extends React.Component {
       openLeft: false,
       liveDemo: false,
       sharesNumber: 0,
+      sharePurch: this.props.sharePurch,
       cost: 0,
       tempCost: 0,
       maxShares: 0,
@@ -51,7 +52,7 @@ class SellModal extends React.Component {
       id: this.props.id,
       uid: Uid
     });
-    this.maxShares(this.props.sharePurch);
+    this.maxShares(this.state.sharePurch);
   }
 
   changeHandler = e => {
@@ -108,13 +109,13 @@ class SellModal extends React.Component {
       axios
         .put(`${URL}/stocks/${this.state.id}`, newRec)
         .then(response => {
-          console.log("response: ", response);
+         // console.log("response: ", response);
           this.setState({
             sharesCost: newSharesCost,
             sharePurch: newSharesNumber,
             balance: balance
           });
-          console.log("this.state: ", this.state)
+          //console.log("this.state: ", this.state)
         })
          
         .catch(err => {
@@ -125,12 +126,7 @@ class SellModal extends React.Component {
   };
 
   balanceHandler = balance => {
-    let test = Date.now() + 3000
-    let z = 0
-    do {
-      z = z + 1;
-    }
-    while (Date.now() < test)
+  
    
     const newRec = {
       uid: this.state.uid,
@@ -140,25 +136,29 @@ class SellModal extends React.Component {
     axios
       .put(`${URL}/users/${this.state.uid}`, newRec)
       .then(response => {
-        console.log("put response: ", response);
+        //console.log("put response: ", response);
       })
       .catch(err => {
         console.log("error writing to users table");
       });
-    if (this.state.sharePurch === 0) {
-      console.log("try to delete")
+      console.log("sharePurch: ", this.state.sharePurch)
+  
+     
+     // if (this.state.sharePurch === 0) {
+      console.log("try to delete");
       
       
       
       this.zeroStocks();
-    }
+  //  }
     
-      //window.location.reload();
+      window.location.reload();
   };
   // this is the number of shares already owned
+  // most we can sell is the same number of stocks owned
   maxShares = sharePurch => {
     let estimate = sharePurch;
-    this.setState({ maxShares: Number(estimate) });
+    this.setState({ maxShares: Number(estimate), sharePurch: sharePurch });
   };
 
   zeroStocks = () => {

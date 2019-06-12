@@ -226,11 +226,11 @@ class InputForm extends React.Component {
         <div className="results">
           <div className="l">
             <p>Number Shares:</p>
-            <p>Net Buy Price: $</p>
-            <p>Buy Commission: $</p>
-            <p>Net Sell Price: $</p>
-            <p>Sell Commission: $</p>
-            <p>Profit/Loss: $</p>
+            <p>Net Buy Price: </p>
+            <p>Buy Commission: </p>
+            <p>Net Sell Price: </p>
+            <p>Sell Commission: </p>
+            <p>Profit/Loss: </p>
             <p>Return on Investment %</p>
             <p> </p>
           </div>

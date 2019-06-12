@@ -1,50 +1,50 @@
 const styles = theme => ({
   root: {
-    // padding: theme.spacing.unit * 3,
     flexGrow: -1,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 30
-
-    // backgroundColor: '#846f96',
-    // height: '100vh'
   },
 
   grid: {
     width: 1200,
-    //flexDirection: "column",
     flexWrap: "wrap-reverse",
     justifyContent: "flex-start",
     alignItems: "flex-end",
-    // margin: `0 ${theme.spacing.unit * 2}px`,
     [theme.breakpoints.down("sm")]: {
-      width: "calc(100% - 75px)"
+      width: "calc(100% - 75px)",
+      padding: "0px",
+      margin: "0px"
     },
 
     [theme.breakpoints.down("md")]: {
-      width: "calc(100% - 50px)"
+      width: "calc(100% - 50px)",
+      padding: "0px"
     }
   },
   paper: {
     flexGrow: 1,
     padding: theme.spacing.unit * 2,
-    textAlign: "left",
+    textAlign: "right",
+    minWidth: "325px",
     borderTop: "5px solid #4C046B",
     color: theme.palette.text.primary
   },
 
   block: {
     padding: 25,
+    width: "calc(100% - 250px)",
     marginTop: "50px",
     position: "relative",
+    justifyContent: "flex-start",
     top: -72,
     right: 55,
     fontSize: ".8rem",
 
     [theme.breakpoints.down("xs")]: {
       top: -72,
-      right: 8
+      right: 108
     },
     [theme.breakpoints.down("md")]: {
       top: -43
@@ -55,7 +55,7 @@ const styles = theme => ({
     marginTop: "50px",
     position: "relative",
     top: -72,
-    right: 55,
+    left: 100,
     fontSize: ".8rem",
 
     [theme.breakpoints.down("xs")]: {
@@ -63,7 +63,8 @@ const styles = theme => ({
       right: 8
     },
     [theme.breakpoints.down("md")]: {
-      top: -43
+      top: -43,
+      right: 100
     }
   },
   bigAvatar: {
@@ -92,22 +93,6 @@ const styles = theme => ({
     margin: 0,
     padding: 0,
     listStyleType: "none"
-  },
-  liveticker: {
-    right: -769,
-    [theme.breakpoints.down("md")]: {
-      right: -580
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "85%",
-      right: -60,
-      top: 0
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "90%",
-      right: -30,
-      top: 0
-    }
   },
   welcome: {
     position: "relative",
