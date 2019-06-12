@@ -24,7 +24,7 @@ class InputForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fields: {},
+     // fields: {},
       numberShares: 0,
       newPurchasePrice: 0,
       newSellPrice: 0,
@@ -36,17 +36,12 @@ class InputForm extends React.Component {
   }
 
   componentDidMount() {
-    //const currentEmail = fire.currentUser.email;
     //this.setState({ currentEmail: currentEmail });
   }
 
   changeHandler = event => {
-    //console.log("change:", event.target.value);
-    //this.setState({ [event.target.name]: event.target.value });
-    let fields = this.state.fields;
-    fields[event.target.name] = event.target.value;
     this.setState({
-      fields
+      [event.target.name]: event.target.value
     });
   };
 
@@ -57,34 +52,42 @@ class InputForm extends React.Component {
   calculate = () => {
     let newBC = 0;
     let newSC = 0;
-    let fields = this.state.fields;
+    //let fields = this.state.fields;
     if (this.validate()) {
       //calculate the purchase price and buy commission
       let newPP =
-        this.state.fields.numberShares * this.state.fields.purchasePrice;
+        this.state.numberShares * this.state.purchasePrice;
 
       // if the field is empty
-      if (!fields["buyCommission"]) {
+     /*  if (!fields["buyCommission"]) {
         newBC = 0;
-      } else {
-        newBC = newPP * (this.state.fields.buyCommission / 100);
-      }
-      newPP = newPP + newBC;
+      } else { */
+        newBC = newPP * (this.state.buyCommission / 100);
+      //}
+     // newPP = newPP + newBC;
+
       //calculate the sell price and sell commission
-      let newSP = this.state.fields.numberShares * this.state.fields.sellPrice;
+      let newSP = this.state.numberShares * this.state.sellPrice;
 
       // if the field is empty
-      if (!fields["sellCommission"]) {
+     /*  if (!fields["sellCommission"]) {
         newSC = 0;
-      } else {
-        newSC = newSP * (this.state.fields.sellCommission / 100);
-      }
-      newSP = newSP - newSC;
+      } else { */
+        newSC = newSP * (this.state.sellCommission / 100);
+      //}
+      //newSP = newSP - newSC;
 
       //calculate the profit/loss
       let pl = newSP - newPP;
       //calculate the return on investment
       let roi = ((newSP - newPP) / newPP) * 100;
+      //calculate captial gains tax
+     /*  let cgt = 0;
+      if (pl > 0) {
+        cgt = pl * (this.state.cgt / 100);
+        pl = pl - cgt;
+      } */
+
       this.setState({
         newPurchasePrice: newPP,
         newSellPrice: newSP,
@@ -100,10 +103,9 @@ class InputForm extends React.Component {
 
   validate = () => {
     let formIsValid = true;
-    let fields = this.state.fields;
-    //let errors = {};
+    //let fields = this.state.fields;
 
-    if (!fields["numberShares"]) {
+   /*  if (!fields["numberShares"]) {
       if (this.isNumeric(this.state.fields.numberShares)) {
         formIsValid = false;
       }
@@ -116,18 +118,7 @@ class InputForm extends React.Component {
     if (!fields["sellPrice"]) {
       formIsValid = false;
     }
-
-    /*  if (!fields["buyCommission"]) {
-      formIsValid = false;
-    } */
-
-    /*  if (!fields["sellCommission"]) {
-      formIsValid = false;
-      } */
-
-    /* if (!fields["cgt"]) {
-      formIsValid = false;
-    } */
+ */
     return formIsValid;
   };
 
@@ -168,8 +159,8 @@ class InputForm extends React.Component {
                 type="text"
                 onChange={this.changeHandler}
                 name="numberShares"
-                //value={this.props.value}
-                value={this.state.fields.numberShares}
+                value={this.props.value}
+               // value={this.state.numberShares}
                 className="input1"
               />
             </p>
@@ -178,8 +169,8 @@ class InputForm extends React.Component {
                 type="text"
                 onChange={this.changeHandler}
                 name="purchasePrice"
-                //value={this.props.value}
-                value={this.state.fields.purchasePrice}
+                value={this.props.value}
+               // value={this.state.purchasePrice}
                 className="input1"
               />
             </p>
@@ -188,8 +179,8 @@ class InputForm extends React.Component {
                 type="text"
                 onChange={this.changeHandler}
                 name="sellPrice"
-                value={this.state.fields.sellPrice}
-                //value={this.props.value}
+               // value={this.state.sellPrice}
+                value={this.props.value}
                 className="input1"
               />
             </p>
@@ -198,8 +189,8 @@ class InputForm extends React.Component {
                 type="text"
                 onChange={this.changeHandler}
                 name="buyCommission"
-                value={this.state.fields.buyCommission}
-                //value={this.props.value}
+                //value={this.state.buyCommission}
+                value={this.props.value}
                 className="input1"
               />
             </p>
@@ -208,8 +199,8 @@ class InputForm extends React.Component {
                 type="text"
                 onChange={this.changeHandler}
                 name="sellCommission"
-                value={this.state.fields.sellCommission}
-                //value={this.props.value}
+                //value={this.state.sellCommission}
+                value={this.props.value}
                 className="input1"
               />
             </p>
@@ -218,9 +209,8 @@ class InputForm extends React.Component {
                 type="text"
                 onChange={this.changeHandler}
                 name="cgt"
-                value={this.state.fields.cgt}
-                disabled="true"
-                //value={this.props.value}
+                //value={this.state.cgt}
+                value={this.props.value}
                 className="input1"
               />
             </p>
@@ -246,7 +236,7 @@ class InputForm extends React.Component {
           </div>
           <div className="r">
             <div id="number-shares-out" className="input2">
-              {this.state.fields.numberShares}
+              {this.state.numberShares}
             </div>
             <p> </p>
             <div id="net-buy-price" className="input2">

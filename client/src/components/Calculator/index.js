@@ -6,23 +6,16 @@ import InputForm from "./InputForm";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
-import Divider from '@material-ui/core/Divider';
+//import Divider from '@material-ui/core/Divider';
 
 // WithStyles
 import styles from '../Styles/Calculator/styles';
-
-// Calculator Page Components
-//import EmailForm from './EmailForm';
-//import PhoneForm from './PhoneForm';
-//import OptEmailsTextsForm from './OptEmailsTextsForm';
 
 class Calculator extends React.Component {
 
     handleChange = name => event => {
         this.setState({ [name]: event.target.value });
     };
-
-
 
     render() {
         const { classes } = this.props;

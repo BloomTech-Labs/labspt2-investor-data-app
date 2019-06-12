@@ -3,7 +3,7 @@
     text-align: right;
     width: 100px;
     height: 20px;
-    background-color: rgb(206, 203, 240);
+    background-color: rgb(231, 229, 248);
     border-radius: 5px;
     border: 1px solid black;
 }
@@ -11,7 +11,7 @@
 .inputContainer {
     display: flex;
     flex-direction: row;
-   /*  border: 2px solid blue; */
+    /*  border: 2px solid blue; */
 }
 
 .inputLeft {
@@ -23,7 +23,7 @@
 .inputRight {
     display: flex;
     flex-direction: column;
-   /*  border: 2px solid orange; */
+    /*  border: 2px solid orange; */
 }
 
 .bigContainer {
@@ -43,20 +43,20 @@
     display: flex;
     flex-direction: row;
     /*  height: 300px; */
-  /*   border: 2px solid purple; */
+    /*   border: 2px solid purple; */
 }
 
 .l {
-   /*  border: 2px solid pink; */
+    /*  border: 2px solid pink; */
 }
 
 .r {
-   /*  border: 2px solid gray; */
+    /*  border: 2px solid gray; */
 
 }
 
 .input2 {
-    display: flex;
+    /* display: flex; */
     text-align: right;
     width: 100px;
     height: 20px;

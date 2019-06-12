@@ -5,10 +5,10 @@ module.exports = {
         return db("stocks");
     },
 
-   getByUid: uid => {
+   getById: id => {
         let query = db('stocks');
-        if (uid) {
-            query.where('uid', uid).first();
+        if (id) {
+            query.where('id', id).first();
             return query;
         }
         return db('stocks')

@@ -87,6 +87,7 @@ class SellModal extends React.Component {
         this.props.sharePurch - Number(this.state.sharesNumber);
       
       // calculate the return on the stocks that were just sold
+      // this is investment(sharesCost) minus newSharesCost
       let newReturn = newSharesNumber * this.props.sharePrice;
       // recalculate the value of shares still owned - if any
       let newSharesCost = this.props.sharesCost - newReturn;
@@ -100,8 +101,8 @@ class SellModal extends React.Component {
         symbol: this.props.company,
         sharesCost: newSharesCost,
         shareCost: this.props.shareCost,
-        sharePurch: newSharesNumber,
-        uid: this.state.uid
+        sharePurch: newSharesNumber
+        //uid: this.state.uid
       };
       // update the users stock information: need to use the real id?
       axios
@@ -109,21 +110,28 @@ class SellModal extends React.Component {
         .then(response => {
           console.log("response: ", response);
           this.setState({
-            sharesCost: this.props.id,
+            sharesCost: newSharesCost,
             sharePurch: newSharesNumber,
-            balance: newSharesCost
+            balance: balance
           });
-        
-        
+          console.log("this.state: ", this.state)
         })
+         
         .catch(err => {
-          console.log('We"ve encountered an error');
+          console.log("Error writing to stocks table");
         });
       this.balanceHandler(balance);
     }
   };
 
   balanceHandler = balance => {
+    let test = Date.now() + 3000
+    let z = 0
+    do {
+      z = z + 1;
+    }
+    while (Date.now() < test)
+   
     const newRec = {
       uid: this.state.uid,
       balance: balance
@@ -138,10 +146,14 @@ class SellModal extends React.Component {
         console.log("error writing to users table");
       });
     if (this.state.sharePurch === 0) {
+      console.log("try to delete")
+      
+      
+      
       this.zeroStocks();
     }
     
-      window.location.reload();
+      //window.location.reload();
   };
   // this is the number of shares already owned
   maxShares = sharePurch => {
@@ -154,7 +166,7 @@ class SellModal extends React.Component {
     axios
         .delete(`${URL}/stocks/${this.state.id}`)
         .then(response => {
-          console.log("response: ", response);
+          //console.log("response: ", response);
           console.log("stock deleted");
         
         

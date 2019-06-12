@@ -39,10 +39,10 @@ router.get('/:uid', async (req, res) => {
 
 
 /************* Delete stock *************/
-router.delete('/:symbol', (req, res) => {
-    const {symbol} = req.params
-    if (symbol){
-        stocks.remove(symbol)
+router.delete('/:id', (req, res) => {
+    const {id} = req.params
+    if (id){
+        stocks.remove(id)
             .then(stock => {
                 if (stock) {
                     res.json({ message: "The stock was successfully deleted" });
@@ -68,7 +68,7 @@ router.put('/:id', (req, res) => {
         .update(id, changes)
         .then(count => {
             if (count) {
-                stocks.getByUid(uid)
+                stocks.getById(id)
                     .then(user => {
                         // If user's stocks have been updated, return the updated user stocks.
                         res
