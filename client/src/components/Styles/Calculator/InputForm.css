@@ -11,26 +11,21 @@
 .inputContainer {
     display: flex;
     flex-direction: row;
-    /*  border: 2px solid blue; */
 }
 
 .inputLeft {
     display: flex;
     flex-direction: column;
-    /* border: 2px solid green; */
-}
+ }
 
 .inputRight {
     display: flex;
     flex-direction: column;
-    /*  border: 2px solid orange; */
 }
 
 .bigContainer {
     display: flex;
     flex-direction: column;
-    /* border: 2px solid red; */
-
 }
 
 .title {
@@ -42,26 +37,14 @@
 .results {
     display: flex;
     flex-direction: row;
-    /*  height: 300px; */
-    /*   border: 2px solid purple; */
+  
 }
 
-.l {
-    /*  border: 2px solid pink; */
-}
-
-.r {
-    /*  border: 2px solid gray; */
-
-}
-
-.input2 {
-    /* display: flex; */
+.input2 { 
     text-align: right;
     width: 100px;
     height: 20px;
     background-color: rgb(211, 209, 231);
     border-radius: 5px;
     border: 1px solid black;
-
 }

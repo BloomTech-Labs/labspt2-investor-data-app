@@ -10,7 +10,7 @@ import { withStyles } from "@material-ui/core/styles";
 import styles from "../Styles/Calculator/styles";
 import NumberFormat from "react-number-format";
 //import Divider from '@material-ui/core/Divider';
-//import { Row } from "../Styles/Calculator/InputForm";
+import { InputContainer, InputLeft, InputRight, BigContainer, Title, Results, Input1 } from "../Styles/Calculator/InputForm";
 //import Grid from "@material-ui/core/Grid";
 //import InputAdornment from "@material-ui/core/InputAdornment";
 // @material-ui/icons
@@ -52,7 +52,7 @@ class InputForm extends React.Component {
   calculate = () => {
     let newBC = 0;
     let newSC = 0;
-    //let fields = this.state.fields;
+    
     if (this.validate()) {
       //calculate the purchase price and buy commission
       let newPP =
@@ -103,22 +103,31 @@ class InputForm extends React.Component {
 
   validate = () => {
     let formIsValid = true;
-    //let fields = this.state.fields;
 
-   /*  if (!fields["numberShares"]) {
-      if (this.isNumeric(this.state.fields.numberShares)) {
-        formIsValid = false;
-      }
-    }
-
-    if (!fields["purchasePrice"]) {
+    if (!this.isNumeric(this.state.numberShares)) {
       formIsValid = false;
+      //console.log("shares: ", this.state.numberShares)
     }
-
-    if (!fields["sellPrice"]) {
+    if (!this.isNumeric(this.state.purchasePrice)) {
       formIsValid = false;
+      //console.log("pp: ", this.state.purchasePrice)
     }
- */
+    if (!this.isNumeric(this.state.sellPrice)) {
+      formIsValid = false;
+      //console.log("sp: ", this.state.sellPrice)
+    }
+    if (!this.isNumeric(this.state.buyCommission)) {
+      formIsValid = false;
+      //console.log("bc: ", this.state.buyCommission)
+    }
+    if (!this.isNumeric(this.state.sellCommission)) {
+      formIsValid = false;
+      // console.log("sc: ", this.state.sellCommission)
+    }
+    if (!this.isNumeric(this.state.cgt)) {
+      formIsValid = false;
+      //console.log("cgt: ", this.state.cgt)
+    }
     return formIsValid;
   };
 
@@ -137,9 +146,12 @@ class InputForm extends React.Component {
     //const { classes } = this.props;
 
     return (
-      <div className="bigContainer">
-        <div className="inputContainer">
-          <div className="inputLeft">
+      <BigContainer>
+        {/* <div className="bigContainer"> */}
+        <InputContainer>
+          {/*  <div className="inputContainer"> */}
+          <InputLeft>
+            {/* <div className="inputLeft"> */}
             <p>Number Shares:</p>
             <p>Purchase Price: $</p>
             <p>Sell Price: $</p>
@@ -151,9 +163,9 @@ class InputForm extends React.Component {
             <Button onClick={() => this.calculate()} color="primary">
               Calculate
             </Button>
-          </div>
-
-          <div className="inputRight">
+          </InputLeft>
+          <InputRight>
+          {/*  <div className="inputRight"> */}
             <p>
               <input
                 type="text"
@@ -218,12 +230,14 @@ class InputForm extends React.Component {
             <Button onClick={() => this.reset()} color="primary">
               Reset
             </Button>
-          </div>
-        </div>
-        <div className="title">
+          </InputRight>
+        </InputContainer>
+        <Title>
+          {/*  <div className="title"> */}
           <h4>RESULTS</h4>
-        </div>
-        <div className="results">
+        </Title>
+        <Results>
+          {/* <div className="results"> */}
           <div className="l">
             <p>Number Shares:</p>
             <p>Net Buy Price: </p>
@@ -236,7 +250,7 @@ class InputForm extends React.Component {
           </div>
           <div className="r">
             <div id="number-shares-out" className="input2">
-              {this.state.numberShares}
+              {Number(this.state.numberShares)}
             </div>
             <p> </p>
             <div id="net-buy-price" className="input2">
@@ -294,8 +308,8 @@ class InputForm extends React.Component {
             </div>
             <p> </p>
           </div>
-        </div>
-      </div>
+        </Results>
+      </BigContainer>
     );
   }
 }

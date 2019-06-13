@@ -12,6 +12,7 @@ import Primary from "../Styles/Stocks/jsx/Primary.jsx";
 import Button from "../Styles/Stocks/jsx/Button.jsx";
 import modalStyle from "../Styles/Stocks/jsx/modalStyle.jsx";
 import NumberFormat from "react-number-format";
+
 import { fire } from "../Auth/firebaseConfig";
 
 const URL = "http://localhost:5000/api";
@@ -29,6 +30,7 @@ class BuyModal extends React.Component {
   anchorElLeft = null;
   constructor(props) {
     super(props);
+
     this.state = {
       openLeft: false,
       liveDemo: false,
@@ -43,6 +45,7 @@ class BuyModal extends React.Component {
 
   componentDidMount() {
     let Uid = fire.currentUser.uid;
+
     this.setState({
       id: this.props.id,
       uid: Uid
@@ -53,7 +56,11 @@ class BuyModal extends React.Component {
   changeHandler = e => {
     // calculate the new cost of the stocks
     let newCost = e.target.value * this.props.sharePrice;
-    this.setState({ [e.target.name]: e.target.value, cost: newCost });
+
+    this.setState({
+      [e.target.name]: e.target.value,
+      cost: newCost
+    });
   };
 
   buyHandler = () => {
@@ -62,12 +69,12 @@ class BuyModal extends React.Component {
       alert("Shares must be less than max shares...");
     } else {
       // add the number of new shares purchased to old shares purchased
-      let newSharesNumber =
-        Number(this.state.sharesNumber) + this.props.sharePurch;
+      let newSharesNumber = Number(this.state.sharesNumber) + this.props.sharePurch;
       // add the new investment to the old investment total
       let newSharesCost = this.props.sharesCost + this.state.cost;
 
       let balance = this.props.balance - this.state.cost;
+
       // make a new record using the updated data
       const newRec = {
         symbol: this.props.company,
@@ -76,11 +83,13 @@ class BuyModal extends React.Component {
         sharePurch: newSharesNumber,
         uid: this.state.uid
       };
+
       // update the users stock information: need to use the real id?
       axios
         .put(`${URL}/stocks/${this.state.id}`, newRec)
         .then(response => {
           console.log("response: ", response);
+
           this.setState({
             sharesCost: this.props.id,
             sharePurch: newSharesNumber,
@@ -124,7 +133,9 @@ class BuyModal extends React.Component {
     //Number(estimate);
     //save max shares to state
 
-    this.setState({ maxShares: Number(estimate) });
+    this.setState({
+      maxShares: Number(estimate)
+    });
     //return estimate;
   };
 
@@ -159,7 +170,7 @@ class BuyModal extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
     return (
       <div>
         <Button
@@ -204,7 +215,7 @@ class BuyModal extends React.Component {
               className={classes.modalBody}
             >
               <Row>
-                <h3>{this.props.company}</h3>
+                <h3> {this.props.company}</h3>
               </Row>
               <Row>
                 <Primary>
@@ -221,7 +232,7 @@ class BuyModal extends React.Component {
                 <Primary>
                   Current Market Price:{" "}
                   <NumberFormat
-                    value={`  ${this.decimalToFixed(this.props.sharePrice)}`}
+                    value={`${this.decimalToFixed(this.props.sharePrice)}`}
                     displayType={"text"}
                     thousandSeparator={true}
                     prefix={"$"}
@@ -231,7 +242,7 @@ class BuyModal extends React.Component {
               <Row>
                 <Primary>
                   <p>
-                    Current Shares Owned:{"  "}
+                    Current Shares Owned: {"  "}
                     {this.props.sharePurch}
                   </p>
                 </Primary>
@@ -239,7 +250,7 @@ class BuyModal extends React.Component {
               <p>
                 Original Share Cost:{" "}
                 <NumberFormat
-                  value={`  ${this.decimalToFixed(this.props.shareCost)}`}
+                  value={`${this.decimalToFixed(this.props.shareCost)}`}
                   displayType={"text"}
                   thousandSeparator={true}
                   prefix={"$"}
