@@ -48,3 +48,12 @@ export const Input1 = styled.input`
   border-radius: 5px;
   border: 1px solid black;
 `;
+
+export const Result = styled.div`
+  text-align: right;
+  width: 100px;
+  height: 20px;
+  background-color: rgb(211, 209, 231);
+  border-radius: 5px;
+  border: 1px solid black;
+`;

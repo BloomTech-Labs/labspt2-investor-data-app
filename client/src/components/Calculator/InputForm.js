@@ -1,8 +1,5 @@
 import React from "react";
-import "../Styles/Calculator/InputForm.css";
-// Material UI Components
 import { withStyles } from "@material-ui/core/styles";
-// WithStyles
 import styles from "../Styles/Calculator/styles";
 import NumberFormat from "react-number-format";
 import {
@@ -12,7 +9,9 @@ import {
   BigContainer,
   Title,
   Results,
-  Input1} from "../Styles/Calculator/InputForm";
+  Input1,
+  Result
+} from "../Styles/Calculator/InputForm";
 import Button from "../Styles/Calculator/jss/Button.jsx";
 
 class InputForm extends React.Component {
@@ -30,7 +29,7 @@ class InputForm extends React.Component {
   }
 
   componentDidMount() {
-    //this.setState({ currentEmail: currentEmail });
+    // remove
   }
 
   changeHandler = event => {
@@ -46,41 +45,36 @@ class InputForm extends React.Component {
   calculate = () => {
     let newBC = 0;
     let newSC = 0;
-    
+
+    // only run this if all the data is numeric
     if (this.validate()) {
       //calculate the purchase price and buy commission
-      let newPP =
-        this.state.numberShares * this.state.purchasePrice;
-
-      // if the field is empty
-     /*  if (!fields["buyCommission"]) {
-        newBC = 0;
-      } else { */
+      let newPP = this.state.numberShares * this.state.purchasePrice;
+      // if the field is empty or zero skip the calculation
+      if (this.state.buyCommission > 0) {
         newBC = newPP * (this.state.buyCommission / 100);
-      //}
-     // newPP = newPP + newBC;
+        // add the buy commission amt to the new purchase price
+        newPP = newPP + newBC;
+      }
 
       //calculate the sell price and sell commission
       let newSP = this.state.numberShares * this.state.sellPrice;
-
-      // if the field is empty
-     /*  if (!fields["sellCommission"]) {
-        newSC = 0;
-      } else { */
+      if (this.state.sellCommission > 0) {
         newSC = newSP * (this.state.sellCommission / 100);
-      //}
-      //newSP = newSP - newSC;
+        // add the sell commission amt to the new sell price
+        newSP = newSP - newSC;
+      }
 
       //calculate the profit/loss
       let pl = newSP - newPP;
       //calculate the return on investment
       let roi = ((newSP - newPP) / newPP) * 100;
       //calculate captial gains tax
-     /*  let cgt = 0;
-      if (pl > 0) {
-        cgt = pl * (this.state.cgt / 100);
+      if (this.state.cgt > 0) {
+        let cgt = pl * (this.state.cgt / 100);
+        // subtract the tax from the profit/loss
         pl = pl - cgt;
-      } */
+      }
 
       this.setState({
         newPurchasePrice: newPP,
@@ -91,6 +85,7 @@ class InputForm extends React.Component {
         roi: roi
       });
     } else {
+      // kind of vague message -- does not tell user which field is bad
       alert("check for valid numeric entries");
     }
   };
@@ -100,27 +95,21 @@ class InputForm extends React.Component {
 
     if (!this.isNumeric(this.state.numberShares)) {
       formIsValid = false;
-      //console.log("shares: ", this.state.numberShares)
     }
     if (!this.isNumeric(this.state.purchasePrice)) {
       formIsValid = false;
-      //console.log("pp: ", this.state.purchasePrice)
     }
     if (!this.isNumeric(this.state.sellPrice)) {
       formIsValid = false;
-      //console.log("sp: ", this.state.sellPrice)
     }
     if (!this.isNumeric(this.state.buyCommission)) {
       formIsValid = false;
-      //console.log("bc: ", this.state.buyCommission)
     }
     if (!this.isNumeric(this.state.sellCommission)) {
       formIsValid = false;
-      // console.log("sc: ", this.state.sellCommission)
     }
     if (!this.isNumeric(this.state.cgt)) {
       formIsValid = false;
-      //console.log("cgt: ", this.state.cgt)
     }
     return formIsValid;
   };
@@ -141,81 +130,70 @@ class InputForm extends React.Component {
 
     return (
       <BigContainer>
-        {/* <div className="bigContainer"> */}
         <InputContainer>
-          {/*  <div className="inputContainer"> */}
           <InputLeft>
-            {/* <div className="inputLeft"> */}
             <p>Number Shares:</p>
             <p>Purchase Price: $</p>
             <p>Sell Price: $</p>
             <p>Buy Commission:   %</p>
             <p>Sell Commission:   %</p>
             <p>Capital Gains Tax Rate: %</p>
-
             <p> </p>
             <Button onClick={() => this.calculate()} color="primary">
               Calculate
             </Button>
           </InputLeft>
           <InputRight>
-          {/*  <div className="inputRight"> */}
             <p>
-              <input
+              <Input1
                 type="text"
                 onChange={this.changeHandler}
                 name="numberShares"
                 value={this.props.value}
-               // value={this.state.numberShares}
                 className="input1"
               />
             </p>
             <p>
-              <input
+              <Input1
                 type="text"
                 onChange={this.changeHandler}
                 name="purchasePrice"
                 value={this.props.value}
-               // value={this.state.purchasePrice}
                 className="input1"
               />
             </p>
             <p>
-              <input
+              <Input1
                 type="text"
                 onChange={this.changeHandler}
                 name="sellPrice"
-               // value={this.state.sellPrice}
                 value={this.props.value}
                 className="input1"
               />
             </p>
             <p>
-              <input
+              <Input1
                 type="text"
                 onChange={this.changeHandler}
                 name="buyCommission"
-                //value={this.state.buyCommission}
                 value={this.props.value}
                 className="input1"
               />
             </p>
             <p>
-              <input
+              <Input1
                 type="text"
                 onChange={this.changeHandler}
                 name="sellCommission"
-                //value={this.state.sellCommission}
                 value={this.props.value}
                 className="input1"
               />
             </p>
             <p>
-              <input
+              <Input1
                 type="text"
                 onChange={this.changeHandler}
                 name="cgt"
-                //value={this.state.cgt}
                 value={this.props.value}
                 className="input1"
               />
@@ -227,11 +205,9 @@ class InputForm extends React.Component {
           </InputRight>
         </InputContainer>
         <Title>
-          {/*  <div className="title"> */}
           <h4>RESULTS</h4>
         </Title>
         <Results>
-          {/* <div className="results"> */}
           <div className="l">
             <p>Number Shares:</p>
             <p>Net Buy Price: </p>
@@ -243,63 +219,61 @@ class InputForm extends React.Component {
             <p> </p>
           </div>
           <div className="r">
-            <div id="number-shares-out" className="input2">
-              {Number(this.state.numberShares)}
-            </div>
+            <Result>{Number(this.state.numberShares)}</Result>
             <p> </p>
-            <div id="net-buy-price" className="input2">
+            <Result>
               <NumberFormat
                 value={`${this.decimalToFixed(this.state.newPurchasePrice)}`}
                 displayType={"text"}
                 thousandSeparator={true}
                 prefix={"$"}
               />
-            </div>
+            </Result>
             <p> </p>
-            <div id="buy-commission-out" className="input2">
-            <NumberFormat
-                    value={`${this.decimalToFixed(this.state.newBuyCommission)}`}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />  
-            </div>
+            <Result>
+              <NumberFormat
+                value={`${this.decimalToFixed(this.state.newBuyCommission)}`}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            </Result>
             <p> </p>
-            <div id="net-sell-price" className="input2">
-            <NumberFormat
-                    value={`${this.decimalToFixed(this.state.newSellPrice)}`}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  /> 
-            </div>
+            <Result>
+              <NumberFormat
+                value={`${this.decimalToFixed(this.state.newSellPrice)}`}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            </Result>
             <p> </p>
-            <div id="sell-commission-out" className="input2">
-            <NumberFormat
-                    value={`${this.decimalToFixed(this.state.newSellCommission)}`}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  /> 
-            </div>
+            <Result>
+              <NumberFormat
+                value={`${this.decimalToFixed(this.state.newSellCommission)}`}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            </Result>
             <p> </p>
-            <div id="pl-out" className="input2">
-            <NumberFormat
-                    value={`${this.decimalToFixed(this.state.pl)}`}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  /> 
-            </div>
+            <Result>
+              <NumberFormat
+                value={`${this.decimalToFixed(this.state.pl)}`}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            </Result>
             <p> </p>
-            <div id="roi-out" className="input2">
-            <NumberFormat
-                    value={`${this.decimalToFixed(this.state.roi)}`}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={""}
-                  /> 
-            </div>
+            <Result>
+              <NumberFormat
+                value={`${this.decimalToFixed(this.state.roi)}`}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={""}
+              />
+            </Result>
             <p> </p>
           </div>
         </Results>
