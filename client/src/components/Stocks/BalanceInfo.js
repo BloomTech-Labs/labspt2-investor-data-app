@@ -30,19 +30,20 @@ class BalanceInfo extends React.Component {
 
   componentDidMount() {
     if (localStorage.getItem("balanceInfo")) {
+      // check the contents of local storage
       let symbol = localStorage.getItem("balanceInfo");
+      // if its not equal to Null then fetch the stock data
       if (symbol !== "Null") {
         localStorage.setItem("balanceInfo", "Null");
+        // set it to Null to prevent it from reopening and save symbol to state
         this.setState({
           symbol: symbol
         });
-       
         axios
           .get(
             `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`
           )
           .then(response => {
-            //console.log("response: ", response);
             this.fetchStocks(response.data);
           })
           .catch(err => {
@@ -60,7 +61,7 @@ class BalanceInfo extends React.Component {
     let timeStamps = Object.keys(data);
     let current = data[timeStamps[0]];
     timeStamp = timeStamps[0];
-
+    // build an object with the stock data
     stocks.push({
       company: results["Meta Data"]["2. Symbol"], // Collects stock symbol
       values: current
@@ -71,8 +72,10 @@ class BalanceInfo extends React.Component {
       timeStamp
     });
   };
-
+  // user has decided they want to buy/sell using this symbol
   buyHandler = () => {
+    // i need to check for duplicates before saving a new record
+
     // make a new record using the updated data
     const newRec = {
       symbol: this.state.symbol,
@@ -82,19 +85,19 @@ class BalanceInfo extends React.Component {
       uid: this.state.uid,
       datePurch: ""
     };
-    // update the users stock information: need to use the real id?
     axios
       .post(`${URL}/stocks`, newRec)
       .then(response => {
         console.log("response: ", response);
       })
       .catch(err => {
-        console.log('error writing to stocks table');
+        console.log("error writing to stocks table");
       });
-
-    //window.location.reload();
+    // need to figure another way to refresh the investment display
+    window.location.reload();
   };
 
+  // user decided to cancel the whole process
   cancelHandler = () => {
     // clear out our storage area
     localStorage.setItem("balanceInfo", "Null");

@@ -80,7 +80,6 @@ const getSuggestions = value => {
         if (keep) {
           count += 1;
         }
-
         return keep;
       });
 };
@@ -127,14 +126,12 @@ class Stocks extends Component {
     event,
     { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
   ) => {
-  
-        localStorage.setItem('balanceInfo', suggestionValue);
-        this.setState({
-          symbol: suggestionValue,
-          uid: this.state.uid
-        });
-        window.location.reload();
- 
+    localStorage.setItem('balanceInfo', suggestionValue);
+    this.setState({
+      symbol: suggestionValue,
+      uid: this.state.uid
+    });
+    window.location.reload();
   };
 
   render() {
@@ -168,25 +165,19 @@ class Stocks extends Component {
                 className={classes.bigAvatar}
               />
             </Grid>
-           
             <Grid container justify="center">
-           
-               <Grid
+              <Grid
                 spacing={24}
                 alignItems="center"
                 justify="center"
                 container
                 className={classes.grid}
               >
-              
                 <Grid item sm={4}>
                   <Paper className={classes.paper}>
-                   
-                      <Investments />
-                  
+                    <Investments />
                   </Paper>
                 </Grid>
-               
                 <Grid item xs={12}>
                   <div className={classes.block}>
                     <Typography
@@ -241,7 +232,10 @@ class Stocks extends Component {
                         )}
                       />
                     </div>
-                    <BalanceInfo symbol={this.state.symbol} uid={this.state.uid} /> 
+                    <BalanceInfo
+                      symbol={this.state.symbol}
+                      uid={this.state.uid}
+                    />
                   </div>
                 </Grid>
               </Grid>

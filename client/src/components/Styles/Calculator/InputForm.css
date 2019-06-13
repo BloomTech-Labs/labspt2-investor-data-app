@@ -8,7 +8,7 @@
     border: 1px solid black;
 }
 
-.inputContainer {
+/* .inputContainer {
     display: flex;
     flex-direction: row;
 }
@@ -16,7 +16,7 @@
 .inputLeft {
     display: flex;
     flex-direction: column;
- }
+}
 
 .inputRight {
     display: flex;
@@ -37,8 +37,8 @@
 .results {
     display: flex;
     flex-direction: row;
-  
-}
+
+} */
 
 .input2 { 
     text-align: right;

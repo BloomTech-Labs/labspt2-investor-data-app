@@ -1,30 +1,24 @@
 import React from "react";
 import "../Styles/Calculator/InputForm.css";
-//import { fire } from "../Auth/firebaseConfig";
-
 // Material UI Components
 import { withStyles } from "@material-ui/core/styles";
-//import Typography from "@material-ui/core/Typography";
-
 // WithStyles
 import styles from "../Styles/Calculator/styles";
 import NumberFormat from "react-number-format";
-//import Divider from '@material-ui/core/Divider';
-import { InputContainer, InputLeft, InputRight, BigContainer, Title, Results, Input1 } from "../Styles/Calculator/InputForm";
-//import Grid from "@material-ui/core/Grid";
-//import InputAdornment from "@material-ui/core/InputAdornment";
-// @material-ui/icons
-//import People from "@material-ui/icons/People";
-//core components
-//import CustomInput from "../Styles/Calculator/jss/CustomInput.jsx";
-//import GridItem from "../Styles/Calculator/jss/GridItem.jsx";
+import {
+  InputContainer,
+  InputLeft,
+  InputRight,
+  BigContainer,
+  Title,
+  Results,
+  Input1} from "../Styles/Calculator/InputForm";
 import Button from "../Styles/Calculator/jss/Button.jsx";
 
 class InputForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-     // fields: {},
       numberShares: 0,
       newPurchasePrice: 0,
       newSellPrice: 0,

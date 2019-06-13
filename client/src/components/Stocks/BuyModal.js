@@ -97,7 +97,7 @@ class BuyModal extends React.Component {
           });
         })
         .catch(err => {
-          console.log('error writing to stocks table');
+          console.log("error writing to stocks table");
         });
       this.balanceHandler(balance);
     }
