@@ -7,7 +7,7 @@ import {
   ButtonContainer,
   Loading,
   Row,
-  TickerContainer,
+  StocksContainer,
   StockSymbol
 } from "../Styles/Stocks/InvestmentStocks";
 import Primary from "../Styles/Stocks/jsx/Primary.jsx";
@@ -186,7 +186,7 @@ class InvestmentStocks extends React.Component {
     this.state.stocks.forEach((stock, index) => {
       // Loops through array of stock values and creates a table
       rows.push(
-        <TickerContainer key={index}>
+        <StocksContainer key={index}>
           <Row>
             <StockSymbol>
               <Primary>
@@ -312,7 +312,7 @@ class InvestmentStocks extends React.Component {
             </ButtonContainer>
           </Row>
           <hr />
-        </TickerContainer>
+        </StocksContainer>
       );
     });
 

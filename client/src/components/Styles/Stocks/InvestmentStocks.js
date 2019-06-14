@@ -15,7 +15,7 @@ export const Loading = styled.div`
   align-items: center;
   color: #000;
 `;
-export const TickerContainer = styled.div`
+export const StocksContainer = styled.div`
   color: #000;
   margin: 20px;
 `;

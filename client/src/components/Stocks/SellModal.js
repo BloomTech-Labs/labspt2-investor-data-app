@@ -60,9 +60,9 @@ class SellModal extends React.Component {
     // calculate the new cost of the stocks so multiply the number of shares (n) by the current share price
     let newCost = n * this.props.sharePrice;
     // calculate the temp cost of by multiplying shares(n) by the original share cost
-    let tempCost = n * this.props.shareCost; 
+    let tempCost = n * this.props.shareCost;
     // calculate the return so subtract purchase price from current price then divide by purchase price 
-    let newReturn = newCost - (this.props.shareCost * n) / this.props.shareCost * n;
+    let newReturn =  newCost - (this.props.shareCost * n) / this.props.shareCost * n;
     //  (this.props.sharePrice * e.target.value) - (this.props.shareCost * e.target.value) / (this.props.shareCost * e.target.value);
     // divide the result by the purchase price
     //calculate the profit: new cost - original shares cost
@@ -86,7 +86,7 @@ class SellModal extends React.Component {
       // subtract the number of shares from number shares already owned
       let newSharesNumber =
         this.props.sharePurch - Number(this.state.sharesNumber);
-      
+
       // calculate the return on the stocks that were just sold
       // this is investment(sharesCost) minus newSharesCost
       let newReturn = newSharesNumber * this.props.sharePrice;
@@ -96,7 +96,7 @@ class SellModal extends React.Component {
       let balance = this.props.balance + newReturn;
       // update any other db values
       //let uid = this.state.uid;
-      
+
       // make a new record using the updated data
       const newRec = {
         symbol: this.props.company,
@@ -109,7 +109,7 @@ class SellModal extends React.Component {
       axios
         .put(`${URL}/stocks/${this.state.id}`, newRec)
         .then(response => {
-         // console.log("response: ", response);
+          // console.log("response: ", response);
           this.setState({
             sharesCost: newSharesCost,
             sharePurch: newSharesNumber,
@@ -117,7 +117,6 @@ class SellModal extends React.Component {
           });
           //console.log("this.state: ", this.state)
         })
-         
         .catch(err => {
           console.log("Error writing to stocks table");
         });
@@ -126,7 +125,7 @@ class SellModal extends React.Component {
   };
 
   balanceHandler = (balance, newSharesNumber) => { 
-   
+
     const newRec = {
       uid: this.state.uid,
       balance: balance
@@ -136,19 +135,16 @@ class SellModal extends React.Component {
       .put(`${URL}/users/${this.state.uid}`, newRec)
       .then(response => {
         //console.log("put response: ", response);
+        if (newSharesNumber === 0) {
+          this.zeroStocks();
+        }
       })
       .catch(err => {
         console.log("error writing to users table");
       });
-     // console.log("sharePurch: ", this.state.sharePurch)
-  
-     
-     if (newSharesNumber === 0) {
-      console.log("try to delete");
-      this.zeroStocks();
-     }
-     this.handleClose("liveDemo")
-      window.location.reload();
+
+    this.handleClose("liveDemo");
+    window.location.reload();
   };
   // this is the number of shares already owned
   // most we can sell is the same number of stocks owned
@@ -160,22 +156,17 @@ class SellModal extends React.Component {
   zeroStocks = () => {
     // need to remove the stock from the list if the shares are equal to zero
     axios
-        .delete(`${URL}/stocks/${this.state.id}`)
-        .then(response => {
-          //console.log("response: ", response);
-          console.log("stock deleted");
-        
-        
-        })
-        .catch(err => {
-          console.log('We"ve encountered an error');
-        });
-  }
- 
+      .delete(`${URL}/stocks/${this.state.id}`)
+      .then(response => {
+        console.log("stock deleted");
+      })
+      .catch(err => {
+        console.log('We"ve encountered an error');
+      });
+  };
+
   changePercent = (current, purchase) => {
     // function for calculating the change of a stocks gain/loss by %
-    //console.log("current: ", current)
-    //console.log("purchase: ", purchase)
     let deduct = current - purchase;
     let divide = deduct / purchase;
     let solution = divide * 100;
@@ -334,7 +325,7 @@ class SellModal extends React.Component {
                   {`${this.state.maxShares}`}
                 </p>
                 <p>
-                  Est. Profit: 
+                  Est. Profit:
                   <NumberFormat
                     value={`${this.decimalToFixed(this.state.profit)}`}
                     displayType={"text"}
@@ -352,19 +343,20 @@ class SellModal extends React.Component {
                   />
                 </p>
                 <Row>
-                <p>Est. Return:{" "}
-                 
-                </p>
-                <p
-              style={{
-                color:
-                  Math.sign(this.state.return) < 0
-                    ? "#ff2900"
-                    : "#21ab42"
-              }}
-            >
-              {`${this.changePercent(this.state.cost, this.state.tempCost)}`}%
-            </p></Row>
+                  <p> Est. Return:{" "}</p>
+                  <p
+                    style={{
+                      color:
+                        Math.sign(this.state.return) < 0 ? "#ff2900" : "#21ab42"
+                    }}
+                  >
+                    {`${this.changePercent(
+                      this.state.cost,
+                      this.state.tempCost
+                    )}`}
+                    %
+                  </p>
+                </Row>
               </form>
               <hr />
             </DialogContent>
@@ -381,7 +373,6 @@ class SellModal extends React.Component {
             </DialogActions>
           </CardBlock>
         </Dialog>
-       
       </div>
     );
   }

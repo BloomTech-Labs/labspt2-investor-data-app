@@ -91,8 +91,7 @@ class App extends Component {
               currentEmail: user.email,
               firstName: user.displayName.substring(0, space),
               lastName: user.displayName.substring(space + 1),
-              userUID: user.uid,
-              balance: 100000
+              userUID: user.uid
             });
             this.addCurrentUser(user);
           })

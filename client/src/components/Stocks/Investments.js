@@ -2,9 +2,12 @@ import React from "react";
 import axios from "axios";
 import { Typography } from "@material-ui/core";
 import InvestmentStocks from "./InvestmentStocks";
+import { InvestContainer, InvestHolder } from "../Styles/Stocks/Investments";
 import { fire } from "../Auth/firebaseConfig";
+
 //const URL = "https://pickemm.herokuapp.com/api";
 const URL = "http://localhost:5000/api";
+
 class Investments extends React.Component {
   constructor(props) {
     super(props);
@@ -22,11 +25,26 @@ class Investments extends React.Component {
     this.setState({
       uid: uid
     });
+    // get the account balance for the user from the user table
     this.fetchBalance(uid);
-    this.fetchUserStocks(uid);
   }
 
-  // get the user stock data
+  fetchBalance = uid => {
+    axios
+      .get(`${URL}/users/${uid}`)
+      .then(response => {
+        let balance = response.data.balance;
+        this.setState({
+          balance: balance
+        });
+        this.fetchUserStocks(uid);
+      })
+      .catch(err => {
+        console.log('We"ve encountered an error');
+      });
+  };
+
+  // get the user stock data from the stocks table
   fetchUserStocks = uid => {
     axios
       .get(`${URL}/stocks`)
@@ -42,21 +60,6 @@ class Investments extends React.Component {
         });
         // call the stock handler function
         this.stockHandler();
-      })
-      .catch(err => {
-        console.log('We"ve encountered an error');
-      });
-  };
-
-  fetchBalance = uid => {
-    axios
-      .get(`${URL}/users/${uid}`)
-      .then(response => {
-        let balance = response.data.balance;
-        this.setState({
-          balance: balance
-        });
-        //console.log("state.balance1: ", this.state.balance);
       })
       .catch(err => {
         console.log('We"ve encountered an error');
@@ -92,7 +95,7 @@ class Investments extends React.Component {
       return "You currently have no Investments";
     }
     return (
-      <div>
+      <InvestContainer>
         <Typography
           variant="h5"
           gutterBottom
@@ -105,14 +108,14 @@ class Investments extends React.Component {
           My Investment Stocks
         </Typography>
         {""}
-        <div>
+        <InvestHolder>
           <InvestmentStocks
             companies={this.state.companies}
             investments={this.state.investments}
             balance={this.state.balance}
           />
-        </div>
-      </div>
+        </InvestHolder>
+      </InvestContainer>
     );
   }
 }
