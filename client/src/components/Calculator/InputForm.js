@@ -43,22 +43,27 @@ class InputForm extends React.Component {
   };
 
   calculate = () => {
+    // newBC is the new Buy Commission
     let newBC = 0;
+    // newSC is the new Sell Commission
     let newSC = 0;
 
-    // only run this if all the data is numeric
+    // need to validate the input fields
     if (this.validate()) {
+      // at this point i know all the fields have numeric values
       //calculate the purchase price and buy commission
       let newPP = this.state.numberShares * this.state.purchasePrice;
-      // if the field is empty or zero skip the calculation
+      // if the field is zero skip the calculation
       if (this.state.buyCommission > 0) {
+        // calculate the buy commission
         newBC = newPP * (this.state.buyCommission / 100);
         // add the buy commission amt to the new purchase price
         newPP = newPP + newBC;
       }
 
-      //calculate the sell price and sell commission
+      //calculate the sell price
       let newSP = this.state.numberShares * this.state.sellPrice;
+      // if sell commission is a zero skip this
       if (this.state.sellCommission > 0) {
         newSC = newSP * (this.state.sellCommission / 100);
         // add the sell commission amt to the new sell price
@@ -68,14 +73,15 @@ class InputForm extends React.Component {
       //calculate the profit/loss
       let pl = newSP - newPP;
       //calculate the return on investment
-      let roi = ((newSP - newPP) / newPP) * 100;
+      let roi = (pl / newPP) * 100;
       //calculate captial gains tax
+      // make sure it is greater than zero
       if (this.state.cgt > 0) {
         let cgt = pl * (this.state.cgt / 100);
         // subtract the tax from the profit/loss
         pl = pl - cgt;
       }
-
+      // save the new values to state
       this.setState({
         newPurchasePrice: newPP,
         newSellPrice: newSP,
@@ -91,6 +97,7 @@ class InputForm extends React.Component {
   };
 
   validate = () => {
+    // this function check all the input fields for numeric values
     let formIsValid = true;
 
     if (!this.isNumeric(this.state.numberShares)) {
@@ -116,6 +123,7 @@ class InputForm extends React.Component {
 
   reset = () => {
     //clear all the fields or reload page.
+    // would like to clear the fields without reloading the page
     window.location.reload();
   };
 
@@ -126,8 +134,6 @@ class InputForm extends React.Component {
   };
 
   render() {
-    //const { classes } = this.props;
-
     return (
       <BigContainer>
         <InputContainer>
@@ -135,8 +141,8 @@ class InputForm extends React.Component {
             <p>Number Shares:</p>
             <p>Purchase Price: $</p>
             <p>Sell Price: $</p>
-            <p>Buy Commission:   %</p>
-            <p>Sell Commission:   %</p>
+            <p>Buy Commission: %</p>
+            <p>Sell Commission: %</p>
             <p>Capital Gains Tax Rate: %</p>
             <p> </p>
             <Button onClick={() => this.calculate()} color="primary">

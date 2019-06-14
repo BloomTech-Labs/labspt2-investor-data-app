@@ -121,12 +121,11 @@ class SellModal extends React.Component {
         .catch(err => {
           console.log("Error writing to stocks table");
         });
-      this.balanceHandler(balance);
+      this.balanceHandler(balance, newSharesNumber);
     }
   };
 
-  balanceHandler = balance => {
-  
+  balanceHandler = (balance, newSharesNumber) => { 
    
     const newRec = {
       uid: this.state.uid,
@@ -141,17 +140,14 @@ class SellModal extends React.Component {
       .catch(err => {
         console.log("error writing to users table");
       });
-      console.log("sharePurch: ", this.state.sharePurch)
+     // console.log("sharePurch: ", this.state.sharePurch)
   
      
-     // if (this.state.sharePurch === 0) {
+     if (newSharesNumber === 0) {
       console.log("try to delete");
-      
-      
-      
       this.zeroStocks();
-  //  }
-    
+     }
+     this.handleClose("liveDemo")
       window.location.reload();
   };
   // this is the number of shares already owned
@@ -178,8 +174,8 @@ class SellModal extends React.Component {
  
   changePercent = (current, purchase) => {
     // function for calculating the change of a stocks gain/loss by %
-    console.log("current: ", current)
-    console.log("purchase: ", purchase)
+    //console.log("current: ", current)
+    //console.log("purchase: ", purchase)
     let deduct = current - purchase;
     let divide = deduct / purchase;
     let solution = divide * 100;

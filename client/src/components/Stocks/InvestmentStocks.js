@@ -93,7 +93,7 @@ class InvestmentStocks extends React.Component {
           timeStamp,
           balance: this.props.balance
         });
-        console.log("state.balance2: ", this.state.balance);
+        //console.log("state.balance2: ", this.state.balance);
       })
       .catch(error => {
         console.error("There was an error with the network requests", error);

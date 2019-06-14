@@ -56,7 +56,7 @@ class Investments extends React.Component {
         this.setState({
           balance: balance
         });
-        console.log("state.balance1: ", this.state.balance);
+        //console.log("state.balance1: ", this.state.balance);
       })
       .catch(err => {
         console.log('We"ve encountered an error');

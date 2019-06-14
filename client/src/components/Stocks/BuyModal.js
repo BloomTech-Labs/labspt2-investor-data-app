@@ -12,7 +12,6 @@ import Primary from "../Styles/Stocks/jsx/Primary.jsx";
 import Button from "../Styles/Stocks/jsx/Button.jsx";
 import modalStyle from "../Styles/Stocks/jsx/modalStyle.jsx";
 import NumberFormat from "react-number-format";
-
 import { fire } from "../Auth/firebaseConfig";
 
 const URL = "http://localhost:5000/api";
@@ -64,7 +63,7 @@ class BuyModal extends React.Component {
   };
 
   buyHandler = () => {
-    //check the data it cat be larger than max shares
+    //check the data it cant be larger than max shares
     if (this.state.sharesNumber > this.state.maxShares) {
       alert("Shares must be less than max shares...");
     } else {
@@ -84,11 +83,11 @@ class BuyModal extends React.Component {
         uid: this.state.uid
       };
 
-      // update the users stock information: need to use the real id?
+      // update the users stock information: need to use the real id
       axios
         .put(`${URL}/stocks/${this.state.id}`, newRec)
         .then(response => {
-          console.log("response: ", response);
+          //console.log("response: ", response);
 
           this.setState({
             sharesCost: this.props.id,
@@ -104,6 +103,7 @@ class BuyModal extends React.Component {
   };
 
   balanceHandler = balance => {
+    // update the users balance located in the users table
     const newRec = {
       uid: this.state.uid,
       balance: balance
@@ -112,11 +112,14 @@ class BuyModal extends React.Component {
     axios
       .put(`${URL}/users/${this.state.uid}`, newRec)
       .then(response => {
-        console.log("put response: ", response);
+        //console.log("put response: ", response);
       })
       .catch(err => {
         console.log("error writing to users table");
       });
+
+    this.handleClose("liveDemo");
+
     window.location.reload();
   };
 
@@ -130,13 +133,10 @@ class BuyModal extends React.Component {
     let n = estimate.indexOf(".");
     estimate = estimate.slice(0, n);
 
-    //Number(estimate);
     //save max shares to state
-
     this.setState({
       maxShares: Number(estimate)
     });
-    //return estimate;
   };
 
   decimalToFixed = input => {

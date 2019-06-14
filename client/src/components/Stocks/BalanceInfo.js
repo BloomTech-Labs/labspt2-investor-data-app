@@ -88,7 +88,7 @@ class BalanceInfo extends React.Component {
     axios
       .post(`${URL}/stocks`, newRec)
       .then(response => {
-        console.log("response: ", response);
+        //console.log("response: ", response);
       })
       .catch(err => {
         console.log("error writing to stocks table");

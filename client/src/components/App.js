@@ -70,6 +70,7 @@ class App extends Component {
     lastName: null,
     currentEmail: null,
     userUID: null,
+    balance: null,
     redirect: false
   };
 
@@ -90,7 +91,8 @@ class App extends Component {
               currentEmail: user.email,
               firstName: user.displayName.substring(0, space),
               lastName: user.displayName.substring(space + 1),
-              userUID: user.uid
+              userUID: user.uid,
+              balance: 100000
             });
             this.addCurrentUser(user);
           })
@@ -103,6 +105,7 @@ class App extends Component {
           authenticated: false,
           redirect: false,
           currentEmail: null,
+          balance: null,
           userUID: null
         });
       }
@@ -112,17 +115,20 @@ class App extends Component {
   removeAuthListener: any;
   // Add current user method will grab the information from state create new user in our database
   addCurrentUser = () => {
+    let balance = 100000;
     function newUser(firstName, lastName, email, uid) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
       this.uid = uid;
+      this.balance = balance;
     }
     const creds = new newUser(
       this.state.firstName,
       this.state.lastName,
       this.state.currentEmail,
-      this.state.userUID
+      this.state.userUID,
+      this.state.balance
     );
     const endpoint = `${URL}api/users`;
     axios
