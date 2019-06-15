@@ -13,14 +13,16 @@ const styles = theme => ({
     justifyContent: "flex-start",
     alignItems: "flex-end",
     [theme.breakpoints.down("sm")]: {
-      width: "calc(100% - 75px)",
+      width: "calc(100% - 50px)",
       padding: "0px",
       margin: "0px"
     },
-
     [theme.breakpoints.down("md")]: {
-      width: "calc(100% - 50px)",
+      width: "calc(100% - 75px)",
       padding: "0px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "calc(100% - 10px)"
     }
   },
   paper: {
@@ -34,19 +36,20 @@ const styles = theme => ({
 
   block: {
     padding: 25,
-    width: "calc(100% - 250px)",
+    width: "calc(100% - 150px)",
     marginTop: "50px",
     position: "relative",
     justifyContent: "flex-start",
     top: -72,
-    right: 55,
+    right: 5,
     fontSize: ".8rem",
-
     [theme.breakpoints.down("xs")]: {
-      top: -72,
-      right: 108
+      width: "calc(100% - 20px)",
+      top: -12,
+      right: 5
     },
     [theme.breakpoints.down("md")]: {
+      width: "calc(100% - 50px)",
       top: -43
     }
   },
@@ -101,10 +104,10 @@ const styles = theme => ({
       right: -770
     },
     [theme.breakpoints.down("sm")]: {
-      right: -680
+      right: -68
     },
-    [theme.breakpoints.down("sm")]: {
-      right: -25
+    [theme.breakpoints.down("xs")]: {
+      right: -68
     }
   }
 });

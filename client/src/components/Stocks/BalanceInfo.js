@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Loading } from "../Styles/Stocks/InvestmentStocks";
+import { Loading } from "../Styles/Stocks/BalanceInfo";
 import GridContainer from "../Styles/Stocks/jsx/GridContainer.jsx";
 import GridItem from "../Styles/Stocks/jsx/GridItem.jsx";
 import Card from "../Styles/Stocks/jsx/Card";
@@ -32,9 +32,10 @@ class BalanceInfo extends React.Component {
     if (localStorage.getItem("balanceInfo")) {
       // check the contents of local storage
       let symbol = localStorage.getItem("balanceInfo");
+      console.log("symbol: ", symbol);
       // if its not equal to Null then fetch the stock data
-      if (symbol !== "Null") {
-        localStorage.setItem("balanceInfo", "Null");
+      if (symbol !== "null") {
+        localStorage.setItem("balanceInfo", "null");
         // set it to Null to prevent it from reopening and save symbol to state
         this.setState({
           symbol: symbol
@@ -100,7 +101,7 @@ class BalanceInfo extends React.Component {
   // user decided to cancel the whole process
   cancelHandler = () => {
     // clear out our storage area
-    localStorage.setItem("balanceInfo", "Null");
+    localStorage.setItem("balanceInfo", null);
     // um... reload
     window.location.reload();
   };
