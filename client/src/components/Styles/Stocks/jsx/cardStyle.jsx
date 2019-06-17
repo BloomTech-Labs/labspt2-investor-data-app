@@ -12,7 +12,7 @@ const cardStyle = {
     borderRadius: "2px",
     color: "rgba(" + hexToRgb(blackColor) + ", 1)",
     background: "rgba(" + hexToRgb(whiteColor) + ", 1)",
-    minWidth: 345,
+    minWidth: 305,
     //maxWidth: 345,
     height: 164,
     boxShadow: "0 1px 4px 0 rgba(" + hexToRgb(blackColor) + ", 0.14)",
