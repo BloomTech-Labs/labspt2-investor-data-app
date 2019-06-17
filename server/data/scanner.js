@@ -1,6 +1,6 @@
 const axios = require("axios");
 const nexmo = require("./nexmoConfig");
-
+const private_alpha_key = require("./auth/alphaVantageConfig")
 
 scanner = () => {
   const YOUR_VIRTUAL_NUMBER = "18572560178";
@@ -81,7 +81,7 @@ scanner = () => {
   getStocks = (companies, phoneNumber) => {
 
     let promises = companies.map((company) =>
-      axios.get(`https://www.alphavantage.co/query?function=MACD&symbol=${company}&interval=daily&series_type=open&apikey=TFUONSVQ3ZDFXFPG`));
+      axios.get(`https://www.alphavantage.co/query?function=MACD&symbol=${company}&interval=daily&series_type=open&apikey=${private_alpha_key}`));
 
     let timeStamp;
     let x = false;

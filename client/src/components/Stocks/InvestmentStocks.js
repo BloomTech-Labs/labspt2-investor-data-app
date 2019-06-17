@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import BuyModal from "./BuyModal";
 import SellModal from "./SellModal";
+import { private_alpha_key } from "../Auth/alphaVantageConfig";
 import NumberFormat from "react-number-format";
 import {
   ButtonContainer,
@@ -42,7 +43,7 @@ class InvestmentStocks extends React.Component {
       company // map that sends array of companies through axios to invoke external API
     ) =>
       axios.get(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`
+        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=${private_alpha_key}`
       )
     );
     this.fetchStocks(promises);

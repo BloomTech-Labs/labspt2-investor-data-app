@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { private_alpha_key } from "../Auth/alphaVantageConfig";
 import { Loading } from "../Styles/Stocks/BalanceInfo";
 import GridContainer from "../Styles/Stocks/jsx/GridContainer.jsx";
 import GridItem from "../Styles/Stocks/jsx/GridItem.jsx";
@@ -37,12 +38,13 @@ class BalanceInfo extends React.Component {
       if (symbol !== "null") {
         localStorage.setItem("balanceInfo", "null");
         // set it to Null to prevent it from reopening and save symbol to state
+        const alpha_key = private_alpha_key;
         this.setState({
           symbol: symbol
         });
         axios
           .get(
-            `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`
+            `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&interval=5min&apikey=${alpha_key}`
           )
           .then(response => {
             this.fetchStocks(response.data);

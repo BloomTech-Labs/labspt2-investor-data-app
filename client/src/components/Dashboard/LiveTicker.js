@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import TickerStar from "./TickerStar";
+import { private_alpha_key } from "../Auth/alphaVantageConfig";
 import { Loading, Star } from "../Styles/Dashboard/LiveTickerStyles";
 import GridContainer from "../Styles/Dashboard/GridContainer.jsx";
 import GridItem from "../Styles/Dashboard/GridItem.jsx";
@@ -9,6 +10,8 @@ import styles from "../Styles/Dashboard/styles";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 import { withStyles, Tooltip, Typography, Zoom } from "@material-ui/core";
+const alpha_key = private_alpha_key;
+
 class LiveTicker extends React.Component {
   constructor() {
     super();
@@ -21,12 +24,13 @@ class LiveTicker extends React.Component {
   }
 
   componentDidMount() {
+    
     this.setState(state => ({ checked: !state.checked }));
     let promises = this.state.companies.map((
       company // map that sends array of companies through axios to invoke external API
     ) =>
       axios.get(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=TFUONSVQ3ZDFXFPG`
+        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${company}&interval=5min&apikey=${alpha_key}`
       )
     );
     this.fetchStocks(promises);

@@ -1,7 +1,13 @@
 import React from "react";
 import axios from "axios";
+import { private_alpha_key } from "../Auth/alphaVantageConfig";
 import FavoriteTickerstar from "./favoriteTickerstar";
-import { Input, Form, SearchIcon, ReturnButton } from '../Styles/Dashboard/YourFavorites'
+import {
+  Input,
+  Form,
+  SearchIcon,
+  ReturnButton
+} from "../Styles/Dashboard/YourFavorites";
 import {
   Loading,
   Row,
@@ -12,6 +18,7 @@ import {
 import { Tooltip, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
+const alpha_key = private_alpha_key;
 
 class FavoriteStocks extends React.Component {
   constructor(props) {
