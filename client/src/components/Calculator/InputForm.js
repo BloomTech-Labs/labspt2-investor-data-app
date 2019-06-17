@@ -24,7 +24,10 @@ class InputForm extends React.Component {
       newBuyCommission: 0,
       newSellCommission: 0,
       roi: 0,
-      pl: 0
+      pl: 0,
+      buyCommission: 0,
+      sellCommission: 0,
+      cgt: 0
     };
   }
 
@@ -92,7 +95,7 @@ class InputForm extends React.Component {
       });
     } else {
       // kind of vague message -- does not tell user which field is bad
-      alert("check for valid numeric entries");
+      alert("First 3 fields need valid numeric entries...");
     }
   };
 
@@ -109,14 +112,28 @@ class InputForm extends React.Component {
     if (!this.isNumeric(this.state.sellPrice)) {
       formIsValid = false;
     }
-    if (!this.isNumeric(this.state.buyCommission)) {
-      formIsValid = false;
+
+    // this field can be blank, check for blank and if it's not blank then check for number
+    if (this.state.buyCommission === "") {
+      this.setState({ buyCommission: 0 });
+    } else {
+      if (!this.isNumeric(this.state.buyCommission)) {
+        formIsValid = false;
+      }
     }
-    if (!this.isNumeric(this.state.sellCommission)) {
-      formIsValid = false;
+    if (this.state.sellCommission === "") {
+      this.setState({ sellCommission: 0 });
+    } else {
+      if (!this.isNumeric(this.state.sellCommission)) {
+        formIsValid = false;
+      }
     }
-    if (!this.isNumeric(this.state.cgt)) {
-      formIsValid = false;
+    if (this.state.cgt === "") {
+      this.setState({ cgt: 0 });
+    } else {
+      if (!this.isNumeric(this.state.cgt)) {
+        formIsValid = false;
+      }
     }
     return formIsValid;
   };
