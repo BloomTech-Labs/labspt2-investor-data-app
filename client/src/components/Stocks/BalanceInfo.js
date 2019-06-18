@@ -30,21 +30,20 @@ class BalanceInfo extends React.Component {
   }
 
   componentDidMount() {
+    // not happy with this code but it works, its prohibits the card from constantly displaying
     if (localStorage.getItem("balanceInfo")) {
       // check the contents of local storage
       let symbol = localStorage.getItem("balanceInfo");
-      console.log("symbol: ", symbol);
-      // if its not equal to Null then fetch the stock data
+      // if its not equal to null then fetch the stock data
       if (symbol !== "null") {
         localStorage.setItem("balanceInfo", "null");
-        // set it to Null to prevent it from reopening and save symbol to state
-        const alpha_key = private_alpha_key;
+        // set it to null to prevent it from reopening and save symbol to state
         this.setState({
           symbol: symbol
         });
         axios
           .get(
-            `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&interval=5min&apikey=${alpha_key}`
+            `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&interval=5min&apikey=${private_alpha_key}`
           )
           .then(response => {
             this.fetchStocks(response.data);

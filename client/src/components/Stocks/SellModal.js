@@ -173,15 +173,37 @@ class SellModal extends React.Component {
       });
   };
 
-  changePercent = (current, purchase) => {
-    // function for calculating the change of a stocks gain/loss by %
-    let deduct = current - purchase;
-    let divide = deduct / purchase;
-    let solution = divide * 100;
-    if (solution > 0) {
-      return "+" + solution.toFixed(2);
+  isNumeric = n => {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  };
+
+  validate = (close, start) => {
+    // check for validity and if its zero, return a zero
+    let dataIsValid = true;
+    if ((!this.isNumeric(close)) || (!close > 0)) {
+      dataIsValid = false;
     }
-    return solution.toFixed(2);
+    // same check here
+    if ((!this.isNumeric(start)) || (!start > 0)) {
+      dataIsValid = false;
+    }
+    return dataIsValid;
+  };
+
+  changePercent = (current, purchase) => {
+    // check for valid data
+    if (this.validate(current, purchase)) {
+      // function for calculating the change of a stocks gain/loss by %
+      let deduct = current - purchase;
+      let divide = deduct / purchase;
+      let solution = divide * 100;
+      if (solution > 0) {
+        return "+" + solution.toFixed(2);
+      }
+      return solution.toFixed(2);
+    } else {
+      return 0;
+    }
   };
 
   decimalToFixed = input => {
