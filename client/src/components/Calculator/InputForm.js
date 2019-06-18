@@ -2,6 +2,7 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "../Styles/Calculator/styles";
 import NumberFormat from "react-number-format";
+import axios from "axios";
 import {
   InputContainer,
   InputLeft,
@@ -13,6 +14,10 @@ import {
   Result
 } from "../Styles/Calculator/InputForm";
 import Button from "../Styles/Calculator/jss/Button.jsx";
+import { fire } from "../Auth/firebaseConfig";
+//URL Endpoints
+const URL = "http://localhost:5000/api";
+//const URL = "https://pickemm.herokuapp.com/api";
 
 class InputForm extends React.Component {
   constructor(props) {
@@ -27,7 +32,9 @@ class InputForm extends React.Component {
       pl: 0,
       buyCommission: 0,
       sellCommission: 0,
-      cgt: 0
+      cgt: 0,
+      balance: 0,
+      uid: fire.currentUser.uid
     };
   }
 
@@ -39,6 +46,27 @@ class InputForm extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     });
+    if (this.state.numberShares === "99999") {
+      // reset the account balance to 100,000
+      this.resetBalance(this.state.uid);
+    }
+  };
+
+  resetBalance = uid => {
+    let balance = 100000;
+    const newRec = {
+      uid: this.state.uid,
+      balance: balance
+    };
+
+    axios
+      .put(`${URL}/users/${this.state.uid}`, newRec)
+      .then(response => {
+        alert("balance reset...");
+      })
+      .catch(err => {
+        console.log("error writing to users table");
+      });
   };
 
   isNumeric = n => {

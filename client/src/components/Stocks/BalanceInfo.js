@@ -7,7 +7,7 @@ import GridItem from "../Styles/Stocks/jsx/GridItem.jsx";
 import Card from "../Styles/Stocks/jsx/Card";
 import styles from "../Styles/Stocks/styles";
 import Button from "../Styles/Stocks/jsx/Button.jsx";
-import { withStyles, Tooltip, Typography } from "@material-ui/core";
+import { withStyles, Zoom } from "@material-ui/core";
 
 //const URL = "https://pickemm.herokuapp.com/api";
 const URL = "http://localhost:5000/api";
@@ -30,6 +30,7 @@ class BalanceInfo extends React.Component {
   }
 
   componentDidMount() {
+    this.setState(state => ({ checked: !state.checked }));
     // not happy with this code but it works, its prohibits the card from constantly displaying
     if (localStorage.getItem("balanceInfo")) {
       // check the contents of local storage
@@ -77,26 +78,31 @@ class BalanceInfo extends React.Component {
   // user has decided they want to buy/sell using this symbol
   buyHandler = () => {
     // i need to check for duplicates before saving a new record
-
-    // make a new record using the updated data
-    const newRec = {
-      symbol: this.state.symbol,
-      sharesCost: 0,
-      shareCost: 0,
-      sharePurch: 0,
-      uid: this.state.uid,
-      datePurch: ""
-    };
-    axios
-      .post(`${URL}/stocks`, newRec)
-      .then(response => {
-        //console.log("response: ", response);
-      })
-      .catch(err => {
-        console.log("error writing to stocks table");
-      });
-    // need to figure another way to refresh the investment display
-    window.location.reload();
+    const symbol = this.state.symbol;
+    // save this symbol and then check the favorites table to see if the symbol is already listed
+    if (!this.fetchUserStocks(symbol, this.setState.uid)) {
+      // make a new record using the updated data
+      const newRec = {
+        symbol: this.state.symbol,
+        sharesCost: 0,
+        shareCost: 0,
+        sharePurch: 0,
+        uid: this.state.uid,
+        datePurch: ""
+      };
+      axios
+        .post(`${URL}/stocks`, newRec)
+        .then(response => {
+          //console.log("response: ", response);
+        })
+        .catch(err => {
+          console.log("error writing to stocks table");
+        });
+      // need to figure another way to refresh the investment display
+      window.location.reload();
+    } else {
+      alert("Already own shares of that stock");
+    }
   };
 
   // user decided to cancel the whole process
@@ -105,6 +111,27 @@ class BalanceInfo extends React.Component {
     localStorage.setItem("balanceInfo", null);
     // um... reload
     window.location.reload();
+  };
+
+  fetchUserStocks = (symbol, uid) => {
+    let isOwned = false;
+    axios
+      .get(`${URL}/stocks`)
+      .then(response => {
+        response.data.forEach((item, index) => {
+          if (item.uid === uid) {
+            if (item.symbol === symbol) {
+              isOwned = true;
+              console.log("isOwned: ", isOwned);
+            }
+          }
+          
+        });
+        return isOwned;
+      })
+      .catch(err => {
+        console.log('We"ve encountered an error');
+      });
   };
 
   changePercent = (close, start) => {
@@ -163,6 +190,7 @@ class BalanceInfo extends React.Component {
       return <Loading>Select a Stock to load details...Reminder: this does not involve real money</Loading>;
     }
     const { classes } = this.props;
+    const { checked } = this.state;
     const open = "1. open";
     const close = "4. close";
     const volume = "5. volume";
@@ -170,24 +198,17 @@ class BalanceInfo extends React.Component {
 
     this.state.stocks.forEach((stock, index) => {
       rows.push(
+       
         <GridContainer key={index}>
           <GridItem xs={12} sm={6} md={3}>
+          <Zoom in={checked} key={index}>
             <Card>
-              <Tooltip
-                disableFocusListener
-                title={
-                  <Typography color="inherit">
-                    View the Stock Indicator Reports
-                  </Typography>
-                }
-              >
                 <h2
                   style={{ position: "relative", top: "-8px" }}
                   className={classes.cardCategory}
                 >
                   {stock.company}
-                </h2>
-              </Tooltip>
+                </h2>          
               <p
                 className={classes.cardTitle}
                 style={{ position: "relative", top: "12px", right: "-8px" }}
@@ -259,8 +280,10 @@ class BalanceInfo extends React.Component {
                 Cancel
               </Button>
             </Card>
+            </Zoom>
           </GridItem>
         </GridContainer>
+       
       );
     });
 

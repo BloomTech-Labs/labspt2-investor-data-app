@@ -29,12 +29,12 @@ class Calculator extends React.Component {
                     component="h1"
                     variant="h2"
                     color="textPrimary"
-                   // className={classes.header}
+                    className={classes.header}
                     gutterBottom
                 >
                     Stock Calculator
                 </Typography>
-                {/* Form to update email address */}
+            
                 <InputForm
                     // className={classes.container}
                     gutterBottom

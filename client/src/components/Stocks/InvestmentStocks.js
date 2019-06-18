@@ -11,6 +11,7 @@ import {
   StocksContainer,
   StockSymbol
 } from "../Styles/Stocks/InvestmentStocks";
+import { Tooltip, Typography } from "@material-ui/core";
 import Primary from "../Styles/Stocks/jsx/Primary.jsx";
 
 class InvestmentStocks extends React.Component {
@@ -318,6 +319,14 @@ class InvestmentStocks extends React.Component {
 
     return (
       <div>
+        <Tooltip
+                    disableFocusListener
+                    title={
+                      <Typography color="inherit">
+                        To reset your balance, go to the calculator and type 99999 in the shares field
+                      </Typography>
+                    }
+                  >
         <h6>
           <p style={{ textAlign: "center" }}>
             Available Funds:
@@ -329,6 +338,7 @@ class InvestmentStocks extends React.Component {
             />
           </p>
         </h6>
+        </Tooltip>
         <div>{rows}</div>
       </div>
     );

@@ -20,18 +20,32 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       borderTop: "6px solid purple",
       margin: "5px, auto",
+      borderRadius: '5px',
       width: "70%",
       padding: "10px"
     },
     [theme.breakpoints.down('xs')]: {
       borderTop: "4px solid purple",
-      //border: '0',
+      borderRadius: '0px',
+      border: '0',
       width: '100%',
       padding: "5px",
       margin: "auto, auto",
-      minWidth: "320px"
-      //backgroundColor: '#FAFAFA',
-      // boxShadow: '0 0 0, 0 0 0'
+      //minWidth: "320px",
+      backgroundColor: '#FAFAFA',
+      boxShadow: '0 0 0, 0 0 0'
+    }
+  },
+  header: {
+    alignSelf: "center",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "30px"
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "28px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "26px"
     }
   }
 });
