@@ -18,7 +18,7 @@ import {
 import { Tooltip, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
-const alpha_key = private_alpha_key;
+//const alpha_key = private_alpha_key;
 
 class FavoriteStocks extends React.Component {
   constructor(props) {

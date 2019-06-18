@@ -250,7 +250,7 @@ class BalanceInfo extends React.Component {
                 size="sm"
                 onClick={() => this.buyHandler()}
               >
-                Add
+                List Em
               </Button>
               <Button
                 color="danger"

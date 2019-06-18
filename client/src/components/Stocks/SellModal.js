@@ -62,13 +62,18 @@ class SellModal extends React.Component {
     // calculate the temp cost of by multiplying shares(n) by the original share cost
     let tempCost = n * this.props.shareCost;
     // calculate the return so subtract purchase price from current price then divide by purchase price 
-    let newReturn =  newCost - (this.props.shareCost * n) / this.props.shareCost * n;
+    let newReturn = newCost - tempCost / tempCost;
     //  (this.props.sharePrice * e.target.value) - (this.props.shareCost * e.target.value) / (this.props.shareCost * e.target.value);
     // divide the result by the purchase price
     //calculate the profit: new cost - original shares cost
     let profit = newCost - tempCost;
     // this is going to be this.state.sharesNumber and this.state.cost
     // these both update on screen values as the user types in a shares number
+    console.log("n: ", n);
+    console.log("newCost: ", newCost);
+    console.log("tempCost: ", tempCost);
+    console.log("newReturn: ", newReturn);
+    console.log("Profit: ", profit);
     this.setState({
       [e.target.name]: e.target.value,
       cost: newCost,
@@ -84,16 +89,19 @@ class SellModal extends React.Component {
       alert("Shares cannot exceed the number you own...");
     } else {
       // subtract the number of shares from number shares already owned
-      let newSharesNumber =
-        this.props.sharePurch - Number(this.state.sharesNumber);
-
+      let newSharesNumber = this.props.sharePurch - this.state.sharesNumber;
+        //this.props.sharePurch - Number(this.state.sharesNumber);
+        
       // calculate the return on the stocks that were just sold
       // this is investment(sharesCost) minus newSharesCost
-      let newReturn = newSharesNumber * this.props.sharePrice;
+      // value of anything i still own
+      let newValue = newSharesNumber * this.props.shareCost;
+      let newBalance = this.state.cost;
       // recalculate the value of shares still owned - if any
-      let newSharesCost = this.props.sharesCost - newReturn;
+      let newSharesCost = this.props.sharesCost - newValue;
       // calculate the new balance
-      let balance = this.props.balance + newReturn;
+      let balance = this.props.balance + newBalance;
+      console.log("balance: ", balance)
       // update any other db values
       //let uid = this.state.uid;
 
@@ -144,7 +152,7 @@ class SellModal extends React.Component {
       });
 
     this.handleClose("liveDemo");
-    window.location.reload();
+   // window.location.reload();
   };
   // this is the number of shares already owned
   // most we can sell is the same number of stocks owned
