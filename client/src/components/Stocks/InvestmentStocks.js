@@ -244,9 +244,13 @@ class InvestmentStocks extends React.Component {
               Value: $
               {`${this.decimalToFixed(stock.values[close] * stock.sharePurch)}`}
             </p>
-            <p style={{ marginLeft: "0px" }}>
-              Cost: ${`${this.decimalToFixed(stock.sharesCost)}`}
-            </p>
+            Cost:
+            <NumberFormat
+              value={`${this.decimalToFixed(stock.sharesCost)}`}
+              displayType={"text"}
+              thousandSeparator={true}
+              prefix={"$"}
+            />
             <p
               style={{
                 marginLeft: "0px",
@@ -323,7 +327,7 @@ class InvestmentStocks extends React.Component {
                     disableFocusListener
                     title={
                       <Typography color="inherit">
-                        To reset your balance, go to the calculator and type 99999 in the shares field
+                        To reset your account balance, sell all your stocks then go to the calculator and type 99999 in the Capital Gains Tax field
                       </Typography>
                     }
                   >
