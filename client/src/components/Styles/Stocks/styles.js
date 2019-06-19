@@ -6,11 +6,10 @@ const styles = theme => ({
     alignItems: "center",
     marginTop: 30
   },
-
   grid: {
-    width: 1200,
+    width: 900,
     flexWrap: "wrap-reverse",
-    justifyContent: "flex-start",
+    //justifyContent: "flex-start",
     alignItems: "flex-end",
     [theme.breakpoints.down("sm")]: {
       width: "calc(100% - 50px)",
@@ -18,7 +17,7 @@ const styles = theme => ({
       margin: "0px"
     },
     [theme.breakpoints.down("md")]: {
-      width: "calc(100% - 75px)",
+      width: "calc(100% - 50px)",
       padding: "0px"
     },
     [theme.breakpoints.down("xs")]: {
@@ -31,9 +30,18 @@ const styles = theme => ({
     textAlign: "right",
     minWidth: "325px",
     borderTop: "5px solid #4C046B",
-    color: theme.palette.text.primary
+    color: theme.palette.text.primary,
+    [theme.breakpoints.down('xs')]: {
+      borderTop: "4px solid purple",
+      borderRadius: '0px',
+      border: '0',
+      width: '100%',
+      padding: "5px",
+      margin: "auto, auto",
+      backgroundColor: '#FAFAFA',
+      boxShadow: '0 0 0, 0 0 0'
+    }
   },
-
   block: {
     padding: 25,
     width: "calc(100% - 150px)",
@@ -41,7 +49,7 @@ const styles = theme => ({
     position: "relative",
     justifyContent: "flex-start",
     top: -72,
-    right: 5,
+    //right: 5,
     fontSize: ".8rem",
     [theme.breakpoints.down("xs")]: {
       width: "calc(100% - 20px)",
@@ -99,9 +107,9 @@ const styles = theme => ({
   },
   welcome: {
     position: "relative",
-    right: -1114,
+    right: -814,
     [theme.breakpoints.down("md")]: {
-      right: -770
+      right: -670
     },
     [theme.breakpoints.down("sm")]: {
       right: -68

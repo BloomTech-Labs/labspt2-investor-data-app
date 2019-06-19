@@ -1,5 +1,5 @@
 const styles = theme => ({
-  // Parent container 
+  // Parent container
   parent: {
     display: 'flex',
     flexDirection: 'column',

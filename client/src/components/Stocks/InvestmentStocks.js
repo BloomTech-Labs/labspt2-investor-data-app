@@ -203,14 +203,20 @@ class InvestmentStocks extends React.Component {
             </h5>
           </Row>
           <Row>
-            <p>Price: ${`${this.decimalToFixed(stock.values[close])}`}</p>
-            <p
-              style={{
-                marginLeft: "10px"
-              }}
-            >
-              Cost: ${`${this.decimalToFixed(stock.shareCost)}`}
-            </p>
+            <p>Price:{" "}
+              <NumberFormat
+                    value={`${this.decimalToFixed(stock.values[close])}`}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  /></p>
+            <p>Cost:{" "}
+            <NumberFormat
+              value={`${this.decimalToFixed(stock.shareCost)}`}
+              displayType={"text"}
+              thousandSeparator={true}
+              prefix={"$"}
+            /></p>
             <p
               style={{
                 color:
@@ -239,18 +245,23 @@ class InvestmentStocks extends React.Component {
               {`${this.changePercent(stock.values[close], stock.shareCost)}`}%
             </p>
           </Row>
-          <Row>
-            <p>
-              Value: $
-              {`${this.decimalToFixed(stock.values[close] * stock.sharePurch)}`}
-            </p>
-            Cost:
+          <Row><p>
+            Value:{" "}
+            <NumberFormat
+              value={`${this.decimalToFixed(
+                stock.values[close] * stock.sharePurch
+              )}`}
+              displayType={"text"}
+              thousandSeparator={true}
+              prefix={"$"}
+            /></p>
+            <p>Cost:{" "}
             <NumberFormat
               value={`${this.decimalToFixed(stock.sharesCost)}`}
               displayType={"text"}
               thousandSeparator={true}
               prefix={"$"}
-            />
+            /></p>
             <p
               style={{
                 marginLeft: "0px",

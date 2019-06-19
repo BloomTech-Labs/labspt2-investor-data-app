@@ -6,7 +6,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
-import { Row, CardBlock } from "../Styles/Stocks/BuyModal";
+import { Row, CardBlock } from "../Styles/Stocks/SellModal";
 import Close from "@material-ui/icons/Close";
 import Primary from "../Styles/Stocks/jsx/Primary.jsx";
 import Button from "../Styles/Stocks/jsx/Button.jsx";
