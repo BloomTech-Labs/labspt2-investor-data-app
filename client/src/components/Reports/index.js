@@ -268,6 +268,17 @@ class Reports extends Component {
                 </Link>
               </Grid>
               <Grid item xs={12}>
+                <Link
+                  to={ROUTES.STOCKS}
+                  style={{ textDecoration: "none", alignItems: "center" }}
+                >
+                  <Typography variant="h4" className={classes.back}>
+                    <ArrowBackIos />
+                    Buy/Sell Stocks
+                  </Typography>
+                </Link>
+              </Grid>
+              <Grid item xs={12}>
                 <div className={classes.topBar}>
                   <div className={classes.block}>
                     <Typography variant="h2">

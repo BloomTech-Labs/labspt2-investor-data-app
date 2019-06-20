@@ -72,13 +72,15 @@ class BuyModal extends React.Component {
       // add the new investment to the old investment total
       let newSharesCost = this.props.sharesCost + this.state.cost;
 
+      let newShareCost = newSharesCost / newSharesNumber;
+
       let balance = this.props.balance - this.state.cost;
 
       // make a new record using the updated data
       const newRec = {
         symbol: this.props.company,
         sharesCost: newSharesCost,
-        shareCost: this.props.sharePrice,
+        shareCost: newShareCost,
         sharePurch: newSharesNumber,
         uid: this.state.uid
       };
@@ -90,9 +92,10 @@ class BuyModal extends React.Component {
           //console.log("response: ", response);
 
           this.setState({
-            sharesCost: this.props.id,
+            //sharesCost: this.props.id,
+            sharesCost: newSharesCost,
             sharePurch: newSharesNumber,
-            balance: newSharesCost
+            balance: balance
           });
         })
         .catch(err => {

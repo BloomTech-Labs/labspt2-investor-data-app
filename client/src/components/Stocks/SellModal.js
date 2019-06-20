@@ -47,20 +47,20 @@ class SellModal extends React.Component {
   }
 
   componentDidMount() {
-    let Uid = fire.currentUser.uid;
+    //const Uid = fire.currentUser.uid;
     this.setState({
       id: this.props.id,
-      uid: Uid
+      uid: fire.currentUser.uid
     });
     this.maxShares(this.state.sharePurch);
   }
 
   changeHandler = e => {
-    let n = e.target.value;
-    // calculate the new cost of the stocks so multiply the number of shares (n) by the current share price
+    const n = e.target.value;
+    // calculate the new value of the stocks so multiply the number of shares (n) by the current share price
     let newCost = n * this.props.sharePrice;
-    // calculate the temp cost of by multiplying shares(n) by the original share cost
-    let tempCost = n * this.props.shareCost;
+    // calculate the original cost of by multiplying shares(n) by the original share cost
+    let tempCost = (this.props.sharePurch - n) * this.props.shareCost;
     // calculate the return so subtract purchase price from current price then divide by purchase price 
     let newReturn = newCost - tempCost / tempCost;
     //  (this.props.sharePrice * e.target.value) - (this.props.shareCost * e.target.value) / (this.props.shareCost * e.target.value);
@@ -86,22 +86,22 @@ class SellModal extends React.Component {
   sellHandler = () => {
     //check the data it cant be larger than max shares
     if (this.state.sharesNumber > this.state.maxShares) {
-      alert("Shares cannot exceed the number you own...");
+      alert("Sell number cannot exceed the number of shares you own...");
     } else {
       // subtract the number of shares from number shares already owned
       let newSharesNumber = this.props.sharePurch - this.state.sharesNumber;
-        //this.props.sharePurch - Number(this.state.sharesNumber);
-        
-      // calculate the return on the stocks that were just sold
-      // this is investment(sharesCost) minus newSharesCost
-      // value of anything i still own
-      let newValue = newSharesNumber * this.props.shareCost;
+      // shareCost does not change when i sell a stock
+       
+      
+     
+      
+      let newInvestment = newSharesNumber * this.props.shareCost;
       let newBalance = this.state.cost;
       // recalculate the value of shares still owned - if any
-      let newSharesCost = this.props.sharesCost - newValue;
+      let newSharesCost = newInvestment;
       // calculate the new balance
       let balance = this.props.balance + newBalance;
-      console.log("balance: ", balance)
+      console.log("balance: ", balance);
       // update any other db values
       //let uid = this.state.uid;
 
@@ -150,15 +150,23 @@ class SellModal extends React.Component {
       .catch(err => {
         console.log("error writing to users table");
       });
+    
+     /*  let test = Date.now() + 5000
+            let z = 0
+            do {
+              z = z + 1;
+            }
+            while (Date.now() < test) */
+      window.location.reload();
 
     this.handleClose("liveDemo");
-   // window.location.reload();
+   
   };
   // this is the number of shares already owned
   // most we can sell is the same number of stocks owned
   maxShares = sharePurch => {
-    let estimate = sharePurch;
-    this.setState({ maxShares: Number(estimate), sharePurch: sharePurch });
+    //let estimate = sharePurch;
+    this.setState({ maxShares: Number(sharePurch), sharePurch: sharePurch });
   };
 
   zeroStocks = () => {

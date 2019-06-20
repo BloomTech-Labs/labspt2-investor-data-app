@@ -309,21 +309,35 @@ class InputForm extends React.Component {
             </Result>
             <p> </p>
             <Result>
-              <NumberFormat
-                value={`${this.decimalToFixed(this.state.pl)}`}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={"$"}
-              />
+              <p
+                style={{
+                  marginLeft: "0px",
+                  color: this.state.pl < 0 ? "#ff2900" : "#21ab42"
+                }}
+              >
+                <NumberFormat
+                  value={`${this.decimalToFixed(this.state.pl)}`}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+              </p>
             </Result>
             <p> </p>
             <Result>
-              <NumberFormat
-                value={`${this.decimalToFixed(this.state.roi)}`}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={""}
-              />
+              <p
+                style={{
+                  marginLeft: "0px",
+                  color: this.state.roi < 0 ? "#ff2900" : "#21ab42"
+                }}
+              >
+                <NumberFormat
+                  value={`${this.decimalToFixed(this.state.roi)}`}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={""}
+                />
+              </p>
             </Result>
             <p> </p>
           </div>

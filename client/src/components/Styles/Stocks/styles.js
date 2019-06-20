@@ -28,7 +28,7 @@ const styles = theme => ({
     flexGrow: 1,
     padding: theme.spacing.unit * 2,
     textAlign: "right",
-    minWidth: "325px",
+    minWidth: "350px",
     borderTop: "5px solid #4C046B",
     color: theme.palette.text.primary,
     [theme.breakpoints.down('xs')]: {

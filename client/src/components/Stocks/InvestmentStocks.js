@@ -13,6 +13,8 @@ import {
 } from "../Styles/Stocks/InvestmentStocks";
 import { Tooltip, Typography } from "@material-ui/core";
 import Primary from "../Styles/Stocks/jsx/Primary.jsx";
+import { Link } from "react-router-dom";
+import * as ROUTES from "../../constants/routes";
 
 class InvestmentStocks extends React.Component {
   constructor(props) {
@@ -187,12 +189,22 @@ class InvestmentStocks extends React.Component {
     this.state.stocks.forEach((stock, index) => {
       // Loops through array of stock values and creates a table
       rows.push(
+       
         <StocksContainer key={index}>
           <Row>
             <StockSymbol>
+            <Link
+        to={{
+          pathname: ROUTES.REPORTS,
+          state: { ticker: stock.company }
+        }}
+        key={index}
+        style={{ textDecoration: "none" }}
+      >
               <Primary>
                 <h3>{stock.company}</h3>
               </Primary>
+              </Link>
             </StockSymbol>
           </Row>
           <Row>
@@ -329,6 +341,7 @@ class InvestmentStocks extends React.Component {
           </Row>
           <hr />
         </StocksContainer>
+        
       );
     });
 
