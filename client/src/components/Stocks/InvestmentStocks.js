@@ -189,21 +189,20 @@ class InvestmentStocks extends React.Component {
     this.state.stocks.forEach((stock, index) => {
       // Loops through array of stock values and creates a table
       rows.push(
-       
         <StocksContainer key={index}>
           <Row>
             <StockSymbol>
-            <Link
-        to={{
-          pathname: ROUTES.REPORTS,
-          state: { ticker: stock.company }
-        }}
-        key={index}
-        style={{ textDecoration: "none" }}
-      >
-              <Primary>
-                <h3>{stock.company}</h3>
-              </Primary>
+              <Link
+                to={{
+                  pathname: ROUTES.REPORTS,
+                  state: { ticker: stock.company }
+                }}
+                key={index}
+                style={{ textDecoration: "none" }}
+              >
+                <Primary>
+                  <h3>{stock.company}</h3>
+                </Primary>
               </Link>
             </StockSymbol>
           </Row>
@@ -215,20 +214,24 @@ class InvestmentStocks extends React.Component {
             </h5>
           </Row>
           <Row>
-            <p>Price:{" "}
+            <p>
+              Price:{" "}
               <NumberFormat
-                    value={`${this.decimalToFixed(stock.values[close])}`}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  /></p>
-            <p>Cost:{" "}
-            <NumberFormat
-              value={`${this.decimalToFixed(stock.shareCost)}`}
-              displayType={"text"}
-              thousandSeparator={true}
-              prefix={"$"}
-            /></p>
+                value={`${this.decimalToFixed(stock.values[close])}`}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            </p>
+            <p>
+              Cost:{" "}
+              <NumberFormat
+                value={`${this.decimalToFixed(stock.shareCost)}`}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            </p>
             <p
               style={{
                 color:
@@ -257,23 +260,27 @@ class InvestmentStocks extends React.Component {
               {`${this.changePercent(stock.values[close], stock.shareCost)}`}%
             </p>
           </Row>
-          <Row><p>
-            Value:{" "}
-            <NumberFormat
-              value={`${this.decimalToFixed(
-                stock.values[close] * stock.sharePurch
-              )}`}
-              displayType={"text"}
-              thousandSeparator={true}
-              prefix={"$"}
-            /></p>
-            <p>Cost:{" "}
-            <NumberFormat
-              value={`${this.decimalToFixed(stock.sharesCost)}`}
-              displayType={"text"}
-              thousandSeparator={true}
-              prefix={"$"}
-            /></p>
+          <Row>
+            <p>
+              Value:{" "}
+              <NumberFormat
+                value={`${this.decimalToFixed(
+                  stock.values[close] * stock.sharePurch
+                )}`}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            </p>
+            <p>
+              Cost:{" "}
+              <NumberFormat
+                value={`${this.decimalToFixed(stock.sharesCost)}`}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            </p>
             <p
               style={{
                 marginLeft: "0px",
@@ -341,31 +348,30 @@ class InvestmentStocks extends React.Component {
           </Row>
           <hr />
         </StocksContainer>
-        
       );
     });
 
     return (
       <div>
         <Tooltip
-                    disableFocusListener
-                    title={
-                      <Typography color="inherit">
-                        To reset your account balance, sell all your stocks then go to the calculator and type 99999 in the Capital Gains Tax field
-                      </Typography>
-                    }
-                  >
-        <h6>
-          <p style={{ textAlign: "center" }}>
-            Available Funds:
-            <NumberFormat
-              value={`${this.decimalToFixed(this.state.balance)}`}
-              displayType={"text"}
-              thousandSeparator={true}
-              prefix={"$"}
-            />
-          </p>
-        </h6>
+          disableFocusListener
+          title={
+            <Typography color="inherit">
+              To reset your account balance, sell all your stocks then go to the calculator and type 99999 in the Capital Gains Tax field
+            </Typography>
+          }
+        >
+          <h6>
+            <p style={{ textAlign: "center" }}>
+              Available Funds:
+              <NumberFormat
+                value={`${this.decimalToFixed(this.state.balance)}`}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            </p>
+          </h6>
         </Tooltip>
         <div>{rows}</div>
       </div>

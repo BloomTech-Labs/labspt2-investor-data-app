@@ -47,7 +47,6 @@ class SellModal extends React.Component {
   }
 
   componentDidMount() {
-    //const Uid = fire.currentUser.uid;
     this.setState({
       id: this.props.id,
       uid: fire.currentUser.uid
@@ -63,17 +62,11 @@ class SellModal extends React.Component {
     let tempCost = (this.props.sharePurch - n) * this.props.shareCost;
     // calculate the return so subtract purchase price from current price then divide by purchase price 
     let newReturn = newCost - tempCost / tempCost;
-    //  (this.props.sharePrice * e.target.value) - (this.props.shareCost * e.target.value) / (this.props.shareCost * e.target.value);
     // divide the result by the purchase price
     //calculate the profit: new cost - original shares cost
     let profit = newCost - tempCost;
     // this is going to be this.state.sharesNumber and this.state.cost
     // these both update on screen values as the user types in a shares number
-    console.log("n: ", n);
-    console.log("newCost: ", newCost);
-    console.log("tempCost: ", tempCost);
-    console.log("newReturn: ", newReturn);
-    console.log("Profit: ", profit);
     this.setState({
       [e.target.name]: e.target.value,
       cost: newCost,
@@ -91,49 +84,32 @@ class SellModal extends React.Component {
       // subtract the number of shares from number shares already owned
       let newSharesNumber = this.props.sharePurch - this.state.sharesNumber;
       // shareCost does not change when i sell a stock
-       
-      
-     
-      
       let newInvestment = newSharesNumber * this.props.shareCost;
       let newBalance = this.state.cost;
       // recalculate the value of shares still owned - if any
       let newSharesCost = newInvestment;
       // calculate the new balance
       let balance = this.props.balance + newBalance;
-      console.log("balance: ", balance);
-      // update any other db values
-      //let uid = this.state.uid;
-
       // make a new record using the updated data
       const newRec = {
         symbol: this.props.company,
         sharesCost: newSharesCost,
         shareCost: this.props.shareCost,
         sharePurch: newSharesNumber
-        //uid: this.state.uid
       };
       // update the users stock information: need to use the real id?
       axios
         .put(`${URL}/stocks/${this.state.id}`, newRec)
         .then(response => {
-          // console.log("response: ", response);
-          this.setState({
-            sharesCost: newSharesCost,
-            sharePurch: newSharesNumber,
-            balance: balance
-          });
-          //console.log("this.state: ", this.state)
+          this.zeroStocks(balance, newSharesNumber);
         })
         .catch(err => {
           console.log("Error writing to stocks table");
         });
-      this.balanceHandler(balance, newSharesNumber);
     }
   };
 
-  balanceHandler = (balance, newSharesNumber) => { 
-
+  balanceHandler = (balance, newSharesNumber) => {
     const newRec = {
       uid: this.state.uid,
       balance: balance
@@ -142,43 +118,37 @@ class SellModal extends React.Component {
     axios
       .put(`${URL}/users/${this.state.uid}`, newRec)
       .then(response => {
-        //console.log("put response: ", response);
-        if (newSharesNumber === 0) {
-          this.zeroStocks();
-        }
+        // alert...
       })
       .catch(err => {
         console.log("error writing to users table");
       });
-    
-     /*  let test = Date.now() + 5000
-            let z = 0
-            do {
-              z = z + 1;
-            }
-            while (Date.now() < test) */
-      window.location.reload();
-
+    // reload to refresh the screen
+    window.location.reload();
+    // close the modal window
     this.handleClose("liveDemo");
-   
   };
   // this is the number of shares already owned
   // most we can sell is the same number of stocks owned
   maxShares = sharePurch => {
-    //let estimate = sharePurch;
+
     this.setState({ maxShares: Number(sharePurch), sharePurch: sharePurch });
   };
 
-  zeroStocks = () => {
+  zeroStocks = (balance, newSharesNumber) => {
     // need to remove the stock from the list if the shares are equal to zero
-    axios
-      .delete(`${URL}/stocks/${this.state.id}`)
-      .then(response => {
-        console.log("stock deleted");
-      })
-      .catch(err => {
-        console.log('We"ve encountered an error');
-      });
+    if (newSharesNumber === 0) {
+      axios
+        .delete(`${URL}/stocks/${this.state.id}`)
+        .then(response => {
+          //console.log("stock deleted");
+          // this.balanceHandler(balance, newSharesNumber);
+        })
+        .catch(err => {
+          console.log('We"ve encountered an error');
+        });
+    }
+    this.balanceHandler(balance, newSharesNumber);
   };
 
   isNumeric = n => {
