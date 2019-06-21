@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { private_alpha_key } from "../Auth/alphaVantageConfig";
-import { Loading } from "../Styles/Stocks/BalanceInfo";
+import { Loading, Row, ButtonContainer } from "../Styles/Stocks/BalanceInfo";
 import GridContainer from "../Styles/Stocks/jsx/GridContainer.jsx";
 import GridItem from "../Styles/Stocks/jsx/GridItem.jsx";
 import Card from "../Styles/Stocks/jsx/Card";
@@ -125,7 +125,6 @@ class BalanceInfo extends React.Component {
               console.log("isOwned: ", isOwned);
             }
           }
-          
         });
         return isOwned;
       })
@@ -198,92 +197,103 @@ class BalanceInfo extends React.Component {
 
     this.state.stocks.forEach((stock, index) => {
       rows.push(
-       
         <GridContainer key={index}>
           <GridItem xs={12} sm={6} md={3}>
-          <Zoom in={checked} key={index}>
-            <Card>
-                <h2
-                  style={{ position: "relative", top: "-8px" }}
-                  className={classes.cardCategory}
-                >
-                  {stock.company}
-                </h2>          
-              <p
-                className={classes.cardTitle}
-                style={{ position: "relative", top: "12px", right: "-8px" }}
-              >
-                Price: ${`${this.decimalToFixed(stock.values[close])}`}
-              </p>
-              <p
-                className={classes.cardTitle}
-                style={{
-                  color:
-                    Math.sign(
-                      this.changePoints(stock.values[close], stock.values[open])
-                    ) < 0
-                      ? "#ff2900"
-                      : "#21ab42"
-                }}
-              >
-                Change:{" "}
-                {`${this.changePoints(
-                  stock.values[close],
-                  stock.values[open]
-                )}`}
-              </p>
-
-              <p
-                className={classes.cardTitle}
-                style={{
-                  position: "relative",
-                  top: "12px",
-                  right: "-8px"
-                }}
-              >
-                Volume: {`${this.shortenVolume(stock.values[volume])}`}
-              </p>
-              <p
-                className={classes.cardTitle}
-                style={{
-                  color:
-                    Math.sign(
-                      this.changePercent(
-                        stock.values[close],
-                        stock.values[open]
-                      )
-                    ) < 0
-                      ? "#ff2900"
-                      : "#21ab42"
-                }}
-              >
-                Change %:{" "}
-                {`${this.changePercent(
-                  stock.values[close],
-                  stock.values[open]
-                )}`}
-              </p>
-
-              <br />
-              <Button
-                color="success"
-                size="sm"
-                onClick={() => this.buyHandler()}
-              >
-                List Em
-              </Button>
-              <Button
-                color="danger"
-                size="sm"
-                onClick={() => this.cancelHandler()}
-              >
-                Cancel
-              </Button>
-            </Card>
+            <Zoom in={checked} key={index}>
+              <Card className={classes.card} style={{ position: "relative" }}>
+                <Row>
+                  <h2
+                    style={{ position: "relative", top: "-20px" }}
+                    className={classes.cardCategory}
+                  >
+                    {stock.company}
+                  </h2>
+                </Row>
+                <Row>
+                  <p
+                    className={classes.cardTitle}
+                    style={{ position: "relative", top: "0px", right: "-8px" }}
+                  >
+                    Price: ${`${this.decimalToFixed(stock.values[close])}`}
+                  </p>
+                  <p
+                    //className={classes.cardTitle}
+                    style={{
+                      top: "0px",
+                      color:
+                        Math.sign(
+                          this.changePoints(
+                            stock.values[close],
+                            stock.values[open]
+                          )
+                        ) < 0
+                          ? "#ff2900"
+                          : "#21ab42"
+                    }}
+                  >
+                    Change:{" "}
+                    {`${this.changePoints(
+                      stock.values[close],
+                      stock.values[open]
+                    )}`}
+                  </p>
+                </Row>
+                <Row>
+                  <p
+                    className={classes.cardTitle}
+                    style={{
+                      position: "relative",
+                      top: "0px",
+                      right: "-8px"
+                    }}
+                  >
+                    Volume: {`${this.shortenVolume(stock.values[volume])}`}
+                  </p>
+                  <p
+                    className={classes.cardTitle}
+                    style={{
+                      top: "0px",
+                      color:
+                        Math.sign(
+                          this.changePercent(
+                            stock.values[close],
+                            stock.values[open]
+                          )
+                        ) < 0
+                          ? "#ff2900"
+                          : "#21ab42"
+                    }}
+                  >
+                    Change %:{" "}
+                    {`${this.changePercent(
+                      stock.values[close],
+                      stock.values[open]
+                    )}`}
+                  </p>
+                </Row>
+                <br />
+                <Row>
+                  <ButtonContainer>
+                    <Button
+                      color="success"
+                      size="sm"
+                      onClick={() => this.buyHandler()}
+                    >
+                      Add Em
+                    </Button>
+                    <Button
+                      color="danger"
+                      size="sm"
+                      onClick={() => this.cancelHandler()}
+                    >
+                      Cancel
+                    </Button>
+                  </ButtonContainer>
+                </Row>
+              </Card>
             </Zoom>
           </GridItem>
         </GridContainer>
-       
       );
     });
 

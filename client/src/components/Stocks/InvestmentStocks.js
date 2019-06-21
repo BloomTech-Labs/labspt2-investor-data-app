@@ -201,7 +201,16 @@ class InvestmentStocks extends React.Component {
                 style={{ textDecoration: "none" }}
               >
                 <Primary>
-                  <h3>{stock.company}</h3>
+                  <Tooltip
+                    disableFocusListener
+                    title={
+                      <Typography color="inherit">
+                        View Stock Indicator Reports
+                      </Typography>
+                    }
+                  >
+                    <h3>{stock.company}</h3>
+                  </Tooltip>
                 </Primary>
               </Link>
             </StockSymbol>

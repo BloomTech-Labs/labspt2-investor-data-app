@@ -18,3 +18,11 @@ export const CardBlock = styled.div`
   border: 1px solid purple;
   border-radius: 10px;
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+`;

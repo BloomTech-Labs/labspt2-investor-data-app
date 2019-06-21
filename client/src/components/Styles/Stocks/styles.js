@@ -10,6 +10,7 @@ const styles = theme => ({
     width: 900,
     flexWrap: "wrap-reverse",
     //justifyContent: "flex-start",
+    //border: "2px solid blue",
     alignItems: "flex-end",
     [theme.breakpoints.down("sm")]: {
       width: "calc(100% - 50px)",
@@ -29,6 +30,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     textAlign: "right",
     minWidth: "350px",
+    //border: "2px solid pink",
     borderTop: "5px solid #4C046B",
     color: theme.palette.text.primary,
     [theme.breakpoints.down('xs')]: {
@@ -47,6 +49,7 @@ const styles = theme => ({
     width: "calc(100% - 150px)",
     marginTop: "50px",
     position: "relative",
+    //border: "2px solid orange",
     justifyContent: "flex-start",
     top: -72,
     //right: 5,
@@ -62,20 +65,29 @@ const styles = theme => ({
     }
   },
   card: {
-    padding: 25,
-    marginTop: "50px",
+    padding: 10,
+    //marginTop: "66px",
     position: "relative",
-    top: -72,
-    left: 100,
-    fontSize: ".8rem",
-
+    //border: "2px solid green",
+    top: -42,
+    right: -160,
+    fontSize: "1rem",
+    [theme.breakpoints.down("sm")]: {
+      right: -120
+    },
     [theme.breakpoints.down("xs")]: {
       top: -72,
-      right: 8
+      border: '0',
+      width: '100%',
+      padding: "5px",
+      left: 0,
+      margin: "auto, auto",
+      backgroundColor: '#FAFAFA',
+      boxShadow: '0 0 0, 0 0 0'
     },
     [theme.breakpoints.down("md")]: {
-      top: -43,
-      right: 100
+      top: -42,
+      right: -140
     }
   },
   bigAvatar: {
