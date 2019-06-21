@@ -202,6 +202,7 @@ class InvestmentStocks extends React.Component {
               >
                 <Primary>
                   <Tooltip
+                    placement="top"
                     disableFocusListener
                     title={
                       <Typography color="inherit">

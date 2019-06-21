@@ -111,6 +111,8 @@ class InputForm extends React.Component {
         let cgt = pl * (this.state.cgt / 100);
         // subtract the tax from the profit/loss
         pl = pl - cgt;
+        // have to recalculate the return on investment
+        roi = (pl / newPP) * 100;
       }
       // save the new values to state
       this.setState({
