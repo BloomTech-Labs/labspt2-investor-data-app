@@ -71,9 +71,9 @@ class BuyModal extends React.Component {
       let newSharesNumber = Number(this.state.sharesNumber) + this.props.sharePurch;
       // add the new investment to the old investment total
       let newSharesCost = this.props.sharesCost + this.state.cost;
-
+      // calculate the new share cost
       let newShareCost = newSharesCost / newSharesNumber;
-
+      // calculate the new user balance
       let balance = this.props.balance - this.state.cost;
 
       // make a new record using the updated data
@@ -91,12 +91,12 @@ class BuyModal extends React.Component {
         .then(response => {
           //console.log("response: ", response);
 
-          this.setState({
+         // this.setState({
             //sharesCost: this.props.id,
-            sharesCost: newSharesCost,
-            sharePurch: newSharesNumber,
-            balance: balance
-          });
+         //   sharesCost: newSharesCost,
+         //   sharePurch: newSharesNumber,
+         //   balance: balance
+         // });
         })
         .catch(err => {
           console.log("error writing to stocks table");
@@ -116,12 +116,11 @@ class BuyModal extends React.Component {
       .put(`${URL}/users/${this.state.uid}`, newRec)
       .then(response => {
         //console.log("put response: ", response);
+        this.handleClose("liveDemo");
       })
       .catch(err => {
         console.log("error writing to users table");
       });
-
-    this.handleClose("liveDemo");
 
     window.location.reload();
   };
@@ -218,7 +217,9 @@ class BuyModal extends React.Component {
               className={classes.modalBody}
             >
               <Row>
-                <h3> {this.props.company}</h3>
+                <Primary>
+                  <h3> {this.props.company}</h3>
+                </Primary>
               </Row>
               <Row>
                 <Primary>
@@ -250,7 +251,7 @@ class BuyModal extends React.Component {
                   </p>
                 </Primary>
               </Row>
-              <p>
+              <Row>
                 Original Share Cost:{" "}
                 <NumberFormat
                   value={`${this.decimalToFixed(this.props.shareCost)}`}
@@ -258,8 +259,8 @@ class BuyModal extends React.Component {
                   thousandSeparator={true}
                   prefix={"$"}
                 />
-              </p>
-              <p>
+               </Row>
+               <Row>
                 Current Investment:{" "}
                 <NumberFormat
                   value={`${this.decimalToFixed(this.props.sharesCost)}`}
@@ -267,8 +268,8 @@ class BuyModal extends React.Component {
                   thousandSeparator={true}
                   prefix={"$"}
                 />
-              </p>
-              <p>
+              </Row>
+              <Row>
                 Current Total Value:{" "}
                 <NumberFormat
                   value={`${this.decimalToFixed(this.props.values)}`}
@@ -276,8 +277,10 @@ class BuyModal extends React.Component {
                   thousandSeparator={true}
                   prefix={"$"}
                 />
-              </p>
+              </Row>
+              <Row>
               Nbr of Shares
+              </Row>
               <form className={classes.form}>
                 <input
                   type="text"
@@ -286,11 +289,11 @@ class BuyModal extends React.Component {
                   value={this.props.value}
                   className="shares"
                 />
-                <p>
+                <Row>
                   Max Shares: {"  "}
                   {`${this.state.maxShares}`}
-                </p>
-                <p>
+                  </Row>
+                <Row>
                   Market Price: x
                   <NumberFormat
                     value={`${this.decimalToFixed(this.props.sharePrice)}`}
@@ -298,8 +301,8 @@ class BuyModal extends React.Component {
                     thousandSeparator={true}
                     prefix={"$"}
                   />
-                </p>
-                <p>
+                </Row>
+                <Row>
                   Est. Cost:{" "}
                   <NumberFormat
                     value={`${this.decimalToFixed(this.state.cost)}`}
@@ -307,7 +310,7 @@ class BuyModal extends React.Component {
                     thousandSeparator={true}
                     prefix={"$"}
                   />
-                </p>
+               </Row>
               </form>
               <hr />
             </DialogContent>

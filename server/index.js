@@ -29,7 +29,7 @@ server.use("/api/billing", verifyToken, billingRouter);
 server.use("/api/favorites", verifyToken, favoritesRouter);
 server.use("/api/users", verifyToken, usersRouter);
 server.use("/api/sms", smsRouter);
-server.use("/api/stocks", stocksRouter);
+server.use("/api/stocks", verifyToken, stocksRouter);
 server.use("/api/stripe", stripeRouter);
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());

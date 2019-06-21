@@ -4,7 +4,7 @@ export const Row = styled.div`
   display: flex;
   flex-wrap: true;
   align-text: left;
-  font-size: 12px;
+  font-size: 14px;
   width: 100%;
 `;
 
