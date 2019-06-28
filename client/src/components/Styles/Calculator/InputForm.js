@@ -29,6 +29,11 @@ export const BigContainer = styled.div`
   flex-direction: column;
 `;
 
+//export const SwitchContainer = styled.div`
+ // display: flex;
+ // flex-direction: column;
+//`;
+
 export const Title = styled.div`
   text-align: center;
   height: 40px;

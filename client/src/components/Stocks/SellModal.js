@@ -56,24 +56,28 @@ class SellModal extends React.Component {
 
   changeHandler = e => {
     const n = e.target.value;
-    // calculate the new value of the stocks so multiply the number of shares (n) by the current share price
-    let newCost = n * this.props.sharePrice;
-    // calculate the original cost of by multiplying shares(n) by the original share cost
-    let tempCost = (this.props.sharePurch - n) * this.props.shareCost;
-    // calculate the return so subtract purchase price from current price then divide by purchase price 
-    let newReturn = newCost - tempCost / tempCost;
-    // divide the result by the purchase price
-    //calculate the profit: new cost - original shares cost
-    let profit = newCost - tempCost;
-    // this is going to be this.state.sharesNumber and this.state.cost
-    // these both update on screen values as the user types in a shares number
-    this.setState({
-      [e.target.name]: e.target.value,
-      cost: newCost,
-      return: newReturn,
-      profit: profit,
-      tempCost: tempCost
-    });
+    if (this.isNumeric(n)) {
+      // calculate the new value of the stocks so multiply the number of shares (n) by the current share price
+      let newCost = n * this.props.sharePrice;
+      // calculate the original cost of by multiplying shares(n) by the original share cost
+      let tempCost = (this.props.sharePurch - n) * this.props.shareCost;
+      // calculate the return so subtract purchase price from current price then divide by purchase price 
+      let newReturn = newCost - tempCost / tempCost;
+      // divide the result by the purchase price
+      //calculate the profit: new cost - original shares cost
+      let profit = newCost - tempCost;
+      // this is going to be this.state.sharesNumber and this.state.cost
+      // these both update on screen values as the user types in a shares number
+      this.setState({
+        [e.target.name]: e.target.value,
+        cost: newCost,
+        return: newReturn,
+        profit: profit,
+        tempCost: tempCost
+      });
+    } else {
+      alert("Please enter a numeric value");
+    }
   };
 
   sellHandler = () => {
@@ -131,7 +135,6 @@ class SellModal extends React.Component {
   // this is the number of shares already owned
   // most we can sell is the same number of stocks owned
   maxShares = sharePurch => {
-
     this.setState({ maxShares: Number(sharePurch), sharePurch: sharePurch });
   };
 

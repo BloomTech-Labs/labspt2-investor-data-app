@@ -4,8 +4,8 @@ const stocks = require('../data/helpers/stocksModel')
 
 
 /********* Get stocks *************/
-router.get('/', async (req, res) => {
-    await stocks.get()
+router.get('/', (req, res) => {
+    stocks.get()
         .then((stocks) => {
             res.json(stocks);
         })

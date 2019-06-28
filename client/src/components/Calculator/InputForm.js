@@ -1,6 +1,7 @@
 import React from "react";
+//import "../Styles/Calculator/InputForm.css";
 import { withStyles } from "@material-ui/core/styles";
-import styles from "../Styles/Calculator/styles";
+//import styles from "../Styles/Calculator/styles";
 import NumberFormat from "react-number-format";
 import axios from "axios";
 import {
@@ -13,6 +14,7 @@ import {
   Input1,
   Result
 } from "../Styles/Calculator/InputForm";
+import checkboxAdnRadioStyle from "../Styles/Calculator/jss/checkboxAdnRadioStyle.jsx";
 import Button from "../Styles/Calculator/jss/Button.jsx";
 import { fire } from "../Auth/firebaseConfig";
 //URL Endpoints
@@ -34,6 +36,8 @@ class InputForm extends React.Component {
       sellCommission: 0,
       cgt: 0,
       balance: 0,
+      selectedValue: null,
+      hasStocks: true,
       uid: fire.currentUser.uid
     };
   }
@@ -42,23 +46,57 @@ class InputForm extends React.Component {
     // remove
   }
 
+  handleChange = event => {
+    this.setState({ selectedValue: event.target.value });
+  };
+
   changeHandler = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
-    if (this.state.numberShares === "99999") {
-      // reset the account balance to 100,000
-      this.resetBalance(this.state.uid);
+    if (this.state.cgt === "99999") {
+      // make sure the user has sold all of their stocks
+      if (this.checkZeroStocks(this.state.uid) === true) {
+        alert("You must first sell all your stocks to reset your balance")
+        // reset the account balance to 100,000
+      } else {
+        this.resetBalance(this.state.uid);
+      }
     }
   };
 
+  checkZeroStocks = uid => {
+    let hasStocks = false;
+    axios
+      .get(`${URL}/stocks`)
+      .then(response => {
+        response.data.forEach((item, index) => {
+          if (item.uid === uid) {
+            hasStocks = true;
+            console.log("loop hasStocks: ", hasStocks);
+            this.setState({
+              hasStocks: true
+            });
+          }
+        });
+        console.log("hasStocksNew: ", hasStocks);
+        return hasStocks;
+
+      })
+      .catch(err => {
+        console.log('We"ve encountered an error');
+      });
+    console.log("this.hasStocks: ", this.state.hasStocks);
+    return hasStocks;
+  };
+
   resetBalance = uid => {
+    // this resets the users balance and lets them start over
     let balance = 100000;
     const newRec = {
       uid: this.state.uid,
       balance: balance
     };
-
     axios
       .put(`${URL}/users/${this.state.uid}`, newRec)
       .then(response => {
@@ -181,6 +219,7 @@ class InputForm extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <BigContainer>
         <InputContainer>
@@ -349,4 +388,4 @@ class InputForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(InputForm);
+export default withStyles(checkboxAdnRadioStyle)(InputForm);

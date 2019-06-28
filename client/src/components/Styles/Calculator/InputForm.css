@@ -1,0 +1,15 @@
+.dollarOn {
+    background-image: url('./dollar_on.png');
+}
+
+.dollarOff {
+    background-image: url('./dollar_off.png');
+}
+
+.percentOn {
+    background-image: url('./percent_on.png');
+}
+
+.percentOff {
+    background-image: url('./percent_off.png');
+}

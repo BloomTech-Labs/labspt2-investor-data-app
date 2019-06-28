@@ -52,14 +52,35 @@ class BuyModal extends React.Component {
     this.maxShares(this.state.balance, this.props.sharePrice);
   }
 
-  changeHandler = e => {
-    // calculate the new cost of the stocks
-    let newCost = e.target.value * this.props.sharePrice;
+  isNumeric = n => {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  };
 
-    this.setState({
-      [e.target.name]: e.target.value,
-      cost: newCost
-    });
+  validate = target => {
+    // this function check all the input fields for numeric values
+    let formIsValid = false;
+
+    if (!this.isNumeric(target)) {
+      formIsValid = true;
+    }
+    return formIsValid;
+  };
+
+  changeHandler = e => {
+    console.log("i am here: ");
+    // check the validity of the data
+    if (!this.validate(e.target.value)) {
+      console.log("target: ", e.target.value);
+      // calculate the new cost of the stocks
+      let newCost = e.target.value * this.props.sharePrice;
+
+      this.setState({
+        [e.target.name]: e.target.value,
+        cost: newCost
+      });
+    } else {
+      alert("Please enter a numeric value");
+    }
   };
 
   buyHandler = () => {
