@@ -1,5 +1,4 @@
 import React from "react";
-//import "../Styles/Calculator/InputForm.css";
 import { withStyles } from "@material-ui/core/styles";
 //import styles from "../Styles/Calculator/styles";
 import NumberFormat from "react-number-format";
@@ -37,7 +36,7 @@ class InputForm extends React.Component {
       cgt: 0,
       balance: 0,
       selectedValue: null,
-      hasStocks: true,
+      hasStocks: false,
       uid: fire.currentUser.uid
     };
   }
@@ -60,8 +59,14 @@ class InputForm extends React.Component {
         alert("You must first sell all your stocks to reset your balance")
         // reset the account balance to 100,000
       } else {
+        console.log("2nd hasstocks: ", this.state.hasStocks);
+       
+        if (this.state.hasStocks) {
+        alert("You must first sell all your stocks to reset your balance");
+       } else {
         this.resetBalance(this.state.uid);
       }
+    }
     }
   };
 
