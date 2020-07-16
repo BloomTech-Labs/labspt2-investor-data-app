@@ -23,7 +23,7 @@
     "firebase": "^5.9.0",
     "glamor": "^2.20.40",
     "less": "^3.9.0",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.19",
     "netlify-cli": "^2.8.3",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
